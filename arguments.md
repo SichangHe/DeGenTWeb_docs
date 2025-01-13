@@ -10,3 +10,10 @@
     we do best-effort w/ SoTA method
     - Trafilatura [@barbaresi2021trafilatura]
         is SoTA [@bevendorff2023empirical; reeve2024evaluation]
+
+## Generated text detection
+
+- Binoculars score reflect information density (substance)
+    - is calibrated perplexity
+    - generated text is bad because provide less actual information
+    - detect both generated and low-quality content
