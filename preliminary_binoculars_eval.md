@@ -33,6 +33,8 @@ lower-score page (above FPR-threshold but around F1-threshold):
 - short listing/interaction page
     - site search result
         <https://newsroom.courts.ca.gov/search?t=Napa&sort=created&order=desc&keywords=&facets_query=&f%5B0%5D=content:event&f%5B1%5D=event_type:132&f%5B2%5D=event_type:202>
+    - event listing
+        <https://www.montananaturalist.org/events/list/page/20/?tribe-bar-date=2023-09-14>
 - boilerplate text:
     - cookie banner from Trafilatura extraction issue
         - very short content
@@ -40,3 +42,18 @@ lower-score page (above FPR-threshold but around F1-threshold):
         - non-English content
             <https://www.neske.hu/webshop/ekszerek/medalok/turkiz-levelkes-medal-nagy/>,
             <https://traczer.pl/fr/suplement_vet/>
+- clearly generated
+    - AI refusing to write article
+        <https://educacion-especial.com/2023/03/12/a-beginners-guide-to-home-schooling-tips-and-resources/>
+    - BS Ad <http://aloeecopark.com/kajabi-themes-for-sale/>
+
+## Problem
+
+- listing/interaction page should not be in this study
+    - cannot simply filter by markup ratio (link, button, etc.)
+        bc some attach large description block
+    - ❓ ML model to distinguish article
+        - can base on BERT or BART
+        - cannot ask LLM bc unreliable (tested)
+    - ❓ `<meta property="og:type" content="article">` but
+        not every article has this

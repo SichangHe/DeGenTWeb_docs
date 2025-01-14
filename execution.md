@@ -4,7 +4,8 @@
 
 ## Preliminary
 
-- [ ] run Binoculars over Common Crawl; see if result make sense
+- [ ] run Binoculars over Common Crawl; see if
+    result make sense (`preliminary_binoculars_eval.md`)
 
 ## Keyword aquisition
 
