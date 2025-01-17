@@ -22,3 +22,5 @@ plan:
     - Google Trends has ~1400 topics, w/ levels of subtopics
         - `google_trends_all_cat.json` from
             <https://github.com/pat310/google-trends-api/wiki/Google-Trends-Categories>
+    - 💀 Google Trends give off topic related queries
+        - e.g., `how to` → `how to train y` → `how to train your dragon`
