@@ -9,12 +9,15 @@
 
 ## Keyword aquisition
 
-- [ ] from Google Trends (`google_trends.md`)
+- WikiHow article titles
+- ~~[ ] from Google Trends (`google_trends.md`)~~
     - Google completion?
-- ~~classify into topics~~ get topic class from Google Trends
-- [ ] human brainstorm related keywords
+- ~~get topic class from Google Trends~~
+- ~~[ ] human brainstorm related keywords~~
 
 ## Web searching and crawling
+
+`web_search.md`
 
 - [ ] search Google/Bing/Brave/Perplexity/ChatGPT/ChatNoir
 - [ ] crawl top 10 results/reference
