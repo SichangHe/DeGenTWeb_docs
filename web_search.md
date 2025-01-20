@@ -16,3 +16,5 @@
 - `What people are saying` (TikTok, etc.): same as main result except
     has `class` and does not contain `h3`
 - ❓ Google sometimes also display time of publish; useful?
+
+- [ ] ❓ Google blocked our IPv6 address; why are we on IPv6?

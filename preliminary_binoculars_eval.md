@@ -57,3 +57,9 @@ lower-score page (above FPR-threshold but around F1-threshold):
         - cannot ask LLM bc unreliable (tested)
     - ❓ `<meta property="og:type" content="article">` but
         not every article has this
+
+## Google 500 WikiHow articles
+
+- only low Binoculars score does seem to
+    use ChatGPT language
+    <https://www.hollyland.com/blog/tips/accept-a-pending-payment-on-facebook>
