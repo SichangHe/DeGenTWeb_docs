@@ -58,8 +58,15 @@ lower-score page (above FPR-threshold but around F1-threshold):
     - ❓ `<meta property="og:type" content="article">` but
         not every article has this
 
-## Google 500 WikiHow articles
+## ~~Google~~ Bing 500 WikiHow articles
 
-- only low Binoculars score does seem to
-    use ChatGPT language
-    <https://www.hollyland.com/blog/tips/accept-a-pending-payment-on-facebook>
+- not running browser
+- some domain has many result w/ Binoculars score \< FPR threshold
+    - e.g.,
+        <https://accountinginsights.org/> <https://gbtimes.com/>
+        <https://robots.net/> <https://www.madpenguin.org/>
+    - [ ] tend to have `og:type` be `article` (need verifying)
+    - include many ad (business model: content farm + ad?)
+        - [ ] detect&count ad
+- some clear false positive on some forum&support page
+    - no `og:type` or have it be `webpage`
