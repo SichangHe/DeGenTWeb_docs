@@ -70,3 +70,9 @@ lower-score page (above FPR-threshold but around F1-threshold):
         - [ ] detect&count ad
 - some clear false positive on some forum&support page
     - no `og:type` or have it be `webpage`
+    - for false positive article, perhaps can filter by searching
+        [training
+        data](https://huggingface.co/datasets/tiiuae/falcon-refinedweb)
+        - too much data (2TB) to search online, need local DB
+    - 🤔 some like <https://www.geeksforgeeks.org/> are somewhere between
+        content farm and educational site, w/ variable quality
