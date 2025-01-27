@@ -65,9 +65,13 @@ lower-score page (above FPR-threshold but around F1-threshold):
     - e.g.,
         <https://accountinginsights.org/> <https://gbtimes.com/>
         <https://robots.net/> <https://www.madpenguin.org/>
-    - [ ] tend to have `og:type` be `article` (need verifying)
+    - [x] ~~tend to have `og:type` be `article`~~ seem not reliable
     - include many ad (business model: content farm + ad?)
         - [ ] detect&count ad
+    - seller/scam website boosting site rank in search engine w/ AI blog
+        - e.g.,
+            <http://www.androidphonesoft.com/> <https://dashboardsexcel.com/>
+        - [ ] detect seller/scam website
 - some clear false positive on some forum&support page
     - no `og:type` or have it be `webpage`
     - for false positive article, perhaps can filter by searching
