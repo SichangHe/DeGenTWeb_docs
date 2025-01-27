@@ -60,18 +60,31 @@ lower-score page (above FPR-threshold but around F1-threshold):
 
 ## ~~Google~~ Bing 500 WikiHow articles
 
-- not running browser
+- not running browser; 20 search Bing result per query; \~133 Google query
 - some domain has many result w/ Binoculars score \< FPR threshold
-    - e.g.,
-        <https://accountinginsights.org/> <https://gbtimes.com/>
-        <https://robots.net/> <https://www.madpenguin.org/>
     - [x] ~~tend to have `og:type` be `article`~~ seem not reliable
     - include many ad (business model: content farm + ad?)
+        - e.g.,
+            <https://www.solveyourtech.com> <https://gbtimes.com>
+            <https://robots.net> <https://www.supportyourtech.com>
+            <https://www.thetechedvocate.org> <https://citizenside.com>
+            <https://www.live2tech.com> <https://www.madpenguin.org>
+            <https://accountinginsights.org> <https://umatechnology.org>
+            <https://www.clrn.org> <https://www.costumerealm.com>
+            <https://www.neuralword.com> <https://www.simplymac.com>
+            <https://www.gameslearningsociety.org/> <https://thetechylife.com/>
         - [ ] detect&count ad
     - seller/scam website boosting site rank in search engine w/ AI blog
         - e.g.,
             <http://www.androidphonesoft.com/> <https://dashboardsexcel.com/>
         - [ ] detect seller/scam website
+    - unclear how this wiki profit, but
+        clearly generated <https://freemwiki.com/wiki/%E9%A6%96%E9%A1%B5>
+        - 💡 we are 100% sure a website is generated w/ ChatGPT w/o human
+            review if they include something like `As an AI`
+    - [ ] how are they ranked in search result?
+        - some appear in multiple search. double count or take median?
+        - skimming show some high some low
 - some clear false positive on some forum&support page
     - no `og:type` or have it be `webpage`
     - for false positive article, perhaps can filter by searching
