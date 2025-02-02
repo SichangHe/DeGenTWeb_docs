@@ -17,3 +17,8 @@
     - is calibrated perplexity
     - generated text is bad because provide less actual information
     - detect both generated and low-quality content
+
+## Content farm
+
+- moral issue: some site like GeeksforGeeks look like content farm but
+    may be useful; what is our stance?

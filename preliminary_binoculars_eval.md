@@ -55,12 +55,12 @@ lower-score page (above FPR-threshold but around F1-threshold):
     - ❓ ML model to distinguish article
         - can base on BERT or BART
         - cannot ask LLM bc unreliable (tested)
-    - ❓ `<meta property="og:type" content="article">` but
-        not every article has this
+    - ~~❓ `<meta property="og:type" content="article">` but
+        not every article has this~~ tested, unreliable
 
 ## ~~Google~~ Bing 500 WikiHow articles
 
-- not running browser; 20 search Bing result per query; \~133 Google query
+- not running browser; 20 Bing search result per query; \~133 Google query
 - some domain has many result w/ Binoculars score \< FPR threshold
     - [x] ~~tend to have `og:type` be `article`~~ seem not reliable
     - include many ad (business model: content farm + ad?)

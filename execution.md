@@ -6,6 +6,7 @@
 
 - [ ] run Binoculars over Common Crawl; see if
     result make sense (`preliminary_binoculars_eval.md`)
+    *edit*: … and WikiHow search result
 
 ## Keyword aquisition
 

@@ -2,8 +2,6 @@
 
 ## Content farm
 
-- moral issue: some site like GeeksforGeeks look like content farm but
-    may be useful; what is our stance?
 - [An examination of content farms in
     web search using
     crowdsourcing](https://dl.acm.org/doi/10.1145/2396761.2398689)
