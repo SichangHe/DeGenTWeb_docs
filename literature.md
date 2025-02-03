@@ -23,6 +23,8 @@
         Online
         Advertisements](https://dl.acm.org/doi/abs/10.1145/3646547.3688427),
         Christina Yeung, Tadayoshi Kohno, Franziska Roesner, IMC, 2024
+        - use UWCSESecurityLab adscraper to extract ad, which [in turn use
+            EsayList](https://github.com/UWCSESecurityLab/adscraper/blob/main/crawler/src/ads/ad-detection.ts#L10)
 - [Funding the Next Generation of Content Farms: Some of
     the World’s Largest Blue Chip Brands Unintentionally Support the Spread of
     Unreliable AI-Generated News
@@ -47,3 +49,18 @@
     - literature review on NewsGuard report & detector
     - human&DetectGPT low accuracy—infeasible to detect
         - fine-tuning of detector help a lot, but need to know base LLM used
+
+## Training data curation
+
+- [The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with
+    Web Data, and Web Data Only](https://arxiv.org/abs/2306.01116),
+    Guilherme Penedo, Quentin Malartic, Daniel Hesslow, Ruxandra Cojocaru,
+    Alessandro Cappelli, Hamza Alobeidli, Baptiste Pannier, Ebtesam Almazrouei,
+    Julien Launay, arXiv, 2023
+    - heuristic-based URL filtering; no ML filtering to avoid bias
+        - [4.6M site
+            list](https://dsi.ut-capitole.fr/blacklists/index_en.php)
+            💡 useful for spotting spam/scam, etc.
+    - use Trafilatura  for main content extraction
+    - Quality at a glance: An audit of web-crawled multilingual datasets
+        - Common Crawl include large portion of machine spam & porn
