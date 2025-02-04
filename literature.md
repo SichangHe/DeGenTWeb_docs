@@ -50,6 +50,15 @@
     - human&DetectGPT low accuracy—infeasible to detect
         - fine-tuning of detector help a lot, but need to know base LLM used
 
+## Search Engine Optimization (SEO)
+
+See
+<https://sichanghe.github.io/notes/research/web_user_facing.html#search-engine-optimization-seo>.
+
+## Generative AI (GenAI)
+
+See <https://sichanghe.github.io/notes/research/gen_ai.html>.
+
 ## Training data curation
 
 - [The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with
@@ -61,6 +70,6 @@
         - [4.6M site
             list](https://dsi.ut-capitole.fr/blacklists/index_en.php)
             💡 useful for spotting spam/scam, etc.
-    - use Trafilatura  for main content extraction
+    - use Trafilatura for main content extraction
     - Quality at a glance: An audit of web-crawled multilingual datasets
         - Common Crawl include large portion of machine spam & porn

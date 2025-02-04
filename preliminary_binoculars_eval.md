@@ -93,3 +93,8 @@ lower-score page (above FPR-threshold but around F1-threshold):
         - too much data (2TB) to search online, need local DB
     - 🤔 some like <https://www.geeksforgeeks.org/> are somewhere between
         content farm and educational site, w/ variable quality
+
+## Site crawling
+
+for each subdomain shown in search result, try finding sitemap, then
+crawl 20 page
