@@ -18,3 +18,7 @@
 - ❓ Google sometimes also display time of publish; useful?
 
 - ~~[ ] ❓ Google blocked our IPv6 address; why are we on IPv6?~~
+
+## Bing
+
+just use API
