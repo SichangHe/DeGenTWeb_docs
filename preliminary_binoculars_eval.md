@@ -10,7 +10,7 @@ script: `degentweb.common_crawl.classify_english `
 
 result dumped to `data/common_crawl/prelim_test/`; 5961 page; used 1h 20m
 
-## Manual inspection of 1010 page
+## Manual inspection of low-score page among 1010 Common Crawl page
 
 low-score page:
 
@@ -60,6 +60,9 @@ lower-score page (above FPR-threshold but around F1-threshold):
 
 ## ~~Google~~ Bing 500 WikiHow articles
 
+script: `degentweb.browser.bing_search` `degentweb.classifying.google_prelim`
+`degentweb.classifying.prelim_data_analysis`
+
 - not running browser; 20 Bing search result per query; \~133 Google query
 - some domain has many result w/ Binoculars score \< FPR threshold
     - [x] ~~tend to have `og:type` be `article`~~ seem not reliable
@@ -73,15 +76,25 @@ lower-score page (above FPR-threshold but around F1-threshold):
             <https://www.clrn.org> <https://www.costumerealm.com>
             <https://www.neuralword.com> <https://www.simplymac.com>
             <https://www.gameslearningsociety.org/> <https://thetechylife.com/>
+            <https://elevationvibe.com/>
+            <https://ebestcourses.com/language/accent-reduction/>
         - [ ] detect&count ad
     - seller/scam website boosting site rank in search engine w/ AI blog
         - e.g.,
             <http://www.androidphonesoft.com/> <https://dashboardsexcel.com/>
         - [ ] detect seller/scam website
-    - unclear how this wiki profit, but
-        clearly generated <https://freemwiki.com/wiki/%E9%A6%96%E9%A1%B5>
+    - clearly generated but unclear how they profit
+        - e.g., wiki <https://freemwiki.com/wiki/%E9%A6%96%E9%A1%B5>,
+            blog <https://www.thegadgetgazette.com/>
         - 💡 we are 100% sure a website is generated w/ ChatGPT w/o human
             review if they include something like `As an AI`
+        - sitemap show they post too often:
+            <https://bankbingo.com/> <https://accountingjournalentries.com/>
+    - explicitly generated
+        - sell solution for generating article <https://eulogygenerator.com/>
+        - AI search <https://www.neuralword.com/>
+    - spammy but unclear if generated (from late 2022)
+        <https://sheetsland.com/>
     - [ ] how are they ranked in search result?
         - some appear in multiple search. double count or take median?
         - skimming show some high some low
@@ -96,5 +109,10 @@ lower-score page (above FPR-threshold but around F1-threshold):
 
 ## Site crawling
 
-for each subdomain shown in search result, try finding sitemap, then
-crawl 20 page
+script: `degentweb.browser.visit_subdomains`
+
+1. for each subdomain shown in search result, if \< 20 page crawled, then
+    try finding sitemap w/ ultimate-sitemap-parser
+1. if no sitemap, then query Wayback Machine (WM) Content Index API for
+    last 2000 ok HTML response in the last 4 year
+1. if found any page, then crawl (20 – \#already_crawled) page

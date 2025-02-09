@@ -2,6 +2,17 @@
 
 (citation in Quarto format w/ `reference.bib` for future writing)
 
+## Significance
+
+- The Web is the largest public corpus of knowledge for human consumption and
+    machine learning training
+- AI-generated text usually plagiarize prior content,
+    often hallucinate misinformation, so it pollutes contents on the Web.
+- Spammy content affects search engine user experience by
+    disrupting search engine ranking
+- Generated contents in training data may harm LLM performance
+- Generated contents in RAG data may harm LLM search performance
+
 ## Crawling
 
 - trying to see webpage users see although scraper see different results,
