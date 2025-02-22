@@ -6,11 +6,11 @@ see also `arguments.md` and `literature.md`
 
 ## Preliminary
 
-- [ ] run Binoculars over Common Crawl; see if
+- [x] run Binoculars over Common Crawl; see if
     result make sense (`preliminary_binoculars_eval.md`) *edit*: …
     and WikiHow search result
 
-## Keyword aquisition
+## Keyword acquisition
 
 - WikiHow article titles (`wikihow.md`)
 - ~~[ ] from Google Trends (`google_trends.md`)~~
@@ -30,9 +30,10 @@ see also `arguments.md` and `literature.md`
 
 ## Generated text detection
 
+- [ ] filter out non-article (`filter_non_article.md`)
 - ~~[ ] text cleaning~~ cleaned by Trafilatura
 - Binoculars
-    - [ ] speed enhancement for large scale
+    - [x] speed enhancement for large scale
 - [ ] get powerful processor
 
 ## Case studies
@@ -46,7 +47,7 @@ see also `arguments.md` and `literature.md`
                 used [by RefinedWeb](literature.html#training-data-curation)
     - false positive: forum/support
 - [ ] what are those "positive" page
-    - [ ] manual inspection
+    - [x] manual inspection
     - [ ] clustering
 
 ## Development

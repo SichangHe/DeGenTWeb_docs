@@ -20,7 +20,7 @@
 - main body text extraction is difficult to do well, but
     we do best-effort w/ SoTA method
     - Trafilatura [@barbaresi2021trafilatura]
-        is SoTA [@bevendorff2023empirical; reeve2024evaluation]
+        is SoTA [@bevendorff2023empirical; @reeve2024evaluation]
 
 ## Generated text detection
 
@@ -28,6 +28,8 @@
     - is calibrated perplexity
     - generated text is bad because provide less actual information
     - detect both generated and low-quality content
+- statistical probability may give more info than
+    binary classification using fixed threshold
 
 ## Content farm
 
