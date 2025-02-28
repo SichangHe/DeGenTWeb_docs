@@ -61,3 +61,10 @@ see also `arguments.md` and `literature.md`
     - note: some dependency like `nvidia-cuda-runtime-cu12` version for
         Binoculars are unfortunately hardcoded for Exxact; need to change if
         used on other machine
+- register [Pre-commit Hook](https://pre-commit.com/) to run linters and
+    formatters automatically before Git commit:
+
+    ```sh
+    . venv/bin/activate # if not in Rye's virtual env
+    pre-commit install
+    ```
