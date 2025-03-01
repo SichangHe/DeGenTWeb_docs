@@ -42,9 +42,10 @@ see also `arguments.md` and `literature.md`
     - content farm w/ many ad (`ad_extraction.md`)
     - content farm selling product
         - [ ] identify scam seller
-            - perhaps use
+            - ~~perhaps use
                 [blacklist](https://dsi.ut-capitole.fr/blacklists/index_en.php)
-                used [by RefinedWeb](literature.html#training-data-curation)
+                used [by RefinedWeb](literature.html#training-data-curation)~~
+                few matches
     - false positive: forum/support
 - [ ] what are those "positive" page
     - [x] manual inspection

@@ -10,8 +10,14 @@
     often hallucinate misinformation, so it pollutes contents on the Web.
 - Spammy content affects search engine user experience by
     disrupting search engine ranking
+    - Users want accountable, reliable, and informative content, but
+        AI-generated contents are often not so.
 - Generated contents in training data may harm LLM performance
 - Generated contents in RAG data may harm LLM search performance
+- Laws like the [EU AI
+    Act](https://www.europarl.europa.eu/topics/en/article/20230601STO93804/eu-ai-act-first-regulation-on-artificial-intelligence)
+    mandate disclosure of AI-generated content, but
+    many AI content websites do not comply and thus may be illegal.
 
 ## Crawling
 
