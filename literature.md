@@ -92,3 +92,16 @@ See <https://sichanghe.github.io/notes/research/gen_ai.html>.
         Nasanbayar Ulzii-Orshikh, Allahsera Tapo, Nishant Subramani,
         Artem Sokolov, Claytone Sikasote, et al., ACL, 2022
         - Common Crawl include large portion of machine spam & porn
+
+## Synthetic data
+
+- [STaR:
+    Bootstrapping Reasoning With Reasoning](https://arxiv.org/abs/2203.14465),
+    Eric Zelikman, Yuhuai Wu, Jesse Mu, Noah D. Goodman, NeurIPS, 2022
+- [Phi-3 Technical Report: A Highly Capable Language Model Locally on
+    Your Phone](https://arxiv.org/abs/2404.14219), Marah Abdin, Jyoti Aneja,
+    Hany Awadalla, Ahmed Awadallah, Ammar Ahmad Awan, et al., Microsoft, 2024
+- [Rephrasing the Web: A Recipe for Compute and
+    Data-Efficient Language Modeling](https://arxiv.org/abs/2401.16380),
+    Pratyush Maini, Skyler Seto, He Bai, David Grangier, Yizhe Zhang,
+    Navdeep Jaitly, ACL, 2024

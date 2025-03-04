@@ -12,6 +12,10 @@
     disrupting search engine ranking
     - Users want accountable, reliable, and informative content, but
         AI-generated contents are often not so.
+    - [Arguments from
+        Perplexity.ai](https://www.perplexity.ai/hub/faq/how-does-perplexity-work):
+        LLMs may have stale information, and do not cite their sources for
+        verification purposes.
 - Generated contents in training data may harm LLM performance
 - Generated contents in RAG data may harm LLM search performance
 - Laws like the [EU AI

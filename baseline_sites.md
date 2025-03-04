@@ -22,9 +22,6 @@
     - claim to have generated 1.5M+ websites
     - from \$13/month; need "pro" to edit&multi-site; WordPress,
         Cloudflare CDN
-    - example site
-        list:<https://help.10web.io/hc/en-us/articles/360031026572-Can-You-Provide-Examples-of-Websites-Hosted-on-10Web>
-        - probably not purely generated
 - [Wix AI Website Builder](https://www.wix.com/ai-website-builder)
     - landing page & short/long blog article on demand
     - allow multiple site, sell domain&service instead of generator
@@ -42,3 +39,30 @@
 - [B12](https://www.b12.io/)
     - landing page & medium-length blog article on demand
     - from \$42/month
+- [Contentful AI Content
+    Generator](https://www.contentful.com/marketplace/ai-content-generator/)
+    use OpenAI API to write content
+- [HubSpot AI Website Generator](https://www.hubspot.com/products/cms/ai-website-generator) optimize existing company website
+    - only generate landing page
+- [Relume](https://www.relume.io/) only generate mockup/HTML
+
+### Provided example generated sites
+
+- hand-picked; probably not purely generated
+- some not text-heavy (mainly image, etc.)
+- commonly business w/ `/blog`; unlike most content farm found
+
+each generator:
+
+- 10Web
+    <https://help.10web.io/hc/en-us/articles/360031026572-Can-You-Provide-Examples-of-Websites-Hosted-on-10Web>
+    - seem not purely generated
+- Wix <https://www.wix.com/blog/wix-artificial-design-intelligence> \>
+    Examples of sites created with Wix’s ADI-powered website builder
+
+    - most down
+- B12
+    <https://www.commoninja.com/blog/b12-ai-website-builder#Examples-of-Websites-Designed-with-B12%23Examples-of-Websites-Designed-with-B12>
+- Webflow
+    <https://www.seattlenewmedia.com/blog/best-webflow-website-examples-for-inspiration>
+    - not text-heavy
