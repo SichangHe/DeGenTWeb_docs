@@ -45,6 +45,7 @@
 - [HubSpot AI Website Generator](https://www.hubspot.com/products/cms/ai-website-generator) optimize existing company website
     - only generate landing page
 - [Relume](https://www.relume.io/) only generate mockup/HTML
+- [Webflow](https://webflow.com/) only generate layout
 
 ### Provided example generated sites
 
@@ -59,10 +60,6 @@ each generator:
     - seem not purely generated
 - Wix <https://www.wix.com/blog/wix-artificial-design-intelligence> \>
     Examples of sites created with Wix’s ADI-powered website builder
-
     - most down
 - B12
     <https://www.commoninja.com/blog/b12-ai-website-builder#Examples-of-Websites-Designed-with-B12%23Examples-of-Websites-Designed-with-B12>
-- Webflow
-    <https://www.seattlenewmedia.com/blog/best-webflow-website-examples-for-inspiration>
-    - not text-heavy

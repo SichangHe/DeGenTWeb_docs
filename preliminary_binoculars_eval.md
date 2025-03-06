@@ -63,7 +63,7 @@ lower-score page (above FPR-threshold but around F1-threshold):
 script: `degentweb.browser.bing_search` `degentweb.classifying.google_prelim`
 `degentweb.classifying.prelim_data_analysis`
 
-- not running browser; 20 Bing search result per query; \~133 Google query
+- ~~not running browser;~~ 20 Bing search result per query; ~~\~133 Google query~~
 - some domain has many result w/ Binoculars score \< FPR threshold
     - [x] ~~tend to have `og:type` be `article`~~ seem not reliable
     - include many ad (business model: content farm + ad?)
