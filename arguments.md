@@ -40,6 +40,11 @@
     - detect both generated and low-quality content
 - statistical probability may give more info than
     binary classification using fixed threshold
+- detection of individual webpage may yield error, but
+    aggregate analysis per website should increase accuracy
+- although NLP benchmarks evaluated individual detectors on texts,
+    they do not reflect the results from our aggregate website analysis, so
+    we need to run our pipeline over baseline websites
 
 ## Content farm
 
