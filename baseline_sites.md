@@ -1,5 +1,11 @@
 # Baseline Websites
 
+- assume webpage before ChatGPT (Nov 30, 2022) likely human-written
+    - publication date extraction: [htmldate: A Python package to
+        extract publication dates from web
+        pages](https://www.theoj.org/joss-papers/joss.02439/10.21105.joss.02439.pdf),
+        Adrien Barbaresi, JOSS, 2020
+
 ## Human-written
 
 - credible source
@@ -42,7 +48,9 @@
 - [Contentful AI Content
     Generator](https://www.contentful.com/marketplace/ai-content-generator/)
     use OpenAI API to write content
-- [HubSpot AI Website Generator](https://www.hubspot.com/products/cms/ai-website-generator) optimize existing company website
+- [HubSpot AI Website
+    Generator](https://www.hubspot.com/products/cms/ai-website-generator)
+    optimize existing company website
     - only generate landing page
 - [Relume](https://www.relume.io/) only generate mockup/HTML
 - [Webflow](https://webflow.com/) only generate layout
