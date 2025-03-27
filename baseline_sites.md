@@ -26,13 +26,15 @@
     name&description
     - landing page & 1-paragraph sample article
     - claim to have generated 1.5M+ websites
-    - from \$13/month; need "pro" to edit&multi-site; WordPress,
+    - from \$13/month; need \$28/month "pro" to edit&multi-site; WordPress,
         Cloudflare CDN
+        - ❌ need \$49/month for each additional website
+    - extremely slow when generating, e.g., \>10min/page
 - [Wix AI Website Builder](https://www.wix.com/ai-website-builder)
     - landing page & short/long blog article on demand
     - allow multiple site, sell domain&service instead of generator
 - [ContentBot.ai](https://contentbot.ai/) automate AI-driven content creation
-    - claim to be used on ABC News, Contagious, PR Week, etc.
+    - claim to be used on ABCNews, Contagious, PR Week, etc.
     - no free trial; from \$0.5/1000 word, \$29/month for full plan
 - [Copy.ai](https://www.copy.ai/) go-to market AI for marketing, sales, etc.
     - claim to be used by SIEMENS, Rubrik, etc.
@@ -45,6 +47,7 @@
 - [B12](https://www.b12.io/)
     - landing page & medium-length blog article on demand
     - from \$42/month
+    - very fast generation
 - [Contentful AI Content
     Generator](https://www.contentful.com/marketplace/ai-content-generator/)
     use OpenAI API to write content
