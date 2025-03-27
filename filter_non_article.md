@@ -49,6 +49,8 @@ Importantly, we need to segment after main text extraction with Trafilatura.
     classification](https://dl.acm.org/doi/abs/10.1145/2600428.2609630),
     Lidong Bing, Rui Guo, Wai Lam, Zheng-Yu Niu, Haifeng Wang, SIGIR, 2014
     - too old
+    - webpage class: index, image, forum, product, research result, blog,
+        download, news, video, other
 - [Box clustering segmentation: A new method for vision-based web page
     preprocessing](https://www.sciencedirect.com/science/article/pii/S0306457316301169),
     Jan Zeleny, Radek Burget, Jaroslav Zendulka,
@@ -61,3 +63,14 @@ Importantly, we need to segment after main text extraction with Trafilatura.
     Sriparna Saha, Fabrice Maurel, Stéphane Ferrari, TOIS, 2022
     - MCS: automatically choose \#segment using K-means
     - no code?
+- [Web Page Segmentation Revisited: Evaluation Framework and
+    Dataset](https://dl.acm.org/doi/abs/10.1145/3340531.3412782),
+    Johannes Kiesel, Florian Kneist, Lars Meyer, Kristof Komlossy, Benno Stein,
+    Martin Potthast, CIKM, 2020
+    - Webis-WebSeg-20 dataset for WPS benchmark
+- [WebSAM-Adapter: Adapting Segment Anything Model for Web Page
+    Segmentation](https://link.springer.com/chapter/10.1007/978-3-031-56027-9_27),
+    Bowen Ren, Zefeng Qian, Yuchen Sun, Chao Gao, Chongyang Zhang, Advances in
+    Information Retrieval, Springer ECIR, 2024
+    - segment any model vision-based SoTA webpage segmentation
+    - use Webis-WebSeg-20 dataset for eval
