@@ -4,6 +4,17 @@
 
 see also `arguments.md` and `literature.md`
 
+## Overall steps
+
+- [ ] improve ground truth & get robust classifier
+    - [ ] find additional topics beyond blog posts to
+        generate websites/ find tools to generates similar to existing
+        - [ ] \~100 human/AI websites baseline and still do well
+    - limitations of Binoculars
+- [ ] apply broadly to websites in the wild?
+    - ways to discover them
+- [ ] determine why they do this (money/misinformation)?
+
 ## Preliminary
 
 - [x] run Binoculars over Common Crawl; see if

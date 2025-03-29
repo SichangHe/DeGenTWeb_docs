@@ -50,3 +50,49 @@
 
 - moral issue: some site like GeeksforGeeks look like content farm but
     may be useful; what is our stance?
+
+## Generalizing to non-article webpages
+
+Text-based LLM detection cannot generalize to all webpages.
+Types of webpages from the viewpoint of such detection (enumeration based on
+Deepseek):
+
+- **Single or cohesive narrative/text blocks.** Blog Posts, News Articles,
+    Research Publications, Tutorials/Guides, E-books/Whitepapers,
+    Podcast Transcripts, Recipes, Interactive Stories, Archived Content.
+
+    👌 These can be treated as a single block of text and directly classified.
+
+- **Multi-Section Text Pages.** Homepage, FAQ, Glossary,
+    Forum (boards/posts), Directory, Wiki/Knowledge Base, Portfolio,
+    Testimonials, Case Studies, Team Directory, Event Listings, Press Releases,
+    User Profiles, Social Feeds, Q&A Platforms.
+
+    😰 These, when treated as a single block of text, causes discontinuity in
+    the text and degrade text detection performance.
+    Segmenting them and classifying each segment separately may work.
+
+- **Boilerplate/Legal/Standardized Content.** Privacy Policy, Terms of
+    Service, Disclaimer, Product Pages (descriptions), Download Pages,
+    Account Settings, Pricing Pages, Services Pages, Career Listings,
+    API Documentation, Client Dashboards, Affiliate Pages.
+
+    🤷 These have standardized forms, such that humans would write them in
+    a similar way that LLMs do, so detection makes little sense.
+
+- **Media/Non-Text Pages.** Image Galleries, Video Pages, Audio Streams,
+    3D/Virtual Tours.
+
+    ❌ Text detection is not applicable to these.
+
+- **Interactive/Functional Interfaces.** Dashboards, Quizzes/Surveys,
+    Calendars, Booking/Checkout Pages, Login/Registration Forms,
+    Search Results, Advanced Filters, Live Chat, Calculators/Converters, Games,
+    AR/VR Interfaces.
+    Stock Tickers, Weather Forecasts, Order Tracking, Live Streams/Webinars,
+    Auction/Bidding Pages, Real Estate Listings, Job Boards.
+    Comparison Tools, Financial Calculators, Medical/Appointment Systems,
+    Code Playgrounds, Maps.
+
+    ❌ These are not really text-centric content, so
+    text detection is not applicable.
