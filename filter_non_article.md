@@ -67,10 +67,19 @@ Importantly, we need to segment after main text extraction with Trafilatura.
     Dataset](https://dl.acm.org/doi/abs/10.1145/3340531.3412782),
     Johannes Kiesel, Florian Kneist, Lars Meyer, Kristof Komlossy, Benno Stein,
     Martin Potthast, CIKM, 2020
-    - Webis-WebSeg-20 dataset for WPS benchmark
+    - ⭐ Webis-WebSeg-20 dataset for WPS benchmark
 - [WebSAM-Adapter: Adapting Segment Anything Model for Web Page
-    Segmentation](https://link.springer.com/chapter/10.1007/978-3-031-56027-9_27),
+    Segmentation](https://github.com/pennmlr/WebSAM-Adapter/blob/main/WebSAM-Adapter.pdf),
     Bowen Ren, Zefeng Qian, Yuchen Sun, Chao Gao, Chongyang Zhang, Advances in
     Information Retrieval, Springer ECIR, 2024
     - segment any model vision-based SoTA webpage segmentation
     - use Webis-WebSeg-20 dataset for eval
+    - did not cite Multimodal Web Page Segmentation
+- [A DOM-structural cohesion analysis approach for segmentation of
+    modern web
+    pages](https://link.springer.com/article/10.1007/s11280-025-01333-3),
+    Hieu Huynh, Quoc-Tri Le, Vu Nguyen, Tien Nguyen, Springer World Wide Web,
+    2025
+    - use DOM structure analysis
+    - use Webis-WebSeg-20 dataset for eval
+    - did not cite WebSAM-Adapter

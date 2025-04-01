@@ -1,6 +1,6 @@
 # Literature
 
-## Content farm
+## Content farm & scam
 
 - [An examination of content farms in
     web search using
@@ -33,6 +33,14 @@
     - detection: seek "error message" like "as an AI", then human review
     - plagiarize from legit site like New York Times
     - money from Google Ads, from top brand
+- [Scam Sites at Scale: LLMs Fueling a GenAI Criminal
+    Revolution](https://www.netcraft.com/blog/llms-fueling-gen-ai-criminal-revolution/),
+    Netcraft, 2024
+    - phishing website/ fake shop/ email use LLM
+    - > identify thousands of websites each week using AI-generated content
+    - example w/ LLM "error message"/ beginning sentence of response
+        - "Certainly, here's/ here are …:"
+        - "As of my last knownledge update…"
 - [Funding the Next Generation of Content Farms: Some of
     the World’s Largest Blue Chip Brands Unintentionally Support the Spread of
     Unreliable AI-Generated News
