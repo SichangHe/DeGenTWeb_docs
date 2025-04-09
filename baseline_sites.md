@@ -10,6 +10,22 @@
 
 - credible source
     - Wikihow <https://www.wikihow.com/>
+- personal website
+    - [IndieWeb Wiki](https://indieweb.org/): registry of personal website
+        - after filtering by having sitemap, most are tech blog
+    - WordPress directory?
+- company website
+    - ~~[EDGAR database](https://www.edgarcompany.sec.gov/servlet/CompanyDBSearch?page=main)
+        → company name → search for website~~ many of them do not have website
+    - ~~US Business Database?~~ no website link
+    - ~~LinkedIn?~~ forbit crawling
+    - Russell 2000
+        - many do not have blog; many are after ChatGPT; many have no sitemap
+        - after filtering by having sitemap, most are tech company
+        - content: most are blog/ company statement (news);
+            some are service/product description; few functional page e.g. form
+
+- find `.*/blog/.*` URL in CommonCrawl?
 
 ## Machine-generated
 
@@ -34,7 +50,7 @@
     - landing page & short/long blog article on demand
     - allow multiple site, sell domain&service instead of generator
     - for arbitrary page, "Generate Full Page Text" produce poor result
-        - only generate 1 very short text block & no page structure
+        - ❌ only generate 1 very short text block & no layout generation
 - [ContentBot.ai](https://contentbot.ai/) automate AI-driven content creation
     - claim to be used on ABCNews, Contagious, PR Week, etc.
     - no free trial; from \$0.5/1000 word, \$29/month for full plan
@@ -44,7 +60,7 @@
         mainly target business
 - [WebWave AI](https://webwave.me/ai-website-builder)
     - landing page & manually written blog
-    - very slow; had bug of not publishing blog
+    - ❌ very slow; had bug of not publishing blog
     - from \$3.5/month; \$5/month for blog&SEO
 - [B12](https://www.b12.io/)
     - landing page/ medium-length blog/ service/project description/ team
@@ -64,7 +80,12 @@
 - [GoDaddy Airo](https://www.godaddy.com/en-ca/offers/airo) focus on
     marketing & selling
     - ❌ need GoDaddy domain
-- Dorik, Tars, Vzy, Wegic, Tilda, Shopify?
+- [Dorik AI](https://dorik.com/)
+    - ❌ need \$39/month for unlimited \#page, else limit to 5 (free) or
+        25 (\$18/month) per site
+- [Vzy](https://vzy.co/)
+    - \$10/month/site for 100 page
+- Wegic, Tilda, Shopify Magic?
 
 ### Provided example generated sites
 
