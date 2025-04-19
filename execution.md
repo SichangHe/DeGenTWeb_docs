@@ -80,3 +80,4 @@ see also `arguments.md` and `literature.md`
     . venv/bin/activate # if not in Rye's virtual env
     pre-commit install
     ```
+- run `. static_checks.sh` before making pull request
