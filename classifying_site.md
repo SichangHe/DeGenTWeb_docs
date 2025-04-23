@@ -14,17 +14,19 @@
 - train linear SVM classifier on deciles as feature vector
     - train on company/personal website dataset (`baseline_sites.md`)
     - out-of-distribution test on personal/company/other website dataset
-    - filter by beforeGPT for training?
     - [perfect performance in every
         combination](https://github.com/SichangHe/DeGenTWeb/issues/18#issuecomment-2810937177)
+    - when comparing whether filter by beforeGPT, perfect performance except
+        if trained on company deciles/quartiles beforeGPT and tested on
+        non-beforeGPT (98.3\% accuracy)
 - ⇒ aggregate Binoculars score analysis perform well regardless of
     the noise in data (e.g., boilerplate page)
     - generalize across different kinds of website
 
 ## Applying in the wild
 
-- full SVM model: train SVM on
-    all baseline website (`classifying/full_site_svm.py`)
+- full SVM model: train SVM on all baseline website,
+    w/ 9 deciles (`classifying/full_site_svm.py`)
 
 ### Crawling websites for classification
 

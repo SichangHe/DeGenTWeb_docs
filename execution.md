@@ -7,10 +7,12 @@ see also `arguments.md` and `literature.md`
 ## Overall steps
 
 - [ ] improve ground truth & get robust classifier
-    - [ ] find additional topics beyond blog posts to
-        generate websites/ find tools to generates similar to existing
-        - [ ] \~100 human/AI websites baseline and still do well
+    - ~~[ ] find additional topics beyond blog posts to
+        generate websites/ find tools to generates similar to existing~~
+        - [x] \~100 human/AI websites baseline and still do well
     - limitations of Binoculars
+    - [x] apply to 10,000 websites in the wild
+        - [ ] check if doing well
 - [ ] apply broadly to websites in the wild?
     - ways to discover them
 - [ ] determine why they do this (money/misinformation)?
@@ -34,14 +36,15 @@ see also `arguments.md` and `literature.md`
 `web_search.md`
 
 - [ ] search Google/Bing/Brave/Perplexity/ChatGPT/ChatNoir
-- [ ] crawl top 10 results/reference
+- [x] crawl top 20 results/reference
 - [x] extract body text
     - ~~DOM Distiller Reading Mode~~
     - [Trafilatura](https://github.com/adbar/trafilatura)
 
 ## Generated text detection
 
-- [ ] filter out non-article (`filter_non_article.md`)
+- ~~[ ] filter out non-article (`filter_non_article.md`)~~
+    rely on \#tokens filtering & low probability of getting many title pages
 - ~~[ ] text cleaning~~ cleaned by Trafilatura
 - Binoculars
     - [x] speed enhancement for large scale

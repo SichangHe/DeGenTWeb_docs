@@ -7,6 +7,8 @@ extracting&counting ad may help identify content farm
 - (currently implemented) apply [EasyList](https://easylist.to/)
     CSS selectors on HTML (browser, JS enabled) using `lxml` or similar
     - [UW use this](literature.html#content-farm)
+    - [ ] only count elements w/ content
+    - use bounding box?
 - Huanchen idea: turn Ad blocker on/off in browser & diff visual element
 - use uBlock Origin logger when running browser
 - use uBlock-Origin-compatible rule parser (e.g.,
