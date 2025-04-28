@@ -12,6 +12,14 @@ Current method to filter out non-articles:
     most of them are articles and forum threads, except for
     occasional product sales page
 - discard pages w/ \< 200 tokens
+- discard pages w/ \> 20% text in link/code
+    - Trafilatura sometimes extract wrong thing
+        - extract many link following main text, e.g.
+            <https://entrance-exam.net/annamalai-university-pg-diploma-in-automobile-maintenance-auto-garage-management-papers/>
+        - extract only code block, e.g.
+            for <https://plaid.com/institutions/mos/>
+    - ⇒ try Trafilatura w/ `favor_precision` instead of `favor_recall` if
+        too much text in link/code
 
 Ideas for filtering:
 
