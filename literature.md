@@ -78,6 +78,24 @@
 See
 <https://sichanghe.github.io/notes/research/web_user_facing.html#search-engine-optimization-seo>.
 
+## Website clustering
+
+- [Identification of Web Spam through Clustering of
+    Website Structures](https://dl.acm.org/doi/abs/10.1145/2740908.2742127),
+    Filippo Geraci, ACM WWW, 2015
+
+## Website ownership
+
+- [Domain and
+    Website Attribution beyond
+    WHOIS](https://dl.acm.org/doi/abs/10.1145/3627106.3627190),
+    Silvia Sebastián, Raluca-Georgia Diugan, Juan Caballero,
+    Iskander Sanchez-Rola, Leyla Bilge, ACSAC, 2023
+    - use WHOIS, passive DNS, TLS certificate, website content
+        - website content: copyright string, metadata, policy, terms of
+            service (TOS), contact, security.txt
+    - F1 score 0.94
+
 ## Generative AI (GenAI)
 
 See <https://sichanghe.github.io/notes/research/gen_ai.html>.
