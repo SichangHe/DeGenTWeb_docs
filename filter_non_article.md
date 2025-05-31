@@ -6,7 +6,7 @@ Non-articles, include lists of links on a homepage, login pages, dashboards of
 sports scores, and spec charts of products,
 may cause high false positive rates.
 
-Current method to filter out non-articles:
+Current method to filter out non-articles (`visit_subdomains.py`):
 
 - use how-to search results.
     most of them are articles and forum threads, except for
@@ -20,6 +20,13 @@ Current method to filter out non-articles:
             for <https://plaid.com/institutions/mos/>
     - ⇒ try Trafilatura w/ `favor_precision` instead of `favor_recall` if
         too much text in link/code
+- discard pages w/o any "block" \> 250 characters long
+    - a block is a paragraph, list item, or
+        other non-container HTML element text
+    - likely not consist of paragraph
+- discard pages w/ \< 20% text in "large blocks"
+    - large block need ≥100 characters
+- discard pages w/ \> 40% text in list/table
 
 Ideas for filtering:
 
@@ -29,13 +36,24 @@ Ideas for filtering:
     - perhaps study how Trafilatura filter out non-main-body text
 - feed extracted text to classifier
     - BERT-based classifier for article/non-article
-- word count on extracted text to see if consist of paragraph
 
 Unreliable ideas:
 
 - filter by `og:type` = `article`.
     unreliable because not every article has this tag and
     content farm may have this tag be `website`
+
+## Deduplication
+
+- [Finding Similar Files in a Large File
+    System](https://www.usenix.org/legacy/publications/library/proceedings/sf94/full_papers/manber.finding),
+    Udi Manber, USENIX Winter, 1994
+    - use Rabin fingerprint (polynomial fingerprint) to
+        randomly determine "anchor" for chunking
+        - polynomial fingerprint bc can efficiently compute next n-byte hash
+            after shifting 1 byte
+    - find identical chunks
+- Simhash
 
 ## Segmentation for generalization
 
