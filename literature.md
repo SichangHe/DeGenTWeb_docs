@@ -1,6 +1,8 @@
 # Literature
 
-## Content farm & scam
+## Website
+
+### Content farm & scam
 
 - [An examination of content farms in
     web search using
@@ -73,18 +75,18 @@
     - human&DetectGPT low accuracy—infeasible to detect
         - fine-tuning of detector help a lot, but need to know base LLM used
 
-## Search Engine Optimization (SEO)
+### Search Engine Optimization (SEO)
 
 See
 <https://sichanghe.github.io/notes/research/web_user_facing.html#search-engine-optimization-seo>.
 
-## Website clustering
+### Website clustering
 
 - [Identification of Web Spam through Clustering of
     Website Structures](https://dl.acm.org/doi/abs/10.1145/2740908.2742127),
     Filippo Geraci, ACM WWW, 2015
 
-## Website ownership
+### Website ownership
 
 - [Domain and
     Website Attribution beyond
@@ -96,11 +98,47 @@ See
             service (TOS), contact, security.txt
     - F1 score 0.94
 
-## Generative AI (GenAI)
+### Web genre classification
+
+- [Web page genre
+    classification](https://dl.acm.org/doi/abs/10.1145/1363686.1364247),
+    Guangyu Chen, Ben Choi, SAC, 2008
+    - genre: homepage, search, resource, shop, forum
+    - ❌ manual feature design & threshold tuning w/ regex/ HTML tag
+        - unlikely to generalize especially today
+- [Web Genre Classification via Hierarchical Multi-label
+    Classification](https://kt.ijs.si/DragiKocev/wikipage/lib/exe/fetch.php?media=2015ideal_web_genres.pdf),
+    Gjorgji Madjarov, Vedrana Vidulin, Ivica Dimitrovski, Dragi Kocev,
+    Springer IDEAL, 2015
+    - fancy decision tree on web page features
+    - 2491 features from [Multi-Label Approaches to
+        Web Genre Identification](https://jlcl.org/article/download/115/113),
+        Vedrana Vidulin, Mitja Luštrek, Matjaž Gams, JLCL, 2009
+        - keyword in URL
+        - specific word rate, punctuation, HTML tag, out-domain hyperlink
+        - part of speech, sentence type
+        - ❌ bind and brute force, bad <40% accuracy
+    - ❌ bad 28% accuracy
+- [Enhancing the identification of web genres by combining internal and
+    external
+    structures](https://www.sciencedirect.com/science/article/pii/S0167865521000830),
+    Chaker Jebari, Elsevier Pattern Recognition Letters, 2021
+    - ❌ use word (term) in heading + link; combine multiple classifier
+    - dataset: KI04, SANTINIS
+    - \>0.85 accuracy w/ combined classifier
+- [Web Page Classification using LLMs for
+    Crawling Support](https://arxiv.org/abs/2505.06972v1), Yuichi Sasazawa,
+    Yasuhiro Sogawa, Hitachi Ltd., 2025
+    - GPT-4o 0.89 F1 score when classify homepage vs content on
+        extracted title + body
+
+## Training data
+
+### Generative AI (GenAI)
 
 See <https://sichanghe.github.io/notes/research/gen_ai.html>.
 
-## Training data curation
+### Training data curation
 
 - [The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with
     Web Data, and Web Data Only](https://arxiv.org/abs/2306.01116),
@@ -119,7 +157,7 @@ See <https://sichanghe.github.io/notes/research/gen_ai.html>.
         Artem Sokolov, Claytone Sikasote, et al., ACL, 2022
         - Common Crawl include large portion of machine spam & porn
 
-## Synthetic data
+### Synthetic data
 
 - [STaR:
     Bootstrapping Reasoning With Reasoning](https://arxiv.org/abs/2203.14465),
