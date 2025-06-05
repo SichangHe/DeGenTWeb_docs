@@ -45,6 +45,7 @@
 - although NLP benchmarks evaluated individual detectors on texts,
     they do not reflect the results from our aggregate website analysis, so
     we need to run our pipeline over baseline websites
+- when multiple detectors exhibit the same trend, the trend is evident
 
 ## Content farm
 

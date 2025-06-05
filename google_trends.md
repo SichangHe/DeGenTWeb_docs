@@ -1,5 +1,7 @@
 # Google Trends
 
+(deprecated)
+
 - can get top overall/related topics & queries for
     given time range + location + category + topic/query
     - up to (and usually) 25 each

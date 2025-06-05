@@ -7,9 +7,9 @@
 - webpage filtering
     - filter by a URL path regex to rid index page, tag page, etc.
     - filter by `Content-Type: text/html`
-    - filter by English & \#tokens \> 200 (`filter_non_article.md`)
-- compute 11 Binoculars score deciles among webpage for each website
-    - also tried 101 percentiles, 9 deciles, 5 quartiles, 3 quartiles;
+    - filter by English & \#tokens \> 200, etc. (`filter_non_article.md`)
+- compute 9 Binoculars score deciles among webpage for each website
+    - also tried 101 percentiles, 11 deciles, 5 quartiles, 3 quartiles;
         little difference
 - train linear SVM classifier on deciles as feature vector
     - train on company/personal website dataset (`baseline_sites.md`)

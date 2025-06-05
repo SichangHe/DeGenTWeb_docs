@@ -2,9 +2,10 @@
 
 - [x] dump English HTTP response from random Common Crawl WARC file
 - [x] extract main text; if longer than 2000 character, feed into Binoculars
-- [ ] split long page down to Falcon-7B context window 2048 token
+- ~~[ ] split long page down to Falcon-7B context window 2048 token~~
+    just truncate
     - currently, simply truncate
-    - [ ] average score weighted on token count
+    - ~~[ ] average score weighted on token count~~
 
 script: `degentweb.common_crawl.classify_english `
 
@@ -49,7 +50,8 @@ lower-score page (above FPR-threshold but around F1-threshold):
 
 ## Problem
 
-- listing/interaction page should not be in this study
+- `filter_non_article.md` ~~listing/interaction page should not be in
+    this study~~
     - cannot simply filter by markup ratio (link, button, etc.)
         bc some attach large description block
     - ❓ ML model to distinguish article
@@ -78,7 +80,7 @@ script: `degentweb.browser.bing_search` `degentweb.classifying.google_prelim`
             <https://www.gameslearningsociety.org/> <https://thetechylife.com/>
             <https://elevationvibe.com/>
             <https://ebestcourses.com/language/accent-reduction/>
-        - [ ] detect&count ad
+        - [x] detect&count ad
     - seller/scam website boosting site rank in search engine w/ AI blog
         - e.g.,
             <http://www.androidphonesoft.com/> <https://dashboardsexcel.com/>
@@ -95,9 +97,9 @@ script: `degentweb.browser.bing_search` `degentweb.classifying.google_prelim`
         - AI search <https://www.neuralword.com/>
     - spammy but unclear if generated (from late 2022)
         <https://sheetsland.com/>
-    - [ ] how are they ranked in search result?
+    - [x] how are they ranked in search result?
         - some appear in multiple search. double count or take median?
-        - skimming show some high some low
+        - stats show they rank similar to non-AI sites
 - some clear false positive on some forum&support page
     - no `og:type` or have it be `webpage`
     - for false positive article, perhaps can filter by searching
