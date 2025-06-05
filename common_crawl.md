@@ -24,13 +24,13 @@ ar,com,futbolinterior)/component/mailto?link=b2449dac9dd9dbc27fe2d9f8c9dfc250a10
 **filtering:** `mime` is `text/html`, `status` is `200`, `languages`
 contains `eng`.
 
-**ideal compression** (468B → \~60B for this file, \~13%):
+**ideal compression** (468B → \~80B for this file, \~17%):
 
 ```csv
 subdomain,path,length,offset,filename
-fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,78501,243658810,CC-MAIN-2025-21/segments/1746990412231.65/warc/CC-MAIN-20250512042640-20250512072640-00410.warc.gz
-# after storing subdomain and filename in other tables, 53 bytes for this entry
-4B, producto/luz-knog-blinder-mini-niner/,4B, 4B,  4B
+fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,20250512054001,78501,243658810,CC-MAIN-2025-21/segments/1746990412231.65/warc/CC-MAIN-20250512042640-20250512072640-00410.warc.gz
+# after storing subdomain and filename in other tables, 68 bytes for this entry
+4B, producto/luz-knog-blinder-mini-niner/,20250512054001,4B, 4B,  4B
 ```
 
 ### Size and storage estimate
@@ -38,7 +38,7 @@ fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,78501,243658810,CC-MAIN
 - 44 path files from 2020 to May 2025 (very small)
 - \~301 index files per path, \~783MB per file, \~5.8GB uncompressed
 - \~230GB of index files under each path file, \~10.1TB total (too much)
-- assume 5% entries left after filtering, 13% compression rate after index
-    - ⇒ \~11.2GB per path file, \~492GB total (managable)
-- only keep 2000 entries per subdomain, ⇒ est. \~10% size, 48GB (very fine)
+- assume 5% entries left after filtering, 17% compression rate after index
+    - ⇒ \~14.9GB per path file, \~657GB total (managable)
+- only keep 2000 entries per subdomain, ⇒ est. \<10% size, \<66GB (very fine)
     - throw away existing entries w/ largest BLAKE3 64bit hash number
