@@ -76,6 +76,14 @@ see also `arguments.md` and `literature.md`
     - note: some dependency like `nvidia-cuda-runtime-cu12` version for
         Binoculars are unfortunately hardcoded for Exxact; need to change if
         used on other machine
+- install `uv` and `maturin[patchelf]`:
+
+    ```sh
+    rye install uv
+    rye install maturin
+    rye install patchelf
+    ```
+- [install Rust](https://www.rust-lang.org/tools/install)
 - register [Pre-commit Hook](https://pre-commit.com/) to run linters and
     formatters automatically before Git commit:
 
