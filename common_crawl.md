@@ -49,8 +49,19 @@ fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,20250512054001,78501,24
 - only keep 2000 entries per subdomain, ⇒ est. \<10% size, \<66GB (very fine)
     - throw away existing entries w/ largest BLAKE3 signed 64bit hash number
     - wrong estimate; actually much larger
-- only sample index files w/ 1/64 probability
-    - \~207 index files
-    - throw away index files whose path's (w/o prefix)
-        BLAKE3 signed 64bit hash number is not divisible by 64
-        (last 6 bits are 0)
+- only sample index files w/ 1/32 probability
+    - 589 index files
+        - 166 from `cc-index/collections/CC-MAIN-2025-21/` because
+            did not filter that path file when started crawling
+    - only sample index files w/ 0-based line number (in path file) that
+        is fully divided by 32
+- 36192326 subdomains
+    - only 153233 have 2000 records
+
+## Sampling & classification
+
+sample 10,000 subdomain from all index files
+
+### Resource usage estimate
+
+- GPU: 10,000 subdomain × 20 pages × 0.5s/page = 100,000s = 27.8h
