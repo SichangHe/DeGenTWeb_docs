@@ -27,6 +27,12 @@ Current method to filter out non-articles (`visit_subdomains.py`):
 - discard pages w/ \< 20% text in "large blocks"
     - large block need ≥100 characters
 - discard pages w/ \> 40% text in list/table
+- discard pages w/ \> 50% text duplicated relative to previous pages of
+    the same subdomain
+    - calculate %duplication based on byte chunks from
+        Rabin fingerprint content-defined chunking (CDC)
+        - 32 byte window, 96 byte target block size (1/64 probability for
+            splitting)
 
 Ideas for filtering:
 
