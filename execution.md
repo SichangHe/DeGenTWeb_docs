@@ -71,24 +71,25 @@ see also `arguments.md` and `literature.md`
     - automatically do these w/
         [these Git
         config](https://sichanghe.github.io/notes/programming/git.html#config)
-- use [Rye](https://rye.astral.sh/) to manage Python dependencies
-    (`rye sync`, `rye add`)
+- use [UV](https://docs.astral.sh/uv/) to manage Python dependencies
+    (`uv sync --all-packages`, `uv add`)
     - note: some dependency like `nvidia-cuda-runtime-cu12` version for
         Binoculars are unfortunately hardcoded for Exxact; need to change if
         used on other machine
-- install `uv` and `maturin[patchelf]`:
+- install `ruff` and `maturin[patchelf]`:
 
     ```sh
-    rye install uv
-    rye install maturin
-    rye install patchelf
+    uv tool install ruff
+    uv tool install maturin[patchelf]
     ```
+
 - [install Rust](https://www.rust-lang.org/tools/install)
 - register [Pre-commit Hook](https://pre-commit.com/) to run linters and
     formatters automatically before Git commit:
 
     ```sh
-    . venv/bin/activate # if not in Rye's virtual env
+    . venv/bin/activate
     pre-commit install
     ```
+
 - run `. static_checks.sh` before making pull request
