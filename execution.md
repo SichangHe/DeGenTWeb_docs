@@ -71,8 +71,14 @@ see also `arguments.md` and `literature.md`
     - automatically do these w/
         [these Git
         config](https://sichanghe.github.io/notes/programming/git.html#config)
-- use [Rye](https://rye.astral.sh/) to manage Python dependencies
-    (`rye sync`, `rye add`)
+- use [Rye](https://rye.astral.sh/) to manage Python, dependencies, and
+    PyPy (`rye sync`, `rye add`)
+
+    ```sh
+    rye sync
+    cd pypy && rye sync && cd ..
+    ```
+
     - note: some dependency like `nvidia-cuda-runtime-cu12` version for
         Binoculars are unfortunately hardcoded for Exxact; need to change if
         used on other machine
