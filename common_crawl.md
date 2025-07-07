@@ -60,8 +60,9 @@ fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,20250512054001,78501,24
 
 ## Sampling & classification
 
-sample 10,000 subdomain from all index files
+`common_crawl/classify10k.py`
 
-### Resource usage estimate
-
-- GPU: 10,000 subdomain × 20 pages × 0.5s/page = 100,000s = 27.8h
+- sample 10,000 subdomain from all index files
+- 2.16%~4.30%~9.30% subdomains classified as AI-dominant,
+    much lower compared to search results
+- increasing %AI if segment by starting `crawled_at` year

@@ -1,5 +1,11 @@
 # Classifying Websites
 
+## Binoculars optimizations
+
+- quantize Falcon-7B and Falcon-7B-instruct to `fp8`:
+    hardly change Binoculars score, but faster&smaller
+- group batch by similar #tokens & decide batch size from max#tokens
+
 ## SVM website classifier
 
 `classifying/site_svm.py`
@@ -16,9 +22,8 @@
     - out-of-distribution test on personal/company/other website dataset
     - [perfect performance in every
         combination](https://github.com/SichangHe/DeGenTWeb/issues/18#issuecomment-2810937177)
-    - when comparing whether filter by beforeGPT, perfect performance except
-        if trained on company deciles/quartiles beforeGPT and tested on
-        non-beforeGPT (98.3\% accuracy)
+        - optionally filter by beforeGPT
+- still perform well and high SVM-sureness when sampling fewer pages/site
 - ⇒ aggregate Binoculars score analysis perform well regardless of
     the noise in data (e.g., boilerplate page)
     - generalize across different kinds of website
@@ -27,6 +32,16 @@
 
 - full SVM model: train SVM on all baseline website,
     w/ 9 deciles (`classifying/full_site_svm.py`)
+- aim for 20page/site but allow at least 15page/site
+
+## Other detectors
+
+- keeping: Fast-DetectGPT `fast_detect_gpt`, mean log probability `log_p`,
+    likelihood log-rank ratio (LRR) `lrr`, mean log rank `log_rank`, entropy
+    - only Fast-DetectGPT perform perfectly on baseline;
+        others have \>90% accuracies
+- FastNPR, RoBERTa, RADAR, intrinsicPHD, max probability performs badly:
+    \<0.5 Pearson correlation w/ `is_generated` on baseline
 
 ### Crawling websites for classification
 
