@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 for f in *.md; do
-    cat "$f"
+    if [ "$f" != "development.md" ]; then
+        cat "$f"
+    fi
 done
