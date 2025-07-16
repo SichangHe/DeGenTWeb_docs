@@ -51,11 +51,11 @@
     - <https://educacion-especial.com/2023/03/12/a-beginners-guide-to-home-schooling-tips-and-resources/>
     - <https://freemwiki.com/wiki/%E9%A6%96%E9%A1%B5>
 
-## Training/test dataset
+## Training/test dataset 144x
 
-- company website dataset: 30x Wix vs. 30x Russell 2000
-- personal website dataset: 30x B12 vs. 30x IndieWeb Wiki
-- other website dataset: 4x Wix + 4x B12 + 2x self-claim generated vs.
+- company website dataset 60x: 30x Wix vs. 30x Russell 2000
+- personal website dataset 60x: 30x B12 vs. 30x IndieWeb Wiki
+- other website dataset 24x: 4x Wix + 4x B12 + 2x self-claim generated vs.
     8 Reddit recommended blog + 6 top blog
 
 note:
