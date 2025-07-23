@@ -21,12 +21,14 @@ Current method to filter out non-articles (`visit_subdomains.py`):
     - ⇒ try Trafilatura w/ `favor_precision` instead of `favor_recall` if
         too much text in link/code
 - discard pages w/o any "block" \> 250 characters long
-    - a block is a paragraph, list item, or
-        other non-container HTML element text
+    - blocks are separated by newline, line break, separator; boundaries of
+        block elements: header, paragraph, div, body, table cell, list item,
+        code, quote
     - likely not consist of paragraph
-- discard pages w/ \< 20% text in "large blocks"
-    - large block need ≥100 characters
-- discard pages w/ \> 40% text in list/table
+- discard pages w/ \< 75% text in "large blocks"
+    - large block need ≥200 characters
+- discard pages w/ \> 20% text in list/table
+    - do not count long list item/ table cell: need ≤ 100 characters long
 - discard pages w/ \> 50% text duplicated relative to previous pages of
     the same subdomain
     - calculate %duplication based on byte chunks from
