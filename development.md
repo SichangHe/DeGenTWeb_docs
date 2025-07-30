@@ -21,7 +21,7 @@
     formatters automatically before Git commit:
 
     ```sh
-    . venv/bin/activate
+    . .venv/bin/activate
     pre-commit install
     ```
 
@@ -37,9 +37,10 @@
     ```sh
     sh /ssd1/sichanghe/DeGenTWeb/resume_bino_server.sh
     ```
-- There is a small yet tricky bug: when it pauses, I `del` the model from
-    memory, call `gc.collect` and `torch.cuda.empty_cache`, but the models'
-    size is still somehow reflected in the memory usage.
-    The memory is not actually leaked, because
-    reloading the models several times does not blow up the memory.
-    I have no idea why Torch is retaining that memory.
+
+## Restoring PostgreSQL database
+
+- install PostgreSQL 17 & TimescaleDB v2.21.1
+- see
+    [PgBackRest
+    docs](https://pgbackrest.org/user-guide.html#quickstart/perform-restore)
