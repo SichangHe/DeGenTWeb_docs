@@ -1,5 +1,7 @@
 # Development
 
+## Setup
+
 - clone w/ `--recurse-submodules` and remember to update submodules on pull
     - automatically do these w/
         [these Git
@@ -24,6 +26,11 @@
     . .venv/bin/activate
     pre-commit install
     ```
+
+- copy the content of `../conf_template/` to `../` and modify they as
+    appropriate.
+
+## Pull request
 
 - run `. static_checks.sh` before making pull request
 
