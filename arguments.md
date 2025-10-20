@@ -22,6 +22,9 @@
     Act](https://www.europarl.europa.eu/topics/en/article/20230601STO93804/eu-ai-act-first-regulation-on-artificial-intelligence)
     mandate disclosure of AI-generated content, but
     many AI content websites do not comply and thus may be illegal.
+- Hard to do general filtering as opposed to filtering only 1 site
+- Misinformation reference chain can possibly form from
+    AI-generated misinformation
 
 ## Crawling
 
