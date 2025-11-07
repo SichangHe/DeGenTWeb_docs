@@ -47,7 +47,7 @@
 
 ## Restoring PostgreSQL database
 
-- install PostgreSQL 17 & TimescaleDB v2.21.1
+- install PostgreSQL 17
 - see
     [PgBackRest
     docs](https://pgbackrest.org/user-guide.html#quickstart/perform-restore)
