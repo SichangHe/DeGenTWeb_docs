@@ -140,6 +140,18 @@ See <https://sichanghe.github.io/notes/research/gen_ai.html>.
 
 ### Training data curation
 
+- [CCNet: Extracting High Quality Monolingual Datasets from
+    Web Crawl Data](https://aclanthology.org/2020.lrec-1.494/),
+    Guillaume Wenzek, Marie-Anne Lachaux, Alexis Conneau, Vishrav Chaudhary,
+    Francisco Guzmán, Armand Joulin, Edouard Grave, LREC, 2020
+- [Trafilatura: A Web Scraping Library and Command-Line Tool for
+    Text Discovery and Extraction](https://aclanthology.org/2021.acl-demo.15/),
+    Adrien Barbaresi, ACL 2021
+    - [An Empirical Comparison of
+        Web Content Extraction
+        Algorithms](https://dl.acm.org/doi/pdf/10.1145/3539618.3591920),
+        Janek Bevendorff, Sanket Gupta, Johannes Kiesel, Benno Stein, SIGIR,
+        2023
 - [The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with
     Web Data, and Web Data Only](https://arxiv.org/abs/2306.01116),
     Guilherme Penedo, Quentin Malartic, Daniel Hesslow, Ruxandra Cojocaru,
@@ -156,6 +168,10 @@ See <https://sichanghe.github.io/notes/research/gen_ai.html>.
         Nasanbayar Ulzii-Orshikh, Allahsera Tapo, Nishant Subramani,
         Artem Sokolov, Claytone Sikasote, et al., ACL, 2022
         - Common Crawl include large portion of machine spam & porn
+- [Dolma: an Open Corpus of Three Trillion Tokens for
+    Language Model Pretraining Research](https://arxiv.org/abs/2402.00159),
+    Luca Soldaini, Rodney Kinney, Akshita Bhagia, Dustin Schwenk, et al.,
+    Kyle Lo, arXiv, 2024
 
 ### Synthetic data
 

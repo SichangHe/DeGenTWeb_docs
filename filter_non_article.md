@@ -36,6 +36,27 @@ Current method to filter out non-articles (`visit_subdomains.py`):
         - 32 byte window, 96 byte target block size (1/64 probability for
             splitting)
 
+Method used by DOLMa dataset:
+
+- C4 nopunc: remove paragraphs not ending in punctuation
+- Gopher rules
+    - fraction of characters in most common n-gram greater than threshold
+        - bigram > 0.20
+        - trigram > 0.18
+        - 4-gram > 0.16
+    - fraction of characters in duplicate n-grams greater than threshold
+    - fewer than 50 or more than 100 000 words
+    - median word length < 3 or > 10
+    - symbol / word ratio > 0.10
+    - fraction of words with alphabetic characters < 0.80
+    - contains fewer than 2 required words
+    - fraction of lines starting with bullet > 0.90
+    - fraction of lines ending with ellipsis > 0.30
+    - fraction of duplicated lines > 0.30
+    - fraction of characters in duplicated lines > 0.30
+    - more than half of lines not ending with . ? ! "
+    - contains token or token sequence repeated > 100 times
+
 Ideas for filtering:
 
 - discard pages based on HTML structure
