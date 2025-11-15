@@ -18,6 +18,7 @@
         personal website
         - after filtering by having sitemap, most are tech blog
     - WordPress directory?
+- ~~Tranco low-rank blogs mostly dead or non-English, unsuitable~~
 - company website
     - ~~[EDGAR database](https://www.edgarcompany.sec.gov/servlet/CompanyDBSearch?page=main)
         → company name → search for website~~ many of them do not have website
@@ -50,6 +51,10 @@
 - (not included in dataset) clear cue, e.g., "as an AI"
     - <https://educacion-especial.com/2023/03/12/a-beginners-guide-to-home-schooling-tips-and-resources/>
     - <https://freemwiki.com/wiki/%E9%A6%96%E9%A1%B5>
+- [ ] additional AI website generators beyond Wix/B12
+    - [ ] artificial set-level sample from benchmark datasets?
+- [ ] more baseline negatives from before ChatGPT
+- document prompt engineering effort needed for generator outputs
 
 ## Training/test dataset 144x
 

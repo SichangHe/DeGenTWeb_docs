@@ -9,6 +9,7 @@ extracting&counting ad may help identify content farm
     - [UW use this](literature.html#content-farm)
     - [x] only count elements w/ content → `n_non_empty_ads`
     - use bounding box?
+    - [ ] compute ads-per-token normalization metric
 - Huanchen idea: turn Ad blocker on/off in browser & diff visual element
 - use uBlock Origin logger when running browser
 - use uBlock-Origin-compatible rule parser (e.g.,

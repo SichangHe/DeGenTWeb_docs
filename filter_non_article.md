@@ -65,6 +65,12 @@ Ideas for filtering:
     - perhaps study how Trafilatura filter out non-main-body text
 - feed extracted text to classifier
     - BERT-based classifier for article/non-article
+- prior work calls this "genre detection" and often relies on word counts
+
+## Learning-based
+
+- tried decision tree/forest for filtering ⇒ high FPR and
+    uninterpretable tree
 
 Unreliable ideas:
 

@@ -34,6 +34,8 @@
     we do best-effort w/ SoTA method
     - Trafilatura [@barbaresi2021trafilatura]
         is SoTA [@bevendorff2023empirical; @reeve2024evaluation]
+- balancing network, CPU, and
+    GPU load during crawling could be a contribution (Shaoyu)
 
 ## Generated text detection
 
@@ -45,6 +47,8 @@
     binary classification using fixed threshold
 - detection of individual webpage may yield error, but
     aggregate analysis per website should increase accuracy
+- real-world data contain noise, so detectors must tolerate imperfect labels
+- emphasize we already use SoTA LLM detection
 - although NLP benchmarks evaluated individual detectors on texts,
     they do not reflect the results from our aggregate website analysis, so
     we need to run our pipeline over baseline websites
@@ -100,3 +104,21 @@ Deepseek):
 
     ❌ These are not really text-centric content, so
     text detection is not applicable.
+
+## Big questions
+
+- How accurate are our detection methods?
+- How prevalent in search results vs broader web?
+- Why are created, what goals?
+- What harms, e.g., misinformation, scams, degraded search or
+    LLM performance?
+- Produced in batches by a few entities? Tooling used?
+    - Wappalyzer for technology attribution
+- Topics emphasized?
+- Should search engines intervene?
+
+## Directions
+
+- spam industry bottleneck: Google Ads for LLM ad farms?
+    - Google profiting from reduced search quality
+- explored SearXNG deployment concept; subreddit post drew only upvotes

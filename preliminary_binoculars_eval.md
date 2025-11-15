@@ -60,7 +60,7 @@ lower-score page (above FPR-threshold but around F1-threshold):
     - ~~❓ `<meta property="og:type" content="article">` but
         not every article has this~~ tested, unreliable
 
-## ~~Google~~ Bing 500 WikiHow articles
+## ~~Google~~ Bing ~~500~~ 1000 WikiHow articles
 
 script: `degentweb.browser.bing_search` `degentweb.classifying.google_prelim`
 `degentweb.classifying.prelim_data_analysis`
@@ -108,6 +108,7 @@ script: `degentweb.browser.bing_search` `degentweb.classifying.google_prelim`
         - too much data (2TB) to search online, need local DB
     - 🤔 some like <https://www.geeksforgeeks.org/> are somewhere between
         content farm and educational site, w/ variable quality
+- no token-count correlation; search-query correlation unclear
 
 ## Site crawling
 

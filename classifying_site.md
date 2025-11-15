@@ -24,6 +24,7 @@
         combination](https://github.com/SichangHe/DeGenTWeb/issues/18#issuecomment-2810937177)
         - optionally filter by beforeGPT
 - still perform well and high SVM-sureness when sampling fewer pages/site
+- Binoculars SVMs very confident on baseline data
 - ⇒ aggregate Binoculars score analysis perform well regardless of
     the noise in data (e.g., boilerplate page)
     - generalize across different kinds of website

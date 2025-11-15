@@ -58,6 +58,12 @@ fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,20250512054001,78501,24
 - 36192326 subdomains
     - only 153233 have 2000 records
 
+### Implementation
+
+- Common Crawl use blocked gzip
+- batch insertion to avoid slow
+- SSL errors; Common Crawl 1MiB/s rate limiting
+
 ## Sampling & classification
 
 `common_crawl/classify10k.py`
@@ -66,3 +72,4 @@ fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,20250512054001,78501,24
 - 2.16%~4.30%~9.30% subdomains classified as AI-dominant,
     much lower compared to search results
 - increasing %AI if segment by starting `crawled_at` year
+- 10 concurrent downloads, CPU-bound by extraction
