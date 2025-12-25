@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025-12-03
+
+- upgraded to Python 3.14 & rid torch compile
+
 ## 2025-11-11
 
 - finished DB migration & bulk Git history cleanup

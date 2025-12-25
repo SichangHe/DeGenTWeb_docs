@@ -25,11 +25,9 @@ want:
     - [ ] estimate expectation of crawl-to-sample ratio
 - [ ] sampling sensitivity in the wild
     - [ ] retune filter thresholds after restat showed over-filtering
-        - [ ] apply DOLMa filter
-        - [ ] try other ML model on Common Crawl derived labels
-            - [ ] gather more ground truth
-            - [ ] revisit decision-tree-based filter tuning to
-                replace heuristics
+        - [ ] confirm Dolma filter works well against non-prose false
+            positives on Common Crawl data
+            - [x] apply Dolma filter
 - [ ] inspect near-border sites
     - [ ] inspect filtered-out sites to confirm they are non-AI pages
 - [ ] expand baseline dataset per reviewer feedback
@@ -73,9 +71,11 @@ want:
         - [ ] derive sitemap-based publication speed signal
     - [ ] distinguish sites appearing across multiple search results
     - [ ] inspect site source code for tooling clues
-        - [ ] identify website technologies via Wappalyzergo and correlate findings
+        - [ ] identify website technologies via Wappalyzergo and
+            correlate findings
     - [ ] measure similarity among pages within the same site
-    - [ ] investigate middle-ground websites between obvious AI and human content
+    - [ ] investigate middle-ground websites between obvious AI and
+        human content
     - [ ] investigate get-rich-quick scheme hypothesis
         - attempted archiving Reddit posts but originals missing;
             have related passive income post
@@ -153,3 +153,9 @@ done:
 - [ ] review synthetic data impact on LLM performance
     <https://sichanghe.github.io/notes/research/web_user_facing.html#search-engine-optimization-seo>.
 
+## Cancelled
+
+- filtering
+    - try other ML model on Common Crawl derived labels
+        - gather more ground truth
+        - revisit decision-tree-based filter tuning to replace heuristics

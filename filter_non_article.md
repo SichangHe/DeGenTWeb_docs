@@ -36,15 +36,24 @@ Current method to filter out non-articles (`visit_subdomains.py`):
         - 32 byte window, 96 byte target block size (1/64 probability for
             splitting)
 
-Method used by DOLMa dataset:
+Method used by Dolma 1.6 dataset:
 
-- C4 nopunc: remove paragraphs not ending in punctuation
-- Gopher rules
+- C4 NoPunc: remove lines not ending in punctuation (`.` `?` `!` `"`)
+    - remove document w/ ≥ 50% lines not ending in above punctuation
+        (❗️we don't use this bc filter out valid articles)
+- Gopher All (❗️we apply these after NoPunc cleaning to
+    avoid over-filtering):
     - fraction of characters in most common n-gram greater than threshold
         - bigram > 0.20
         - trigram > 0.18
         - 4-gram > 0.16
     - fraction of characters in duplicate n-grams greater than threshold
+        - 5-gram > 0.15
+        - 6-gram > 0.14
+        - 7-gram > 0.13
+        - 8-gram > 0.12
+        - 9-gram > 0.11
+        - 10-gram > 0.10
     - fewer than 50 or more than 100 000 words
     - median word length < 3 or > 10
     - symbol / word ratio > 0.10
@@ -54,8 +63,9 @@ Method used by DOLMa dataset:
     - fraction of lines ending with ellipsis > 0.30
     - fraction of duplicated lines > 0.30
     - fraction of characters in duplicated lines > 0.30
-    - more than half of lines not ending with . ? ! "
-    - contains token or token sequence repeated > 100 times
+- contains `allenai/gpt-neox-olmo-dolma-v1_5` token or
+    token sequence repeated > 100 times (❗️we don't use this bc insignificant)
+    - 0.003% of characters tagged for removal
 
 Ideas for filtering:
 

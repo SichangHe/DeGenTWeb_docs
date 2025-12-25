@@ -185,6 +185,8 @@ See <https://sichanghe.github.io/notes/research/gen_ai.html>.
     Language Model Pretraining Research](https://arxiv.org/abs/2402.00159),
     Luca Soldaini, Rodney Kinney, Akshita Bhagia, Dustin Schwenk, et al.,
     Kyle Lo, arXiv, 2024
+    - for Dolma 1.6
+    - C4 NoPunc + Gopher All for quality filtering
 
 ### Synthetic data
 
