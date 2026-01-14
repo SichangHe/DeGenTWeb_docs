@@ -8,9 +8,9 @@
 
 ## Overall steps
 
-- [ ] improve ground truth & get robust classifier
+- [x] improve ground truth & get robust classifier
     - [x] \~100 human/AI websites baseline and still do well
-    - [ ] check if doing well
+    - [x] check if doing well
         - [x] apply to 10,000 websites in the wild
 - [ ] apply broadly to websites in the wild?
     - ways to discover them
@@ -21,13 +21,14 @@
 want:
 
 - how much need to crawl
-    - [ ] compute CDF of per-subdomain filter pass portions
+    - [x] compute CDF of per-subdomain filter pass portions
     - [ ] estimate expectation of crawl-to-sample ratio
 - [ ] sampling sensitivity in the wild
-    - [ ] retune filter thresholds after restat showed over-filtering
-        - [ ] confirm Dolma filter works well against non-prose false
-            positives on Common Crawl data
-            - [x] apply Dolma filter
+    - [x] confirm Dolma filter works well against non-prose false
+        positives on Common Crawl data
+        - [x] apply Dolma filter
+- [ ] cluster pages into two Gaussians per site for bimodal Binoculars score
+    - idea: sample unsure, crawl more
 - [ ] inspect near-border sites
     - [ ] inspect filtered-out sites to confirm they are non-AI pages
 - [ ] expand baseline dataset per reviewer feedback
@@ -36,14 +37,13 @@ want:
     - [ ] measure accuracy on larger baseline with pre-GPT sites and
         Playwright-generated AI pages
     - [ ] characterize known generated versus self-generated websites
-- [ ] cluster pages into two Gaussians per site for bimodal Binoculars score
 - [ ] historical trend shift from Common Crawl windows
 - [ ] monitor search-result trends
     - [ ] schedule periodic query sampling
     - [ ] run time series analysis on website changes
 - [ ] measure impact of "humanizer" tools on Binoculars scores
 - [ ] what are those website w/ many "positive" page
-    - [ ] finish review UI for manual inspection
+    - [x] finish review UI for manual inspection
     - content farm w/ many ad (`ad_extraction.md`)
         - [ ] infer search queries targeted by content farms
             - [ ] inspect outgoing links for clusters of AI-dominant content
