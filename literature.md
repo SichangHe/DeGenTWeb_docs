@@ -80,6 +80,7 @@
 ### Search Engine Optimization (SEO)
 
 See
+<https://sichanghe.github.io/notes/research/web_user_facing.html#search-engine-optimization-seo>.
 
 ### Website clustering and attribution
 
