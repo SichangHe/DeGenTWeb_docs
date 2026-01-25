@@ -73,3 +73,11 @@ fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,20250512054001,78501,24
     much lower compared to search results
 - increasing %AI if segment by starting `crawled_at` year
 - 10 concurrent downloads, CPU-bound by extraction
+
+## S3
+
+- [Introducing CloudFront as a new way to access Common Crawl data as part of
+    Amazon Web Services’ registry of open
+    data](https://commoncrawl.org/blog/introducing-cloudfront-access-to-common-crawl-data),
+    Sebastian Nagel, 2022
+    - S3 access restricted to authenticated users
