@@ -201,3 +201,108 @@ See <https://sichanghe.github.io/notes/research/gen_ai.html>.
     Data-Efficient Language Modeling](https://arxiv.org/abs/2401.16380),
     Pratyush Maini, Skyler Seto, He Bai, David Grangier, Yizhe Zhang,
     Navdeep Jaitly, ACL, 2024
+
+(below generated)
+
+## Common Crawl processing at terabyte scale
+
+- [CCNet: Extracting High Quality Monolingual Datasets from Web Crawl Data](https://arxiv.org/abs/1911.00359)
+    - Quote: “deduplicates documents and identifies their language.”
+        [arxiv](https://arxiv.org/abs/1911.00359)
+    - Quote: “augment this pipeline with a filtering step to select documents that are close to high quality corpora like Wikipedia.”
+        [arxiv](https://arxiv.org/abs/1911.00359)
+- [cc_net code](https://github.com/facebookresearch/cc_net)
+    - Quote: “The full mining pipeline is divided in 3 steps: hashes downloads one Common-Crawl snapshot, and compute hashes for each paragraph.”
+        [github](https://github.com/facebookresearch/cc_net)
+- [OSCAR project website](https://oscar-project.org)
+    - TODO: Extraction/dedup/filter details are not present in the provided source.
+- [Ungoliant (OSCAR-related pipeline) summary](https://www.semanticscholar.org/paper/CCNet:-Extracting-High-Quality-Monolingual-Datasets-Wenzek-Lachaux/c20c68c45127439139a08adb0b1f2b8354a94d6c)
+    - TODO: Only a brief description was available in the provided source; extraction/dedup/filter details not documented there.
+- [Dolma: an Open Corpus of Three Trillion Tokens](https://aclanthology.org/2024.acl-long.840.pdf)
+    - Quote: “transforms the output of CCNet through URL and document-level deduplication, then quality and content filtering.”
+        [aclanthology](https://aclanthology.org/2024.acl-long.840.pdf)
+    - Quote: “filtering at a rate of 122 CPU hours per TB.”
+        [aclanthology](https://aclanthology.org/2024.acl-long.840.pdf)
+- [RedPajama-Data-v2 blog](https://www.together.ai/blog/redpajama-data-v2)
+    - Quote: “pass each CommonCrawl snapshot through the CCNet pipeline.”
+        [together](https://www.together.ai/blog/redpajama-data-v2)
+    - Quote: “deduplicated … using a Bloom filter,” with “reduction … roughly 40%.”
+        [together](https://www.together.ai/blog/redpajama-data-v2)
+- [Common Crawl FAQ](https://commoncrawl.org/faq)
+    - Quote: “stored on Amazon’s S3 service,” enabling “Map-Reduce processing in EC2.”
+        [commoncrawl](https://commoncrawl.org/faq)
+- TODO: C4/mC4 extraction, dedup, and filtering details were not present in the provided sources.
+
+## AWS cost/throughput for batch processing
+
+- [Comparing Burstable and On-Demand AWS EC2 Instances using NAS Parallel Benchmarks](https://sol.sbc.org.br/index.php/eradrs/article/download/28003/27813)
+    - Quote: “Burstable instances… provide a baseline level of CPU utilization with the ability to burst… governed by CPU credits.”
+        [sol.sbc.org](https://sol.sbc.org.br/index.php/eradrs/article/download/28003/27813)
+    - Quote: “a CPU-bound workload can run similarly in all instances.”
+        [sol.sbc.org](https://sol.sbc.org.br/index.php/eradrs/article/download/28003/27813)
+- [Exploiting Hardware Heterogeneity within the Same Instance Type of Amazon EC2](https://www.usenix.org/system/files/conference/hotcloud12/hotcloud12-final40.pdf)
+    - TODO: No verbatim quote provided in the search results.
+- [Choosing the Right EC2 Instance Type for your Application](https://aws.amazon.com/blogs/aws/choosing-the-right-ec2-instance-type-for-your-application/)
+    - Quote: “If you are running any CPU-bound scale-out applications, you should look at compute-optimized instances first.”
+        [aws.amazon](https://aws.amazon.com/blogs/aws/choosing-the-right-ec2-instance-type-for-your-application/)
+- [Diving Deep into EC2 Spot Instance Cost and Operational Practices](https://aws.amazon.com/blogs/compute/diving-deep-into-ec2-spot-instance-cost-and-operational-practices/)
+    - Quote: “Spot Instances… are available at up to a 90% discount compared to On-Demand EC2 instance prices.”
+        [aws.amazon](https://aws.amazon.com/blogs/compute/diving-deep-into-ec2-spot-instance-cost-and-operational-practices/)
+    - Quote: “Spot Instance Advisor populates the frequency of interruption and average savings… based on the last 30 days of historical data.”
+        [aws.amazon](https://aws.amazon.com/blogs/compute/diving-deep-into-ec2-spot-instance-cost-and-operational-practices/)
+    - Quote: “the past interruption behavior doesn’t predict the future availability of these instances.”
+        [aws.amazon](https://aws.amazon.com/blogs/compute/diving-deep-into-ec2-spot-instance-cost-and-operational-practices/)
+- [Cost-effective Batch Processing with Amazon EC2 Spot](https://aws.amazon.com/blogs/compute/cost-effective-batch-processing-with-amazon-ec2-spot/)
+    - TODO: No verbatim quote provided in the search results.
+- [Scientific Workflow Applications on Amazon EC2 (Montage)](http://montage.ipac.caltech.edu/publications/juve-ccw09.pdf)
+    - Quote: “Epigenomics is considered to be CPU-bound because it spends 99% of its runtime in the CPU and only 1% on I/O…”
+        [montage.ipac.caltech](http://montage.ipac.caltech.edu/publications/juve-ccw09.pdf)
+- [Parsing Common Crawl in a day for $60](https://pierce.dev/notes/parsing-common-crawl-in-a-day-for-60)
+    - Quote: “4117 p/s.”
+        [pierce](https://pierce.dev/notes/parsing-common-crawl-in-a-day-for-60)
+    - Quote: “used the `m7i.metal-48 spot instance`…,” “around `30h` for the full common crawl…,” and “`32,000 items processed per second on average`.”
+        [pierce](https://pierce.dev/notes/parsing-common-crawl-in-a-day-for-60)
+- [Measuring the Carbon Cost of Crawling Five Billion Web Pages](https://tailpipe.ai/measuring-the-carbon-cost-of-crawling-five-billion-web-pages/)
+    - Quote: “Tailpipe assessed Common Crawl’s AWS usage data for the months of February and March.”
+        [tailpipe](https://tailpipe.ai/measuring-the-carbon-cost-of-crawling-five-billion-web-pages/)
+    - Quote: “during the post-processing phase, AWS billed Common Crawl less per day… suggests that… workload was being consolidated across fewer computing instances with a higher utilization rate…”.
+        [tailpipe](https://tailpipe.ai/measuring-the-carbon-cost-of-crawling-five-billion-web-pages/)
+- [AWS EC2 Instances Benchmark](https://runs-on.com/benchmarks/aws-ec2-instances/)
+    - TODO: No verbatim quote provided in the search results.
+- [Common Crawl on AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-zxtb4t54iqjmy)
+    - TODO: No verbatim quote provided in the search results.
+
+## SERP datasets and SEO spam
+
+- [Webis-PSERP-24 dataset page](https://webis.de/data/webis-product-serp-corpus-24.html)
+    - TODO: No verbatim quote provided in the search results.
+- [Is Google Getting Worse? A Longitudinal Investigation of SEO Spam in Search Engines](https://downloads.webis.de/publications/papers/bevendorff_2024a.pdf)
+    - Quote: “we created a large collection of top 20 SERPs for 7,392 product review queries.”
+        [downloads.webis](https://downloads.webis.de/publications/papers/bevendorff_2024a.pdf)
+    - Quote: “The SERPs were scraped repeatedly over the course of a year from Startpage … Bing, and DuckDuckGo,” with pages “archived as Web ARChive (WARC2) files.”
+        [downloads.webis](https://downloads.webis.de/publications/papers/bevendorff_2024a.pdf)
+    - Quote: “It’s not far-fetched to assume a connection between SEO and a per-… tially AI-generated content.”
+        [downloads.webis](https://downloads.webis.de/publications/papers/bevendorff_2024a.pdf)
+
+## LLM-generated text detection at scale
+
+- [A Survey on LLM-Generated Text Detection: Necessity, Methods …](https://arxiv.org/html/2310.14724v3)
+    - Quote: “The LLM-generated text detection aims to discern if a piece of text was produced by an LLM… a binary classification task.”
+        [arxiv](https://arxiv.org/html/2310.14724v3)
+- [An Empirical Study on Detecting LLM-Generated Text via LLMs](https://aclanthology.org/2025.genaidetect-1.3.pdf)
+    - Quote: “Another approach, DetectGPT … employs a zero-shot classifier.”
+        [aclanthology](https://aclanthology.org/2025.genaidetect-1.3.pdf)
+- [Graphite report on Common Crawl prevalence](https://graphite.io/five-percent/more-articles-are-now-created-by-ai-than-humans)
+    - Quote: “randomly select 65k URLs from CommonCrawl” and “published between January 2020 and November 2022.”
+        [graphite](https://graphite.io/five-percent/more-articles-are-now-created-by-ai-than-humans)
+- [LinkedIn post on Google Search prevalence](https://www.linkedin.com/posts/gregory-druck-8977b825_exclusive-the-web-is-still-mostly-written-activity-7383993410161954816-WeNZ)
+    - Quote: “AI-generated content only appears 14% of the time in Google Search (n=31k).”
+        [linkedin](https://www.linkedin.com/posts/gregory-druck-8977b825_exclusive-the-web-is-still-mostly-written-activity-7383993410161954816-WeNZ)
+- [Mozilla Foundation report on Common Crawl](https://www.mozillafoundation.org/en/research/library/generative-ai-training-data/common-crawl/)
+    - Quote: “Common Crawl does not contain the “entire web,” nor a representative sample of it.”
+        [mozillafoundation](https://www.mozillafoundation.org/en/research/library/generative-ai-training-data/common-crawl/)
+- [A Critical Analysis of the Largest Source for Generative AI Training …](https://dl.acm.org/doi/fullHtml/10.1145/3630106.3659033)
+    - TODO: No verbatim quote provided in the search results.
+- [A Review of the Challenges with Massive Web-mined Corpora Used …](https://arxiv.org/html/2407.07630v1)
+    - Quote: “Pipelines like CCNet employ statistical KenLM models to assess text perplexity during the data filtering phase.”
+        [arxiv](https://arxiv.org/html/2407.07630v1)
