@@ -30,3 +30,31 @@ running `src/degentweb/webis/data_index.py`, each w/ something like:
     (Google Product Taxonomy)
 - `LastModified` is useless bc it's just upload time
 - `StorageClass` is always `STANDARD`
+
+## Example content
+
+Each line of `results.jsonl` contains:
+
+```json
+{"query": "string", "results": [{"title": "string", "url": "full_url_string", "snippet": "string"}, …]}
+```
+
+Each `query-N.tar.xz` contains `query-N/`, which contains `hit-0` thru `hit-19`
+(may not be exactly 19?) and `query.txt`
+
+- `query.txt` contains the query string, which should match the `query` of
+    a `results.jsonl` line
+- `hit-N` contains `browser.json` `config.json` `id.txt` `snapshot/`
+- (useless) `browser.json`: `{"viewport":{"width":1280,"height":720}}`
+- (useless) `config.json`:
+    `{"viewportAdjust":{},"snapshot":{"screenshot":{"timeout":120000}},"url":"…"}`
+- (useless) `id.txt`: 28-byte hash string
+- `snapshot/` contains `archive.warc.gz` `dom.html` `nodes.jsonl`
+    `screenshot.png` `viewport.json`
+- `archive.warc.gz`: WARC archive
+- `dom.html`: rendered HTML
+- `nodes.jsonl`: all DOM nodes, each line like
+    `{"xPath":"/HTML[1]/BODY[1]","visible":true,"classes":[…],"position":{…},"text":"…","attributes":{…},"css":{…}}`
+- `screenshot.png`: rendered page whole-page screenshot
+- `viewport.json`:
+    indicate page dimensions `{"x":0,"y":0,"width":1280,"height":10851}`
