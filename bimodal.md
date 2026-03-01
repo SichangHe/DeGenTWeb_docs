@@ -1,11 +1,19 @@
 # Bimodal Binoculars Score Subdomains
 
-(mostly generated)
+(mostly generated, human ones marked with 🧑)
 
 ## From Common Crawl
 
 ### Business using blog for SEO
 
+- 🧑 essayivy.com PDF-style example essays to attract students to pay for
+    ghostwriting
+    - scores clustered by publication_date
+    - <http://localhost:8765/review?content=cleaned&crawl_id=68926161> messed
+        up cleaned text bc line breaks inside paragraphs
+    - <https://essayivy.com/writing-sample/perspectives-on-conflict-1564498293>
+        2012 low-score generic essay on "conflicts" possibly in lots of
+        training data
 - kftirana.al official website for Albanian football club KF Tirana
     - homepage loads (HTTP 200) but content not extractable (language: sq,
         trafilatura discards)
@@ -120,8 +128,9 @@
     - product descriptions for Lottie dolls and BBC mentions
 - evinacards.com e-commerce for oracle cards
     - product listings (e.g., "The Mystery of Life") and spells
-- madelangecouture.com e-commerce for apparel
+- 🧑 madelangecouture.com e-commerce for wedding-related products/services
     - item listings like "Flower Basket Collections" and dress styles
+    - product pages 404; only show "consulting" services now
 - www.animalshirts.net e-commerce and animal blog
     - sells animal shirts alongside bald eagle conservation articles
 - www.rollsbearing.com industrial parts catalog
@@ -155,29 +164,21 @@
 
 ### SEO & Affiliate Blogs
 
-- hollywoodworth.net SEO blog / celebrity net worth
-    - returns HTTP 403 on fetch attempts but
-        domain implies celebrity content site
-    - crawled with Cloudflare challenge pages
-- limittimes.com tips blog; scores clustered by publication_date
+- 🧑 hollywoodworth.net SEO blog / mainly celebrity info e.g. net worth
+    - 0 ads
+    - <https://hollywoodworth.net/all/the-biggest-wins-in-situs-toto-slot-history/>
+        links to <https://www.hollandlanemag.com/>, down, but seems gambling or
+        something
+- 🧑 limittimes.com tips blog; scores clustered by publication_date
     - services to use (e.g.
         carpet cleaning, YouTube downloader) and stuff to buy (e.g.
         projector); human-written
     - random knowledge (e.g., LAN, specific person, sexy Instagram caption);
         generated
-- essayivy.com PDF-style example essays to attract students to pay for
-    ghostwriting
-    - scores clustered by publication_date
-    - <http://localhost:8765/review?content=cleaned&crawl_id=68926161> messed
-        up cleaned text bc line breaks inside paragraphs
-    - <https://essayivy.com/writing-sample/perspectives-on-conflict-1564498293>
-        2012 low-score generic essay on "conflicts" possibly in lots of
-        training data
-- www.experienceaudiovideo.com blog on audio/video equipment and
+- 🧑 www.experienceaudiovideo.com blog on audio/video equipment and
     household appliances in general
     - website sell "AV solutions"
     - scores clustered by publication_date and by crawled_at
-
 - www.amazinghomedecorco.com SEO home decor blog
     - generic topics (e.g., "Creating a beautiful grey basement",
         "red rooftops")
@@ -1052,7 +1053,7 @@
     - no DB extractions available;
         homepage serves legal compliance SEO articles
     - e.g., "Higher Education Legal Compliance"
-- shaykhi.com Blog on Islamic religion knowledge, e.g. Ramadan, Quran
+- 🧑 shaykhi.com Blog on Islamic religion knowledge, e.g. Ramadan, Quran
     - Gaussian 1 or 2 both fit well
     - no strong date-based signal; all after 2024
 - www.stopdrinkingexpert.com mixed blog / generic SEO

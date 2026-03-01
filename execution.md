@@ -56,6 +56,7 @@ want:
         - [ ] detect affiliate links
     - false positive: forum/support
     - [ ] find zero-ad zero-affiliate link site and study it
+    - [ ] fake e-commerce site with AI-generated product descriptions?
     - [ ] clustering
         - [ ] check existing clustering approaches
         - [ ] find comment about similar AI sites
