@@ -167,8 +167,9 @@
 - 🧑 hollywoodworth.net SEO blog / mainly celebrity info e.g. net worth
     - 0 ads
     - <https://hollywoodworth.net/all/the-biggest-wins-in-situs-toto-slot-history/>
-        links to <https://www.hollandlanemag.com/>, down, but seems gambling or
-        something
+        seems to promote gambling "togel online"
+        <https://www.hollandlanemag.com/>.
+        Down, but should have been gambling site
 - 🧑 limittimes.com tips blog; scores clustered by publication_date
     - services to use (e.g.
         carpet cleaning, YouTube downloader) and stuff to buy (e.g.
@@ -924,13 +925,17 @@
     - likely malware delivery spam
 - www.maleplan.com steroid/supplement spam
     - e.g., "How to Order Muscle Building Anabolic Stack Dianabol in Panama"
-- yukajapanesenyc.com recycled blog spam
+- 🧑 yukajapanesenyc.com recycled blog spam
     - wildly disconnected topics (e.g., English Lop rabbits,
         relationship advice)
     - ❗️ <http://localhost:8765/review?content=cleaned&crawl_id=41441974> BS
         advice somehow classified as human-written
-- litecelebrities.com celebrity info spam
+- 🧑 litecelebrities.com celebrity info spam & later random blogs
     - short generated wikis, e.g., "Who is Isabel Gravitt?"
+    - <http://localhost:8765/review?content=rendered&crawl_id=56235840> ad
+        link to cleaning company <https://wowcleansd.com/>
+    - from publication_date vs cleaned_bino_score,
+        can see human-written before 2023, both human and LLM after
 - solutivagrowth.com recycled blog spam
     - mix of dating hookups, strange stories, and casino "RTP explained"
 - lythgoedesign.com casino affiliate spam
@@ -1773,3 +1778,17 @@
         take precautions and the gui..."
     - e.g., "Endoscopic Removal of
         Spinal Tumors is a minimally invasive surgical technique t..."
+
+# "Other" modality
+
+## From Common Crawl
+
+- 🧑 www.wolfensohn.org seems actually unimodal but CDF is in
+    big steps bc many same scores
+    - ❓ numerical issues? from fp8?
+- 🧑 waste-management-ok.com www.silkflowerdesign.com seem similar to
+    www.wolfensohn.org
+- 🧑 toyotamanual.org scam site selling Toyota service manuals
+    - 2-GMM fitting resulted in small cluster inside big one
+    - seem like 2-Gaussian but not bimodal
+- 🧑 smarthomeairandheating.com seems bimodal but not per KS test
