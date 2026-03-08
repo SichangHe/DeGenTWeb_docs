@@ -24,8 +24,8 @@ want:
     - [x] compute CDF of per-subdomain filter pass portions
     - [ ] estimate expectation of crawl-to-sample ratio
 - [ ] sampling sensitivity in the wild
-    - [x] confirm Dolma filter works well against non-prose false
-        positives on Common Crawl data
+    - [x] confirm Dolma filter works well against non-prose false positives
+        on Common Crawl data
         - [x] apply Dolma filter
 - [ ] cluster pages into two Gaussians per site for bimodal Binoculars score
     - idea: sample unsure, crawl more
@@ -69,7 +69,7 @@ want:
         - [ ] examine whether AI enables faster publication speed
         - hard to quantify publication speed without sitemap coverage
         - no correlation observed between score and date so far
-        - [ ] derive sitemap-based publication speed signal
+        - [ ] ❗️ derive sitemap-based publication speed signal
     - [ ] distinguish sites appearing across multiple search results
     - [ ] inspect site source code for tooling clues
         - [ ] identify website technologies via Wappalyzergo and

@@ -26,7 +26,7 @@
         Advertisements](https://dl.acm.org/doi/abs/10.1145/3646547.3688427),
         Christina Yeung, Tadayoshi Kohno, Franziska Roesner, IMC, 2024
         - use UWCSESecurityLab adscraper to extract ad, which [in turn use
-            EsayList](https://github.com/UWCSESecurityLab/adscraper/blob/main/crawler/src/ads/ad-detection.ts#L10)
+            EasyList](https://github.com/UWCSESecurityLab/adscraper/blob/main/crawler/src/ads/ad-detection.ts#L10)
 - [Plagiarism-Bot?
     How Low-Quality Websites Are Using AI to Deceptively Rewrite Content from
     Mainstream News
