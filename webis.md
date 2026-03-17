@@ -58,3 +58,13 @@ Each `query-N.tar.xz` contains `query-N/`, which contains `hit-0` thru `hit-19`
 - `screenshot.png`: rendered page whole-page screenshot
 - `viewport.json`:
     indicate page dimensions `{"x":0,"y":0,"width":1280,"height":10851}`
+
+## Current decisions
+
+- Keep Webis downloads on normal file paths via AWS CLI `s3 cp`; fd/stdout variants triggered 403/throughput regressions.
+- Download all `results.jsonl`; they are cheap and give full query/result metadata.
+- Do not download all crawl tars; choose tars from `results.jsonl` by subdomain page deficit.
+- Target about 15 pages per subdomain; use existing stored pages first to avoid imbalance.
+- `query-N.tar.xz` is matched to line `N` of the corresponding `results.jsonl`; use that to map pages/subdomains to tar keys.
+- New Webis crawls should use crawl source `webis`, not `search_result`.
+- Live DB still has historical Webis rows labeled `search_result`; migrate/backfill that data source separately.
