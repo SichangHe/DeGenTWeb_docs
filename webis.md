@@ -66,5 +66,6 @@ Each `query-N.tar.xz` contains `query-N/`, which contains `hit-0` thru `hit-19`
 - Do not download all crawl tars; choose tars from `results.jsonl` by subdomain page deficit.
 - Target about 15 pages per subdomain; use existing stored pages first to avoid imbalance.
 - `query-N.tar.xz` is matched to line `N` of the corresponding `results.jsonl`; use that to map pages/subdomains to tar keys.
+- Some `results.jsonl` objects listed in prefix-index currently 403; selective mode continues with accessible metadata only.
 - New Webis crawls should use crawl source `webis`, not `search_result`.
 - Live DB still has historical Webis rows labeled `search_result`; migrate/backfill that data source separately.
