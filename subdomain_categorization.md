@@ -2,6 +2,25 @@
 
 (generated following discussion)
 
+## Current decisions
+
+- Keep one primary category plus optional tags.
+- Do not use a separate unclear category; use workflow states such as
+    `needs_more_evidence` and `needs_human_review`.
+- Start from approved categories only; allow new category proposals, but
+    require human approval before reuse.
+- Keep the current category set for now and adjust it as we learn; likely
+    future pressure point is splitting `malicious_deceptive`, possibly making
+    `phishing` its own category.
+- Current MVP uses stored extracted pages only.
+- Current prompt uses XML samples first, includes existing site tags, warns
+    about extraction artifacts, and requires evidence to cite URLs.
+- Store exact prompt text plus structured prompt inputs so each categorization
+    can be replayed exactly.
+- Current draft schema is in `src/degentweb/sql/migrations/v11.sql`.
+- Planned integration points are `cc_dolma_data_analysis.py` and
+    `search_result_dolma_data_analysis.py`.
+
 ## Goal
 
 - Assign each subdomain one coarse category that is easy to analyze.
