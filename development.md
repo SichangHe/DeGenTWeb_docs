@@ -45,6 +45,11 @@
     sh /ssd1/sichanghe/DeGenTWeb/resume_bino_server.sh
     ```
 
+## Live process debugging
+
+see `live_process_debugging.md` for Python 3.14 `sys.remote_exec` usage and
+non-root debugging setup
+
 ## Restoring PostgreSQL database
 
 - install PostgreSQL 17
