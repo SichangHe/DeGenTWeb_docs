@@ -61,11 +61,68 @@ Each `query-N.tar.xz` contains `query-N/`, which contains `hit-0` thru `hit-19`
 
 ## Current decisions
 
-- Keep Webis downloads on normal file paths via AWS CLI `s3 cp`; fd/stdout variants triggered 403/throughput regressions.
-- Download all `results.jsonl`; they are cheap and give full query/result metadata.
-- Do not download all crawl tars; choose tars from `results.jsonl` by subdomain page deficit.
-- Target about 15 pages per subdomain; use existing stored pages first to avoid imbalance.
-- `query-N.tar.xz` is matched to line `N` of the corresponding `results.jsonl`; use that to map pages/subdomains to tar keys.
-- Some `results.jsonl` objects listed in prefix-index currently 403; selective mode continues with accessible metadata only.
+- Keep Webis downloads on normal file paths via AWS CLI `s3 cp`;
+    fd/stdout variants triggered 403/throughput regressions.
+- Download all `results.jsonl`; they are cheap and
+    give full query/result metadata.
+- Do not download all crawl tars; choose tars from `results.jsonl` by
+    subdomain page deficit.
+- Target about 15 pages per subdomain; use existing stored pages first to
+    avoid imbalance.
+- `query-N.tar.xz` is matched to line `N` of
+    the corresponding `results.jsonl`; use that to map pages/subdomains to
+    tar keys.
+- Some `results.jsonl` objects listed in prefix-index currently 403;
+    selective mode continues with accessible metadata only.
 - New Webis crawls should use crawl source `webis`, not `search_result`.
-- Live DB still has historical Webis rows labeled `search_result`; migrate/backfill that data source separately.
+- Live DB still has historical Webis rows labeled `search_result`;
+    migrate/backfill that data source separately.
+
+## ChatNoir timestamp caveat
+
+ChatNoir rows can look like they have "wrong" timestamps compared to
+`startpage`/`ddg`/`bing`.
+
+- Author note "ChatNoir is based on ClueWeb22"
+- ClueWeb22 is a dataset released on 2022.
+    The 10 billion web pages were sampled from
+    the Bing search index during the first half of 2022
+
+Current project rule:
+
+- Hardcode ChatNoir `search_results.search_timestamp` to `2022-07-01`.
+- Do not use S3 `LastModified` or WARC-derived timestamps for
+    ChatNoir search timestamp semantics.
+
+## Reliable query-source split: WikiHow vs Webis/non-WikiHow
+
+Do not treat `search_query_hashes` as WikiHow-only.
+It is shared by both WikiHow and Webis ingest paths.
+
+Canonical distinction:
+
+- **WikiHow query**: matching row exists in `wikihow_articles` for the same
+    `search_query_id`.
+- **Non-WikiHow query**: no matching `wikihow_articles` row.
+
+Reference SQL pattern:
+
+```sql
+SELECT
+  sr.search_result_id,
+  se.search_engine_name,
+  CASE
+    WHEN EXISTS (
+      SELECT 1
+      FROM wikihow_articles wa
+      WHERE wa.search_query_id = sr.search_query_id
+    ) THEN 'wikihow'
+    ELSE 'non_wikihow'
+  END AS query_source
+FROM search_results sr
+JOIN search_engines se USING (search_engine_id);
+```
+
+If you specifically want **Webis-like** rows, combine non-WikiHow with
+engine and crawl-source checks (for example `crawl_src_name='webis'` via
+`search_results -> links -> crawls -> crawl_sources`).
