@@ -7,19 +7,30 @@
 - Keep one primary category plus optional tags.
 - Do not use a separate unclear category; use workflow states such as
     `needs_more_evidence` and `needs_human_review`.
-- Start from approved categories only; allow new category proposals, but
-    require human approval before reuse.
+- Start from approved categories only; show only approved categories to the
+    model, and save new category proposals for human approval before reuse.
 - Keep the current category set for now and adjust it as we learn; likely
     future pressure point is splitting `malicious_deceptive`, possibly making
     `phishing` its own category.
-- Current MVP uses stored extracted pages only.
-- Current prompt uses XML samples first, includes existing site tags, warns
-    about extraction artifacts, and requires evidence to cite URLs.
+- Current MVP uses stored extracted pages from site-analysis snapshots only.
+- Candidate subdomains come from `site_analysis_subdomains.selected_for_deep`,
+    not raw `subdomains`, because LLM site categorization only makes sense once
+    the site-analysis pipeline has already established there are enough usable
+    pages to judge the site as a whole.
+- By default, categorization uses the latest site-analysis run for each crawl
+    source automatically, and prompt pages come from the corresponding latest
+    `site_analysis_sampled_pages` snapshot so the evidence matches the same
+    site-analysis selection pass.
+- When a categorization run starts, the chosen `analysis_run_id` is pinned into
+    `run_notes`, so resume stays on the same site-analysis snapshot without
+    needing a separate schema column.
+- Current prompt version is `1`.
+- Current prompt uses XML samples first, includes existing site tags and
+    selected per-page features, warns about extraction artifacts, and requires
+    evidence to cite URLs.
 - Store exact prompt text plus structured prompt inputs so each categorization
     can be replayed exactly.
-- Current draft schema is in `src/degentweb/sql/migrations/v11.sql`.
-- Planned integration points are `cc_dolma_data_analysis.py` and
-    `search_result_dolma_data_analysis.py`.
+- Current schema changes are in `src/degentweb/sql/migrations/v11.sql`.
 
 ## Goal
 
@@ -79,7 +90,7 @@
     the current list is clearly not a good fit.
 - There is no need for a separate special workflow for this.
 - We will review such cases manually anyway.
-- New category names can be written to the database immediately and then
+- New category names can be saved as proposals in the database and then
     reviewed by a human in the normal review flow.
 
 ## Why these categories are coarse
@@ -326,3 +337,21 @@
 - Parse model JSON with Pydantic.
 - Store each result with an author such as `gpt-oss-120b` or `steven`.
 - Run blinded stratified human review on a sample.
+
+## Operator flow
+
+- Run `src/degentweb/classifying/subdomain_categorization_data_analysis.py` in
+    IPython.
+- The loop resumes the latest matching active run for each crawl source, or
+    starts a new one if none exists.
+- The loop stops when the current run creates proposed categories.
+- It emails the pending-review summary and prints it locally.
+- Approve or reject proposals with the helper functions in the script, then run
+    the loop again.
+
+## Environment
+
+- Do not edit the committed `.env` in the repo.
+- Set real SMTP credentials in your local `.env` for:
+    - `EMAIL_ME_GMAIL_ADDRESS`
+    - `EMAIL_ME_GMAIL_APP_PASSWORD`
