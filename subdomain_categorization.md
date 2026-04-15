@@ -24,7 +24,8 @@
 - When a categorization run starts, the chosen `analysis_run_id` is pinned into
     `run_notes`, so resume stays on the same site-analysis snapshot without
     needing a separate schema column.
-- Current prompt version is `1`.
+- Current categorization loop prompt version is `2`.
+- Prompt version `1` is preserved for replay/backward compatibility.
 - Current prompt uses XML samples first, includes existing site tags and
     selected per-page features, warns about extraction artifacts, and requires
     evidence to cite URLs.
