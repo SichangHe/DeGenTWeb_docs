@@ -126,3 +126,7 @@ JOIN search_engines se USING (search_engine_id);
 If you specifically want **Webis-like** rows, combine non-WikiHow with
 engine and crawl-source checks (for example `crawl_src_name='webis'` via
 `search_results -> links -> crawls -> crawl_sources`).
+
+Stronger persisted provenance now exists in `webis_search_results`, which is
+filled transactionally by Webis ingest and should be preferred over the old
+crawl-based proxy in new analysis code.
