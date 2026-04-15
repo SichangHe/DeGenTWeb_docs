@@ -1,0 +1,26 @@
+# Bhaskar configuration analysis
+
+- Script: `src/degentweb/classifying/bhaskar_config_analysis.py`.
+- Purpose: join Bhaskar ZIP run metadata with saved evaluator outputs to analyze detector evasion by configuration.
+- Inputs:
+  - ZIP metadata, e.g. `data/bhaskar_llm_sites20260413.zip`.
+  - Evaluator outputs, e.g. `data/classify/bhaskar_llm_sites20260413_bino_client/`.
+- Configuration unit:
+  - `dataset_variant` (such as `dataset-2`, `dataset-3`, `dataset-4`),
+  - page-generation `model_name`,
+  - decoding settings (`temperature`, `top_p`, `max_tokens`),
+  - requested category-count prompt regime.
+- Summary/plot labels use the full configuration key so different regimes for the same model are not conflated.
+- Default scope:
+  - restrict analysis to `dataset-4` unless another variant is explicitly requested.
+- Output:
+  - per-config summary CSV,
+  - per-variant summary CSV,
+  - false-negative-rate plots,
+  - false-negative page Binoculars CDF plots,
+  - all-subdomain Binoculars CDF plot for the chosen variant,
+  - short Markdown summary of commonalities.
+- Plot styling:
+  - multi-line CDFs use both color and linestyle cycling so many configuration curves stay distinguishable.
+  - the all-subdomain dataset-4 plot uses one color per model family, linestyle variation within model, and `*` on labels for misclassified sites.
+- Key assumption: successful sites with zero pages are skipped so config metadata aligns with checkpointed page/site outputs.
