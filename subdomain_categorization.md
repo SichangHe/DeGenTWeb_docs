@@ -9,6 +9,21 @@
     `needs_more_evidence` and `needs_human_review`.
 - Start from approved categories only; show only approved categories to the
     model, and save new category proposals for human approval before reuse.
+- Approved taxonomy can be refined by introducing a new canonical category and
+    marking narrower overlapping labels as `superseded`; superseded labels stay
+    in history but disappear from future prompts because prompts read only
+    approved categories.
+- Current canonical merge plan:
+  - `software_repository` is the superset replacement for
+    `android_app_repository`, `ios_app_repository`,
+    `open_source_software_repository`, and
+    `software_download_repository`.
+  - `asset_boilerplate_resources` is the superset replacement for
+    `form_repository`, `free_template_repository`,
+    `product_manual_repository`, `free_design_asset_repository`,
+    `free_map_repository`, and `genealogy_repository`.
+  - `personal` is the superset replacement for
+    `personal_knowledge_base`.
 - Keep the current category set for now and adjust it as we learn; likely
     future pressure point is splitting `malicious_deceptive`, possibly making
     `phishing` its own category.
