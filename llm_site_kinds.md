@@ -206,6 +206,49 @@ or ≥ 2× odds ratio) are used.
     pure-LLM or pure-human do not contribute rows to this table
     because the human (or LLM) cell is too small.
 
+## Extra findings from CDF and spot-check evidence
+
+These are supporting observations surfaced by the LLM-vs-human CDFs and
+by direct HTML-content spot-checking.
+
+- **Whole-cohort LLM vs human CDFs do not look dramatically different.**
+    The `llm_site_kinds_llm_vs_human_cdf_n_ads_networks.png` plot
+    shows the LLM cohort has slightly *more* zero-ad-network sites
+    (≈41% vs ≈35%) than the human cohort, and the same shape in the
+    tail; the LLM-vs-human picture is not "LLM sites are monetized
+    more aggressively on average" — it is "a small LLM-dominated
+    subset (the content-farm kind) drags up the average, while the
+    long tail of LLM sites is at worst mildly monetized and often
+    not at all". Same pattern in
+    `llm_site_kinds_llm_vs_human_cdf_median_performance_score.png`:
+    overall LLM performance CDF sits slightly *above* the human one;
+    the poor-Vitals story of Arg 6 is driven by a specific cluster,
+    not the whole label.
+- **`llm_site_kinds_signal_llm_vs_human_gap.png`** is a single bar
+    chart of the per-signal LLM-minus-human percentage-point gap.
+    Two blue bars (LLM-enriched: AdSense and Ezoic) vs a long tail
+    of orange bars (human-enriched): Raptive/AdThrive, Amazon
+    Advertising, Sovrn, Facebook Pixel, PubMatic, ConvertKit,
+    Mediavine, Amazon Associates, Mailchimp, Criteo,
+    Google Ad Manager, Index Exchange, Taboola. Good paper figure
+    for Arg 3; the asymmetry is striking.
+- **Content-farm sites pass naive AI-disclosure checks.** Direct PG
+    grep on the representative Ezoic content-farm subdomains
+    (`susanhomecare.com`, `sipsscene.com`, `homescale.net`,
+    `stevenfitspot.com`, `cookgeeks.net`, `homebathtub.com`,
+    `liftmanual.com`) found zero occurrences of obvious AI-giveaway
+    phrases like "as an AI language model" or "in conclusion,", and
+    zero pages with AI-generation disclosures. Every sampled page
+    carries a schema.org Person / author markup. In other words,
+    these sites would not be caught by surface-level manual review;
+    the SVM / Binoculars detector is doing work a human reader
+    typically would not.
+- **Content-farm pages are heavy.** Average HTML byte size for the
+    seven representative subdomains above ranges from ~170 KB to
+    ~1.16 MB, with multiple sites at 800 KB+. This corroborates the
+    Lighthouse-perf claim (Arg 6): the poor Web Vitals are rooted in
+    actual page weight, not just synthetic-benchmark variance.
+
 ## Supporting tables and plots
 
 - `site_summary` — cohort sizes and coverage.
@@ -247,6 +290,15 @@ or ≥ 2× odds ratio) are used.
 - Plots (paths relative to `data/classify/llm_site_kinds/`):
     - `llm_site_kinds_all_kind_monetization_share.{png,pdf}` — per-kind
         stacked bar of monetization buckets.
+    - `llm_site_kinds_signal_llm_vs_human_gap.{png,pdf}` — horizontal
+        bar of LLM-minus-human percentage-point gap per signal (the
+        single best paper figure for Arg 3).
+    - `llm_site_kinds_llm_vs_human_cdf_*.png` — LLM-vs-human CDFs
+        for `n_ads_networks`, `n_affiliate_networks`,
+        `n_base_technologies`, `median_performance_score`,
+        `median_seo_score`, `median_accessibility_score`,
+        `median_lcp_ms` (log-x), `median_tbt_ms`. Tag:
+        `llm_vs_human_cdf_plot_paths`.
     - `llm_site_kinds_cluster_label_mix.{png,pdf}` — per-LLM-kind
         count bar (LLM-only clustering).
     - `llm_site_kinds_affiliate_by_category.{png,pdf}` — per-category
