@@ -360,3 +360,12 @@ by direct HTML-content spot-checking.
 Vendor and product descriptions with citable sources are in
 `docs/llm_site_kinds_tech_ref.md`. Use that doc when writing the
 paper to back up technology claims.
+
+## Pointer to the what-they-do breakdown
+
+A hierarchical breakdown of what all 2,243 LLM-like sites are actually
+doing — by category and monetization sub-type, with examples and
+percentages — is in
+[`docs/llm_site_kinds_what_they_do.md`](llm_site_kinds_what_they_do.md).
+Analysis methodology and reproduction steps are in
+[`codebase_index/llm_site_kinds_what_they_do_analysis.md`](../codebase_index/llm_site_kinds_what_they_do_analysis.md).
