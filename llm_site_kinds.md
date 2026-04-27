@@ -83,10 +83,15 @@ The CC pipeline (`cc_llm_site_kinds_paper_artifacts.py`) already used
 `selected_for_deep=TRUE` throughout, so step 7–8 are no-ops for CC
 (≤3 NULL sites out of 6,732).
 
-**Cohort counts** (target after live-fetch completes):
+**Cohort counts** (as of 2026-04-27):
 
-- Search: ≈ 2,571 + 2,571 (all categorized; was 5,142 with 146 NULL).
-- CC: 3,366 + 3,366 = 6,732 (unchanged; 3 NULL excluded → ≈6,726).
+- Search: 2,393 + 2,393 = **4,786** (all categorized; 5 excluded). Session:
+    `data/classify/llm_site_kinds/duckdb_session/20260427_135715.duckdb`.
+    The "any-run" expansion (sites `selected_for_deep=TRUE` in any analysis run,
+    not just the latest) yielded 2,456 human × 2,503 LLM; balanced at 2,398 per
+    label; 5 truly uncategorized excluded; final 2,393 per label.
+- CC: 3,366 + 3,366 = 6,732 (unchanged). Session:
+    `data/classify/llm_site_kinds_cc/duckdb_session/20260427_001614.duckdb`.
 
 `llm_site_kinds_paper_plots._DEFAULT_SEARCH_DB_PATH` defaults to the
 latest balanced search session.  Override via
