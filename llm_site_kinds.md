@@ -26,61 +26,92 @@ paths under `data/classify/llm_site_kinds/`.
 
 ### Balanced cohort for incentive-coarse paper plots
 
+#### Why `selected_for_deep` gates sampled pages
+
+`selected_for_deep=TRUE` in `site_analysis_subdomains` is the hard gate
+for two things:
+1. **`site_analysis_sampled_pages`**: The page-sampling step only collects
+    pages for `selected_for_deep=TRUE` subdomains.  Without these pages
+    the LLM categorization prompt has no text to work with → the site
+    cannot be categorized.
+2. **`site_feature_live` crawls**: The live-fetch enqueue query
+    (`selected_site_analysis_sample_pages_without_fetch` in
+    `src/degentweb/sql/queries/site_features.sql`, line ≈364) filters
+    `WHERE selected_for_deep = true`.
+
+Subdomains with `selected_for_deep=FALSE` therefore have neither
+analysis pages nor live-fetch data and must be excluded from the cohort.
+A previous balanced-cohort SQL (commit `edde835`, reverted in `d1852bd`)
+dropped this filter and sourced sites purely from live-fetch success.
+That was wrong: it included sites that had live-fetch data from older
+crawls but no `site_analysis_sampled_pages`, so 146 Search human-like
+sites ended up uncategorized in the session and were silently bucketed as
+"Other" in the plots.
+
+#### Current cohort procedure (as of 2026-04-27+)
+
 The `incentive_coarse` paper plots and the macros
 `SiteKindsTotalCount`, `SiteKindsAiCount`, `SiteKindsHumanCount`
-(and `Cc*` siblings) come from a **balanced** cohort that drops the
-`selected_for_deep` filter and downsamples each label to the size of
-the smaller class. Procedure (built into the cohort CTE in
-`src/degentweb/classifying/llm_site_kinds_analysis.py` /
-`src/degentweb/classifying/cc_llm_site_kinds_paper_artifacts.py` —
-the SQL that lands in the DuckDB session under `page_html_signals`):
+(and `Cc*` siblings) come from a **balanced, fully-categorized** cohort
+built by `scripts/rebuild_balanced_search_cohort.py` (Search) and
+`src/degentweb/classifying/cc_llm_site_kinds_paper_artifacts.py` (CC).
 
-1. `selected_subdomains`: latest `site_analysis_runs.analysis_run_id`
-    for the chosen `crawl_src_name` (`search_result` or
-    `common_crawl2`); keep all subdomains with `svm_distance IS NOT
-    NULL`. (No `selected_for_deep` filter — the balanced cohort is
-    deliberately wider.)
-2. `live_success_pages`: latest successful `crawls` row per `page_id`
-    in `crawl_src_name = 'site_feature_live'` (CC equivalent for the
-    CC pipeline); join via `pages` and via `redirections` so that a
-    redirected page still counts toward its origin subdomain.
-3. `successful_signal_pages`: union of step 2 keyed by
-    `(subdomain_id, page_id)`; this is the set of (site, page) pairs
-    that carry usable HTML signals.
-4. Per-label site count = distinct `subdomain_id` per label;
-    `target.n_per_label = MIN(label sizes)`.
-5. `balanced_subdomains`: for each label, deterministically rank
-    subdomains by `(subdomain64blake3, subdomain_id)` and keep the
-    top `n_per_label`. The blake3 column is a stable per-subdomain
-    hash, so the sample is reproducible across reruns.
-6. The DuckDB tables `page_html_signals`, `page_categorizations`,
-    `page_lighthouse`, etc. all use this balanced subdomain set.
+Procedure for the Search side:
 
-**Latest balanced sessions** (used to render the paper macros):
+1. **`raw_cohort`**: latest `site_analysis_runs.analysis_run_id` for
+    `search_result`; join `site_analysis_sampled_pages` and `pages`;
+    filter `selected_for_deep=TRUE` AND `svm_distance IS NOT NULL`.
+    This guarantees every subdomain has analysis pages and is thus
+    categorizable.
+2. **`live_ok`**: for each page in `raw_cohort`, take the latest
+    successful `site_feature_live` crawl and join `htmls` for HTML
+    content.  Only rows with `crawl_ok=TRUE` survive.
+3. **`signal_subs`**: distinct `(subdomain_id, label, subdomain64blake3)`
+    from `live_ok`.
+4. **`balanced_sids`**: for each label, rank subdomains by
+    `(subdomain64blake3, subdomain_id)` (deterministic, reproducible)
+    and keep top `MIN(n_llm, n_human)`.
+5. Filter `live_ok` to `balanced_sids` → `page_html_signals`.
+6. Fetch `page_categorizations` from PG for the balanced set.
+7. **Exclude uncategorized** subdomains (NULL `category_slug`) from
+    `page_html_signals`; these are NOT bucketed as "Other".
+8. **Re-balance** to `MIN(LLM, human)` after exclusion using the same
+    blake3 order.  The tiny imbalance from excluded sites (typically
+    0–10) is corrected here.
 
-- Search: `data/classify/llm_site_kinds/duckdb_session/20260427_004506.duckdb`
-    — 5,142 sites (2,571 + 2,571).
-- CC: `data/classify/llm_site_kinds_cc/duckdb_session/20260427_001614.duckdb`
-    — 6,732 sites (3,366 + 3,366).
+The CC pipeline (`cc_llm_site_kinds_paper_artifacts.py`) already used
+`selected_for_deep=TRUE` throughout, so step 7–8 are no-ops for CC
+(≤3 NULL sites out of 6,732).
+
+**Cohort counts** (target after live-fetch completes):
+
+- Search: ≈ 2,571 + 2,571 (all categorized; was 5,142 with 146 NULL).
+- CC: 3,366 + 3,366 = 6,732 (unchanged; 3 NULL excluded → ≈6,726).
 
 `llm_site_kinds_paper_plots._DEFAULT_SEARCH_DB_PATH` defaults to the
-balanced search session. Override via
-`DEGENTWEB_SITE_KINDS_SEARCH_DB_PATH` if a newer session is on disk.
+latest balanced search session.  Override via
+`DEGENTWEB_SITE_KINDS_SEARCH_DB_PATH`.
 
-**Categorization gap.** Because the balanced cohort drops
-`selected_for_deep`, a slice of (mostly human-like) subdomains in
-the balanced set were never enqueued to
-`subdomain_categorization` (which keys off `selected_for_deep`).
-These show up in the coarse plot as the `Other` slice on the bottom
-two bars. To re-categorize them, run
-`scripts/categorize_balanced_search_cohort.py` (see header), which
-enqueues exactly the `subdomain_id`s missing from
-`page_categorizations` in the latest balanced search session and
-drives them through the standard
-`degentweb.subdomain_categorization.db.step_run` loop. After the
-script finishes, refresh the DuckDB session's
-`page_categorizations` table and re-render the plots via
-`scripts/regen_incentive_coarse_plots.py`.
+**Re-building the Search balanced session from scratch:**
+
+```bash
+# 1. (one-time, if needed) fetch live HTML for new selected_for_deep=TRUE human sites
+DEGENTWEB_LIVE_FETCH_COHORT_CRAWL_SRCS=search_result \
+  python -m degentweb.post_processing.fetch_live_page_features
+
+# 2. Rebuild the balanced DuckDB session (excludes uncategorized automatically)
+python -m scripts.rebuild_balanced_search_cohort
+
+# 3. If the script reports uncategorized sites remaining, run:
+python -m scripts.categorize_balanced_search_cohort
+python -m scripts.refresh_balanced_search_categorizations
+python -m scripts.rebuild_balanced_search_cohort   # re-run after categorization
+
+# 4. Regenerate combined plot (uses both Search and CC sessions)
+python -m scripts.regen_incentive_coarse_plots
+```
+
+**Re-rendering plots without a fresh PG fetch.**
 
 **Re-rendering plots without a fresh PG fetch.**
 `scripts/regen_incentive_coarse_plots.py` opens the latest balanced
