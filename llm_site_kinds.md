@@ -24,6 +24,74 @@ paths under `data/classify/llm_site_kinds/`.
     They detect presence at a point in time only and under-count
     server-injected / consent-gated ads.
 
+### Balanced cohort for incentive-coarse paper plots
+
+The `incentive_coarse` paper plots and the macros
+`SiteKindsTotalCount`, `SiteKindsAiCount`, `SiteKindsHumanCount`
+(and `Cc*` siblings) come from a **balanced** cohort that drops the
+`selected_for_deep` filter and downsamples each label to the size of
+the smaller class. Procedure (built into the cohort CTE in
+`src/degentweb/classifying/llm_site_kinds_analysis.py` /
+`src/degentweb/classifying/cc_llm_site_kinds_paper_artifacts.py` —
+the SQL that lands in the DuckDB session under `page_html_signals`):
+
+1. `selected_subdomains`: latest `site_analysis_runs.analysis_run_id`
+    for the chosen `crawl_src_name` (`search_result` or
+    `common_crawl2`); keep all subdomains with `svm_distance IS NOT
+    NULL`. (No `selected_for_deep` filter — the balanced cohort is
+    deliberately wider.)
+2. `live_success_pages`: latest successful `crawls` row per `page_id`
+    in `crawl_src_name = 'site_feature_live'` (CC equivalent for the
+    CC pipeline); join via `pages` and via `redirections` so that a
+    redirected page still counts toward its origin subdomain.
+3. `successful_signal_pages`: union of step 2 keyed by
+    `(subdomain_id, page_id)`; this is the set of (site, page) pairs
+    that carry usable HTML signals.
+4. Per-label site count = distinct `subdomain_id` per label;
+    `target.n_per_label = MIN(label sizes)`.
+5. `balanced_subdomains`: for each label, deterministically rank
+    subdomains by `(subdomain64blake3, subdomain_id)` and keep the
+    top `n_per_label`. The blake3 column is a stable per-subdomain
+    hash, so the sample is reproducible across reruns.
+6. The DuckDB tables `page_html_signals`, `page_categorizations`,
+    `page_lighthouse`, etc. all use this balanced subdomain set.
+
+**Latest balanced sessions** (used to render the paper macros):
+
+- Search: `data/classify/llm_site_kinds/duckdb_session/20260427_004506.duckdb`
+    — 5,142 sites (2,571 + 2,571).
+- CC: `data/classify/llm_site_kinds_cc/duckdb_session/20260427_001614.duckdb`
+    — 6,732 sites (3,366 + 3,366).
+
+`llm_site_kinds_paper_plots._DEFAULT_SEARCH_DB_PATH` defaults to the
+balanced search session. Override via
+`DEGENTWEB_SITE_KINDS_SEARCH_DB_PATH` if a newer session is on disk.
+
+**Categorization gap.** Because the balanced cohort drops
+`selected_for_deep`, a slice of (mostly human-like) subdomains in
+the balanced set were never enqueued to
+`subdomain_categorization` (which keys off `selected_for_deep`).
+These show up in the coarse plot as the `Other` slice on the bottom
+two bars. To re-categorize them, run
+`scripts/categorize_balanced_search_cohort.py` (see header), which
+enqueues exactly the `subdomain_id`s missing from
+`page_categorizations` in the latest balanced search session and
+drives them through the standard
+`degentweb.subdomain_categorization.db.step_run` loop. After the
+script finishes, refresh the DuckDB session's
+`page_categorizations` table and re-render the plots via
+`scripts/regen_incentive_coarse_plots.py`.
+
+**Re-rendering plots without a fresh PG fetch.**
+`scripts/regen_incentive_coarse_plots.py` opens the latest balanced
+session for both Search and CC, monkey-patches
+`llm_site_kinds_paper_plots.OUT_DIR` per side, calls
+`_write_incentive_stats`, `_plot_incentive_coarse_by_label`
+(WIDE + NARROW), and `_plot_incentive_coarse_combined` against the
+NARROW style, and writes the PDFs/PNGs and stats files in place.
+This is the script to run when only the plot styling changed — it
+is much faster than rebuilding the cohort from Postgres.
+
 ## Paper arguments
 
 Each argument is stated as Claim → Evidence → Caveat and points to the
