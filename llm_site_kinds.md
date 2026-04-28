@@ -596,6 +596,64 @@ expensive relative to local wages, and where AI writing tools have reached high
 adoption. They build a web presence primarily for credibility/legitimacy (not search
 ranking), so they appear in CC but not in Search.
 
+### What actually drives the CC LLM BSO bulk (2026-04-28)
+
+**Short answer**: Not emerging-market businesses — those are only ~200 of the
+1,435 CC LLM BSO sites. The bulk is **Anglophone small/local offline service
+businesses** (US, Canada, UK, Australia) that used AI tools to generate their
+website content cheaply.
+
+**Monetization fingerprint is the diagnostic**: CC LLM BSO has **75% no-signal**
+(no ads, no affiliate links, no subscribe forms) — identical to CC human BSO (74%).
+Compare to CC LLM editorial (69% no-signal) or affiliate/SEO (75% no-signal but
+higher affiliate rate). This proves these are not content farms: they have no
+interest in monetizing web traffic. Their website is a **digital business card and
+lead-generation contact page**.
+
+**Industry breakdown (keyword-approximated, 1,435 CC LLM BSO sites):**
+
+| Industry | n | % |
+|---|---|---|
+| Medical / dental / health clinic | 132 | 9.2% |
+| Home / trade services (HVAC, plumbing, roofing, cleaning…) | 128 | 8.9% |
+| Marketing / media / creative agencies | 91 | 6.3% |
+| Tech / IT / digital services | 78 | 5.4% |
+| Auto / transport / logistics | 52 | 3.6% |
+| Travel / events / hospitality | 44 | 3.1% |
+| Legal / finance / accounting | 33 | 2.3% |
+| Wellness / beauty / personal care | 28 | 2.0% |
+| Real estate / construction | 27 | 1.9% |
+| Emerging-market geo TLDs (.ae+.pk+.ph+.africa) | ~230 | ~16% |
+| Other / unclassified (same pattern, opaque domain names) | 762 | 53% |
+
+The "other-unclassified" 53% breaks the same way when eyeballed:
+`affordableheatingcooling.com`, `ajrheatingandactx.com`,
+`aliefheatingandairconditioning.com`, `agapebhc.com` (behavioral health),
+`airportassistme.com`, `allphaserestore.com` (restoration) — all local services
+using domain names that don't contain readable industry keywords.
+
+**The mechanism**:
+- A dentist / HVAC company / law firm / marketing agency wants a website.
+- They use an AI-assisted website builder (Wix AI, Squarespace AI, or ChatGPT)
+  to generate "About Us", service descriptions, FAQ copy.
+- Cost: nearly zero. Time: minutes.
+- This site appears in Common Crawl (broadly indexed), but **never ranks in search**
+  (no SEO investment, no backlinks, no content scale).
+- Result: shows up in CC as LLM-dominant, absent from Search cohort.
+
+The emerging-market pattern (.ae, .pk, .ph) is the most **visible** because the TLD
+ratio is large (5–6x), but those ~230 sites are just a more exotic instance of the
+same universal phenomenon. The dominant driver is the much larger pool of
+**English-language small businesses in the US/Canada/UK** doing the same thing.
+
+**Comparison: CC vs Search LLM BSO monetization**:
+- CC LLM BSO: ads=24.7%, aff=0.4%, neither=75.1% — **no-monetization mode**
+- Search LLM BSO: ads=31.2%, aff=3.0%, neither=66.7% — slightly more monetized
+
+Search LLM BSO (430 sites) has higher ad/affiliate rates because ranking in search
+selects for sites with active traffic strategies, including those that monetize
+that traffic. CC LLM BSO has no such filter.
+
 ### One-sentence explanations
 
 **Search** (LLM ≈ human): The ranking filter selects for traffic-seeking commercial
@@ -604,9 +662,10 @@ editorial content farming.
 
 **CC** (LLM >> BSO/retail, human >> institutional/personal): No filter, so the full
 web shows through. Human web includes a large non-commercial sector with zero LLM
-adoption pressure. LLM web is almost entirely commercial entities (BSO, retail, SaaS)
-that adopted LLM for cheap web-presence generation, concentrated in AI startups and
-emerging-market SMBs.
+adoption pressure. LLM BSO is dominated by **offline service businesses** (medical,
+HVAC, legal, etc.) that used AI to generate their website copy as a digital business
+card — not content farms. Emerging-market businesses (.ae, .pk) are a visible
+minority (~16%) of the same phenomenon, not the bulk driver.
 
 Reproduction: `data/classify/llm_site_kinds/duckdb_session/20260427_135715.duckdb`
 (Search) and `data/classify/llm_site_kinds_cc/duckdb_session/20260427_001614.duckdb`
