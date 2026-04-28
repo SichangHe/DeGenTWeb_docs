@@ -473,3 +473,142 @@ percentages — is in
 [`docs/llm_site_kinds_what_they_do.md`](llm_site_kinds_what_they_do.md).
 Analysis methodology and reproduction steps are in
 [`codebase_index/llm_site_kinds_what_they_do_analysis.md`](../codebase_index/llm_site_kinds_what_they_do_analysis.md).
+
+---
+
+## CC vs Search composition differences — analysis (2026-04-27)
+
+### Category distributions (balanced cohorts, all categorized)
+
+**Search** (2,393 LLM + 2,393 human):
+
+| Category | LLM% | Human% | Δ |
+|---|---|---|---|
+| publisher_editorial | 54.0 | 40.9 | +13.1 |
+| business_service_operator | 18.0 | 19.2 | −1.2 |
+| affiliate_seo_content | 11.4 | 10.6 | +0.8 |
+| retail_ecommerce | 6.1 | 6.4 | −0.3 |
+| product_saas_company | 3.0 | 4.7 | −1.8 |
+| institutional | 0.8 | 7.1 | **−6.3** |
+| personal | 1.8 | 5.0 | −3.3 |
+
+→ Distributions are **nearly identical**. The search-ranking filter pre-selects
+for traffic-seeking commercial sites on both sides. The main LLM edge is in
+`publisher_editorial` (+13pp): LLM content farms masquerade as editorial sites and
+outcompete human editorial in SERPs.
+
+**CC** (3,366 LLM + 3,366 human):
+
+| Category | LLM% | Human% | Δ |
+|---|---|---|---|
+| business_service_operator | 42.6 | 31.0 | **+11.6** |
+| retail_ecommerce | 16.8 | 9.6 | **+7.2** |
+| publisher_editorial | 23.8 | 26.3 | −2.5 |
+| affiliate_seo_content | 5.0 | 2.0 | +2.9 |
+| product_saas_company | 4.8 | 2.0 | +2.8 |
+| institutional | 1.2 | 15.7 | **−14.5** |
+| personal | 0.7 | 5.6 | **−4.8** |
+
+→ Distributions are **structurally different**. Two mechanisms:
+
+1. **Non-commercial floor disappears for LLM.** CC human is ~21% institutional
+   + personal (universities, .gov, .org NGOs, churches, hobbyist blogs) that have
+   no AI adoption pressure. CC LLM is <2% of these. Because LLM sites are nearly
+   all commercial, BSO/retail/SaaS inflate as a share of the LLM pie.
+
+2. **CC captures a commercial tier invisible in Search.** CC indexes small
+   businesses building their first web presence with AI, which never rank in
+   search. The .ae/.pk/.ph/.africa TLD patterns (see TLD section below) show
+   this is concentrated in emerging markets.
+
+### TLD analysis (CC dataset)
+
+**Most LLM-enriched TLDs** (by LLM%/human% ratio, n≥5):
+
+| TLD | LLM n | Human n | Ratio | Interpretation |
+|---|---|---|---|---|
+| .guide | 11 | 1 | 11x | How-to guide content farms |
+| **.ai** | **223** | **36** | **6.2x** | AI startups using LLM for own content (see below) |
+| .pk | 70 | 12 | 5.8x | Pakistan SMBs: e-commerce, real estate, local services |
+| .ae | 138 | 26 | 5.3x | UAE businesses: real estate Dubai, marketing agencies |
+| .agency | 31 | 6 | 5.2x | Marketing/design agencies with AI-generated content |
+| .africa | 12 | 5 | 2.4x | African emerging market businesses |
+| .app | 64 | 46 | 1.4x | App product pages (mild enrichment) |
+
+**Most human-enriched TLDs**:
+
+| TLD | LLM n | Human n | Ratio | Interpretation |
+|---|---|---|---|---|
+| .gov | 1 | 42 | 0.02x | Government — zero LLM adoption |
+| .ac.uk | 0 | 23 | 0.00x | UK academia — zero LLM adoption |
+| .sg | 0 | 18 | 0.00x | Singapore institutions |
+| .org | 101 | 424 | 0.24x | Non-profits/NGOs strongly human-dominated |
+| .co.uk | 2 | 40 | 0.05x | UK commercial (often established businesses) |
+| .me | 3 | 14 | 0.21x | Personal portfolios/blogs |
+
+### .ai domain deep dive
+
+CC: **223 LLM .ai** (6.63% of all CC LLM) vs **36 human .ai** (1.07%) → **6.2x ratio**.
+.ai is the **#3 TLD** for CC LLM (after .com and .net). For CC human it is #7.
+
+Search: 37 LLM .ai (1.5%) vs 16 human .ai (0.7%) → 2.1x ratio. The lower Search
+enrichment confirms these sites mostly don't rank well.
+
+**Two distinct populations of .ai sites:**
+
+*Human .ai* — legitimate established AI/tech product companies:
+`arthur.ai`, `vast.ai` (GPU cloud), `fundgpt.ai`, `hypernatural.ai`, `invoicer.ai`,
+`metatable.ai`, `ocelot.ai`. Categories: product_saas_company (dominant),
+support_knowledge_base (docs). These have real products and human-written copy.
+
+*LLM .ai* — AI startups / AI-themed services using LLM for their own marketing/blog content:
+`autoblogging.ai` (product_saas: AI writing tool itself), `essayai.ai`,
+`blog.forexhero.ai`, `bestinai.ai`, `generativeaidatascientist.ai`,
+`marketinghero.ai`, `sociallab.ai`, `blog.cryptohero.ai`. Categories: mix of
+product_saas_company (~40%), business_service_operator (~30%),
+publisher_editorial (~20%).
+
+Key .ai observations:
+- **Self-referential**: many are AI-product companies using AI to write their
+  own blog/marketing content. The LLM detection is catching AI companies' own
+  marketing material.
+- **"blog.*" subdomain pattern**: `blog.forexhero.ai`, `blog.alphashots.ai`,
+  `blog.clientconnect.ai`, `blog.brainify.ai`, `blog.wowto.ai` — these are
+  AI startups with LLM-generated blog sections specifically.
+- **docs.*.ai pattern**: `docs.allpass.ai`, `docs.swarmzero.ai`, `docs.trieve.ai` —
+  auto-generated or LLM-assisted technical documentation.
+- Some problematic content: `undressaiapp.ai`, `www.cybeauty.ai`, `thotchat.ai`
+  (adult/NSFW) using AI for content generation.
+
+### Emerging-market business pattern (.ae, .pk examples)
+
+**CC LLM .ae examples** (real estate, marketing, local services Dubai):
+`neorealtydubai.ae`, `busrentaldubai.ae`, `danceanddazzledubai.ae`,
+`www.reemmall.ae` (mall retail), `jaipurnationaluniversity.ae`,
+`www.twoguys.ae`, `stratedge.ae`, `kabamba.aero`.
+
+**CC LLM .pk examples** (e-commerce, fashion, pharmacy):
+`trendify.pk`, `vegasvapor.pk`, `www.marhampharmacy.pk`,
+`shreepramukhjewellery.in.ua` (Indian jewelry), `floristella.com.ph` (Philippines florist).
+
+Pattern: these are real businesses in markets where professional web writing is
+expensive relative to local wages, and where AI writing tools have reached high
+adoption. They build a web presence primarily for credibility/legitimacy (not search
+ranking), so they appear in CC but not in Search.
+
+### One-sentence explanations
+
+**Search** (LLM ≈ human): The ranking filter selects for traffic-seeking commercial
+sites on both sides, making category mixes similar. The LLM edge is narrowly in
+editorial content farming.
+
+**CC** (LLM >> BSO/retail, human >> institutional/personal): No filter, so the full
+web shows through. Human web includes a large non-commercial sector with zero LLM
+adoption pressure. LLM web is almost entirely commercial entities (BSO, retail, SaaS)
+that adopted LLM for cheap web-presence generation, concentrated in AI startups and
+emerging-market SMBs.
+
+Reproduction: `data/classify/llm_site_kinds/duckdb_session/20260427_135715.duckdb`
+(Search) and `data/classify/llm_site_kinds_cc/duckdb_session/20260427_001614.duckdb`
+(CC). The analysis code used to derive these figures is the inline Python block at
+the bottom of `PLAN-cc-search-category-analysis.md`.
