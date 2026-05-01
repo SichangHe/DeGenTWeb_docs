@@ -9,7 +9,7 @@
     - but unclear how to know their popularity
 - can get name + relative interest + href to Google Trends page for
     each topic/query entry
-- [ ] Google Trends block request from browser in incognito mode 💀
+- ~~[ ] Google Trends block request from browser in incognito mode 💀~~
     - can use BigQuery to get data directly
 
 plan:

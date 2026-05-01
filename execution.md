@@ -27,8 +27,9 @@ want:
     - [x] confirm Dolma filter works well against non-prose false positives
         on Common Crawl data
         - [x] apply Dolma filter
-- [ ] cluster pages into two Gaussians per site for bimodal Binoculars score
+- [x] cluster pages into two Gaussians per site for bimodal Binoculars score
     - idea: sample unsure, crawl more
+- [ ] inspect bimodal sites manually
 - [ ] inspect near-border sites
     - [ ] inspect filtered-out sites to confirm they are non-AI pages
 - [ ] expand baseline dataset per reviewer feedback
@@ -68,6 +69,8 @@ want:
         - [ ] study burst versus gradual ramps of AI content
         - [ ] examine whether AI enables faster publication speed
         - hard to quantify publication speed without sitemap coverage
+        - [x] validate date extraction reliability with `htmldate`
+        - [x] inspect sites where many pages share the same date stamp
         - no correlation observed between score and date so far
         - [ ] ❗️ derive sitemap-based publication speed signal
     - [ ] distinguish sites appearing across multiple search results
@@ -143,6 +146,8 @@ done:
     - [ ] examine generated imagery on detected sites such as
         <https://burstofstyle.com/messi-blonde-hair/>
     - [ ] survey openly available detectors of AI-generated images
+    - [ ] inspect Bing sites in the ~2% LLM cohort with >200 images
+    - [ ] count video-heavy pages and manually inspect representative examples
 - [ ] design deterministic confirmation steps after detector pre-filtering
 
 ## Reading backlog

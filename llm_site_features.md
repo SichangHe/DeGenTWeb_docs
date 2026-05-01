@@ -57,6 +57,8 @@
 - [ ] lighthouse metrics: performance, accessibility, best-practices, SEO
     - implement: run Lighthouse once after page load and
         persist category scores + key audits
+    - [x] `lighthouse_seo_score.md`
+        inspect how Lighthouse computes SEO score for interpretation
 - [ ] JS/CSS unused-byte ratio
     - implement: use Chrome DevTools Protocol coverage in Playwright;
         store used vs shipped bytes
@@ -84,3 +86,16 @@
     - implement:
         rule score combining ad density + affiliate density + publication
         burstiness + low content diversity
+
+## tests
+
+- Kolmogorov–Smirnov (KS) test: max distance between empirical CDFs
+- Mann–Whitney (MW) test: median difference
+- Benjamini–Hochberg q-values
+
+## related literature
+
+- [Lighthouse performance scoring  |  Chrome for
+    Developers](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring):
+    > A "perfect" score of 100 is extremely challenging to achieve and
+    > not expected.
