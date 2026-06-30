@@ -78,6 +78,10 @@ fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,20250512054001,78501,24
       .venv/bin/python3 -m degentweb.common_crawl.classify10k
     ```
 
+    This must run with a write-capable `POSTGRES_URI` for the real `degentweb`
+    database. The local `agent_dw` role is read-only on `degentweb` and is only
+    write-capable on `dw_test`, which is not the production dataset.
+
     Add `--aws-extract` only when the AWS extraction workers are intentionally
     available; otherwise the local HTTP downloader is the conservative path.
 - 2.16%~4.30%~9.30% subdomains classified as AI-dominant,
