@@ -1,0 +1,25 @@
+Existing DW1 detector-score summary
+Run date: 2026-08-07 America/Los_Angeles
+Harness: analyze_existing_scores.py
+Input: data/classify/cc10k/fdgpt_trial_all_df1, read without modification
+
+Rows: 8,170
+Human: 6,216
+Generated: 1,954
+
+Score                 Raw AUROC            Orientation-free AUROC
+Binoculars            0.053296648198132325 0.9467033518018677
+FastDetectGPT         0.9386044318554554   0.9386044318554554
+DetectLLM-LRR         0.7990754865115152   0.7990754865115152
+Log likelihood        0.7470073844498103   0.7470073844498103
+Log rank              0.2368982248076414   0.7631017751923586
+OpenAI RoBERTa        0.39222537440935595  0.607774625590644
+RADAR                 0.6729317415090189   0.6729317415090189
+
+Orientation-free AUROC is max(raw AUROC, 1 - raw AUROC). It is used here
+because the stored methods do not share a score direction. This is a direct
+descriptive calculation over an existing convenience trial, not a new held-out
+evaluation. The rows are imbalanced, source files are no longer all present,
+and the corpus may contain domain or generator dependencies. These results
+therefore support relative triage only; they do not establish production
+accuracy, threshold calibration, or a low false-positive operating point.

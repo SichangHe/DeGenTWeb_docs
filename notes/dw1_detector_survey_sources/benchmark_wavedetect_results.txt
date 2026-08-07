@@ -1,0 +1,81 @@
+WaveDetect public-artifact feasibility benchmark
+Run date: 2026-08-07 America/Los_Angeles
+Harness: benchmark_wavedetect.py
+
+Artifact
+Hugging Face repository: KaitongQin/WaveDetect
+Revision: c4d72102938842de531990b3e961d3b41aaa4f05
+Checkpoint SHA-256: 68d100bfa9f7a9081627b55e988963bd230628f8cc62e1913ef85d44fdbab096
+Official loader SHA-256: c78d135864ee3a6a4699e609c735e6cf85de19f0870b8882983b5be1cf6828be
+License declared by repository: Apache-2.0
+Pipeline tag: text-classification
+Artifact was downloaded without credentials and executed without modification.
+
+Environment and fixed inputs
+Python: 3.14.1
+torch: 2.9.1+cu126; torch CUDA build: 12.6
+transformers: 4.57.3
+NVIDIA driver: 580.173.02
+GPUs: device 0 and device 1 were NVIDIA RTX A6000, each with 49,140 MiB
+reported by nvidia-smi. WaveDetect used CUDA device 0 only; device 1 was unused.
+Batch size: 8
+Score CSV rows: 8,170
+Rows whose local extraction text was still present: 8,022
+Rows excluded because the historical path was absent: 148
+Timing documents: the eight available records with the largest stored n_tokens
+Timing repetitions: one warm-up and three timed repetitions
+Model loading and tokenization were excluded from the timing loop.
+
+The eight timing documents were:
+data/classify/google_prelim/global.invacare.com20250408-003541.html
+data/classify/google_prelim/www.lithia.com20250408-010228.html
+data/classify/google_prelim/co/lukealexdavis.co.uk20250602-035309.html
+data/classify/google_prelim/global.invacare.com20250408-002609.html
+data/classify/google_prelim/www.bristowgroup.com20250408-002753.html
+data/classify/google_prelim/www.strongerbyscience.com20250317-050922.html
+data/classify/google_prelim/ie/global.invacare.com20250622-073110.html
+data/classify/google_prelim/foreverliketh.is20250408-005430.html
+
+Timing at 1,024 tokens
+Batch seconds: 0.16612100880593061, 0.1647069090977311, 0.16639705281704664
+Median batch seconds: 0.16612100880593061
+Median seconds per document: 0.020765126100741327
+Peak allocated CUDA memory: 8,195.27978515625 MiB
+
+Timing at 2,048 tokens
+Batch seconds: 0.3111701002344489, 0.3080328516662121, 0.3100730646401644
+Median batch seconds: 0.3100730646401644
+Median seconds per document: 0.03875913308002055
+Peak allocated CUDA memory: 15,412.90478515625 MiB
+Median per-document latency divided by the separate controlled DW1 Binoculars
+measurement at batch 8 and 2,048 tokens: 0.040099937342628796. This ratio is an
+arithmetic comparison between two local runs, not a claim about end-to-end service
+throughput or a definition of "not much slower."
+
+Fixed local discrimination check
+Selection: Python random seed 42; 500 available human and 500 available generated
+records sampled without replacement, then shuffled. The same records were used for
+every detector score. WaveDetect used batch 8 and a 1,024-token maximum. Stored
+scores were used for the other detectors. AUROC is reported orientation-free for
+comparability, and WaveDetect's raw orientation was also checked.
+
+Evaluation documents: 1,000
+Elapsed WaveDetect scoring time including per-batch text reads and tokenization: 33.064770713448524 seconds
+WaveDetect seconds per document: 0.03306477071344852
+WaveDetect raw AUROC: 0.8905580000000001
+WaveDetect orientation-free AUROC: 0.8905580000000001
+Binoculars orientation-free AUROC: 0.9594860000000001
+FastDetectGPT orientation-free AUROC: 0.95362
+DetectLLM-LRR orientation-free AUROC: 0.7977880000000002
+OpenAI RoBERTa orientation-free AUROC: 0.591148
+RADAR orientation-free AUROC: 0.6920719999999999
+
+Scope and limitations
+The official public checkpoint and loader were used, but the harness calls the
+underlying batched model directly because the official predict helper accepts one
+string at a time. The local discrimination sample is a reproducible screen, not an
+evaluation protocol or threshold calibration. It is not stratified by domain,
+generator, date, or document source; stored comparator scores may have been
+generated under different software versions and truncation limits; and some
+historical source files are absent. No claim is made about calibrated accuracy,
+robustness, sustained throughput, multi-worker contention, or production fit.

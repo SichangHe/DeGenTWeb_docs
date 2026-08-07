@@ -1,0 +1,64 @@
+DW1 detector timing benchmark
+Run date: 2026-08-07 America/Los_Angeles
+Harness: benchmark_dw1.py
+
+Environment
+torch: 2.9.1+cu126
+transformers: 4.57.3
+scipy: 1.16.3
+GPUs: 2 x NVIDIA RTX A6000, 49,140 MiB reported per GPU
+Batch size: 8
+Observed token lengths: 2,048 for all 8 documents
+Observer: SichangHe/falcon-7b-FP8-Dynamic; model.dtype reported torch.bfloat16
+Performer: SichangHe/falcon-7b-instruct-FP8-Dynamic; model.dtype reported torch.bfloat16
+Timing boundary: device-resident token IDs entered each timed operation and CPU
+detector scores left it. Model loading, tokenization, and host-to-device input
+transfer were excluded for every method.
+
+Input documents, selected as the eight longest records in
+data/classify/cc10k/fdgpt_trial_all_df1:
+data/classify/google_prelim/global.invacare.com20250408-003541.html
+data/classify/google_prelim/www.lithia.com20250408-010228.html
+data/classify/google_prelim/co/lukealexdavis.co.uk20250602-035309.html
+data/classify/google_prelim/global.invacare.com20250408-002609.html
+data/classify/google_prelim/www.bristowgroup.com20250408-002753.html
+data/classify/google_prelim/www.strongerbyscience.com20250317-050922.html
+data/classify/google_prelim/ie/global.invacare.com20250622-073110.html
+data/classify/google_prelim/foreverliketh.is20250408-005430.html
+
+DW1 Binoculars, two concurrent Falcon forwards
+Batch seconds: 7.721401993185282, 7.736028827726841, 7.732507459819317
+Median batch seconds: 7.732507459819317
+Median seconds per document: 0.9665634324774146
+Peak allocated CUDA memory MiB, GPU 0 and GPU 1: 35,095.3466796875, 35,095.3466796875
+
+SpecDetect formula, one DW1 performer forward
+Batch seconds: 7.537208426743746, 7.538122811354697, 7.542907763272524
+Median batch seconds: 7.538122811354697
+Median seconds per document: 0.9422653514193371
+Peak allocated CUDA memory MiB, GPU 0 and GPU 1: 8.375, 35,095.5966796875
+Median latency ratio to DW1 Binoculars: 0.9748613694232166
+
+DetectLLM-LRR, one DW1 performer forward
+Batch seconds: 7.578878480009735, 7.59651255980134, 7.601620901376009
+Median batch seconds: 7.59651255980134
+Median seconds per document: 0.9495640699751675
+Peak allocated CUDA memory MiB, GPU 0 and GPU 1: 8.375, 35,095.5966796875
+Median latency ratio to DW1 Binoculars: 0.9824125743525433
+
+Scope and limitations
+The run directly measures scoring latency and allocated CUDA memory for one warm-up
+followed by three timed repetitions under the uniform boundary stated above. It
+does not measure accuracy, threshold calibration, sustained throughput,
+model-loading time, tokenization, input transfer, or multi-worker contention.
+The candidate runs use the DW1 performer model as proxy, not the candidates' paper
+default proxy. Their score formulas are faithful, but their effectiveness with this
+proxy is unvalidated.
+
+Reproducibility incident
+The first run called Binoculars.compute_score directly and failed because, under
+Transformers 4.57.3, BatchEncoding.to() mutated the shared encoding before the
+two concurrent forwards, leaving the observer's inputs on GPU 1 while its model was
+on GPU 0. The successful run uses shallow copies before moving the two encodings,
+matching the established path in src/degentweb/classifying/fdgpt_trial.py. No DW1
+implementation or configuration was changed.
