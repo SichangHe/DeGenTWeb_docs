@@ -1,0 +1,51 @@
+SV-Detect optimized feature-reconstruction A6000 feasibility benchmark
+Run date: 2026-08-08 America/Los_Angeles
+Harness: benchmark_svdetect.py
+
+Artifact and model
+Official repository: Atmyre/SV-Detect
+Repository commit: a25469ba6a1fa2adcf644338db6fef712511da66
+Backbone: EleutherAI/gpt-neo-2.7B, revision
+e24fa291132763e59f4a5422741b424fb5d59056
+Weight SHA-256:
+ac75c6bf3e242ed5df22c1d9eb4a5fa563d201c0beab16711bd3fbb7448b1699
+Precision: float16
+
+Environment and timing basis
+GPUs: 2 x NVIDIA RTX A6000
+Maximum sequence length: 2,048 tokens
+Python: 3.14.1
+torch: 2.9.1+cu126; torch CUDA build: 12.6
+transformers: 4.57.3
+NVIDIA driver: 580.173.02
+Feature path: one backbone forward with hidden states, mean pooling at every
+layer, cosine similarity to one direction per layer, and CPU feature output
+Adaptation: the official extractor processes one text at a time in FP32 and
+records pooled activations to CPU. This harness uses FP16, batches four texts per
+card, and projects within GPU hooks.
+Timing repetitions: one warm-up followed by three measured repetitions
+Memory basis: torch.cuda.max_memory_allocated, reset before each repetition.
+
+Batch 1 on one A6000
+Median seconds per document: 0.303961
+Peak allocated CUDA memory MiB, GPU 0: 6,114.2
+GPU 1 baseline allocation: 5,186.7 MiB
+
+Two-A6000 data parallel, total batch 8 with four documents per card
+Median seconds per batch: 1.247568
+Median seconds per document: 0.155946
+Peak allocated CUDA memory MiB, GPU 0 and GPU 1: 8,848.2, 8,838.2
+Median batch-time ratio to stored 2026-08-07 DW1 Binoculars timing: 0.16134
+Comparator: benchmark_results.txt, DW1 dynamic Falcon revisions
+0ad33730b9d0911d6586670a661f04adaaf2c850 and
+40d43a5d6ac55026c5a471d908c9d3bf6623dbb1; batch 8, 2,048 tokens,
+7.732507 seconds per batch under the same scoring-only boundary.
+
+Scope and limitations
+This is an optimized batched reconstruction of the released feature mathematics,
+not the exact release path, an end-to-end detector timing, or an accuracy
+reproduction. The authors released training and evaluation code but no trained
+steering directions or logistic-regression state. Deterministic unit directions
+were used only to preserve tensor shapes; their scores have no classification
+meaning. The result shows that an optimized reconstruction fits the hardware. It
+does not establish deployed throughput, paper accuracy, or a production threshold.

@@ -1,0 +1,65 @@
+LAPD cost-only A6000 feasibility benchmark
+Run date: 2026-08-08 America/Los_Angeles
+Harness: benchmark_lapd.py
+
+Artifact and method
+Official repository: creator-xi/LAPD
+Repository commit: 1988eb68b70205d471c1924b6bbf1e199452662d
+Official score implementation SHA-256:
+b1fa1fc8380b69f9f1acab980ebd8117d9708cf3af18174f3720687c35eebe4e
+Conditional categorical samples per token: 10,000
+
+Environment and fixed inputs
+GPUs: 2 x NVIDIA RTX A6000, 48,539.4375 MiB reported by PyTorch per GPU
+Observer: SichangHe/falcon-7b-FP8-Dynamic, torch.bfloat16
+Observer revision: 0ad33730b9d0911d6586670a661f04adaaf2c850
+Performer: SichangHe/falcon-7b-instruct-FP8-Dynamic, torch.bfloat16
+Performer revision: 40d43a5d6ac55026c5a471d908c9d3bf6623dbb1
+Comparator source: DW1 Binoculars at top-level commit
+7e2e7a9faec058e4a1c6c3c25d45a3556a165784; that commit changes documentation
+only, so detector code matches origin/main 060726b
+Python: 3.14.1
+torch: 2.9.1+cu126; torch CUDA build: 12.6
+transformers: 4.57.3
+NVIDIA driver: 580.173.02
+Batch size: 8
+Observed token lengths: 2,048 for every document
+Documents: the same eight longest available trial documents listed in
+benchmark_results.txt
+Timing: one warm-up followed by three repetitions. Device-resident token IDs
+entered the timed operation and CPU scores left it. Loading, tokenization, and
+host-to-device transfer were excluded.
+Memory basis: torch.cuda.max_memory_allocated, reset before each repetition.
+
+DW1 Binoculars, two concurrent Falcon forwards
+Batch seconds: 7.723376394249499, 7.723777397535741, 7.703822980634868
+Median batch seconds: 7.723376394249499
+Median seconds per document: 0.9654220492811874
+Peak allocated CUDA memory MiB, GPU 0 and GPU 1:
+35,095.3466796875, 35,095.3466796875
+
+LAPD, same concurrent Falcon forwards plus released score
+Batch seconds: 7.760680134408176, 7.764121430926025, 7.7686607874929905
+Median batch seconds: 7.764121430926025
+Median seconds per document: 0.9705151788657531
+Peak allocated CUDA memory MiB, GPU 0 and GPU 1:
+35,095.3466796875, 35,095.3466796875
+Median batch-time ratio to the same-run Binoculars comparator:
+1.0052755471955068
+
+Scope and limitations
+This directly validates the score's cost and memory on the required hardware.
+It does not validate accuracy. The benchmark intentionally uses DW1's dynamic
+Falcon checkpoints so the candidate and comparator share hardware, models,
+token IDs, documents, batch, sequence length, and timing boundary. The paper's
+accuracy was obtained with full-precision Llama-2 or Falcon pairs and cannot be
+transferred to these dynamic checkpoints. The released LAPD statistic draws
+independent token alternatives from already-computed categorical distributions;
+it neither decodes auxiliary text nor performs another model forward. When the
+sampling model equals the base model, the official cache-building path reuses its
+logits, while the separate multi-GPU runner redundantly forwards the same model.
+This harness follows the cache-path behavior, so it is a transparent adapter and
+not an unchanged timing of the released multi-GPU command. LAPD uses 10,000
+auxiliary categorical samples and is excluded from the qualifying shortlist under
+the strict no-multi-perturbation constraint; this cost record is retained only as
+research evidence.

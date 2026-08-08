@@ -1,0 +1,76 @@
+IRM public-model A6000 feasibility and discrimination screen
+Run date: 2026-08-08 America/Los_Angeles
+Harness: benchmark_irm.py
+
+Artifact and model pair
+Method source: NeurIPS 2025 supplemental implementation
+Base model: Qwen/Qwen2-0.5B, revision
+91d2aff3f957f99e4c74c962f2f408dcc88a18d8
+Base weight SHA-256:
+9cd8fc8c85a197b8c551d6b931b5709fe2611889d6b44945876472fecdf77cad
+Instruction model: Qwen/Qwen2-0.5B-Instruct, revision
+c540970f9e29518b1d8f06ab8b24cba66ad77b6d
+Instruction weight SHA-256:
+130282af0dfa9fe5840737cc49a0d339d06075f83c5a315c3372c9a0740d0b96
+Both artifacts were publicly downloaded without credentials.
+
+Environment and timing basis
+GPUs: 2 x NVIDIA RTX A6000
+Precision: float32, matching the official implementation
+Python: 3.14.1
+torch: 2.9.1+cu126; torch CUDA build: 12.6
+transformers: 4.57.3
+NVIDIA driver: 580.173.02
+Maximum sequence length: 2,048 tokens
+Timing repetitions: one warm-up followed by three measured repetitions
+Timing boundary: device-resident inputs entered model scoring and CPU detector
+scores left it. Loading, tokenization, and host-to-device transfer were excluded.
+Memory basis: torch.cuda.max_memory_allocated, reset before each repetition.
+
+Sequential batch 1
+Median seconds per document: 0.4524212023243308
+Peak allocated CUDA memory: 4,269.0869140625 MiB on each GPU
+
+Concurrent batch 8
+Median seconds per batch: 1.8337424350902438
+Median seconds per document: 0.22921780438628048
+Peak allocated CUDA memory: 30,383.7890625 MiB on each GPU
+Median batch-time ratio to stored 2026-08-07 DW1 Binoculars timing:
+0.23714719250113628
+Comparator: benchmark_results.txt, DW1 dynamic Falcon revisions
+0ad33730b9d0911d6586670a661f04adaaf2c850 and
+40d43a5d6ac55026c5a471d908c9d3bf6623dbb1; batch 8, 2,048 tokens,
+7.732507 seconds per batch under the same scoring-only boundary.
+
+Fixed local discrimination screen
+Selection: seed 42; 500 human and 500 generated available trial documents;
+maximum 2,048 tokens; the same rows for every score
+Trial CSV rows: 8,170; rows with available local text: 8,022
+Trial CSV SHA-256:
+964cf196caacaee7cb28c106e0bc7b1177a2567478ab1058dd5ee5f8228aef46
+Selected record manifest SHA-256:
+fbddb007a51a13de864711a10fddd1ac8d76f9698f75537ce405ea9a5bce782d
+Selected path-and-text-content SHA-256:
+b4b189cbec454c96e752977a66d08bfa4eb7577c86cf3f680a39e910267ab1b9
+Base and instruction tokenizers were loaded separately and produced identical
+token IDs for all 1,000 selected texts at the recorded truncation.
+IRM raw AUROC: 0.943596
+IRM orientation-free AUROC: 0.943596
+Stored Binoculars orientation-free AUROC: 0.959486
+Stored FastDetectGPT orientation-free AUROC: 0.953620
+IRM elapsed time including text reads and tokenization: 135.36701714713126 seconds
+
+Scope and limitations
+The Qwen2-0.5B family is an evaluated IRM pair in the paper, but not the
+paper's highest-scoring Llama-3.2-1B family. The exact Llama artifacts require
+authenticated license acceptance, which the approved public-only screen did not
+bypass. The local AUROC is a bounded convenience-corpus screen, not calibrated
+accuracy: it is not stratified, stored comparators may have different historical
+software and truncation bases, and it supplies no low-false-positive threshold.
+The timing comparison uses the same hardware, length, and batch, but a separately
+recorded Binoculars run rather than a same-process comparator. The official score
+direction is instruction-model sequence log-likelihood minus base-model sequence
+log-likelihood. The official command binds the instruction checkpoint to a
+misleading variable named `base_model`; the harness follows the checkpoint role,
+not that variable name. Orientation-free AUROC is also reported because stored
+comparators use different score directions.

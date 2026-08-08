@@ -12,6 +12,234 @@ The primary PDFs are retained in the established external paper collection. Full
 filenames and hashes are in `paper_artifacts.md`. Repository commits and search
 routes are in `search_log.md`.
 
+## 2026-08-08 accuracy-first follow-up
+
+### N1 — LAPD
+
+- Official sources: [arXiv 2604.16923](https://arxiv.org/abs/2604.16923) and
+  [repository at inspected commit](https://github.com/creator-xi/LAPD/tree/1988eb68b70205d471c1924b6bbf1e199452662d).
+- Preserved evidence: primary PDF, Table 13 and Appendix C.1; repository
+  `method/core/compute.py`, `method/core/agg_strategy.py`,
+  `method/lapd_multi_gpu.py`, and `method/scripts/time_efficiency.sh`.
+- Sourced method: Log-likelihood Alignment Preference Discrepancy compares a base
+  and aligned model, information-weights token discrepancies, and standardizes
+  them with 10,000 independent categorical samples per token. The implementation
+  samples from already-computed logits; it does not decode those samples or run
+  another model forward. The paper nevertheless marks LAPD as a method that
+  standardizes by “perturbing or generating auxiliary sequences.”
+- Sourced accuracy: Table 13 uses the same Llama-2-7B base/instruct pair for every
+  method. Binoculars/LAPD AUROC percentages are M4 87.27/88.02, DetectRL
+  multi-LLM 93.11/97.17, DetectRL multi-domain 88.33/96.11, RAID 85.30/85.21,
+  RealDet 94.56/95.32, and average 89.72/92.37.
+- Sourced efficiency: Appendix C.1 caps input at 1,024 tokens and states two RTX
+  3090 24 GB GPUs. Table 7 measures 300 texts, batch 1: LAPD 0.5792 seconds and
+  Binoculars 0.6549.
+- Exact anchor quote: “All methods use the Llama2-7B base/instruct pair”.
+- Artifact boundary: code and datasets are public, but no license file or license
+  declaration was found. The exact Llama artifacts require license acceptance.
+  The cached release path reuses base logits when the sampling model equals the
+  base, but the separate multi-GPU runner redundantly forwards that model again.
+- Interpretation: the matched table is strong comparative evidence on those
+  benchmarks, not evidence for DW1 or dynamic-quantized Falcon accuracy. The
+  0.09-point RAID loss prevents a claim of universal dominance. Under the strict
+  no-multi-perturbation constraint, the 10,000 auxiliary samples exclude LAPD
+  unless the human explicitly permits them.
+
+### N2 — IRM
+
+- Official sources: [NeurIPS 2025 proceedings](https://proceedings.neurips.cc/paper_files/paper/2025/hash/f50258b34f1c5080e43281e05050034e-Abstract-Conference.html),
+  [official supplemental archive](https://proceedings.neurips.cc/paper_files/paper/2025/file/f50258b34f1c5080e43281e05050034e-Supplemental-Conference.zip),
+  and [arXiv 2604.21223](https://arxiv.org/abs/2604.21223).
+- Preserved evidence: primary paper Tables 1 and 5, implementation details, and
+  the official supplemental archive, SHA-256
+  `831062de6a10566594c072f43ea8b770dfdf73d1b1193dc32c3a4c76fb56c8fa`.
+- Sourced method: the implicit reward score is the sequence log-likelihood under
+  an instruction-tuned model minus the sequence log-likelihood under its base
+  counterpart. The released command binds the instruction checkpoint to the
+  implementation's misleading `base_model` variable. The implementation performs
+  one forward per model.
+- Sourced matched comparison: with the Llama-3.2-1B family, IRM/Binoculars AUROC
+  percentages are 97.97/92.48 multi-domain, 97.24/92.08 multi-LLM,
+  97.19/93.04 multi-attack, and 94.48/94.63 human writing. The reported 91.77
+  aggregate mixes AUROC and F1 columns; it is not an aggregate AUROC.
+- Sourced public-pair result: Qwen2-0.5B IRM gives 90.14, 89.43, and 90.47 AUROC
+  on the same three task families; its mixed aggregate is 82.79.
+- Sourced hardware: all experiments use two RTX 4090 24 GB GPUs.
+- Exact anchor quote: “All experiments are conducted on two NVIDIA RTX 4090 GPUs”.
+- Artifact boundary: code is complete, but the best Llama pair is gated behind
+  license acceptance. The Qwen pair is anonymously downloadable.
+
+### N3 — SV-Detect
+
+- Official sources: [arXiv 2606.07313](https://arxiv.org/abs/2606.07313) and
+  [repository at inspected commit](https://github.com/Atmyre/SV-Detect/tree/a25469ba6a1fa2adcf644338db6fef712511da66).
+- Preserved evidence: primary paper Sections 3–4, Tables 1, 7, and 8, Appendix
+  efficiency table; official repository training/evaluation source and data
+  manifest.
+- Sourced method: one frozen GPT-Neo-2.7B forward returns all hidden layers;
+  mean-pooled representations are compared with learned steering directions and
+  fed to logistic regression. Experiments use a 2,048-token maximum; the
+  efficiency experiment separately caps at 512.
+- Sourced accuracy boundary: in the in-domain DetectRL settings, reported
+  SV-Detect AUROCs span 99.83–100. Training and test partitions come from the
+  corresponding domain, source-model, or attack-family setting, and the attack
+  setup uses 10,192 examples per class. Cross-source generalization is reported
+  separately, without a matching Binoculars row.
+- Sourced efficiency: one A100 40 GB, float16, 512 tokens; 25.71 milliseconds at
+  batch 1, 74.3 texts per second at batch 16, 8,951 MB peak.
+- Exact anchor quote: “only a single forward pass through the backbone”.
+- Artifact boundary: repository code and data downloader are present, but no
+  trained steering direction, logistic-regression state, release, checkpoint, or
+  declared license was found.
+
+### N4 — EchoPrompt
+
+- Official source: [arXiv 2608.05741](https://arxiv.org/abs/2608.05741), submitted
+  6 August 2026.
+- Preserved evidence: primary manuscript, Tables 1–2, Figure 7, implementation
+  details, and limitations.
+- Sourced method: a fixed assistant-style prefix conditions base and aligned
+  proxy likelihoods; no target text is rewritten and no auxiliary passage is
+  decoded.
+- Sourced result: with a Llama-3-8B proxy across DetectRL, RealDet, and RAID,
+  EchoPrompt averages 95.56 AUROC and 91.98 F1 versus Binoculars at 90.07 and
+  84.62. With Falcon, EchoPrompt/Binoculars average AUROC is 86.91/85.73, while
+  F1 is 81.72/82.13.
+- Sourced runtime boundary: Figure 7 plots 0.254 seconds per EchoPrompt text and
+  0.157 for Binoculars. Experiments state a V100 32 GB and 1,024-token maximum,
+  but the figure does not fully identify proxy, batch, or timing boundary.
+- Exact anchor quote: “depends on the choice of proxy family”.
+- Artifact boundary: no official repository or checkpoint was found in exact-title
+  GitHub search on 8 August 2026. Results are manuscript claims, not a runnable
+  reproduction.
+
+### N5 — Steer-to-Detect
+
+- Official source: [arXiv 2605.12890](https://arxiv.org/abs/2605.12890).
+- Preserved evidence: primary manuscript, Table 8 and Appendix F.4.
+- Sourced method: a frozen observer model is steered using a learned vector and
+  scored in one forward. The efficiency comparison trains each trainable method
+  on 512 mixed text pairs and uses Llama-3.1-8B as observer.
+- Sourced same-run comparison: on one A100 80 GB, batch 1, the mixed test has
+  average length about 267 tokens and 95 percent below 435. Steer-to-Detect reports
+  98.90 AUROC, 97.75 TPR at 1 percent false-positive rate, 0.30 seconds, and
+  39 GB peak. Binoculars reports 87.70, 74.70, 0.50 seconds, and 58 GB.
+- Exact anchor quote: “All efficiency profiling is conducted on a single NVIDIA A100”.
+- Artifact boundary: no official code, checkpoint, or detector state was found by
+  exact-title GitHub search on 8 August 2026. A short-text batch-1 39 GB result
+  does not prove batch-8, 2,048-token A6000 fit.
+
+### N6 — RepreGuard
+
+- Official sources: [arXiv 2508.13152](https://arxiv.org/abs/2508.13152) and
+  [repository at inspected commit](https://github.com/NLP2CT/RepreGuard/tree/53677be4efc4a494d083b76f91dccc50d8bb4400).
+- Preserved evidence: TACL 2025 manuscript Table 5; official training and
+  evaluation source.
+- Sourced result: one A100 80 GB, float32, batch 1; a 1,000-pair test across four
+  generators after training on 512 Claude-Instant pairs. Phi-2 RepreGuard gives
+  96.10 AUROC, 54.50 TPR at 0.01 percent false-positive rate, 16 GB, and 0.072
+  seconds. Llama-3.1-8B gives 94.80, 77.10, 38 GB, and 0.359 seconds. Binoculars
+  gives 81.90, 72.60, 58 GB, and 0.653 seconds.
+- Exact anchor quote: “trained on the Claude-Instant dataset with 512”.
+- Mismatch: inputs are capped at 256 tokens and generators are older than the
+  current DW1 target. The repository ships code but no trained directions or
+  checkpoint, has no declared license, and its dataset download identifier is
+  malformed in the inspected README.
+
+### N7 — Uncertainty and Uncertainty++
+
+- Official sources: [arXiv 2606.02158](https://arxiv.org/abs/2606.02158) and
+  [MIT-licensed repository at inspected commit](https://github.com/guoyikai2000/Uncertainty-AIGT/tree/2e06a3d91ed1121c25b3fd7e6380238e04517086).
+- Preserved evidence: ICML 2026 manuscript main results and efficiency section;
+  official source.
+- Sourced result: with GPT-J on XSum, WritingPrompts, and Reddit, average AUROC is
+  88.74 for Uncertainty and 93.24 for Uncertainty++, versus 85.64 FastDetectGPT
+  and 91.51 Lastde++. A newer-generator table averages 94.79 for Uncertainty++.
+- Sourced efficiency: on one A100 80 GB with GPT-J, throughput is 27.27 samples
+  per second for Uncertainty and 18.75 for Uncertainty++, with 12.68 GB peak for
+  the latter. Sequence length and batch are not sufficiently reported for a DW1
+  comparison.
+- Evidence gap: no like-for-like Binoculars result exists, so neither the strong
+  AUROC nor the speed number establishes Binoculars parity.
+
+### N8 — Newer methods rejected or excluded
+
+- Primary manuscripts preserved: [DeBERTa-Sentinel](https://arxiv.org/abs/2608.01046),
+  [DWT-Fusion](https://arxiv.org/abs/2607.22026),
+  [GTCL](https://arxiv.org/abs/2607.14967),
+  [strong RoBERTa baseline and distribution shift](https://arxiv.org/abs/2607.03680),
+  [Triospect](https://arxiv.org/abs/2606.31074),
+  [Multi-Level Contextual Detection](https://arxiv.org/abs/2605.16107),
+  [Hidden Human-Like Nature](https://arxiv.org/abs/2605.23190),
+  [GPTZero](https://arxiv.org/abs/2602.13042),
+  [late-stage stability](https://arxiv.org/abs/2601.04833),
+  [DEER](https://arxiv.org/abs/2511.01192),
+  [PhantomHunter](https://arxiv.org/abs/2506.15683), and
+  [DivScore](https://arxiv.org/abs/2506.06705).
+- Artifact snapshots: DeBERTa-Sentinel commit
+  `cd8b1a46cc98eb353ef2eb6e70bfc751f6eece16`; GTCL commit
+  `c9094d66bd0f6a888d3490ac04b3b3c68d2d2b64`; Triospect commit
+  `7599d456a667e3db0261ffe35da1c1bc37b641a9`; Multi-Level commit
+  `c108289ea8595da780471ed1ce034773a571b364`.
+- Accuracy rejection: DeBERTa-Sentinel's 99.53 ROC-AUC comes from one GLC random
+  split and has no released checkpoint or credible cross-distribution comparator.
+  DWT-Fusion's reported M4/MAGE results are below the leading candidates and it
+  has no official detector release. Multi-Level exposes supplementary material,
+  not runnable code. GPTZero is not an open detector artifact.
+- Deployment rejection: PhantomHunter has several probability extractors, no
+  released detector state, and insufficient speed evidence. DivScore targets
+  specialized legal/medical domains through domain knowledge distillation, not a
+  general DW1 drop-in. Late-stage stability lacks a like-for-like Binoculars row.
+- Method exclusion: official GTCL inference uses k-nearest-neighbor classification
+  over retained representations. Triospect generates summaries and simplified
+  versions and aggregates multiple views. They violate retrieval or
+  rewrite/regeneration constraints before ranking.
+
+### M4 — Local IRM screen
+
+- Durable output: [benchmark_irm_results.txt](benchmark_irm_results.txt).
+- Measured: public Qwen2-0.5B pair, float32, two A6000s, batch 8, 2,048 tokens;
+  1.833742 seconds per batch, 0.229218 per document, 30,383.789 MiB peak per card.
+- Measured accuracy screen: fixed 500 human/500 generated rows, IRM raw AUROC
+  0.943596 and orientation-free AUROC 0.943596; stored same-row Binoculars
+  0.959486 and FastDetectGPT 0.953620. The base and instruction tokenizers were
+  loaded separately and yielded identical token IDs for all selected texts.
+- Reproducibility anchors: trial CSV SHA-256
+  `964cf196caacaee7cb28c106e0bc7b1177a2567478ab1058dd5ee5f8228aef46`;
+  selected-record manifest SHA-256
+  `fbddb007a51a13de864711a10fddd1ac8d76f9698f75537ce405ea9a5bce782d`;
+  selected path-and-text SHA-256
+  `b4b189cbec454c96e752977a66d08bfa4eb7577c86cf3f680a39e910267ab1b9`.
+- Boundary: public executable pair, but not the paper's best gated Llama pair;
+  local corpus is unstratified and historical comparators may differ in software
+  and truncation.
+
+### M5 — Local SV-Detect feature-path screen
+
+- Durable output: [benchmark_svdetect_results.txt](benchmark_svdetect_results.txt).
+- Measured: an optimized reconstruction of the public GPT-Neo-2.7B feature
+  mathematics, float16, two-A6000 data parallel, total batch 8, 2,048 tokens;
+  1.247568 seconds per batch, 0.155946 per document, and at most 8,848.2 MiB peak
+  per card.
+- Boundary: the official extractor is one-text-at-a-time FP32 and records pooled
+  activations to CPU. The harness batches four texts per card and projects inside
+  GPU hooks. Deterministic unit directions preserve operation shapes, but this is
+  not exact release or end-to-end detector throughput. No trained state was
+  released, so no classification result was produced.
+
+### M6 — Local LAPD cost screen
+
+- Durable output: [benchmark_lapd_results.txt](benchmark_lapd_results.txt).
+- Measured same-run comparison: DW1 dynamic Falcon pair, two A6000s, batch 8,
+  2,048 tokens. LAPD median 7.764121 seconds per batch versus Binoculars 7.723376;
+  ratio 1.005276. Both peaked at 35,095.347 MiB per GPU.
+- Boundary: same hardware, models, token IDs, batch, documents, and timing boundary
+  validate cost only. Paper accuracy from full-precision model pairs does not
+  transfer to the dynamic DW1 checkpoints. The harness uses the official cached
+  path's base-logit reuse, not the multi-GPU runner's redundant sampling forward.
+  The same-process comparator ran in the preceding timing block, not interleaved.
+  LAPD remains excluded by the strict auxiliary-sampling constraint.
+
 ## Canonical comparators
 
 ### C1 — Binoculars paper
