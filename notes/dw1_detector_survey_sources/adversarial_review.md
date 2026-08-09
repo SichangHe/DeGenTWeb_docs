@@ -151,3 +151,119 @@ Verified facts:
 Required resolution: none. Append this review verbatim to the durable review record, refresh the two candidate bindings, then commit the frozen candidate.
 
 Final verdict: **PASS**
+
+## Review 4 — FAIL
+
+- reviewer identity: `/root/semantic_repair_adversarial_review`, a fresh distinct
+  read-only reviewer
+- recorded timestamp: `2026-08-08T18:52:40-07:00`
+- scope: complete evaluator verdict; fully staged owned semantic repair; all 119
+  row mappings and generated audit; LM²otifs/NEULIF primary evidence; previously
+  accepted method, accuracy, MELD, A6000, speed, integrity, conclusion, and
+  no-send constraints; candidate and external ledgers
+- reviewed candidate-ledger SHA-256:
+  `8e69fac73a24574f53424b4b13767970840335012ba88ef135c7ec38ba5ad580`
+- reviewed external ledger: 134 entries, SHA-256
+  `f9b21e7a27383af474cc2b65a8fcdf8c33ca767e0d1d59ccddea41dd131e15b2`
+
+### Findings
+
+1. **P1 — semantic coverage still hid plausible high-score detectors.** The
+   trigger expressions omitted “first rank,” “most performant,” and
+   “near-perfect results.” Rows `2509.00623` and `2506.01702` were consequently
+   unflagged and lacked individual primary-source review. Four already flagged
+   high metric claims—`2507.05157`, `2505.11550`, `2503.22338`, and
+   `2502.16857`—were wrongly called false positives: their missing artifact,
+   low-FPR, or deployment evidence were rejection criteria, not reasons that the
+   high detector claims were false positives.
+2. **P2 — arbitrary catch-all codes passed.** The script checked only mapping
+   kind, resolution, and nonempty text; an unknown `catch_all` disposition code
+   would have validated. It needed kind-specific allowlists bound to documented
+   class semantics.
+3. **P2 — candidate-ledger command lacked its working directory.** Ledger paths
+   are relative to `docs/notes/`, so the command printed beside the ledger failed
+   when run from the source directory.
+
+### Verified by reviewer 4
+
+- all 45 candidate-ledger entries matched staged and working bytes when checked
+  from `notes/`;
+- all 134 external-ledger entries matched;
+- LM²otifs and NEULIF PDFs, source cards, artifact blockers, metric boundaries,
+  two-A6000 decisions, and no-run decisions were sound;
+- MELD and prior accepted constraints remained intact; and
+- email subject/body matched and remained **NOT SENT**, with staged paths limited
+  to owned survey artifacts.
+
+### Resolution
+
+The six named shared-task rows now have individual dispositions, primary PDFs,
+and artifact checks. A broader trigger stress test also found general detector
+paper `2603.18750`; it too is individually reviewed and preserved. Three linked
+official source repositories are archived at immutable commits, while their lack
+of checkpoints is explicit. The trigger set now covers first-rank,
+most-performant, robust/remarkable/near-perfect, accuracy-claim, broader metric,
+and comparative-improvement language. The generated audit emits a
+kind-specific allowlisted class definition; unknown, wrong-kind, and catch-all
+codes fail. The candidate manifest gives the exact notes-relative ledger command.
+
+Reviewer 4 final verdict: **FAIL** until these defects are repaired and a
+different fresh reviewer passes. This FAIL is preserved and is not rewritten as
+a PASS.
+
+## Review 5 — PASS
+
+- reviewer identity: `/root/semantic_repair_fresh_review`, a different fresh
+  read-only reviewer
+- timestamp: `2026-08-08T19:05:39-07:00`
+- scope: complete evaluator verdict; fully staged owned semantic repair; all 119
+  row mappings and generated audit; LM²otifs/NEULIF and all seven later-promoted
+  systems; previously accepted method, accuracy, MELD, A6000, speed, integrity,
+  conclusion, and no-send constraints; candidate and external ledgers
+- reviewed candidate-ledger SHA-256:
+  `cafc887f4811141bb067c33444813a65f466d64f413c84867cb1e44294c18839`
+- reviewed external ledger: 150 entries, SHA-256
+  `1b92b652294562b6f1abbad3064c2c0f2b0fa2c49ff23e30b3937d5e9cdba67c`
+
+Inferred goal: close every P1/P2 semantic-coverage defect without disturbing
+the cleared MELD benchmark, integrity, conclusion, review-chain, or unsent-email
+work, and freeze the smallest public-evidence-backed candidate suitable for a
+new one-shot evaluator.
+
+Findings:
+
+- P1: none
+- P2: none
+- P3: none
+
+Verified facts:
+
+- all 45 candidate-ledger entries matched both staged and working bytes when
+  checked from `docs/notes/`, including the exact CRLF score CSV, and the staged
+  candidate equalled the working candidate;
+- all 150 external-ledger entries matched, and every one of the 71 distinct
+  explicit or targeted arXiv identifiers had a retained primary PDF;
+- the semantic audit replayed to 204 raw rows, 119 unique rows, 106 flagged
+  rows, 68 explicit dispositions, 51 mechanically defined non-candidate rows,
+  and PASS, with every frozen export row mapped exactly once;
+- missing, duplicate, unknown catch-all, and wrong-kind mappings failed; a
+  broader independent performance-language check found no unflagged high-claim
+  row;
+- LM²otifs and NEULIF each had a separate primary-source-backed disposition,
+  artifact search, comparability analysis, two-A6000 assessment, speed
+  assessment, and scientifically justified no-run decision;
+- all seven systems promoted after review 4 had individual primary-source and
+  artifact review, disposition, and justified no-run decision;
+- the cleared MELD evidence, benchmark outputs, method exclusions, bounded
+  conclusion, and external/public-access integrity remained intact;
+- the human-readable email and mechanical delivery body matched exactly and
+  remained **NOT SENT**, gated on a new one-shot evaluator PASS and manager
+  authorization; and
+- the staged paths were confined to the owned survey artifacts and contained no
+  DW1 implementation or configuration change.
+
+Required resolution: none. Append this review to the durable record and refresh
+the candidate bindings; those bookkeeping changes do not alter reviewed
+scientific or email content.
+
+Final verdict: **PASS — no P1, P2, or P3 findings.**

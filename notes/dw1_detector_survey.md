@@ -6,11 +6,11 @@ the owned research artifacts; no DW1 implementation or configuration was changed
 
 ## Answer
 
-MELD, released in May 2026, is the strongest new scientific lead and should have
-been in the earlier survey. Its paper reports dramatically better like-for-like
-test-set numbers than Binoculars, and its current public checkpoint is small,
-fast, and reproducible on the two NVIDIA A6000 GPUs. Those facts correct the old
-claim that the bounded search found no such recent high-accuracy release.
+MELD, released in May 2026, remains the strongest actionable new scientific lead
+and should have been in the earlier survey. Its paper reports dramatically better
+like-for-like test-set numbers than Binoculars, and its current public checkpoint
+is small, fast, and reproducible on the two NVIDIA A6000 GPUs. Those facts correct
+the old claim that the bounded search found no such recent high-accuracy release.
 
 They do **not** yet justify replacing DW1 Binoculars. The paper-era MELD checkpoint
 and current runnable v5 checkpoint are materially different models, and the v5
@@ -22,6 +22,24 @@ on disjoint local human rows. Local recalibration yielded promising tail recall,
 but this convenience corpus and historical comparators are not a frozen
 like-for-like evaluation. The artifact-version and comparability gap remains an
 explicit blocker. [N9, M7]
+
+A row-level semantic reaudit also found two plausible results previously hidden
+in a mixed catch-all. LM²otifs reports stronger in-domain accuracy and AUC than
+same-table Binoculars, but its cross-domain average accuracy is 0.79 versus 0.95,
+its OOV path performs nearest-training-vocabulary lookup, and no runnable state or
+comparable timing is public. NEULIF reports 0.9951 ROC-AUC for a 25 MB CNN, but
+only on one random in-domain split of an under-specified Kaggle corpus, with no
+matched Binoculars row or released model. Neither is a demonstrated qualifier.
+[N13, N14]
+
+Adversarial semantic review surfaced seven more detector papers whose strong or
+superlative shared-task claims also require individual treatment. The public
+mdok test AUROC is only 0.853 despite its first-place claim; four Defactify and
+one M-DAIGT result are confined to their task splits without released trained
+state; and the comparative neural paper's strongest rows use 60-text tests.
+Three linked source repositories are preserved, but each omits a checkpoint.
+None supplies matched low-FPR and timing evidence or changes the conclusion.
+[N15]
 
 The corrected disposition is:
 
@@ -35,16 +53,23 @@ The corrected disposition is:
    result and public ModernBERT checkpoint are credible, but it lacks a matching
    Binoculars/FastDetectGPT row, low-FPR transfer evidence, and the fixed A6000
    runtime basis. [N12]
-4. **Retain IRM as the runnable recent zero-shot control and SV-Detect as
+4. **Reject LM²otifs and NEULIF individually.** Their headline values deserve
+   preservation, but method, generalization, artifact, low-FPR, two-A6000, and
+   timing evidence do not satisfy the fixed screen. [N13, N14]
+5. **Reject the seven other promoted high-claim systems individually.** Their
+   primary papers and three linked source releases are preserved, but narrow
+   task/test boundaries, missing trained state, low-FPR evidence, and timing
+   prevent promotion. [N15]
+6. **Retain IRM as the runnable recent zero-shot control and SV-Detect as
    reconstruction-only evidence.** Their previously accepted evidence remains
    unchanged. [N2, N3, M4, M5]
-5. **Keep LAPD, Exons-Detect, GTCL, and Triospect excluded.** Their attractive
+7. **Keep LAPD, Exons-Detect, GTCL, and Triospect excluded.** Their attractive
    numbers cannot override the fixed multi-perturbation, regeneration, retrieval,
    and rewriting exclusions. [N1, N8, N11, M6]
 
 This is a bounded, source-mapped conclusion—not a universal claim that no other
-paper exists. The exact query exports and a disposition for every plausible
-high-accuracy result are preserved in
+paper exists. The exact query exports, one mapping for every exported row, and a
+semantic trigger audit are preserved in
 [coverage_dispositions.md](dw1_detector_survey_sources/coverage_dispositions.md).
 
 ## Fixed deployment and comparison screen
@@ -182,6 +207,41 @@ same-row Binoculars/FastDetectGPT result, low-FPR threshold transfer, 2,048-toke
 batch memory, or A6000 timing is available. It remains a watchlist item, not a
 replacement. [N12]
 
+### High in-domain graph result: LM²otifs
+
+LM²otifs trains a three-layer graph convolutional network on lexical
+co-occurrence/document graphs. Its supervised in-domain Table 1 reports average
+accuracy/AUC of 0.98/1.00 versus 0.97/0.99 for same-table Binoculars; Table 2
+reports 0.95 average accuracy versus 0.83 across eleven generator settings.
+Those are genuine high claims. They do not transfer: cross-domain average
+accuracy is 0.79 versus 0.95 for Binoculars and 0.97 for FastDetectGPT. [N13]
+
+The published OOV path selects a nearest semantic neighbor from the training
+vocabulary, crossing the strict no-nearest-neighbor gate. The paper used eight
+40 GB A100 GPUs and gives neither input-length/batch memory nor detector-state
+size. Its 0.0051–0.0091-second HC3 timing lacks a per-document versus whole-set
+boundary, batch, length, and Binoculars row. No official code or checkpoint was
+found. Reconstructing an unreleased graph, vocabulary, and state would not test
+the paper, so no A6000 screen was run. LM²otifs is method-excluded and also fails
+artifact, cross-domain, low-FPR, fit, and speed comparability. [N13]
+
+### Lightweight in-domain claim: NEULIF
+
+NEULIF extracts 68 spaCy/TextDescriptives features and applies a CNN or random
+forest. On one random balanced split of 20,000 essays from a roughly 500,000-row
+Kaggle corpus, the CNN reports 97 percent accuracy and 0.9951 ROC-AUC; the random
+forest reports roughly 95 percent accuracy and 0.9555 ROC-AUC. The paper states
+that these results are in-domain only. It does not identify generator families,
+source domains, length distribution, or duplicate-control provenance, and its
+cross-paper table has no matched Binoculars row. [N14]
+
+The 25 MB/10.6 MB serialized-size claims make memory capacity plausible, not
+reproducibility. No model, scaler, feature schema, split indices, or repository is
+released. The claimed sub-100-millisecond CPU path lacks hardware, length, batch,
+repetitions, and raw timing. Its nominal-threshold confusion matrix implies 2.81
+percent FPR, not the fixed one-percent operating point. Training a substitute
+would not validate the claim, so no A6000 screen was meaningful. [N14]
+
 ### Runnable control: IRM
 
 IRM's best Llama-3.2-1B paper pair beats same-pair Binoculars on DetectRL
@@ -246,6 +306,9 @@ does not prove the fixed A6000 screen. Both remain unreproduced watchlist claims
 | --- | --- | --- | --- |
 | MELD | Paper RAID clean 99.85 AUROC and 99.40 TPR at 1% FPR vs Binoculars 84.40/69.54; current v5 is released and fast | Paper/current states explicitly incomparable; v5 AUROC trails stored comparators; shipped thresholds fail local transfer | First blocker for a future frozen evaluation; not recommended |
 | DACTYL/Vanguard | Released ModernBERT; PAN AUROC 0.993 | Supervised challenge result; no matched Binoculars, low-FPR, length, memory, or speed row | Released watchlist |
+| LM²otifs | In-domain 0.98 accuracy/1.00 AUC vs same-table Binoculars 0.97/0.99 | Cross-domain 0.79 vs 0.95; nearest-neighbor fallback; no state or comparable cost | Excluded/rejected |
+| NEULIF | In-domain CNN 97% accuracy and 0.9951 ROC-AUC; reported 25 MB | One under-specified corpus split; no matched comparator, state, low-FPR, or reproducible timing | Unreleased in-domain claim |
+| Seven promoted high-claim systems | Up to 1.0 shared-task F1; three public source repositories | Narrow or tiny tests; no trained checkpoint, fixed low-FPR comparison, or reproducible timing | Individually retained/rejected |
 | IRM | Best paper pair beats matched Binoculars on three DetectRL AUROCs | Best pair gated; anonymous public pair trails stored Binoculars locally | Runnable control |
 | SV-Detect | 99.83–100 matched-family reported AUROC | No trained detector state; supervised setting; local run is reconstruction only | Reconstruction evidence |
 | LAPD | 92.37 average vs same-pair Binoculars 89.72; measured near-identical cost | 10,000 auxiliary categorical samples | Excluded by method |
@@ -261,12 +324,15 @@ within each source and does not rank numbers across different rows.
 ## Coverage, preservation, and uncertainty
 
 The frozen evidence includes three raw date-sorted arXiv query exports, a targeted
-Markov export, 119 deduplicated 2025–2026 dispositions, and one anonymous public
-Google Scholar first-page result export. A prior Scholar attempt returned a robot
-challenge and was not bypassed; the fresh narrow request returned HTTP 200. The
-general web-search connector returned HTTP 404, so direct anonymous primary
-endpoints were used. No PB, authenticated state, browser profile, persistent
-session, cookie reuse, robot bypass, or human-owned tmux session was used.
+Markov export, 119 deduplicated 2025–2026 row mappings, a generated semantic audit,
+and anonymous public Google Scholar first-page evidence. The audit mechanically
+flagged 106 titles/abstracts for performance language or metrics; every flag has
+an individual disposition or documented false-positive reason. A prior Scholar
+attempt returned a robot challenge and was not bypassed; fresh narrow requests
+returned HTTP 200. The general web-search connector returned HTTP 404, so direct
+anonymous primary endpoints were used. No PB, authenticated state, browser
+profile, persistent session, cookie reuse, robot bypass, or human-owned tmux
+session was used.
 
 All new papers, immutable MELD snapshots, official MRF/Exons archives, public API
 metadata, raw HTTP evidence, and queries live in the discoverable external

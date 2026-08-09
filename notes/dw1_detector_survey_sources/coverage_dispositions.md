@@ -46,6 +46,7 @@ to `source_cards.md` and `paper_artifacts.md`.
 | 2026-06-22 | [WaveDetect, 2606.23336](https://arxiv.org/abs/2606.23336) | Retain/reject: the released checkpoint is fast, but measured same-row AUROC 0.8906 trails Binoculars 0.9595. [M2] |
 | 2026-06-05 | [SV-Detect, 2606.07313](https://arxiv.org/abs/2606.07313) | Retain reconstruction only: near-perfect matched-family rows are supervised and the release omits trained steering directions and classifier state. [N3, M5] |
 | 2026-06-01 | [Uncertainty++, 2606.02158](https://arxiv.org/abs/2606.02158) | Retain/reject: public code and strong AUROC exist, but no like-for-like Binoculars row or complete length/batch speed basis establishes parity. [N7] |
+| 2026-05-29 | [Distribution-free rewrite calibration, 2606.00402](https://arxiv.org/abs/2606.00402) | Exclude: it expressly converts rewrite-based detectors, outside the fixed no-rewriting boundary. |
 | 2026-05-27 | [Show, Don't TELL, 2605.27921](https://arxiv.org/abs/2605.27921) | Retain/reject: supervised explanation-generating detector reports 0.927 AUROC, below the requested accuracy lead and without the fixed speed evidence. |
 | 2026-05-24 | [READER, 2605.25281](https://arxiv.org/abs/2605.25281) | Exclude: its 1.5B model autoregressively reasons before detection, making generation part of inference; no fixed DW1 comparator is supplied. |
 | 2026-05-15 | [Multi-Level Contextual Detection, 2605.16107](https://arxiv.org/abs/2605.16107) | Retain/reject: only supplementary material was released; no runnable detector state supports the reported gains. [N8] |
@@ -57,29 +58,50 @@ to `source_cards.md` and `paper_artifacts.md`.
 | 2026-04-13 | [AEyeDE, 2606.00016](https://arxiv.org/abs/2606.00016) | Retain/reject: attention attribution claims do not include a released state or fixed low-FPR, 2,048-token A6000 comparison. |
 | 2026-04-02 | [kNNProxy, 2604.02008](https://arxiv.org/abs/2604.02008) | Exclude: the defining proxy alignment uses k-nearest-neighbor lookup, violating retrieval. |
 | 2026-03-26 | [Exons-Detect, 2603.24981](https://arxiv.org/abs/2603.24981) | Exclude: its 92.14 average AUROC beats same-table Binoculars 86.08, but an essential generated ideal-sequence mutation-repair term violates regeneration; the release is not end-to-end. [N11] |
+| 2026-03-24 | [Explainable linguistic-feature detector, 2603.23146](https://arxiv.org/abs/2603.23146) | Retain/reject: 0.9734 in-domain F1 degrades under cross-domain and cross-generator shift; no fixed Binoculars, low-FPR, or A6000 result establishes parity. |
+| 2026-03-19 | [Comparative neural detectors, 2603.18750](https://arxiv.org/abs/2603.18750) | Retain/reject: the strongest proposed-model rows are 91.67 percent on a 60-text English test and 98.3 percent on a 60-text thematic test; public notebooks ship no checkpoint, and no matched low-FPR or timing evidence establishes parity. [N15] |
 | 2026-03-05 | [NOTAI.AI, 2603.05617](https://arxiv.org/abs/2603.05617) | Retain/reject: a FastDetectGPT-derived explanatory ensemble, but no public frozen state and like-for-like DW1 low-FPR/speed evidence were found in the bounded check. |
+| 2026-02-17 | [DependencyAI, 2602.15514](https://arxiv.org/abs/2602.15514) | Retain/reject: competitive syntactic results include cross-domain overprediction and expose no fixed metric, public detector state, or A6000 comparator in the export. |
 | 2026-02-08 | [Markov-informed calibration, 2602.08031](https://arxiv.org/abs/2602.08031) | Retain released calibration: official code exists, but per-dataset supervised states are not shipped and its Binoculars gains do not establish a qualifying detector or whole-path speed. [N10] |
 | 2026-02-01 | [Prototype-based proxy routing, 2602.01240](https://arxiv.org/abs/2602.01240) | Retain/reject: routing among proxies adds artifact/training requirements and lacks a released fixed DW1 parity and two-A6000 result. |
 | 2026-01-27 | [Variation/VaryBalance, 2602.13226](https://arxiv.org/abs/2602.13226) | Exclude: the claimed gain over Binoculars depends on LLM rewrites of the target text. |
+| 2026-01-27 | [LLM-specific fine-tuning, 2601.20006](https://arxiv.org/abs/2601.20006) | Retain/reject: 99.6 percent is token-level accuracy on the authors' benchmark, not document AUROC or low-FPR parity; no fixed deployment state is established. |
 | 2026-01-08 | [Late-stage stability, 2601.04833](https://arxiv.org/abs/2601.04833) | Retain/reject: no like-for-like Binoculars accuracy and fixed A6000 speed evidence supports promotion. [N8] |
+| 2026-01-08 | [DP-MGTD, 2601.04641](https://arxiv.org/abs/2601.04641) | Exclude: near-perfect accuracy follows differentially private entity sanitization of the target text, outside the no-perturbation screen. |
+| 2026-01-07 | [AI Generated Text Detection, 2601.03812](https://arxiv.org/abs/2601.03812) | Retain/reject: DistilBERT reports 0.96 ROC-AUC but 88.11 percent accuracy and no released state, low-FPR row, or fixed speed result. |
+| 2025-11-22 | [NEULIF, 2511.21744](https://arxiv.org/abs/2511.21744) | Retain/reject: 0.9951 ROC-AUC is one balanced in-domain Kaggle split; no matched Binoculars row, frozen model, cross-domain test, or comparable timing artifact exists. [N14] |
 | 2025-11-03 | [DEER, 2511.01192](https://arxiv.org/abs/2511.01192) | Retain/reject: supervised mixture-of-experts claims generalization, but no released deployment state and fixed comparator evidence establish DW1 parity. [N8] |
+| 2025-11-02 | [Easy-to-hard supervision, 2511.00988](https://arxiv.org/abs/2511.00988) | Retain/reject: broad effectiveness is claimed without a threshold metric, fixed released state, or like-for-like Binoculars and A6000 comparison in the export. |
 | 2025-10-14 | [StyleDecipher, 2510.12608](https://arxiv.org/abs/2510.12608) | Retain/reject: supervised stylistic performance lacks a runnable frozen state and like-for-like low-FPR/A6000 evidence. |
 | 2025-09-26 | [Mixture of Detectors, 2509.22147](https://arxiv.org/abs/2509.22147) | Retain/reject: ensemble claims do not provide the fixed public state, comparator, and latency basis required here. |
 | 2025-09-23 | [Diversity Boosts Detection, 2509.18880](https://arxiv.org/abs/2509.18880) | Retain/reject: training-data diversity gains do not establish a released detector that beats Binoculars on the same held-out rows. |
+| 2025-09-22 | [PIFE, 2510.02319](https://arxiv.org/abs/2510.02319) | Exclude: inference transforms the target through multi-stage normalization and scores the rewrite discrepancy. |
+| 2025-09-19 | [DNA-DetectLLM, 2509.15550](https://arxiv.org/abs/2509.15550) | Exclude: SOTA gains require iterative construction of an ideal AI sequence, violating no regeneration. |
 | 2025-09-15 | [DetectAnyLLM, 2509.14268](https://arxiv.org/abs/2509.14268) | Exclude: Reference Clustering performs nearest-reference lookup over retained human/generated sets. [X2] |
 | 2025-09-02 | [MoSEs, 2509.02499](https://arxiv.org/abs/2509.02499) | Exclude: inference activates examples from a Stylistics Reference Repository for conditional thresholds, crossing the no-retrieval gate. |
+| 2025-08-30 | [Multi-Strategy/M-DAIGT, 2509.00623](https://arxiv.org/abs/2509.00623) | Retain/reject: near-perfect RoBERTa scores are confined to news and academic-abstract task sets; no public trained state, cross-distribution result, low-FPR evidence, or fixed deployment basis is released. [N15] |
 | 2025-08-19 | [MGT-Prism, 2508.13768](https://arxiv.org/abs/2508.13768) | Retain/reject: supervised spectral-alignment results lack a public frozen state and same-row low-FPR, length, and speed comparison. |
+| 2025-08-16 | [CAMF, 2508.11933](https://arxiv.org/abs/2508.11933) | Retain/reject: a multi-LLM-agent inference pipeline has no public fixed state or plausible near-Binoculars timing basis. |
 | 2025-08-15 | [SpecDetect, 2508.11343](https://arxiv.org/abs/2508.11343) | Retain/reject: formula is fast but the public artifact is incomplete and published accuracy does not establish Binoculars parity under DW1. [S1, S2] |
+| 2025-08-09 | [SentiDetect, 2508.06913](https://arxiv.org/abs/2508.06913) | Exclude: reported F1 gains depend on sentiment-altering and semantic-preserving target transformations, violating the multi-perturbation screen. |
 | 2025-08-03 | [Temporal Tomography, 2508.01754](https://arxiv.org/abs/2508.01754) | Retain/reject: theoretical temporal signal lacks a released qualifying state and matched low-FPR/A6000 comparison. |
 | 2025-07-31 | [T-Detect, 2507.23577](https://arxiv.org/abs/2507.23577) | Retain/reject: tail normalization targets attacks but has no released fixed state or complete like-for-like Binoculars and A6000 result. |
+| 2025-07-07 | [Instruction fine-tuned detectors, 2507.05157](https://arxiv.org/abs/2507.05157) | Retain/reject: the 0.9547 Task-A result is one Defactify fine-tune, including a closed hosted GPT-4o-mini state, with no public detector, low-FPR result, or fixed deployment comparison. [N15] |
 | 2025-06-18 | [PhantomHunter, 2506.15683](https://arxiv.org/abs/2506.15683) | Retain/reject: several probability extractors, no released detector state, and insufficient speed evidence. [N8] |
 | 2025-06-07 | [DivScore, 2506.06705](https://arxiv.org/abs/2506.06705) | Reject for scope: specialized legal/medical domain distillation is not a general DW1 replacement. [N8] |
+| 2025-06-02 | [mdok, 2506.01702](https://arxiv.org/abs/2506.01702) | Retain/reject: despite first place, official test AUROC/F1 are 0.853/0.898; public source ships no trained 14B state, inference timing, low-FPR row, or fixed A6000 comparison. [N15] |
 | 2025-05-21 | [AGENT-X, 2505.15261](https://arxiv.org/abs/2505.15261) | Retain/reject: multiple reasoning LLM agents provide no plausible near-Binoculars latency or fixed public deployment artifact. |
 | 2025-05-20 | [FAID, 2505.14271](https://arxiv.org/abs/2505.14271) | Reject for scope: fine-grained multilingual academic/hybrid attribution is not the fixed binary general-document task. |
 | 2025-05-20 | [Domain Gating Ensemble, 2505.13855](https://arxiv.org/abs/2505.13855) | Retain/reject: supervised ensemble results lack a released state and like-for-like operating-point/speed evidence. |
+| 2025-05-18 | [LM²otifs, 2505.12507](https://arxiv.org/abs/2505.12507) | Exclude/reject: in-domain rows beat same-table Binoculars, but cross-domain accuracy trails it; a nearest-training-vocabulary lookup violates the strict method gate, and no released state, comparable timing, or two-A6000 basis exists. [N13] |
+| 2025-05-15 | [Multifaceted Defactify detector, 2505.11550](https://arxiv.org/abs/2505.11550) | Retain/reject: 0.994 F1 is fifth place on one binary task; the multi-encoder system has no public trained state, cross-distribution, low-FPR, or speed basis. [N15] |
 | 2025-05-08 | [Multiscaled Conformal Prediction, 2505.05084](https://arxiv.org/abs/2505.05084) | Retain calibration watchlist: controls FPR on RealDet calibration, but does not ship a DW1 calibration state or establish a whole-detector A6000 comparison. |
 | 2025-04-22 | [Dynamic perturbations, 2504.21019](https://arxiv.org/abs/2504.21019) | Exclude: target-text dynamic perturbations violate the fixed multi-perturbation constraint. |
+| 2025-04-15 | [OpenTuringBench/OTBDetector, 2504.11369](https://arxiv.org/abs/2504.11369) | Retain/reject: outperforming-most language on its new benchmark exposes no qualifying threshold metric, frozen detector state, or fixed comparator deployment row. |
 | 2025-04-01 | [Short-PHD, 2504.02873](https://arxiv.org/abs/2504.02873) | Exclude: the detector inserts off-topic content into the target, violating the no-rewriting/perturbation gate. |
+| 2025-03-28 | [SKDU/Defactify, 2503.22338](https://arxiv.org/abs/2503.22338) | Retain/reject: the allowed NELA-XGBoost branch reports 0.9945 Task-A F1, but public feature code ships no trained state and no cross-distribution, low-FPR, Binoculars, or timing comparison. [N15] |
+| 2025-02-24 | [Sarang/Defactify, 2502.16857](https://arxiv.org/abs/2502.16857) | Retain/reject: perfect Task-A F1 comes from one shared-task split and a DeBERTa ensemble, without a public trained state, cross-distribution, low-FPR, or fixed deployment result. [N15] |
+| 2025-02-18 | [GREATER, 2502.12734](https://arxiv.org/abs/2502.12734) | Retain/reject: 0.67 percent is attack-success reduction, not absolute accuracy; no fixed Binoculars, released state, or A6000 result is supplied. |
 | 2025-02-17 | [ExaGPT, 2502.11336](https://arxiv.org/abs/2502.11336) | Exclude: example-based inference is a retrieval lane. |
 | 2025-02-06 | [Group-adaptive thresholds, 2502.04528](https://arxiv.org/abs/2502.04528) | Retain/reject: a threshold-optimization study, not a released detector demonstrating fixed DW1 accuracy and speed. |
 | 2025-01-07 | [PAWN, 2501.03940](https://arxiv.org/abs/2501.03940) | Retain/reject: released supervised detector remains below the accuracy-first qualifying evidence and lacks the fixed full deployment comparison. [P1] |
@@ -98,37 +120,30 @@ not members of the 119-row exact-phrase union:
 
 ## Accounting for the other export rows
 
-The remaining deduplicated rows did not meet the declared plausible-general-
-detector rule. They were still inspected at title and abstract level and assigned
-one of these source-mapped dispositions:
+The former catch-all buckets are superseded. `coverage_row_dispositions.tsv`
+contains exactly one reviewed source-mapped row for each of the 119 deduplicated
+export identifiers. `audit_coverage.py` independently parses the three immutable
+exports, rejects conflicting or duplicate mappings, and flags title or abstract
+text containing SOTA, best, comparative or high-performance claims, named
+metrics, or explicit percentages of at least 90.
 
-- **Different task or unit:** 2608.03859 (source plagiarism/reranking),
-  2607.23805 (survey-fraud study), 2607.14905 (reasoning authorship attribution),
-  2606.18946 (sentence-level hybrid documents), 2605.03723 (change-point hybrid
-  segmentation), 2604.21365 (generated code), 2604.21300 (authorship attribution),
-  2604.04932 (creator/editor attribution), 2510.00890 (scientific span detection),
-  2509.25154 (generated judgments), 2509.21269 (corpus/localization), 2508.18715
-  (dialogue-specific detection), and 2506.02959 (human-AI coauthoring).
-- **Language- or benchmark-specific rather than a general English replacement:**
-  2604.11796, 2603.27949, 2512.21709, 2510.20610, 2510.16573, 2510.03502,
-  2509.26051, 2509.00731, 2508.06913, 2507.05157, 2503.00032, 2502.12064,
-  2501.11914, 2501.09813, 2501.11012, and 2501.08913.
-- **Dataset, evaluation, attack, analysis, privacy, or survey—not a new qualifying
-  detector:** 2606.04906, 2606.04177, 2605.20761, 2605.15518, 2605.14240,
-  2604.19768, 2604.16607, 2603.23146, 2603.18750, 2602.11871, 2601.20006, 2601.04641,
-  2512.09292, 2510.22874, 2510.19492, 2510.12476, 2507.15286, 2505.24523,
-  2505.15422, 2504.11369, 2503.23622, 2502.15654, 2502.12611, and 2501.18998.
-- **Narrow system paper, augmentation/training recipe, or no high-accuracy claim
-  sufficient to enter the priority table:** 2605.02712, 2602.15514,
-  2601.03812, 2511.21744, 2511.17402, 2511.00988, 2510.16549, 2509.00623,
-  2508.11933, 2506.01702, 2505.12507, 2505.11550, 2503.22338, 2503.15044,
-  2502.16857, 2502.12734, and 2501.14288.
-- **Excluded method family not already in the priority table:** 2606.00402
-  (rewrite-based), 2510.02319 (adversarial perturbation modeling), 2509.15550
-  (mutation-repair), and 2504.21019 (dynamic perturbations).
+The generated `coverage_semantic_audit.tsv` preserves the title, contributing
+exports, every matched text fragment, mapping kind, allowlisted class definition,
+resolution, reason, and primary arXiv URL for every row. The frozen run found 106
+semantic flags. All 68 plausible or method-excluded results have explicit
+individual dispositions; the other 51 rows have mechanically allowlisted
+non-candidate classes and specific reasons. Every flag in those 51 rows is
+resolved as a documented false positive, such as a metric belonging to a task
+overview, a source-plagiarism task, an attack, a dataset baseline, or a non-English
+detector. Unknown, wrong-kind, and catch-all codes fail validation; no
+identifier-only group remains.
 
-The raw exports, rather than this human-readable grouping, remain the canonical
-result inventory.
+`coverage_semantic_audit_report.txt` preserves the exact project-neutral command,
+input/output hashes, raw and deduplicated counts, mapping counts, and PASS.
+`coverage_semantic_audit_environment.txt` preserves the Python and platform
+environment; `coverage_semantic_audit_design.md` fixes the control flow and
+failure conditions. The raw Atom exports remain the canonical result data, while
+the reviewed mapping and generated audit make its semantic accounting testable.
 
 ## Public Google Scholar check
 

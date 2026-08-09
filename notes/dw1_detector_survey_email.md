@@ -39,6 +39,21 @@ Representations Markov calibration code needs a new supervised state.
 Exons-Detect has strong paper results, but its essential generated replacement
 sequence violates the no-regeneration constraint.
 
+The row-by-row audit also found two high claims that the earlier correction had
+still grouped too loosely. LM squared motifs beats Binoculars in an in-domain
+table, but trails it in the paper's cross-domain average, uses nearest-neighbor
+lookup, and no public detector release was found. NEULIF reports ninety-nine
+point five percent area under the curve for a small classifier, but only on one
+in-domain Kaggle split. No public model was found, and the paper supplies no
+matched Binoculars result, generator provenance, or reproducible timing. Neither
+qualifies under the fixed screen.
+
+The expanded audit also preserved seven other strong shared-task or small-test
+claims. Their results include perfect F one on one shared task and ninety-eight
+point three percent accuracy on a sixty-text test. The three public source
+releases do not include trained checkpoints, and none reports a matched
+low-false-positive and speed comparison. They do not change the recommendation.
+
 For now, keep Binoculars. Before reconsidering MELD, resolve the checkpoint used
 for the paper and run MELD, Binoculars, and FastDetectGPT together on one frozen,
 stratified, current-generator test with separate human calibration.

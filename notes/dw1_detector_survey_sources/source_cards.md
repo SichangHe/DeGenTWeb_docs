@@ -313,6 +313,172 @@ commits and search routes are in `search_log.md`.
   needs a frozen DW1 accuracy and operating-point run before feasibility testing
   can support promotion.
 
+### N13 — LM²otifs
+
+- Official source: [arXiv 2505.12507v2](https://arxiv.org/abs/2505.12507v2),
+  updated 30 July 2026. The exact primary PDF is retained with SHA-256
+  `b0a2bcc7f56ba0959563b7536f0bc9b6ee3e982865cfd91848805b60c2dfeb06`.
+- Sourced mechanism: LM²otifs builds lexical token-co-occurrence and document
+  graphs, inserts test-document nodes, and classifies them with a three-layer
+  graph convolutional network. For out-of-vocabulary input it selects the
+  “nearest semantic neighbor from the training set.” That inference-time lookup
+  independently crosses the strict no-nearest-neighbor boundary.
+- Sourced data and training: six datasets cover open question answering,
+  medicine, finance, Reddit, arXiv, reviews, recipes, books, poetry, Yelp,
+  essays, and creative writing. Generator rows include ChatGPT, DaVinci, Cohere,
+  Dolly, BloomZ, Llama 2, GPT-4, MPT, Mistral, Claude 3, and Gemini 1.0 Pro.
+  Individual graph experiments use up to 2,000 training, 200 validation, and 200
+  test texts; the GCN trains for 5,000 epochs. The paper reports no document
+  length distribution or 2,048-token batch basis.
+- Sourced in-domain comparison: Table 1 reports average accuracy/AUC of
+  0.98/1.00 for LM²otifs and 0.97/0.99 for same-table Binoculars over HC3, M4,
+  and RAID ChatGPT rows. Table 2 reports average accuracy 0.95 versus 0.83 over
+  eleven generator settings. These are supervised in-domain comparisons, not an
+  equal-training regime, fixed low-FPR test, or transferable calibration.
+- Sourced cross-domain control: Table 9 reports average accuracy 0.79 for
+  LM²otifs versus 0.95 for Binoculars and 0.97 for FastDetectGPT. The paper says
+  its “cross-domain generalization is constrained.” It reports no TPR at a fixed
+  FPR, threshold-selection procedure, or independent calibration result.
+- Sourced timing and hardware: Table 19 gives 0.0051–0.0091 seconds on four HC3
+  domains and says the experiment was repeated ten times. It supplies no batch,
+  input-length, per-document versus whole-set boundary, or Binoculars timing row.
+  All experiments used “8 NVIDIA A100 GPUs,” each with 40 GB. Training graphs
+  contain up to 8.6 million edges, but no peak memory or detector-state size is
+  reported. The timing cannot establish near-Binoculars speed, and total A100
+  capacity cannot establish a two-A6000 fit.
+- Artifact boundary: the paper links no detector repository or checkpoint.
+  Anonymous GitHub repository searches by method name, exact title, and arXiv
+  identifier returned no match; anonymous Hugging Face model and Space searches
+  by method name returned none. Raw responses are in the external collection.
+  This is bounded negative evidence, not a universal absence claim.
+- Reproducibility decision: no code, trained graph, vocabulary, GCN state, or
+  threshold is public. A local A6000 reconstruction would test an invented
+  implementation and cannot validate the tables or timing, so no screen was run.
+  LM²otifs is excluded by its nearest-neighbor fallback and independently
+  rejected for artifact, cross-domain, calibration, fit, and timing gaps despite
+  the paper's “state-of-the-art performance” claim.
+
+### N14 — NEULIF
+
+- Official source: [arXiv 2511.21744v2](https://arxiv.org/abs/2511.21744v2),
+  updated 8 January 2026. The exact primary PDF is retained with SHA-256
+  `774057540585a0ce338a3456bc644b621949a8ee1f8af95d659c713a47208ab0`.
+- Sourced mechanism: spaCy and TextDescriptives extract 68 stylometric,
+  readability, syntactic, lexical, and cohesion features. A fitted scaler feeds
+  either a one-dimensional CNN or a 100-tree random forest; the paper uses a
+  nominal 0.5 CNN decision threshold. This is a single feature/classifier path,
+  not retrieval, rewriting, regeneration, or multi-perturbation inference.
+- Sourced data boundary: the authors randomly sample 20,000 balanced essays from
+  a roughly 500,000-row Kaggle “AI Vs Human Text” corpus, drop missing features,
+  and report 15,981 train, 1,993 validation, and 1,997 test rows. The paper does
+  not identify the contributing generators, source domains, length distribution,
+  or duplicate-control boundary. The matching public Kaggle listing says only
+  that roughly 500,000 essays were combined from multiple sources; its anonymous
+  metadata is retained. The exact dataset identity therefore remains an
+  inference rather than paper-specified provenance.
+- Sourced metrics: the CNN reports 97 percent accuracy, about 0.95–0.97 F1, and
+  0.9951 ROC-AUC on that one random in-domain split; the random forest reports
+  roughly 95 percent accuracy, 0.94 F1, and 0.9555 ROC-AUC. The paper explicitly
+  says its “results are reported in-domain only.” Its cross-paper comparison
+  mixes other datasets and metrics and contains no matched Binoculars row.
+- Calibration and operating point: no held-out probability-calibration method,
+  calibration curve, Brier score, or TPR at a fixed FPR is reported. The CNN
+  confusion matrix has 28 false positives among 997 human test rows, an inferred
+  2.81 percent FPR at the stated nominal threshold, not a one-percent operating
+  point. Low log loss alone does not prove transferable calibration.
+- Size and timing: the architecture table reports 2,205,185 trainable CNN
+  parameters while an earlier prose claim says fewer than 10^5, an internal
+  inconsistency. The serialized CNN and random forest are reported as about 25
+  MB and 10.6 MB. The paper claims “typical inference times under 100
+  milliseconds” for the complete CPU path but gives no CPU model, text length,
+  batch, repetitions, distribution, raw timing, or matched Binoculars boundary.
+  The claim is plausibly lightweight but does not demonstrate near-Binoculars
+  speed under the fixed screen.
+- Artifact boundary: the paper links no repository, model, scaler, feature
+  schema, or checkpoint. Exact-name/title/identifier GitHub and method-name
+  Hugging Face model/Space searches found no relevant release. The Kaggle corpus
+  metadata is public, but data alone cannot reproduce the detector.
+- Reproducibility decision: the tiny reported serialized sizes make two-A6000
+  memory capacity plausible, yet the intended path is CPU-based and the trained
+  classifier, scaler, precise features, split indices, and timing protocol are
+  absent. Training a replacement would not reproduce the reported state, so no
+  A6000 screen was scientifically meaningful. NEULIF is retained as an
+  in-domain lightweight claim and rejected for provenance, generalization,
+  artifact, low-FPR, and timing comparability gaps.
+
+### N15 — High-claim rows promoted by semantic adversarial review
+
+These seven rows are individual detector dispositions, not a shared-task
+catch-all. Their primary PDFs and every paper-linked public repository are
+preserved in the external collection.
+
+- [Comparative neural detectors, 2603.18750](https://arxiv.org/abs/2603.18750):
+  four supervised architectures are evaluated on 60-text tests. The strongest
+  proposed model reaches 91.67 percent accuracy on the balanced English dtEN
+  test and 98.3 percent on the thematic Italian ART&MH test; the Italian dtITA
+  rows are single-class and cannot establish balanced discrimination. No
+  Binoculars, fixed-FPR, hardware, or inference-time result is reported. The
+  official repository at commit
+  `a18a95ecb70e799b7b0ea02e9e43b1ae9929bddf` contains notebooks and data but no
+  trained checkpoint. PDF SHA-256:
+  `42106d2af0da94784fef3855471f0e5106e90c2beb0a2552295c4abece29d27f`;
+  source-archive SHA-256:
+  `c18030e7946007525740cc9ccdcf9c28f473f769b7193381cc7fe5225ee7ae2f`.
+- [Multi-Strategy/M-DAIGT, 2509.00623](https://arxiv.org/abs/2509.00623):
+  fine-tuned RoBERTa reports 99.99 percent accuracy/F1 on news and 100 percent
+  on academic-abstract test sets after equally near-perfect development rows.
+  The paper provides no generator-shift, cross-domain, calibration, fixed-FPR,
+  hardware, or measured-latency result and links no trained state or source
+  repository. Its 512-token method therefore cannot be assigned the shared-task
+  scores outside that closed task split. PDF SHA-256:
+  `6f564ed548359c3e73e97481dbfb9895fcd2b15c94839b8cf740d38956ea910c`.
+- [Instruction fine-tuned detectors, 2507.05157](https://arxiv.org/abs/2507.05157):
+  the Defactify Task-A test result is F1 0.9547. It comes from a fine-tuned,
+  hosted GPT-4o-mini state; about 200 test calls were filtered, and the final
+  submission combines that closed result with a BERT Task-B result. The paper
+  links no detector release and supplies no low-FPR, matched comparator, or
+  inference-time row. PDF SHA-256:
+  `c5a4409f82ec509c78fd5df0243de5214d7fe6d4eef9200d0ab84b7dd0e9869e`.
+- [mdok, 2506.01702](https://arxiv.org/abs/2506.01702): in-distribution
+  validation AUROC is 0.9972 and the paper claims first rank, but the official
+  binary test leaderboard reports AUROC 0.853 and F1 0.898. Its separate MIX2k
+  validation AUROC is 0.6995 versus 0.6368 for same-table Binoculars. The
+  detector uses a 14-billion-parameter Qwen model; the paper gives no inference
+  timing or memory. The official repository at commit
+  `3d87f716e895ac13df9c96c6c645f6b26c7eca3f` contains two training scripts and
+  no checkpoint. PDF SHA-256:
+  `c362ab8854b93bdeceeae9a6753b07c33ebf7041d03e3ecb08abc941c4a461e7`;
+  source-archive SHA-256:
+  `8ad6d7b5adbb15381f2c6a6a6fafc0b07fd0b49df8630ada98b5688d915e9b7b`.
+- [Multifaceted Defactify detector, 2505.11550](https://arxiv.org/abs/2505.11550):
+  the fifth-place Task-A system reports F1 0.994 on one shared-task test. It
+  combines a RoBERTa detector, E5 embeddings, stylometric features, and a dense
+  classifier. No public trained state, cross-distribution evaluation,
+  fixed-FPR result, hardware, or latency is supplied. PDF SHA-256:
+  `5ffd86b33dffeecef2cd3511ec33b219b810edf0b3713304ee94f347a0f03a02`.
+- [SKDU/Defactify, 2503.22338](https://arxiv.org/abs/2503.22338): the permitted
+  NELA-feature/XGBoost branch—not the lower-scoring seven-rewrite RAIDAR
+  branch—reports Task-A test F1 0.9945. The official repository at commit
+  `8ac8229b45fb826d309119927ead7e65924f7c64` contains two NELA feature scripts
+  but no fitted classifier or frozen feature state. No cross-distribution,
+  Binoculars, fixed-FPR, hardware, or timing result is reported. PDF SHA-256:
+  `5d5c29599d4039d36bffca8a7f597adaf0e884dbe4b6c663ed74e6aaa214b986`;
+  source-archive SHA-256:
+  `29da14ce1cb119ccc4981a66370b63a51624387c05ed0e86869df60c48050303`.
+- [Sarang/Defactify, 2502.16857](https://arxiv.org/abs/2502.16857): a
+  DeBERTa-v3-small ensemble trained with input noise reports first-place Task-A
+  F1 1.0 on one shared-task test, at a maximum length of 768. Training-time
+  noising does not itself violate the inference method gate, but no public
+  trained state, cross-distribution result, fixed-FPR calibration, hardware, or
+  inference timing is supplied. PDF SHA-256:
+  `2d4e556e73bc2397084180faa5822e7bc418f838be14488a445a1add565c2347`.
+
+None received an A6000 screen: the three public repositories omit trained state,
+the other four papers expose none, and rebuilding supervised systems would test
+new states rather than the reported result. The missing fixed-state and timing
+boundaries also prevent a near-Binoculars speed claim. All seven are retained as
+high claims and individually rejected, leaving the recommendation unchanged.
+
 ### M7 — Local MELD v5 feasibility and bounded accuracy screen
 
 - Durable raw evidence: [benchmark_meld_stdout.txt](benchmark_meld_stdout.txt),

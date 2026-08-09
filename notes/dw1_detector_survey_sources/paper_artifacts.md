@@ -156,10 +156,10 @@ this exact, discoverable path:
 
 `/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08`
 
-Its `README.md` documents scope and provenance. Its 105-entry
+Its `README.md` documents scope and provenance. Its 150-entry
 `MANIFEST.sha256` has SHA-256
-`0afacad6dc7921c2f43e794f590604be49d9464ee2e9e7a8d3c91d227cd9c989`;
-`sha256sum --check MANIFEST.sha256` passed for all 105 retained files on
+`1b92b652294562b6f1abbad3064c2c0f2b0fa2c49ff23e30b3937d5e9cdba67c`;
+`sha256sum --check MANIFEST.sha256` passed for all 150 retained files on
 2026-08-08. The ledger covers every collection file other than itself. This
 repository separately preserves raw benchmark execution and environment files,
 which are frozen by `candidate_manifest.md`.
@@ -175,6 +175,10 @@ which are frozen by `candidate_manifest.md`.
   `aa168b104cb89db81bbe82b458844b2e836f2751b1a20b3d3a7a50ae3abdefbe`.
 - DACTYL/PAN 2026 paper, arXiv 2607.17382: `papers/2607.17382.pdf`, SHA-256
   `60fbe410d18e586aa4720669721791a9f920c08bcd4d955b91feb86e5fe3c9f4`.
+- LM²otifs paper, arXiv 2505.12507v2: `papers/2505.12507.pdf`, SHA-256
+  `b0a2bcc7f56ba0959563b7536f0bc9b6ee3e982865cfd91848805b60c2dfeb06`.
+- NEULIF paper, arXiv 2511.21744v2: `papers/2511.21744.pdf`, SHA-256
+  `774057540585a0ce338a3456bc644b621949a8ee1f8af95d659c713a47208ab0`.
 - MELD paper-era complete official Hugging Face snapshot at revision
   `51f3ac2d4ce8de9f6f3a1eba9ca4276b077bb808`; its 1,584,091,048-byte weight
   file has SHA-256
@@ -198,7 +202,8 @@ are retained under `http/`; no authenticated follow-up was attempted.
 
 The second distinct reviewer identified 13 disposition-table papers that had
 public links and raw Atom metadata but no retained primary PDF. All 13 exact
-public arXiv PDFs are now under `papers/` and included in the 105-entry manifest:
+public arXiv PDFs are now under `papers/` and were included in the then-105-entry
+manifest:
 
 - 2502.04528, Group-Adaptive Threshold Optimization:
   `15dfbe23b08579198050b7bd165b24cb85ed8c44450373ac62ed14e7db9ba999`.
@@ -227,10 +232,80 @@ public arXiv PDFs are now under `papers/` and included in the 105-entry manifest
 - 2606.00016, AEyeDE:
   `4286cbb4d617297eb393ef3e9b360ab5820e61407657a649fb10013442087e1c`.
 
-A mechanical audit of every arXiv URL in the plausible-result and targeted
-carry-forward tables found 49 distinct identifiers; all 49 now have a PDF whose
-frozen filename contains that identifier. This is a preservation claim for the
-bounded table, not a universal literature-completeness claim.
+That historical repair covered all 49 table identifiers at the time.
+
+### Primary papers added by the semantic repair
+
+The row-level audit promoted 15 export results to explicit dispositions. The two
+decisive PDFs are listed above; these 13 additional primary PDFs and SHA-256
+values are also retained:
+
+- 2502.12734, GREATER:
+  `a7a943b8b3c1f8374e57904e171985b2e74082ca47efb24ff2c05d19691e3da4`.
+- 2504.11369, OpenTuringBench:
+  `78ee269f0426deb98cece515e4dfe27cba24bfc7b4656f50af59c6cd9bf1894d`.
+- 2508.06913, SentiDetect:
+  `3680b046f339c958f0b1af6d61503c19e59e0573968f5ab336b867ee579e7bae`.
+- 2508.11933, CAMF:
+  `7c2891e7e1ea1ee6d34f320cb9848f2ba57049334b22ac7e5de3935afd8804a4`.
+- 2509.15550, DNA-DetectLLM:
+  `78ada135cef637d28a2525c17406b48ab7a37b38dfc0b8808cc6fcddfa057eb0`.
+- 2510.02319, PIFE:
+  `0867f4be40c925e414b5538f2bcd40c0b8a3873bbfb6be5b0c17aa8f6d98a16d`.
+- 2511.00988, easy-to-hard supervision:
+  `96cfbe05ee1445866982951e287af4e6eda66545b1109dcca504d2123e6ddd13`.
+- 2601.03812, AI Generated Text Detection:
+  `57930f4ec027309f8362c6011ce806a517999a07377e908964628bfd421e0ec9`.
+- 2601.04641v1, DP-MGTD:
+  `5d5caf4e90eba97468b0ae46788d603834fc5414d787f8eab6be0929b28152e2`.
+- 2601.20006, LLM-specific fine-tuning:
+  `bdfbb99b6283d1533b3490b43119ba1dc1b10c7ceaedfd7a9949acc8651a5d80`.
+- 2602.15514, DependencyAI:
+  `0364ad5bf6d54460ccff938c6f1551bbd7bfdcd47f00ac3da7c92ec43fd2bbab`.
+- 2603.23146, explainable linguistic-feature detector:
+  `ae8fbbf92fbeb90047c9375f23713836fb7d42a64224a29317dee078cc04a86f`.
+- 2606.00402, distribution-free rewrite calibration:
+  `facb5ff5f0f4f57c826e73ee1a6ba6e050646849f881e5d12def8302e5d0cd02`.
+
+The frozen export names DP-MGTD revision 2. Its abstract page remained public,
+but its revision-2 PDF returned HTTP 404; the public revision-1 PDF is explicitly
+versioned above.
+
+### Primary papers and sources added after semantic adversarial review
+
+The first semantic reviewer rejected treating six high-scoring shared-task
+systems as false positives. A broader trigger check also promoted one general
+comparative detector. Their exact public PDFs are retained:
+
+- 2502.16857, Sarang/Defactify:
+  `2d4e556e73bc239708418f838be14488a445a1add565c2347`.
+- 2503.22338, SKDU/Defactify:
+  `5d5c29599d4039d36bffca8a7f597adaf0e884dbe4b6c663ed74e6aaa214b986`.
+- 2505.11550, multifaceted Defactify detector:
+  `5ffd86b33dffeecef2cd3511ec33b219b810edf0b3713304ee94f347a0f03a02`.
+- 2506.01702, mdok:
+  `c362ab8854b93bdeceeae9a6753b07c33ebf7041d03e3ecb08abc941c4a461e7`.
+- 2507.05157, instruction fine-tuned detectors:
+  `c5a4409f82ec509c78fd5df0243de5214d7fe6d4eef9200d0ab84b7dd0e9869e`.
+- 2509.00623, Multi-Strategy/M-DAIGT:
+  `6f564ed548359c3e73e97481dbfb9895fcd2b15c94839b8cf740d38956ea910c`.
+- 2603.18750, comparative neural detectors:
+  `42106d2af0da94784fef3855471f0e5106e90c2beb0a2552295c4abece29d27f`.
+
+Three papers link public source. Immutable archives and anonymous GitHub
+repository/commit metadata are retained for mdok commit
+`3d87f716e895ac13df9c96c6c645f6b26c7eca3f`, archive SHA-256
+`8ad6d7b5adbb15381f2c6a6a6fafc0b07fd0b49df8630ada98b5688d915e9b7b`;
+SKDU commit `8ac8229b45fb826d309119927ead7e65924f7c64`, archive SHA-256
+`29da14ce1cb119ccc4981a66370b63a51624387c05ed0e86869df60c48050303`;
+and comparative-framework commit
+`a18a95ecb70e799b7b0ea02e9e43b1ae9929bddf`, archive SHA-256
+`c18030e7946007525740cc9ccdcf9c28f473f769b7193381cc7fe5225ee7ae2f`.
+The archives contain scripts or notebooks but no trained checkpoint.
+
+A mechanical audit of every arXiv URL in the current explicit and targeted
+tables found 71 distinct identifiers and no missing filename match. This is a
+preservation claim for the bounded tables, not universal literature completeness.
 
 ### Raw coverage and Scholar evidence
 
@@ -247,6 +322,10 @@ bounded table, not a universal literature-completeness claim.
   sanitized headers have SHA-256
   `05225a60c4e75dd9a04f76439bab0cf6e9cb308c12bab84b263f94b6207a069a`.
   `Set-Cookie` was removed, and no cookie was stored or reused.
+- LM²otifs/NEULIF arXiv metadata, bounded GitHub/Hugging Face artifact searches,
+  NEULIF's likely Kaggle-corpus metadata, and the combined public Scholar body
+  are retained under `queries/` and `http/`. Exact hashes are in the external
+  manifest; no returned Scholar cookie was stored or sent.
 
 ### Canonical comparator preservation
 

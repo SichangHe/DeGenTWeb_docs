@@ -331,3 +331,115 @@ The collection has its own README and `MANIFEST.sha256` covering every retained
 file other than the ledger itself. `paper_artifacts.md` records the path and key
 identities. This replaces the earlier unverifiable phrase “established external
 paper collection” with a discoverable, integrity-checkable location.
+
+## Semantic-coverage repair: 2026-08-08
+
+The next evaluator found that identifier accounting had hidden LM²otifs and
+NEULIF inside a mixed catch-all. The three raw exact-phrase exports were not
+refetched or edited. A new row-level audit treats their frozen title and abstract
+text as the discovery surface and the arXiv identifier as the unique mapping key.
+
+The exact project-neutral command was:
+
+```text
+uv run --isolated --no-project --python 3.13 python audit_coverage.py \
+  --map coverage_row_dispositions.tsv \
+  --output coverage_semantic_audit.tsv \
+  --report coverage_semantic_audit_report.txt \
+  --environment coverage_semantic_audit_environment.txt
+```
+
+It parsed 204 raw export entries into the unchanged 119 unique 2025–2026 rows.
+Patterns conservatively flagged 106 rows for SOTA, best/first-rank,
+comparative-improvement, high/robust/near-perfect performance, accuracy claims,
+named accuracy/threshold metrics, or explicit percentages of at least 90. The
+reviewed mapping assigns 68 rows explicit dispositions and 51 mechanically
+allowlisted non-candidate classes. Every flagged non-candidate has a specific
+false-positive explanation. Kind-specific code-to-definition allowlists reject
+unknown, wrong-kind, and catch-all codes, and the generated audit emits the bound
+definition beside each matched fragment and primary URL. The report binds the
+command, script, mapping, exports, output, environment, and counts by SHA-256 and
+returns PASS.
+
+Four validation-negative controls used the recorded Python 3.13 interpreter,
+process-substituted mappings, and `/dev/null` outputs: removing the last row,
+duplicating the first data row, replacing a code with `catch_all`, and assigning
+the non-candidate `analysis_only` code to an explicit disposition. Each exited
+1; the unchanged mapping exited 0. A separate broader expression covering
+accurate, near-perfect, first-rank, F-score, ROC, TPR/FPR, and high-percentage
+forms found no matching unflagged row after the repair.
+
+### LM²otifs and NEULIF primary and artifact checks
+
+One anonymous arXiv metadata request for identifiers `2505.12507,2511.21744`
+resolved both current revision-2 records. Their public PDFs were downloaded
+directly and preserved. LM²otifs reports “state-of-the-art performance”; NEULIF
+reports a 99.5 percent ROC-AUC. Those phrases triggered review rather than
+promotion.
+
+Neither paper links a repository or checkpoint. Anonymous GitHub repository
+searches used each method name, exact title, and arXiv identifier. LM²otifs
+returned no repository; NEULIF name-only matches were unrelated and its exact
+title/identifier returned none. Anonymous Hugging Face model and Space searches
+by method name returned none. The raw public JSON responses are retained. This
+is a bounded artifact check, not a universal nonexistence claim.
+
+One combined anonymous public Google Scholar first-page request for
+`"LM2otifs" OR "NEULIF"` returned HTTP 200 without a robot challenge. It exposed
+the primary arXiv record and unrelated lexical matches, not an official detector
+release. No cookie jar or persistent session was used; response cookies were not
+stored or sent. The raw body is retained. The general web-search connector again
+returned HTTP 404 and supplied no evidence.
+
+The anonymous Kaggle API's exact-title result matching NEULIF's roughly 500,000
+essays was `shanegerami/ai-vs-human-text`. Its public metadata says the essays
+were combined from multiple sources but does not name generators, domains, or
+lengths. Search and metadata JSON are retained; because the paper itself does not
+name the owner/reference, this match remains inferred rather than definitive.
+
+No local A6000 run was performed. LM²otifs releases neither code nor its trained
+graph, vocabulary, GCN state, or threshold; reconstructing it would not reproduce
+the paper. NEULIF releases neither classifier, scaler, feature schema, split
+indices, nor timing protocol; retraining a substitute would test a different
+state. Their exact scientific blockers are recorded in source cards N13 and N14.
+
+### Preservation after row promotion
+
+The initial semantic review moved thirteen other results from catch-alls into explicit
+dispositions. Their primary PDFs were downloaded from the exact frozen arXiv
+revision and preserved. DP-MGTD revision 2 was the sole exception: its abstract
+page returned HTTP 200 but its revision-2 PDF returned 404, so the public
+revision-1 PDF is retained and labeled rather than silently substituted.
+
+The first fresh semantic reviewer then found six high-scoring shared-task systems
+whose missing artifact, low-FPR, or deployment evidence had been mislabeled as a
+false-positive reason. A separate broader trigger check found the general
+comparative detector 2603.18750. All seven were moved to individual dispositions;
+their PDFs were preserved, and the three paper-linked GitHub repositories were
+pinned and archived. Those repositories contain scripts or notebooks but no
+trained checkpoints, so no scientifically comparable A6000 run was possible.
+
+The public download pattern was:
+
+```text
+curl --fail --location --silent --show-error \
+  --output /tmp/ARXIV_ID.pdf https://arxiv.org/pdf/ARXIV_ID
+curl --fail --silent --show-error \
+  https://api.github.com/repos/OWNER/REPO
+curl --fail --silent --show-error \
+  https://api.github.com/repos/OWNER/REPO/commits/DEFAULT_BRANCH
+curl --fail --location --silent --show-error \
+  https://github.com/OWNER/REPO/archive/COMMIT.tar.gz
+```
+
+The client was curl 7.81.0 with OpenSSL 3.0.2; PDF text checks used Poppler
+`pdftotext` 22.02.0. All endpoints were anonymous and public. Exact PDF, archive,
+repository-metadata, and commit-metadata hashes are in the external manifest;
+primary and archive anchors are repeated in source card N15 and
+`paper_artifacts.md`.
+
+The explicit export table now has 68 identifiers and the targeted carry-forward
+table has three. A mechanical filename audit found a retained primary PDF for all
+71. The external ledger now covers 150 files and has SHA-256
+`1b92b652294562b6f1abbad3064c2c0f2b0fa2c49ff23e30b3937d5e9cdba67c`;
+all entries verified before the collection was restored to read-only.

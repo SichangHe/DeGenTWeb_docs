@@ -1,0 +1,4 @@
+python=3.13.11 (main, Dec  9 2025, 19:04:10) [Clang 21.1.4 ]
+implementation=CPython
+platform=Linux-5.15.0-181-generic-x86_64-with-glibc2.35
+dependencies=Python standard library only
