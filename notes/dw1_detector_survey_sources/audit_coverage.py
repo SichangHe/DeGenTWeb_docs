@@ -15,6 +15,8 @@ from collections.abc import Callable
 from dataclasses import dataclass, replace
 from pathlib import Path
 
+import discover_table_accounts as table_discovery
+
 ATOM_NS = "{http://www.w3.org/2005/Atom}"
 EXPORT_NAMES = (
     "coverage_query_ai_generated.atom",
@@ -145,23 +147,29 @@ RESULT_CODE_TEXT_PATTERNS = {
     ),
 }
 EXPECTED_RESULT_IDS_SHA256 = (
-    "b7fbe5addd85685392ac7cd617ef9bfea6410bf7d5be2482057605ac5589cd8a"
+    "d1c505385cfeaaf01582bbc972ace563a12e0b756199d10c99f47736b66a864f"
 )
-SOURCE_CARDS_SHA256 = "ad4d4b4a4abfefda23ce3d7580b28c7692fb1bb67c343f0a5ba65c4b8c6cd79b"
+SOURCE_CARDS_SHA256 = "0ee5e13d9d053987153953525641b1ed45f4d614043efc4960d7b4ad30c61775"
 FULLTEXT_SOURCES_SHA256 = (
-    "5f258b94e18593582f8172c1bcc43c32d07ca05dc4b4b5b0b7f87af071b9e720"
+    "541eded2fc1de41fd3ca845035c8b704b96fd19b1fc82210079fdd1f054fedee"
 )
 FULLTEXT_ACCOUNTS_SHA256 = (
-    "871f3e9b7f0356aece25c5a59b2baae84956cb8ee3181fb59fa47f2aaf76b2ac"
+    "78cf40ef5daa64712a926d2c1d822b145beb4635a924b9a2e3c8b93e9cc4c846"
 )
 FULLTEXT_ACCOUNT_MAP_SHA256 = (
-    "5027a7d752966197f120b91262192cd8a1e45a1db424b21bc2e9a5497529fa4f"
+    "459832035eb67b51630ddbe0bfb92355afb18f9485e6c4bef7f0cd64274e04ff"
 )
 PRIMARY_RESULTS_SHA256 = (
-    "705959809818fa15f2a19a5dcfe0a93e3017652b36ef7d14aee32772e1ff25f9"
+    "9bd6434060456233794f7d5d9b1b7e6c22d7bb9ea1689df3b7f3c7ddc00a0aec"
+)
+TABLE_CANDIDATES_SHA256 = (
+    "0460babd82a2aba738e83d53b978f464f0e546305037e92d03a565ab47e045dd"
+)
+TABLE_DISCOVERY_SHA256 = (
+    "296a40b62dd17c828f9dc959a1667a5465803a333efd9d3bf03b086c24033a48"
 )
 FULLTEXT_ACCOUNT_SET_SHA256 = (
-    "def94a17c54add16e9a6522a01b4b453cb16d706aef596b9f78024cbf3a3b2d9"
+    "1647ac46547ecab7adb0e96f09785e2b06d46a8ae7bb3fc66b3dd4168a6657db"
 )
 SOURCE_CARD_HEADING_PATTERN = re.compile(
     r"^## (?P<label>E\d+) — .+, arXiv (?P<parent>\d{4}\.\d{5})$"
@@ -205,6 +213,35 @@ ANCHOR_RESULT_IDS = {
     },
 }
 CONTENT_ANCHOR_ACCOUNTS = {
+    "2501.03940": {
+        "2501.03940:radar-ft",
+        "2501.03940:m4-roberta-base",
+        "2501.03940:gpt2",
+        "2501.03940:llama31-1b",
+        "2501.03940:hsff-gpt2",
+        "2501.03940:hsff-llama31-1b",
+        "2501.03940:mpn-gpt2",
+        "2501.03940:mpn-llama31-1b",
+        "2501.03940:ens-gpt2-llama",
+        "2501.03940:ens-2gpt2-2llama",
+        "2501.03940:ens-2gpt2",
+        "2501.03940:ens-2llama",
+        "2501.03940:ens-gpt2-llama-qwen",
+    },
+    "2607.03680": {
+        "2607.03680:vanilla-intellabs-base",
+        "2607.03680:vanilla-mage-large",
+        "2607.03680:vanilla-faid-base",
+        "2607.03680:vanilla-mirage-large",
+        "2607.03680:fomaml-lora",
+        "2607.03680:confidence-ensemble",
+    },
+    "2605.25281": {
+        "2605.25281:imbd-read",
+        "2605.25281:imbd-target-adapted",
+        "2605.25281:grpo-noncot",
+        "2605.25281:grpo-cot",
+    },
     "2509.00623": {
         "2509.00623:roberta-base",
         "2509.00623:tfidf-svm",
@@ -360,6 +397,14 @@ CONTENT_ANCHOR_ACCOUNTS = {
     },
 }
 CONTENT_ANCHOR_TEXT = {
+    "2501.03940": ("RADAR-FT", "five epochs", "RoBERTa", "0.970"),
+    "2607.03680": (
+        "IntelLabs (base)",
+        "MAGE (large)",
+        "FAID (base)",
+        "MIRAGE (large)",
+    ),
+    "2605.25281": ("I M BD", "I M BD∗", "0.920", "0.929"),
     "2509.00623": ("TF-IDF + SVM", "Candace", "99.95"),
     "2503.22338": ("RAIDAR + NELA", "Random Forest", "0.9945"),
     "2502.16857": ("Double Finetune", "Ensemble", "0.9531"),
@@ -383,6 +428,15 @@ CONTENT_ANCHOR_TEXT = {
     "2504.21019": ("training phase", "Gaussian noise", "86.10"),
 }
 RESULT_CODE_ANCHORS = {
+    "2511.21744:detective-comparator": "exclude_retrieval",
+    "2501.03940:radar-ft": "retain_reject",
+    "2501.03940:m4-roberta-base": "retain_reject",
+    "2607.03680:vanilla-intellabs-base": "retain_reject",
+    "2607.03680:vanilla-mage-large": "retain_reject",
+    "2607.03680:vanilla-faid-base": "retain_reject",
+    "2607.03680:vanilla-mirage-large": "retain_reject",
+    "2605.25281:imbd-read": "retain_reject",
+    "2605.25281:imbd-target-adapted": "retain_reject",
     "2509.15550:biscope": "retain_reject",
     "2509.15550:entropy": "retain_reject",
     "2509.15550:likelihood": "retain_reject",
@@ -1214,6 +1268,34 @@ def _read_fulltext_artifact(
     )
 
 
+def validate_table_discovery(
+    fulltext_sources_path: Path,
+    fulltext_accounts_path: Path,
+    candidates_path: Path,
+    discovery_path: Path,
+    paper_root: Path,
+) -> tuple[list[table_discovery.Candidate], list[table_discovery.Resolution]]:
+    """Replay PDF-table discovery independently of the curated generator."""
+    if sha256(candidates_path) != TABLE_CANDIDATES_SHA256:
+        raise ValueError("table-candidate snapshot hash mismatch")
+    if sha256(discovery_path) != TABLE_DISCOVERY_SHA256:
+        raise ValueError("table-discovery snapshot hash mismatch")
+    sources = table_discovery.load_sources(fulltext_sources_path)
+    candidates = table_discovery.discover_all(sources, paper_root)
+    if table_discovery.serialize(candidates) != candidates_path.read_text(
+        encoding="utf-8"
+    ):
+        raise ValueError("table-candidate snapshot does not reproduce from PDFs")
+    accounts = table_discovery.load_accounts(fulltext_accounts_path)
+    resolutions = table_discovery.resolve_all(candidates, accounts)
+    table_discovery.validate_resolutions(candidates, resolutions, accounts)
+    if table_discovery.serialize_resolutions(resolutions) != discovery_path.read_text(
+        encoding="utf-8"
+    ):
+        raise ValueError("table-discovery account matches do not reproduce")
+    return candidates, resolutions
+
+
 def validate_fulltext(
     rows: list[ExportRow],
     mappings: dict[str, Mapping],
@@ -1225,6 +1307,7 @@ def validate_fulltext(
     paper_root: Path,
     *,
     artifacts: dict[str, tuple[str, str, str]] | None = None,
+    table_resolutions: list[table_discovery.Resolution] | None = None,
 ) -> dict[str, tuple[str, str, str]]:
     row_by_id = {row.arxiv_id: row for row in rows}
     row_ids = set(row_by_id)
@@ -1388,9 +1471,9 @@ def validate_fulltext(
         raise ValueError("content-derived account and text controls differ")
     for parent_id, expected_ids in CONTENT_ANCHOR_ACCOUNTS.items():
         found_ids = {item.account_id for item in by_parent[parent_id]}
-        if found_ids != expected_ids:
+        if not expected_ids <= found_ids:
             raise ValueError(
-                f"content-derived account inventory mismatch for {parent_id}"
+                f"content-derived anchor accounts missing for {parent_id}"
             )
         text = artifact_state[parent_id][2].lower()
         missing_tokens = [
@@ -1402,6 +1485,16 @@ def validate_fulltext(
             raise ValueError(
                 f"content anchors absent from {parent_id}: {', '.join(missing_tokens)}"
             )
+    if table_resolutions is not None:
+        requirements = table_discovery.content_requirements(table_resolutions)
+        for parent_id, expected_ids in requirements.items():
+            found_ids = {item.account_id for item in by_parent[parent_id]}
+            if not expected_ids <= found_ids:
+                missing_ids = sorted(expected_ids - found_ids)
+                raise ValueError(
+                    "independently discovered table accounts missing for "
+                    f"{parent_id}: {', '.join(missing_ids)}"
+                )
     return artifact_state
 
 
@@ -1651,6 +1744,8 @@ def run_fulltext_regression_tests(
     primary_results: list[EmbeddedResult],
     paper_root: Path,
     artifacts: dict[str, tuple[str, str, str]],
+    table_candidates: list[table_discovery.Candidate],
+    table_resolutions: list[table_discovery.Resolution],
 ) -> int:
     tests = 0
 
@@ -1662,6 +1757,63 @@ def run_fulltext_regression_tests(
             tests += 1
             return
         raise ValueError(f"full-text negative control unexpectedly passed: {label}")
+
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            table_candidates, table_resolutions[:-1], accounts
+        ),
+        "one PDF-derived candidate resolution removed",
+    )
+
+    target_index = next(
+        index
+        for index, item in enumerate(table_resolutions)
+        if item.target_account_ids
+    )
+    unknown_target_resolutions = list(table_resolutions)
+    unknown_target_resolutions[target_index] = replace(
+        table_resolutions[target_index],
+        target_account_ids=("0000.00000:invented",),
+    )
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            table_candidates, unknown_target_resolutions, accounts
+        ),
+        "PDF-derived resolution redirected to an unknown account",
+    )
+
+    required_index = next(
+        index
+        for index, item in enumerate(table_resolutions)
+        if "2510.12476:detective-m4" in item.target_account_ids
+    )
+    hidden_required_resolutions = list(table_resolutions)
+    hidden_required_resolutions[required_index] = replace(
+        table_resolutions[required_index],
+        resolution_kind="nonqualifying_metric_context",
+        target_account_ids=(),
+        reason=(
+            "Negative control falsely suppresses the grouped DeTeCtive M4 "
+            "table state despite its directly extracted high cells."
+        ),
+    )
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            table_candidates, hidden_required_resolutions, accounts
+        ),
+        "content-required grouped table state reclassified as a false positive",
+    )
+
+    mutated_candidates = list(table_candidates)
+    mutated_candidates[required_index] = replace(
+        table_candidates[required_index], row_label="mutated PDF row"
+    )
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            mutated_candidates, table_resolutions, accounts
+        ),
+        "raw PDF candidate content mutated without updating its resolution",
+    )
 
     row_by_id = {row.arxiv_id: row for row in rows}
     if is_composite_source(row_by_id["2509.00623"], mappings["2509.00623"]):
@@ -1725,6 +1877,95 @@ def run_fulltext_regression_tests(
             artifacts=artifacts,
         ),
         "non-anchor primary result omitted with lowered mutable count",
+    )
+
+    fitted_baseline_id = "2501.03940:m4-roberta-base"
+    missing_fitted_baseline_accounts = [
+        item for item in accounts if item.account_id != fitted_baseline_id
+    ]
+    missing_fitted_baseline_map = [
+        item for item in account_map if item.account_id != fitted_baseline_id
+    ]
+    missing_fitted_baseline_results = [
+        item for item in primary_results if item.result_id != fitted_baseline_id
+    ]
+    lowered_fitted_baseline_sources = dict(fulltext_sources)
+    lowered_fitted_baseline_sources["2501.03940"] = replace(
+        fulltext_sources["2501.03940"], expected_account_count="12"
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            lowered_fitted_baseline_sources,
+            missing_fitted_baseline_accounts,
+            missing_fitted_baseline_map,
+            embedded_results,
+            missing_fitted_baseline_results,
+            paper_root,
+            artifacts=artifacts,
+            table_resolutions=table_resolutions,
+        ),
+        "PDF-discovered fitted RoBERTa baseline omitted with lowered count",
+    )
+
+    collapsed_state_id = "2607.03680:vanilla-mirage-large"
+    collapsed_state_accounts = [
+        item for item in accounts if item.account_id != collapsed_state_id
+    ]
+    collapsed_state_map = [
+        item for item in account_map if item.account_id != collapsed_state_id
+    ]
+    collapsed_state_results = [
+        item for item in primary_results if item.result_id != collapsed_state_id
+    ]
+    collapsed_state_sources = dict(fulltext_sources)
+    collapsed_state_sources["2607.03680"] = replace(
+        fulltext_sources["2607.03680"], expected_account_count="5"
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            collapsed_state_sources,
+            collapsed_state_accounts,
+            collapsed_state_map,
+            embedded_results,
+            collapsed_state_results,
+            paper_root,
+            artifacts=artifacts,
+            table_resolutions=table_resolutions,
+        ),
+        "PDF-discovered MIRAGE training state collapsed with lowered count",
+    )
+
+    inherited_reader_blocker = [
+        replace(
+            item,
+            disposition_code="exclude_generation",
+            disposition=(
+                "The ImBD baseline inherits READER's autoregressive generation "
+                "boundary and is therefore excluded."
+            ),
+        )
+        if item.result_id == "2605.25281:imbd-read"
+        else item
+        for item in primary_results
+    ]
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            fulltext_sources,
+            accounts,
+            account_map,
+            embedded_results,
+            inherited_reader_blocker,
+            paper_root,
+            artifacts=artifacts,
+            table_resolutions=table_resolutions,
+        ),
+        "ImBD baseline falsely inherits READER generation exclusion",
     )
 
     non_english_id = "2509.00731:qwen-r16"
@@ -2195,6 +2436,8 @@ def write_report(
     fulltext_accounts_path: Path,
     account_map_path: Path,
     primary_results_path: Path,
+    table_candidates_path: Path,
+    table_discovery_path: Path,
     paper_root: Path,
     audit_path: Path,
     embedded_audit_path: Path,
@@ -2208,6 +2451,7 @@ def write_report(
     fulltext_sources: dict[str, FulltextSource],
     accounts: list[FulltextAccount],
     primary_results: list[EmbeddedResult],
+    table_candidates: list[table_discovery.Candidate],
     composite_regression_tests: int,
     fulltext_regression_tests: int,
 ) -> str:
@@ -2230,6 +2474,8 @@ def write_report(
         "--fulltext-accounts coverage_fulltext_expected_accounts.tsv "
         "--account-map coverage_fulltext_account_map.tsv "
         "--primary-results coverage_primary_results.tsv "
+        "--table-candidates coverage_table_candidates.tsv "
+        "--table-discovery coverage_table_discovery.tsv "
         f"--paper-root {paper_root} "
         "--output coverage_semantic_audit.tsv "
         "--embedded-output coverage_embedded_result_audit.tsv "
@@ -2251,6 +2497,7 @@ def write_report(
         f"fulltext_source_rows={len(fulltext_sources)}",
         f"fulltext_account_rows={len(accounts)}",
         f"primary_result_rows={len(primary_results)}",
+        f"independent_table_candidates={len(table_candidates)}",
         f"composite_regression_controls={composite_regression_tests}",
         f"fulltext_regression_controls={fulltext_regression_tests}",
         "regression_and_negative_controls="
@@ -2270,6 +2517,8 @@ def write_report(
             f"sha256 {fulltext_accounts_path.name}={sha256(fulltext_accounts_path)}",
             f"sha256 {account_map_path.name}={sha256(account_map_path)}",
             f"sha256 {primary_results_path.name}={sha256(primary_results_path)}",
+            f"sha256 {table_candidates_path.name}={sha256(table_candidates_path)}",
+            f"sha256 {table_discovery_path.name}={sha256(table_discovery_path)}",
             f"sha256 {audit_path.name}={sha256(audit_path)}",
             f"sha256 {embedded_audit_path.name}={sha256(embedded_audit_path)}",
             f"sha256 {fulltext_audit_path.name}={sha256(fulltext_audit_path)}",
@@ -2293,6 +2542,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--fulltext-accounts", type=Path)
     parser.add_argument("--account-map", type=Path)
     parser.add_argument("--primary-results", type=Path)
+    parser.add_argument("--table-candidates", type=Path)
+    parser.add_argument("--table-discovery", type=Path)
     parser.add_argument("--paper-root", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--embedded-output", type=Path)
@@ -2330,6 +2581,8 @@ def main() -> int:
         args.fulltext_accounts,
         args.account_map,
         args.primary_results,
+        args.table_candidates,
+        args.table_discovery,
         args.paper_root,
         args.output,
         args.embedded_output,
@@ -2342,6 +2595,7 @@ def main() -> int:
             "--map, --composite-sources, --embedded-results, --expected-results, "
             "--source-cards, --fulltext-sources, --fulltext-accounts, "
             "--account-map, --primary-results, --paper-root, --output, "
+            "--table-candidates, --table-discovery, "
             "--embedded-output, --fulltext-output, --report, and --environment "
             "are required"
         )
@@ -2355,6 +2609,8 @@ def main() -> int:
         fulltext_accounts_path,
         account_map_path,
         primary_results_path,
+        table_candidates_path,
+        table_discovery_path,
         paper_root,
         output_path,
         embedded_output_path,
@@ -2375,6 +2631,13 @@ def main() -> int:
     validate_composites(
         rows, mappings, sources, results, expected_result_ids, source_cards
     )
+    table_candidates, table_resolutions = validate_table_discovery(
+        fulltext_sources_path,
+        fulltext_accounts_path,
+        table_candidates_path,
+        table_discovery_path,
+        paper_root,
+    )
     artifacts = validate_fulltext(
         rows,
         mappings,
@@ -2384,6 +2647,7 @@ def main() -> int:
         results,
         primary_results,
         paper_root,
+        table_resolutions=table_resolutions,
     )
     composite_regression_tests = run_regression_tests(
         rows, mappings, sources, results, expected_result_ids, source_cards
@@ -2398,6 +2662,8 @@ def main() -> int:
         primary_results,
         paper_root,
         artifacts,
+        table_candidates,
+        table_resolutions,
     )
     write_audit(
         output_path,
@@ -2432,6 +2698,8 @@ def main() -> int:
         fulltext_accounts_path,
         account_map_path,
         primary_results_path,
+        table_candidates_path,
+        table_discovery_path,
         paper_root,
         output_path,
         embedded_output_path,
@@ -2445,6 +2713,7 @@ def main() -> int:
         fulltext_sources,
         fulltext_accounts,
         primary_results,
+        table_candidates,
         composite_regression_tests,
         fulltext_regression_tests,
     )

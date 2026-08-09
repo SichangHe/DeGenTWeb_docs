@@ -501,11 +501,13 @@ exceptions. It added 61 configurations that the preceding repair still hid:
 additional Task 3 versions and controls, high length/attack/domain/language
 slices, older score baselines, the author-role-bias study's fitted classifiers
 and ensembles, and its mdok comparison. The final inventory therefore contains
-241 exact result IDs from 26 expanded sources; seven sources remain
+At that predecessor composite-only stage, the inventory contained 241 exact
+result IDs from 26 expanded sources; seven sources remained
 no-qualifier only after their inspected tables and non-candidate high values are
 stated explicitly. Each isolated high cell retains its weaker mean, overall,
 other-class, or official aggregate in the same row. The checker binds the exact
-241-ID set rather than trusting per-parent counts.
+241-ID set rather than trusting per-parent counts. The later full-table repair
+supersedes that count with the 263-ID inventory recorded below.
 
 ### Task 3 and primary-system resolution
 
@@ -571,17 +573,18 @@ the seeded splits and recomputes all AUROCs and operating points from the score
 CSV. Ruff, basedpyright, model-file checks, packages, interpreter, and GPU details
 are durable beside the harness.
 
-### Final external freeze
+### Pre-eval5 external freeze
 
-The final expanded external collection contains 274 files other than its ledger.
+The predecessor external collection contained 274 files other than its ledger;
+the later full-corpus freeze below supersedes this count with 288 files.
 The post-review additions are the missing composite parent 2505.24523, the
 correctly identified DetectLLM 2306.05540 PDF, twelve Task 1 primary system
 papers, official BiScope and DeTeCtive PDFs, nine closing-pass primary PDFs,
 and the immutable DC-PDD archive plus metadata; the README correction is
-included within the same manifest. Its `MANIFEST.sha256` has SHA-256
+included within the same manifest. That predecessor `MANIFEST.sha256` had SHA-256
 `6aeb1d786e1c91eb6c7e3f0723d129a6a562586c57024227c7082bbbdf5f4529`.
-All 274 entries verified, and a permission audit found zero writable collection
-files or directories. The collection contains only public anonymous evidence;
+All 274 predecessor entries verified, and a permission audit found zero writable
+collection files or directories. The collection contained only public anonymous evidence;
 no PB, human, authenticated, persistent browser/session, robot-bypass, or
 human-owned tmux state was accessed.
 
@@ -612,7 +615,7 @@ sha256sum papers/ARXIV_ID.pdf
 No credentials, cookies, persistent browser profile, PB, robot-challenge bypass,
 or human-owned tmux state was used. The resulting collection has 288 manifest
 entries. `MANIFEST.sha256` has SHA-256
-`ef79a70d6946056ae1fa6d92c2ef340d94e60f8218ecce31aa61e4fc8a89828a`;
+`1d3537f1833a9463a9eb1399bd45f46ae2056cf8edef9423a67563254a8293b3`;
 all entries and the exact path set verified, and no collection path is writable.
 
 Every primary PDF was extracted with Poppler's `pdftotext -layout -enc UTF-8`.
@@ -625,10 +628,10 @@ uv run --isolated --no-project --python 3.13 python \
   --external-root /ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08
 ```
 
-The reproducible output is 119 source rows, 805 exact detector accounts, and 564
+The reproducible output is 119 source rows, 958 exact detector accounts, and 695
 primary-result dispositions. No parent-only account remains; six sources have
 table-derived no-account decisions. The immutable account-pair digest is
-`def94a17c54add16e9a6522a01b4b453cb16d706aef596b9f78024cbf3a3b2d9`.
+`1647ac46547ecab7adb0e96f09785e2b06d46a8ae7bb3fc66b3dd4168a6657db`.
 The four generated input hashes and the exact audit replay command are preserved
 in `coverage_semantic_audit_report.txt`; interpreter, platform, Poppler version,
 and extraction command are in `coverage_semantic_audit_environment.txt`.
@@ -671,3 +674,46 @@ paper explicitly describes direct target-domain inference. The states are now
 evidence-rejected on their 85.48%/86.10% seven-domain average accuracy, absent
 frozen state, absent low-FPR result, and absent fixed A6000 timing rather than
 being falsely method-excluded.
+
+The eval6 challenge found another account-identity defect in three bound PDFs.
+PAWN now has separate RADAR-FT and five-epoch M4 RoBERTa-base rows. The generic
+Vanilla row in arXiv 2607.03680 is replaced by its four IntelLabs/base,
+MAGE/large, FAID/base, and MIRAGE/large fitted states. READER now separates ImBD
+trained on READ from target-adapted ImBD*. These are eight explicit identities
+and seven net new accounts. Their result-specific rows preserve diagonal,
+oracle-threshold, and target-adaptation limits and do not promote them.
+
+The generalized table-resolution repair then applied the same account rule to
+every independently extracted row rather than only those eight fixtures. It
+expanded the language/training states in arXiv 2509.26051; dataset-fitted
+RoBERTa, DeTeCtive, stylo, and mcgovern states in 2604.16607; both M4
+training-based states in 2510.12476; comparison states in NEULIF, DivEye, and
+PhantomHunter; and method/backbone ablations in DivScore. Every added row keeps
+its weaker aggregate, domain, artifact, method, calibration, and timing limits.
+The complete result sets are 263 embedded rows plus 695 primary rows.
+
+To separate discovery from the curator-authored inventory,
+`discover_table_accounts.py` independently runs `pdftotext -layout` over all
+119 source-ledger PDFs, finds 4,860 high-threshold table-row and grouped-method
+candidates, and only then resolves every candidate against the account ledger
+or a content-specific non-candidate class:
+
+```text
+uv run --isolated --no-project --python 3.13 python \
+  discover_table_accounts.py \
+  --sources coverage_fulltext_sources.tsv \
+  --paper-root /ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08 \
+  --output coverage_table_candidates.tsv \
+  --accounts coverage_fulltext_expected_accounts.tsv \
+  --match-output coverage_table_discovery.tsv
+```
+
+The raw-candidate SHA-256 is
+`0460babd82a2aba738e83d53b978f464f0e546305037e92d03a565ab47e045dd`;
+the match-ledger SHA-256 is
+`296a40b62dd17c828f9dc959a1667a5465803a333efd9d3bf03b086c24033a48`.
+The semantic audit regenerates both byte-for-byte and rejects an unresolved,
+removed, mutated, or mis-targeted resolution. Twenty full-text controls include
+the content-discovered fitted baseline, four separately trained states,
+READER method inheritance, and four direct resolution-ledger mutations. With
+the eleven composite controls, all 31 pass.

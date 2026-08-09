@@ -519,9 +519,9 @@ high claims and individually rejected, leaving the recommendation unchanged.
 - Sourced accounting: all 119 frozen export publications retain exactly one row
   disposition. In addition, 33 overview, benchmark, comparative, evaluation, or
   shared-task sources receive a second-level semantic inspection. Twenty-six
-  sources expand to 241 qualifying named system/version results; the other seven
+  sources expand to 263 qualifying named system/version results; the other seven
   record the inspected scope and a source-specific no-qualifier reason.
-- Exact-ID control: an independently maintained 241-row inventory is bound by a
+- Exact-ID control: an independently maintained 263-row inventory is bound by a
   checker-constant SHA-256 and must exactly match the actual child-ID set for
   every expanded source. The checker separately hard-codes the 20 Task 3 and
   eight Counter Turing identities as anchors. Missing a parent review, child,
@@ -541,7 +541,7 @@ high claims and individually rejected, leaving the recommendation unchanged.
 - Frozen result: 204 raw export rows deduplicate to 119 publications; 106 have
   title/abstract performance triggers, 70 have explicit parent dispositions, 49
   have mechanically allowlisted non-candidate classes, 33 require composite
-  review, and 241 child results are individually dispositioned. All eleven
+  review, and 263 child results are individually dispositioned. All eleven
   regression/negative controls pass.
 - Interpretation: a publication-row mapping is necessary but no longer
   sufficient. The child ledger prevents plausible high-score systems from being
@@ -553,11 +553,14 @@ high claims and individually rejected, leaving the recommendation unchanged.
 
 - Durable source maps:
   [119-paper source inventory](coverage_fulltext_sources.tsv),
-  [805-account expectation inventory](coverage_fulltext_expected_accounts.tsv),
+  [958-account expectation inventory](coverage_fulltext_expected_accounts.tsv),
   [exact disposition map](coverage_fulltext_account_map.tsv),
-  [564 primary-result dispositions](coverage_primary_results.tsv),
+  [695 primary-result dispositions](coverage_primary_results.tsv),
+  [independent raw table candidates](coverage_table_candidates.tsv),
+  [candidate-to-account discovery ledger](coverage_table_discovery.tsv),
   [generated account audit](coverage_fulltext_account_audit.tsv), and
-  [inventory generator](build_fulltext_inventory.py).
+  the separate [inventory generator](build_fulltext_inventory.py) and
+  [PDF-table discovery program](discover_table_accounts.py).
 - Sourced accounting: every primary PDF and every main/appendix result table for
   all 119 frozen export publications was read. A separately named submitted,
   proposed, or fitted detector system, version, ensemble, training state, or
@@ -565,8 +568,8 @@ high claims and individually rejected, leaving the recommendation unchanged.
   0.90 on any reported slice or an explicit high/best claim. Dataset and
   operating-point repetitions stay on one account; component-only hyperparameter
   sweeps do not become deployment accounts.
-- Exact result: 805 accounts resolve one-to-one: all 241 accepted embedded
-  results and 564 explicit primary-paper configurations. No parent-only account
+- Exact result: 958 accounts resolve one-to-one: all 263 accepted embedded
+  results and 695 explicit primary-paper configurations. No parent-only account
   remains. Six papers have source-specific, table-derived full-text no-qualifier
   reasons. Each of the 119 source rows binds the preserved primary
   PDF hash and the hash of its exact `pdftotext -layout -enc UTF-8` extraction.
@@ -596,6 +599,26 @@ high claims and individually rejected, leaving the recommendation unchanged.
   inherit LAPD's auxiliary-sampling exclusion; DNA-DetectLLM keeps its separate
   regeneration exclusion, and only the actual LAPD pair states carry the
   10,000-sample blocker.
+- Fitted-state correction: PAWN arXiv 2501.03940 now includes the separately
+  reported RADAR-FT comparator at 0.99/0.97/0.98 AUROC and the authors'
+  five-epoch M4 RoBERTa-base baseline, whose mean out-of-domain AUROC is 0.970.
+  ArXiv 2607.03680 now separates the IntelLabs/base, MAGE/large, FAID/base, and
+  MIRAGE/large Vanilla states; their same-training-corpus diagonals are
+  1.000/0.982/0.997/0.976, but cross-corpus and low-FPR transfer are weaker.
+  READER arXiv 2605.25281 now separates ImBD trained on READ from target-adapted
+  ImBD*. The former's 0.920 per-domain result uses an infeasible test-label
+  oracle threshold, while the latter's 0.929 GPT-4o mean requires labeled
+  target-generator adaptation. None has an exact frozen fitted state or a
+  matched low-FPR, two-A6000, near-Binoculars timing basis.
+- Generalized table-resolution correction: the final independent pass expands
+  all material language/training states in arXiv 2509.26051; the dataset-fitted
+  RoBERTa, DeTeCtive, stylo, and mcgovern states in 2604.16607; the two M4
+  training-based states in 2510.12476; NEULIF's named comparison rows; DivEye's
+  fitted comparators; PhantomHunter's baseline and commercial comparisons; and
+  DivScore's adaptation, detector-LM, entropy, and cross-entropy variants. Every
+  row keeps its exact high cell beside weaker aggregate or transfer evidence,
+  public-artifact status, method boundary, two-A6000 feasibility, and missing
+  near-Binoculars timing. None changes the recommendation.
 - Parent-exclusion correction: arXiv 2509.15550 now gives BiScope, Entropy,
   Likelihood, LogRank, DetectGPT, FastDetectGPT, Binoculars, and Lastde++ their
   own mechanisms and table evidence. DetectGPT is multi-perturbation-excluded;
@@ -636,17 +659,26 @@ high claims and individually rejected, leaving the recommendation unchanged.
   unweighted multiclass DistilRoBERTa classifier. It is not an ensemble. The
   four submitted mappings are BC/v1.0.1 unweighted binary, BW/v1.0.3 weighted
   binary, MC/v1.0.4 unweighted multiclass, and MW/v1.0.2 weighted multiclass.
-- Mechanical controls: the checker hash-binds all four full-text ledgers and the
-  exact 805-pair set, reruns PDF extraction, and rejects missing or mis-targeted
-  accounts. Thirteen full-text controls cover the ordinary-title selection fixture,
+- Independent discovery and controls: a separate program scans table pages in
+  every bound PDF without importing the curator-authored account list, freezing
+  4,860 high-metric row-label and grouped-method candidates before resolving
+  every candidate to one account, carry-forward, duplicate, or content-specific
+  non-candidate decision. The checker regenerates both snapshots byte-for-byte,
+  hash-binds all four full-text ledgers and the exact 958-pair set, reruns PDF
+  extraction, and rejects missing, unresolved, mutated, or mis-targeted rows and
+  accounts. Twenty full-text controls cover the
+  ordinary-title selection fixture,
   Candace deletion with a lowered count, non-anchor PAWN deletion with a lowered
   count, deletion of a non-English Qwen LoRA state with a lowered count, content
   detachment for that state, deletion of the narrow-domain ChatGPT-D row with a
   lowered count, content detachment for that row and for a table-derived
   no-account decision, PDF/text detachment, the false Leidos ensemble
   description, false inheritance of parent method blockers by retained LAPD and
-  DNA-DetectLLM-paper comparators, and removal of any one of the 119 source rows.
-  Together with the eleven accepted composite controls, all twenty-four pass.
+  DNA-DetectLLM-paper comparators; delete the independently discovered fitted
+  M4 baseline or collapse a separately trained Vanilla state while lowering
+  their mutable counts; make ImBD inherit READER's method exclusion; and remove
+  any one of the 119 source rows. Together with the eleven accepted composite
+  controls, all thirty-one pass.
 - Decision: the recovered configurations are individually visible but do not
   alter the accuracy-first conclusion. They are validation-only, narrow,
   shifted, unreleased, excluded-method, weaker on official/transfer evidence, or
@@ -973,6 +1005,11 @@ high claims and individually rejected, leaving the recommendation unchanged.
   batches are 128 for MAGE, 32 for M4, and 128 for RAID. The head has 989 thousand
   or 1.6 million trainable parameters. All reported experiments used one RTX 3090
   24 GB. Training-cache and epoch times are reported, but inference time is not.
+- Separately dispositioned table states: Table 4 reproduces RADAR-FT at
+  0.99/0.97/0.98 AUROC. For the M4 comparison the authors trained their own
+  RoBERTa-base baseline for five epochs; Table 9 reports mean out-of-domain AUROC
+  0.970 and a domain cell of 1.000. The paper does not release either exact
+  fitted state.
 - Exact anchor quote: “All experiments were run on a single NVIDIA GeForce RTX 3090 GPU”.
 - Artifact boundary: the official repository has training and benchmark code, but
   no release or standalone checkpoint; README reproduction commands depend on

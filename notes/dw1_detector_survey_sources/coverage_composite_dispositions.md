@@ -7,7 +7,7 @@ Frozen review date: 2026-08-08, America/Los_Angeles.
 Overview, benchmark, comparative, and shared-task publications are composite
 sources: one publication row can contain many independently qualifying detector
 results. `coverage_embedded_results.tsv` is the canonical result-level ledger.
-Each of its 241 rows records one system/version, the exact qualifying metric and
+Each of its 263 rows records one system/version, the exact qualifying metric and
 scope, a primary source or the bounded-search absence sentinel, artifact status,
 and an explicit disposition. `coverage_composite_sources.tsv` records the exact
 scope inspected for all 33 composite sources, including source-specific reasons
@@ -15,7 +15,7 @@ for the seven sources with no independently qualifying child result.
 `coverage_embedded_result_audit.tsv` is generated, not hand
 edited, and binds every child to exactly one parent and source card. A separate
 hand-reviewed `coverage_expected_result_ids.tsv`, immutably bound by a checker
-hash, enumerates the exact 241 parent/result pairs so changing a count and deleting
+hash, enumerates the exact 263 parent/result pairs so changing a count and deleting
 a child cannot recreate a semantic catch-all. Twenty-six sources have explicit
 child inventories; the two former parent-only rows now expand separately named
 comparison systems while retaining the proposed parent method's disposition.
@@ -128,7 +128,7 @@ expanded below; a weak aggregate never suppresses a high slice.
 
 These twenty result rows are immutable checker expectations. The independent
 exact-result inventory also binds all other expanded publications; omitting any
-one of the 241 expected result IDs, lowering a mutable count, or substituting a
+one of the 263 expected result IDs, lowering a mutable count, or substituting a
 nonexistent source-card label makes the coverage audit fail.
 
 ## E2 — Counter Turing Test Task A overview, arXiv 2605.20761
@@ -290,14 +290,16 @@ rows, absent fixed-FPR evidence, and missing timings prevent promotion.
 
 ## E13 — Central-European benchmark, arXiv 2509.26051
 
-<!-- coverage-card E13 parent=2509.26051 results=2509.26051:llama-3.2-3b;2509.26051:mdeberta-v3-base;2509.26051:gemma-2-2b;2509.26051:xlm-roberta-base;2509.26051:fastdetectgpt;2509.26051:binoculars;2509.26051:llm-deviation -->
+<!-- coverage-card E13 parent=2509.26051 results=2509.26051:llama-3.2-3b;2509.26051:mdeberta-v3-base;2509.26051:gemma-2-2b;2509.26051:xlm-roberta-base;2509.26051:llama-news-hr-hu-cs;2509.26051:llama-tpr-pl;2509.26051:mdeberta-generator-de-pl-hr-hu-cs;2509.26051:mdeberta-news-cs;2509.26051:mdeberta-social-de;2509.26051:mdeberta-tpr-de-pl-hr-hu;2509.26051:gemma-social-de-pl-hr-hu-cs;2509.26051:gemma-tpr-de-pl-hr-hu;2509.26051:xlm-social-de-pl;2509.26051:xlm-tpr-de-cs;2509.26051:fastdetectgpt;2509.26051:binoculars;2509.26051:llm-deviation -->
 
-Llama-3.2-3B, mDeBERTa-v3-base, Gemma-2-2B, and XLM-RoBERTa-base report mean
-AUROC of 0.9758, 0.9739, 0.9660, and 0.9621 across eight Central European
-languages. FastDetectGPT and Binoculars additionally reach 0.9667 and 0.9555
-on Llama-2 generations despite means near 0.78/0.76, and LLM-Deviation reaches
-0.9025–0.9083 only on selected regional-news languages despite a 0.7060 news
-mean. All seven rows are separate. No new trained checkpoint or calibration is
+The four architecture families report mean AUROC of 0.9621–0.9758, but the
+paper selects different fitted train-language combinations for its aggregate,
+generator, news, social-media, and low-FPR tables. Those 14 material fitted
+states are now separate: three Llama, five mDeBERTa, three Gemma, and three
+XLM-RoBERTa configurations. FastDetectGPT and Binoculars additionally reach
+0.9667 and 0.9555 on Llama-2 generations despite means near 0.78/0.76, and
+LLM-Deviation reaches 0.9025–0.9083 only on selected regional-news languages
+despite a 0.7060 news mean. No fitted checkpoint or portable calibration is
 released; language/benchmark scope and missing general-English low-FPR and
 timing evidence prevent promotion.
 
@@ -384,7 +386,7 @@ total and no longer uses aggregate-only or subgroup exceptions.
 
 ## E20 — cross-dataset detector evaluation, arXiv 2604.16607
 
-<!-- coverage-card E20 parent=2604.16607 results=2604.16607:binoculars;2604.16607:fdg-gpt-neo;2604.16607:fdg-gpt-j;2604.16607:fdg-falcon-7b;2604.16607:zippy-lzma;2604.16607:zippy-ensemble;2604.16607:biscope-arxiv;2604.16607:biscope-yelp;2604.16607:biscope-essay;2604.16607:biscope-creative;2604.16607:detective-mage;2604.16607:detective-m4gt -->
+<!-- coverage-card E20 parent=2604.16607 results=2604.16607:binoculars;2604.16607:fdg-gpt-neo;2604.16607:fdg-gpt-j;2604.16607:fdg-falcon-7b;2604.16607:zippy-lzma;2604.16607:zippy-ensemble;2604.16607:biscope-arxiv;2604.16607:biscope-yelp;2604.16607:biscope-essay;2604.16607:biscope-creative;2604.16607:detective-mage;2604.16607:detective-m4gt;2604.16607:detective-outfox;2604.16607:detective-turingbench;2604.16607:roberta-h3c-plus;2604.16607:roberta-m4gt;2604.16607:roberta-mage;2604.16607:roberta-raid;2604.16607:stylo-h3c-plus;2604.16607:mcgovern-h3c-plus;2604.16607:mcgovern-m4gt;2604.16607:mcgovern-mage -->
 
 Table 2 reports the best, worst, and mean AUROC for 15 public detector variants
 on seven class-balanced test sets derived from MAGE/MAGE-OOD, M4GT, H3C+, and
@@ -395,16 +397,16 @@ above 400 words. It uses default 0.5 labels for threshold metrics and AUROC for
 Table 2, not an independently frozen DW1 calibration. No per-method threshold
 bundle is released.
 
-Twelve named variants have a best-dataset AUROC from 0.92 to 1.00 and therefore
-receive rows even though every one has a worst value at or below 0.60 and means
-are only 0.66–0.80: Binoculars; three FastDetectGPT proxy variants; two Zippy
-compression variants; four separately trained BiScope domain variants; and two
-DeTeCtive dataset variants. Binoculars and FastDetectGPT remain existing
-controls. Zippy retains LLM-generated seed dictionaries and is excluded by the
-retrieval boundary. The public BiScope release supplies code/data but no single
-best fitted state; the evaluation authors trained the four variants, so they are
-reconstruction-only. DeTeCtive publishes dataset checkpoints but performs KNN
-against a retained embedded training database, which also violates retrieval.
+Twelve Table 2 variants have a best-dataset AUROC from 0.92 to 1.00. Table 3
+adds ten separately named qualifying states that the aggregate-only pass had
+missed: two DeTeCtive dataset variants, four RoBERTa training-corpus states,
+one stylo state, and three mcgovern states. Most Table 3 crossings are
+one-sided accuracy or recall beside severe failure on the other class; all are
+kept explicit rather than promoted. Binoculars and FastDetectGPT remain
+existing controls. Zippy retains LLM-generated seed dictionaries and is
+excluded by the retrieval boundary. BiScope and the RoBERTa/stylo/mcgovern
+states lack immutable fitted artifacts. DeTeCtive performs KNN against a
+retained embedded training database, which also violates retrieval.
 The paper used one 48-GB L40S for GPU experiments but reports no per-method
 latency or memory. Capacity is plausible for several variants on two A6000s,
 but the method exclusions, missing exact states, and weak cross-dataset means
@@ -417,7 +419,7 @@ official repository. A high cell is no longer suppressed because a mean is low.
 
 ## E21 — personalization feature-inversion benchmark, arXiv 2510.12476
 
-<!-- coverage-card E21 parent=2510.12476 results=2510.12476:lastde;2510.12476:lastde-plus-plus;2510.12476:log-likelihood;2510.12476:logrank;2510.12476:detect-lrr;2510.12476:fastdetectgpt -->
+<!-- coverage-card E21 parent=2510.12476 results=2510.12476:lastde;2510.12476:lastde-plus-plus;2510.12476:log-likelihood;2510.12476:logrank;2510.12476:detect-lrr;2510.12476:fastdetectgpt;2510.12476:roberta-m4;2510.12476:detective-m4 -->
 
 Table 2 compares seven GPT-J-6B-proxy scores on M4-general Cohere, ChatGPT,
 Davinci, and BLOOMZ generations and on personalized Stylo-Blog and
@@ -435,6 +437,12 @@ FastDetectGPT maps to 2310.05130. These are controls rather than newer states.
 The shared GPT-J proxy is plausibly within two A6000s, but no fixed calibration,
 memory, throughput, or like-for-like latency is reported, and the decisive
 personalized collapse makes a local speed-only screen uninformative.
+
+Tables 6 and 12–14 also expose the training-based RoBERTa fitting protocol and
+the public DeTeCtive M4 checkpoint as separate results. Both exceed 0.90 on
+aligned M4 or individual-author cells and then collapse on personalized
+writing. The RoBERTa fits are unreleased; DeTeCtive's retained-database KNN
+violates the retrieval gate. Neither changes the conclusion.
 
 ## E22 — linguistic DPO attack study, arXiv 2505.24523
 

@@ -123,7 +123,7 @@ not members of the 119-row exact-phrase union:
 
 Publication-level accounting is not sufficient for an overview, benchmark,
 comparative study, evaluation, or shared-task paper. The generalized audit marks
-33 such frozen export rows. Twenty-six contain 241 qualifying named system/version
+33 such frozen export rows. Twenty-six contain 263 qualifying named system/version
 results; every result now has its own metric scope, primary source or bounded
 absence sentinel, artifact status, and explicit disposition in
 `coverage_embedded_results.tsv`. The other seven composite sources record the exact
@@ -157,12 +157,12 @@ complete primary PDF and every main/appendix result table for all 119 export
 publications. `coverage_fulltext_sources.tsv` binds each paper's PDF hash and the
 hash of its exact `pdftotext -layout -enc UTF-8` extraction.
 
-`coverage_fulltext_expected_accounts.tsv` contains 805 exact detector accounts:
-the accepted 241 embedded results and 564 separately named primary-paper
+`coverage_fulltext_expected_accounts.tsv` contains 958 exact detector accounts:
+the accepted 263 embedded results and 695 separately named primary-paper
 configurations. No parent-only account remains. Each maps exactly once in
-`coverage_fulltext_account_map.tsv`; the 564 configuration dispositions are in
+`coverage_fulltext_account_map.tsv`; the 695 configuration dispositions are in
 `coverage_primary_results.tsv`. Six papers have source-specific, table-derived
-full-text no-qualifier reasons. The generated 805-row resolution is
+full-text no-qualifier reasons. The generated 958-row resolution is
 `coverage_fulltext_account_audit.tsv`. [N18]
 
 This content pass recovers all three M-DAIGT systems from 2509.00623, all nine
@@ -174,6 +174,16 @@ omission with a lowered count, an analogous non-anchor omission, PDF/text
 detachment, the former false Leidos mechanism, and removal of any one of the 119
 source reviews. None of the recovered configurations passes the full accuracy,
 low-FPR, artifact, two-A6000, and near-Binoculars gate.
+
+The final fitted-state pass separates PAWN's RADAR-FT comparator and the
+authors' five-epoch M4 RoBERTa-base baseline; four IntelLabs-, MAGE-, FAID-, and
+MIRAGE-trained Vanilla states in 2607.03680; and READ-trained versus
+target-adapted ImBD in READER. A separate PDF-table extractor freezes 4,860
+high-metric row-label candidates from all 119 papers before matching them to
+the curated inventory. Its content-derived controls reject deletion of the M4
+baseline, collapse of a trained Vanilla state, and false inheritance of
+READER's generation exclusion by ImBD. These eight explicit states add seven
+net accounts and none passes the complete deployment screen. [N18]
 
 A fresh full-corpus mutation review then found that the first primary list still
 left some inspected non-candidate papers at zero. The exact repair adds all nine
@@ -189,10 +199,10 @@ The 2509.15550 rows now apply regeneration only to actual DNA-DetectLLM states;
 DetectGPT is separately multi-perturbation-excluded and the other seven
 baselines are evidence-rejected. DP-Net 2504.21019 is also evidence-rejected
 because its noise is training-only, not an inference perturbation.
-Thirteen full-text controls now include non-English and narrow-domain
+Sixteen full-text controls now include non-English and narrow-domain
 lowered-count omissions and content detachment from both positive inventories
-and a table-derived zero decision, plus two false-inheritance controls for
-parent method blockers.
+and a table-derived zero decision, fitted-baseline deletion, collapsed training
+state, plus three false-inheritance controls for parent method blockers.
 
 ## Accounting for every export row
 
@@ -213,7 +223,7 @@ resolved as a documented false positive, such as a metric belonging to a
 source-plagiarism task, an attack, a dataset-only contribution, or a
 special-language task outside the fixed deployment scope.
 
-The second audit layer validates all 33 composite reviews and all 241 embedded
+The second audit layer validates all 33 composite reviews and all 263 embedded
 results: 26 sources expand and seven have result-specific no-qualifier reasons.
 It rejects a missing child, wrong parent, count mismatch, absent primary
 source/absence sentinel, absent artifact status, unknown disposition, or generic
@@ -222,11 +232,11 @@ predecessor Task 3 omission, a one-child CNLP omission, and removal or parent/
 result misbinding of a real Markdown E-card. Unknown, wrong-kind, and catch-all
 codes fail validation at both levels.
 
-The final audit layer validates all 119 full-text source records and all 805
+The final audit layer validates all 119 full-text source records and all 958
 accounts, independent of title or parent class. It requires the immutable exact
 account set, one disposition target per account, all 119 PDF and text hashes, and
 content-derived anchors for evaluator counterexamples and no-account decisions.
-Together the two result-level layers run twenty-four regression and negative controls; no
+Together the two result-level layers run thirty-one regression and negative controls; no
 identifier-only or publication-only group remains.
 
 `coverage_semantic_audit_report.txt` preserves the exact project-neutral command,

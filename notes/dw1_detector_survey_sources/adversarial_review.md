@@ -655,3 +655,99 @@ rewritten as a PASS. The reviewer made no edits and sent nothing.
 Reviewer 13 final verdict: **PASS — no P1/P2 findings**. P3: none. This internal
 PASS freezes the candidate for a new one-shot evaluator; it neither substitutes
 for that evaluator nor authorizes delivery.
+
+## Review 14 — PASS
+
+- reviewer identity: `/root/eval6_final_frozen_review14`, a new distinct
+  read-only reviewer
+- timestamp recorded after receipt: `2026-08-09T09:09:47-07:00`
+- authoritative eval6 verdict SHA-256:
+  `972eb1cc78ee5ee368b9ead9dc805a1787f1797b2f9de089cd57204fb44a2ed7`
+- frozen next-evaluator prompt SHA-256:
+  `67e3c2eccad5aca651d4af1218d94c82c1b551b9b2d6e8f5c3e49fe588f29d4e`
+- scope: the fully staged eval6 successor repair, all 119 primary PDFs, the
+  independent raw-table discovery and resolution ledger, every fitted-state
+  repair, all accepted constraints and benchmarks, the direct nonrecursive
+  byte bindings, conclusion, and exact unsent correction
+
+### Direct reviewed hashes
+
+- survey:
+  `5e0d44d57060cb99e8ebfe2aad3b2d007d5fb41b47ac5370b12371bd4f3cc47c`
+- human-readable email:
+  `fb3bf756779ab210baf13162b2302d2bdeab02339b9dcc39f0a4d4894be1fc3b`
+- inventory generator:
+  `4646a3de8de101fbf6770ebf59bed1d0eda4bfaa7d27d1d49bb7d3462524392c`
+- table scanner/resolver:
+  `8170995d958fb3da46657db18e4f46557a6732e78c576a65996177d51f0faaee`
+- audit program:
+  `22d1f87cb0a52c6d48069c55cdea5c272c9a54a8da6b1cb7faa49cdc51d616b5`
+- primary-result dispositions:
+  `9bd6434060456233794f7d5d9b1b7e6c22d7bb9ea1689df3b7f3c7ddc00a0aec`
+- table candidates and resolutions, respectively:
+  `0460babd82a2aba738e83d53b978f464f0e546305037e92d03a565ab47e045dd`
+  and `296a40b62dd17c828f9dc959a1667a5465803a333efd9d3bf03b086c24033a48`
+- generated semantic, embedded-result, and full-text-account audits,
+  respectively:
+  `942f693a064e4a4302b410cb0c41cb4e3437ee8e9259674038cf4688a9e0db49`,
+  `de74100cbd56d13cd0f2047af41557d1228d90648e066c5cc9cfb32e7369ebc8`,
+  and `9c05a97c866e508349d2ccaba8d649a6f5e4be739e4ad4c80cf46a91b8808ce3`
+- generated audit report and environment, respectively:
+  `05781765f137bda48199f1465abdbfb1b494f256d7f95f82d918a8716d59954f`
+  and `74f99fda8d74376db2c48bcc2df15856750c550a8e89d5a2363e0e9e7181e767`
+- source cards:
+  `c1a021fde1aa32e5fb7cc2b2b739cab3a1bda3e140ec289c4c5717e4e4beff91`
+- mechanical delivery subject and body, respectively:
+  `73540e80f5dafef3f3cb5168ad75475f755efade636b7135ea21ccaa4fc9abad`
+  and `43fd5a9c4d35e0bd8edfc3ee3a100701579c2f84bacb1ab074f530b80c3df7a6`
+- 74-file candidate ledger and 76-entry direct review-subject ledger,
+  respectively:
+  `cd3a03c28bcb492e1a9633d6b25584150eba5a9024cd799f3d72bf49a74e5b0a`
+  and `af49e1af8f4a2fb188783fc206bc84ae9725a9246cb74af3919c8adc4052e243`
+- external README and 288-entry manifest, respectively:
+  `e44041d2fd53fe18784bc72bcfe7668f0edb46cd27a712ca797ff0edecf51c98`
+  and `1d3537f1833a9463a9eb1399bd45f46ae2056cf8edef9423a67563254a8293b3`
+- staged index tree before this review record was appended:
+  `244f33c1bbbb433535c98fc0b97b452a105b1cb2`
+
+### Independent checks
+
+- The isolated generator reproduced 119 sources, 958 accounts, and 695 primary
+  rows; all four generated inventories matched byte-for-byte.
+- The independent PDF scanner reproduced 4,860 candidates with zero unresolved
+  rows; both candidate and resolution snapshots matched byte-for-byte. The
+  reviewer challenged grouped headings, aliases, duplicate operating points,
+  false-positive reasons, and content-discovery edge cases rather than relying
+  only on the required fixtures.
+- The semantic audit reproduced all three generated audit files, its report and
+  environment byte-for-byte. All eleven composite and twenty full-text controls
+  passed.
+- The reviewer directly checked PAWN's 34 accounts, including RADAR-FT and the
+  five-epoch M4 RoBERTa state; all 21 distribution-shift accounts, including the
+  four separately trained Vanilla states; and all 15 READER accounts, including
+  distinct READ and target-adapted ImBD states. The eval5 fitted-state repairs,
+  Task 3 and Leidos, Counter Turing, LM2otifs, NEULIF, MELD, mixed exclusion
+  boundaries, generalized comparison tables, and no-account reasons also passed.
+  No per-result disposition inherited an inapplicable parent exclusion.
+- The score verifier reproduced all 8,022 rows and 20 benchmark checks. The
+  scientific comparison remained bounded to keeping Binoculars while retaining
+  Desklib as the only runnable follow-up.
+- All 74 candidate-ledger files and the 76 direct review-subject entries passed.
+  The latter is nonrecursive and remains valid when only this review record is
+  appended. All 288 external entries and the exact live path set passed, with
+  no writable file or directory.
+- The staged scope contained 29 changed owned paths, no unstaged candidate
+  bytes, no untracked file, and no diff-check error. The exact subject is
+  `Correction: dw1_detector_survey.md evidence`; the human body matched the
+  mechanical body, and the correction remained **NOT SENT**.
+
+The reviewer reported one nonblocking P3: an expanded static-check scope would
+reformat the three audit scripts and basedpyright reports four list-invariance
+annotations in `audit_coverage.py`. Runtime replay, audit output, and scientific
+content are unaffected. Reformatting or type-only refactoring was not added to
+this minimal evaluator repair.
+
+Reviewer 14 final verdict: **PASS — no P1/P2 findings**. This is an internal
+review verdict only. It does not replace a fresh one-shot evaluator, authorize
+delivery, or change the correction's **NOT SENT** state. The reviewer made no
+edit and sent nothing.

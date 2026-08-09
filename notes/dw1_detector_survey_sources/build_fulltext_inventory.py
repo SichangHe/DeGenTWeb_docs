@@ -41,9 +41,27 @@ modernbert-large-mcgrad|DACTYL ModernBERT-large with MCGrad
 deberta-v3-large|DACTYL DeBERTa-v3-large
 """),
     "2607.03680": _pairs("""
-vanilla-large|Vanilla RoBERTa-large detector
-fomaml-lora|FOMAML+LoRA target-adapted detector
+vanilla-intellabs-base|IntelLabs-trained Vanilla RoBERTa-base
+vanilla-mage-large|MAGE-trained Vanilla RoBERTa-large
+vanilla-faid-base|FAID-trained Vanilla RoBERTa-base
+vanilla-mirage-large|MIRAGE-trained Vanilla RoBERTa-large
+anchor|Anchor peer-review detector
+mage-longformer|MAGE Longformer comparator
+llmdetectaive|LLM-DetectAIve comparator
+faid|FAID comparator
+vanilla-faid-extra-domain|FAID Vanilla+extra adapted to the unseen-domain validation set
+vanilla-faid-extra-domain-generator|FAID Vanilla+extra adapted to the unseen-domain-plus-generator validation set
+detectanyllm|DetectAnyLLM comparator
+vanilla-mirage-base|MIRAGE-trained Vanilla RoBERTa-base
+fomaml-lora|FOMAML+LoRA K=10 target-adapted detector
+fomaml-hc3-k5|FOMAML+LoRA MAGE-to-HC3 K=5 adaptation
+fomaml-hc3-k20|FOMAML+LoRA MAGE-to-HC3 K=20 adaptation
+fomaml-hc3-k50|FOMAML+LoRA MAGE-to-HC3 K=50 adaptation
 confidence-ensemble|Confidence-weighted vanilla/FOMAML ensemble
+reverse-confidence-ensemble|Reverse-confidence FOMAML/vanilla ensemble
+pooled-four-way|Four-way mixed pooled Vanilla detector
+pooled-stratified-base|Stratified pooled Vanilla RoBERTa-base
+pooled-stratified-large|Stratified pooled Vanilla RoBERTa-large
 """),
     "2606.23336": _pairs("""
 base|WaveDetect-base
@@ -60,16 +78,42 @@ llama2-mean-all|SV-Detect Llama-2-7B Mean/all
 llama2-mean-trimmed|SV-Detect Llama-2-7B Mean/trimmed
 llama2-logreg-all|SV-Detect Llama-2-7B LogReg/all
 llama2-logreg-trimmed|SV-Detect Llama-2-7B LogReg/trimmed
+polish-only|SV-Detect MIRAGE polish-only fitted state
+three-task|SV-Detect MIRAGE three-task fitted state
 """),
     "2606.02158": _pairs("""
 uncertainty|Uncertainty
 uncertainty-plus|Uncertainty++
+likelihood|Likelihood comparator
+logrank|LogRank comparator
+detectlrr|DetectLRR comparator
+lastde|Lastde comparator
+detectgpt|DetectGPT comparator
+detectnpr|DetectNPR comparator
+dnagpt|DNA-GPT comparator
+fastdetectgpt|Fast-DetectGPT comparator
+lastde-plus|Lastde++ comparator
+without-low-probability|Uncertainty without low-probability feature
+without-entropy|Uncertainty without entropy feature
 """),
     "2606.00402": _pairs("""
 l2d-knockoff|Knockoff-calibrated L2D
 imbd-knockoff|Knockoff-calibrated ImBD
 """),
     "2605.25281": _pairs("""
+imbd-read|ImBD trained on READ
+imbd-target-adapted|ImBD target-adapted
+biscope-read|BiScope trained on READ
+biscope-target-adapted|BiScope target-adapted
+npr-gemma|NPR with Gemma surrogate
+npr-qwen|NPR with Qwen surrogate
+detectgpt-gemma|DetectGPT with Gemma surrogate
+detectgpt-qwen|DetectGPT with Qwen surrogate
+binoculars-gemma|Binoculars with Gemma model pair
+radar|RADAR released comparator
+fastdetectgpt-gemma|FastDetectGPT with Gemma sampling/scoring models
+adadetectgpt-gemma|AdaDetectGPT with Gemma sampling/scoring models
+adadetectgpt-gemma-target|Target-adapted AdaDetectGPT with Gemma sampling/scoring models
 grpo-noncot|READER GRPO non-CoT
 grpo-cot|READER GRPO CoT
 """),
@@ -96,6 +140,9 @@ detectllm-mult|DetectLLM-Mult
     "2605.06903": _pairs("""
 paper-era|MELD paper-era model
 public-v5|MELD public v5 checkpoint
+roberta-chatgpt-meld|RoBERTa-ChatGPT retrained on MELD data
+modernbert-detect-meld|ModernBERT-Detect retrained on MELD data
+repreguard-meld|RepreGuard retrained on MELD data
 """),
     "2605.02374": _pairs("""
 react-4shot|REACT 4-shot
@@ -106,12 +153,14 @@ react-32shot|REACT 32-shot
     "2604.21223": _pairs("""
 llama32-pair|IRM Llama-3.2 model pair
 qwen25-pair|IRM Qwen2.5 model pair
+reward-model-deberta|OpenAssistant RM-DeBERTa-v3-large-v2 comparator
 """),
     "2606.00016": _pairs("""
 cnn|AEyeDE CNN
 cnn-text|AEyeDE CNN+text
 individual|AEyeDE individual-generator arrangement
 unified|AEyeDE unified-generator arrangement
+superannotate-roberta|SuperAnnotate RoBERTa comparator
 """),
     "2604.02008": _pairs("""
 likelihood-knnproxy|Likelihood+kNNProxy
@@ -121,15 +170,25 @@ fastdetectgpt-mop|FastDetectGPT+MoP
 binoculars-mop|Binoculars+MoP
 """),
     "2602.08031": _pairs("""
+likelihood|Likelihood baseline
 likelihood-m|Likelihood-M
+logrank|Log-Rank baseline
 logrank-m|Log-Rank-M
+entropy|Entropy baseline
 entropy-m|Entropy-M
+detectgpt|DetectGPT baseline
 detectgpt-m|DetectGPT-M
+fastgpt|FastGPT baseline
 fastgpt-m|FastGPT-M
+dnagpt|DNA-GPT baseline
 dnagpt-m|DNA-GPT-M
+repreguard|RepreGuard baseline
 repreguard-m|RepreGuard-M
+lastde|Lastde baseline
 lastde-m|Lastde-M
+fouriergpt|FourierGPT baseline
 fouriergpt-m|FourierGPT-M
+binoculars|Binoculars baseline
 binoculars-m|Binoculars-M
 """),
     "2602.01240": _pairs("""
@@ -172,6 +231,12 @@ distilbert|DistilBERT detector
     "2511.21744": _pairs("""
 cnn|NEULIF CNN
 random-forest|NEULIF Random Forest
+ai-generated-text-detection|AI-generated Text Detection transformer ensemble comparator
+detective-comparator|DeTeCtive literature comparator
+restricted-embeddings|Restricted Embeddings literature comparator
+chatgpt-detector|ChatGPT Detector literature comparator
+roberta-bilstm|RoBERTa plus BiLSTM literature comparator
+styloai-education|StyloAI Education-dataset result
 """),
     "2511.01192": _pairs("""
 domain-f1|DEER domain-matching/F1 routing
@@ -190,6 +255,9 @@ gpt2|DivEye GPT-2
 falcon7b|DivEye Falcon-7B
 llama31-8b|DivEye Llama-3.1-8B
 mistral7b|DivEye Mistral-7B-v0.3
+e5-small-lora|e5-small-lora fitted comparator
+desklib|Desklib AI fitted comparator
+superannotate|SuperAnnotate fitted comparator
 boost-radar|DivEye+RADAR
 boost-detectllm|DivEye+DetectLLM
 boost-fastdetectgpt|DivEye+FastDetectGPT
@@ -236,6 +304,16 @@ llama3-70b|CAMF Llama-3-70B agents
     "2508.11343": _pairs("""
 specdetect|SpecDetect
 specdetect-plus|SpecDetect++
+likelihood|Likelihood comparator
+logrank|LogRank comparator
+entropy|Entropy comparator
+detectlrr|DetectLRR comparator
+lastde|Lastde comparator
+detectgpt|DetectGPT comparator
+detectnpr|DetectNPR comparator
+dnagpt|DNA-GPT comparator
+fastdetectgpt|Fast-DetectGPT comparator
+lastde-plus|Lastde++ comparator
 """),
     "2508.06913": _pairs("""
 sdc|SentiDetect-SDC
@@ -255,11 +333,38 @@ full|PhantomHunter
 without-bfe|PhantomHunter without BFE
 without-cl|PhantomHunter without contrastive learning
 without-moe|PhantomHunter without mixture-of-experts
+roberta-baseline|RoBERTa comparison state
+t5-sentinel-baseline|T5-Sentinel comparison state
+detective-baseline|DeTeCtive comparison state
+seqxgpt-baseline|SeqXGPT comparison state
+dna-gpt-baseline|DNA-GPT comparison state
+detectgpt-baseline|DetectGPT comparison state
+fastdetectgpt-baseline|Fast-DetectGPT comparison state
+hastewire|HasteWire commercial comparison service
 """),
     "2506.06705": _pairs("""
 general|DivScore
 medical|DivScore-medical
 legal|DivScore-legal
+without-adaptation|DivScore without domain adaptation
+divscore-mistral|DivScore with Mistral detector LM
+divscore-falcon|DivScore with Falcon detector LM
+divscore-qwen|DivScore with Qwen detector LM
+divscore-llama|DivScore with Llama detector LM
+entropy-mistral|Entropy with Mistral detector LM
+entropy-falcon|Entropy with Falcon detector LM
+entropy-qwen|Entropy with Qwen detector LM
+entropy-llama|Entropy with Llama detector LM
+cross-entropy-qwen|Cross-Entropy with Qwen detector LM
+roberta-base|RoBERTa-base comparator
+roberta-large|RoBERTa-large comparator
+entropy|Entropy comparator
+rank|Rank comparator
+logrank|Log-Rank comparator
+likelihood|Log-Likelihood comparator
+detectgpt|DetectGPT comparator
+fastdetectgpt|Fast-DetectGPT comparator
+binoculars|Binoculars comparator
 """),
     "2506.01702": _pairs("""
 gemma2-2b|Gemma-2-2B submitted detector
@@ -268,6 +373,7 @@ qwen3-4b|Qwen3-4B-Base submitted detector
 qwen3-8b|Qwen3-8B-Base submitted detector
 qwen3-14b|Qwen3-14B-Base submitted detector
 mdok-binary|mdok binary detector
+tfidf-baseline|TF-IDF validation baseline
 """),
     "2505.15261": _pairs("""
 full|Full AGENT-X
@@ -317,6 +423,29 @@ double-small|Double-finetuned DeBERTa-v3-small
 ensemble-small|Weighted small/double-finetune ensemble
 """),
     "2501.03940": _pairs("""
+radar-ft|RADAR-FT comparator
+m4-roberta-base|Five-epoch RoBERTa-base M4 baseline
+m4-xlm-roberta|M4 XLM-RoBERTa comparator
+mage-longformer|MAGE Longformer comparator
+gltr|GLTR comparator
+raid-rb-gpt2|RAID RoBERTa-base GPT-2-output detector
+raid-rl-gpt2|RAID RoBERTa-large GPT-2-output detector
+raid-rb-cgpt|RAID RoBERTa-base HC3 detector
+raid-radar|RAID RADAR comparator
+raid-fastdetectgpt|RAID FastDetectGPT comparator
+raid-binoculars|RAID Binoculars comparator
+raid-gptzero|RAID GPTZero service
+raid-originality|RAID Originality service
+raid-winston|RAID Winston service
+raid-zerogpt|RAID ZeroGPT service
+mage-roberta-base|MAGE-pretrained RoBERTa-base
+mage-radar-ptm|MAGE-pretrained RADAR-PTM
+raidft-pawn-gpt2|PAWN GPT-2 after one-epoch RAID fine-tuning
+raidft-pawn-llama|PAWN Llama-3.1-1B after one-epoch RAID fine-tuning
+raidft-longformer|Longformer after one-epoch RAID fine-tuning
+raidft-roberta|RoBERTa after one-epoch RAID fine-tuning
+raidft-radar-ptm|RADAR-PTM after one-epoch RAID fine-tuning
+raidft-radar|RADAR after one-epoch RAID fine-tuning
 gpt2|PAWN GPT-2
 llama31-1b|PAWN Llama-3.1-1B
 hsff-gpt2|HSFF GPT-2 ablation
@@ -622,6 +751,7 @@ detectgpt|DetectGPT
 fastdetectgpt|FastDetectGPT
 binoculars|Binoculars
 lastde-plus|Lastde++
+revise-detect|Revise-Detect comparator
 dna-default|DNA-DetectLLM default repair
 dna-low-high|DNA-DetectLLM low-to-high repair
 dna-high-low|DNA-DetectLLM high-to-low repair
@@ -678,6 +808,7 @@ t5-sentinel|T5-Sentinel
 faid|FAID default
 faid-multilingual-e5|FAID multilingual-e5 encoder
 faid-xlmr|FAID XLM-RoBERTa encoder
+faid-unsup-simcse-xlmr|FAID UnSup-SimCSE-XLM-RoBERTa encoder
 faid-knn|FAID k-nearest-neighbors clustering
 faid-fuzzy-cmeans|FAID fuzzy C-means clustering
 """),
@@ -780,50 +911,50 @@ linguistic-svm|Linguistic-feature SVM
 EVIDENCE: dict[str, str] = {
     "2607.22026": "main scalar-score and voting tables plus proxy/wavelet sensitivity; HC3 best individual 0.9876 AUROC and calibrated hard vote 0.9919, with much weaker M4/MAGE rows",
     "2607.17382": "Tables 8-11 and PAN leaderboard; each named classifier/calibration state has at least one AUROC >=0.93, but calibration and OOD metrics vary",
-    "2607.03680": "Tables 6-13; every named vanilla, FOMAML+LoRA, or ensemble state exceeds 0.90 AUROC on a within-MAGE or transfer slice, while low-FPR transfer is weaker",
+    "2607.03680": "Tables 2-14; the four separately trained Vanilla states, Anchor, Longformer, LLM-DetectAIve, FAID, extra-fitted FAID states, DetectAnyLLM, MIRAGE-base state, K-shot FOMAML states, pooled-training states, and both ensemble directions have an explicit >=0.90 slice or material fitted-state result; cross-corpus and low-FPR transfer are weaker, and the binned LR rows are target-label oracle diagnostics rather than detector accounts",
     "2606.23336": "Tables 1-3; both WaveDetect states exceed 0.90 on paper rows, while the separately frozen public-state screen is 0.8906 AUROC",
-    "2606.07313": "backbone Table 2 and COLING Tables 5-6; every row has a development, test, or DetectRL AUROC >=0.90, while official COLING F1 can be 0.740",
-    "2606.02158": "Tables 4-6 and 12-16; both scores exceed 0.90 AUROC on at least one domain/model cell, with lower paraphrase/cross-domain averages",
+    "2606.07313": "backbone Table 2, COLING Tables 5-6, and MIRAGE Table 9; every backbone or separately fitted polish-only/three-task state has a development, test, or DetectRL AUROC >=0.90, while official COLING F1 can be 0.740",
+    "2606.02158": "Tables 1-5 and 12-16; both proposed scores, nine named comparison detectors, and the two named feature ablations have an AUROC/TPR >=0.90 on at least one model/domain cell, with lower paraphrase/cross-domain averages",
     "2606.00402": "Table 2; L2D and ImBD knockoff variants have detection power >=0.90 on at least one generator/q cell; power is not document AUROC",
-    "2605.25281": "Tables 17-18; both GRPO prompting states exceed 0.90 accuracy on at least one in-domain or OOD aggregate; base/SFT rows do not qualify",
+    "2605.25281": "Tables 2-3, 8-15, and 17-18; READ- and target-adapted supervised states, qualifying Gemma/Qwen proxy configurations, RADAR, and both GRPO prompting states exceed 0.90 on a reported per-domain, target-generator, in-domain, or OOD slice; base/SFT READER rows and rationale-prediction diagnostics are not detector accounts",
     "2605.16107": "Tables II-III and transfer/attack figures; each -M or -Mult state has at least one AUROC or TPR@1%FPR >=0.90, with sharply varying averages",
-    "2605.06903": "paper result tables, official checkpoint history, and preserved two-A6000 v5 screen; paper-era and public-v5 states are deliberately separate",
+    "2605.06903": "paper result tables, official checkpoint history, preserved two-A6000 v5 screen, and Appendix Table 9; paper-era, public-v5, and the three same-data baseline retrains are deliberately separate",
     "2605.02374": "main Table 1 and OOD Table 4; every REACT shot-size state exceeds 0.90 accuracy in-domain, while OOD HC3 averages are about 0.86-0.87",
-    "2604.21223": "paper model-pair tables and frozen IRM screen; both pair families have paper AUROC >=0.90, while the best downloadable pair measured 0.9436 versus Binoculars 0.9595",
-    "2606.00016": "Tables 1-4 and attack/external Tables 5-9; every named architecture/arrangement exceeds 0.90 F1 or AUC on at least one cell, with weaker unified/transfer results",
+    "2604.21223": "paper model-pair tables, Appendix Table 8, and frozen IRM screen; both pair families and the RM-DeBERTa comparator have a paper AUROC >=0.90 slice, while the best downloadable IRM pair measured 0.9436 versus Binoculars 0.9595",
+    "2606.00016": "Tables 1-4 and attack/external Tables 5-9; every named architecture/arrangement and the released SuperAnnotate RoBERTa comparator exceed 0.90 F1 or AUC on at least one cell, with weaker unified/transfer results",
     "2604.02008": "Tables III-V; every aligned/routed detector has AUROC or F1 >=0.90 on a Mix8/DetectRL cell and uses retained proxy/reference material",
-    "2602.08031": "Table 2 and Appendix Tables 18-24; each -M detector crosses 0.90 AUROC on a dataset/generator cell, with variable transfer and low-FPR behavior",
+    "2602.08031": "Table 2 and Appendix Tables 18-24; each unmodified baseline and corresponding -M detector is separately reported and crosses 0.90 AUROC on a dataset/generator cell, with variable transfer and low-FPR behavior",
     "2602.01240": "Tables 2 and 6-7; each routed criterion crosses 0.90 AUROC on an EvoBench/MAGE family cell although aggregates can be much lower",
     "2602.13226": "main comparison and expansion ablation; both rewrite configurations have a qualifying high cell and require target rewrites",
     "2601.20006": "Tables 8-14; every listed state has accuracy, F1, AUC, or recall >=0.90; most are token-level/validation-only and ensemble precision is weak",
     "2601.04833": "Tables 3 and 6; Likelihood, Log-Rank, FastDetectGPT, Lastde, DivEye, DD, LV, TSD, and TSD+ each have AUROC >=0.90 on at least one generator slice, while aggregate performance is substantially lower",
     "2601.04641": "main DP-MGTD tables; every named detector instantiation has a qualifying high sanitized-text cell and depends on privacy-budget target sanitization",
     "2601.03812": "main classifier table; BiLSTM ROC-AUC 0.94 and DistilBERT 0.96, with lower accuracy/topic-transfer evidence",
-    "2511.21744": "primary classifier table; CNN and Random Forest are separately fitted and the best balanced-split ROC-AUC is 0.9951 without cross-domain evidence",
+    "2511.21744": "Tables 2-3 and the Table 3 discussion; CNN and Random Forest are separately fitted, while six named literature comparison states expose a >=0.90 claim on at least one in-domain or small-dataset slice; NEULIF's best balanced-split ROC-AUC is 0.9951 without cross-domain evidence",
     "2511.01192": "routing comparison figure and Tables 3, 6, 8; every named routing state has F1 >=0.90 on a domain/length cell, with weaker OOD/attack averages",
     "2511.00988": "main/appendix AUROC tables and KD table; every enhanced state crosses 0.90 on at least one LLM/domain cell, with variable low-FPR transfer",
     "2509.22147": "binary Tables 3-4; every listed feature/learner or implicit transformer has accuracy/F1 >=0.90; segmentation and multiclass tables are excluded tasks",
-    "2509.18880": "Tables 1-4 and 6; each listed backbone/boosted state reaches AUROC >=0.90 somewhere; boosted Binoculars stays below 0.90 and is not an account",
+    "2509.18880": "Tables 1-4, 6, and 13; each listed backbone/boosted state or fitted e5-small-lora, Desklib, and SuperAnnotate comparator reaches AUROC, accuracy, or a reported attack-slice percentage >=0.90 somewhere; boosted Binoculars stays below 0.90 and is not an account",
     "2510.02319": "Tables IV-VII; seven base fine-tunes, adversarial ModernBERT, and PIFE all have AUC >0.90; only PIFE remains strong on most semantic attacks",
     "2509.14268": "main DDL/reference-clustering tables and scoring-model ablation; each named proxy configuration has a qualifying high cell",
     "2509.02499": "main MoSEs-lr/MoSEs-xg tables; all six learner/base-detector pairings cross 0.90 and depend on the stylistics reference repository",
     "2509.00623": "Table 1: RoBERTa news/academic accuracy-F1 99.99/99.99 and 100/100; TF-IDF+SVM 97.90/97.91 and 99.85/99.85; Candace 99.75/99.75 and 99.95/99.95",
     "2508.13768": "Tables 3, 7, 14; both RoBERTa backbone states exceed 0.90 F1 on a generator/domain cell, with weaker scientific-writing/OOD rows",
     "2508.11933": "main results and backbone analysis; every named multi-agent backbone exceeds 0.90 on at least one domain/generator metric",
-    "2508.11343": "main result/variant tables; SpecDetect and SpecDetect++ each cross 0.90 on a dataset/model cell, with incomplete artifact reproduction",
+    "2508.11343": "Table 1 and appendix result/variant tables; SpecDetect, SpecDetect++, and ten named comparison detectors each cross 0.90 on a dataset/model cell, with incomplete artifact reproduction",
     "2508.06913": "Tables 1-3; SDC and SDP each exceed 0.90 F1 on a domain/generator cell, while averages are about 0.70-0.85 and attacks degrade them",
     "2507.23577": "Tables 1-2; standalone T-Detect has Books AUROC 0.926 and CT(T-Detect) has named high domain cells despite 0.876/0.881 aggregates",
     "2507.05157": "validation/test tables: GPT-4o-mini 0.97 validation and 0.9547 test; BERT 1.00 validation but 0.767 test; Llama Task-B validation macro F1 0.93 but 0.14 test",
-    "2506.15683": "Table 3; every full/ablation row has a class F1 >0.90; full PhantomHunter macro F1 is 0.9624-0.9714 and ablation macros are weaker",
-    "2506.06705": "main figures/tables and Table 4; general, medical, and legal DivScore states each exceed 0.90 AUROC on a relevant cell",
-    "2506.01702": "Tables 1-2 and official Table 4; all six binary states exceed 0.99 validation metrics, but OOD AUROC is 0.592-0.700 and official mdok AUROC/F1 0.853/0.898",
+        "2506.15683": "Tables 3 and 5; every full/ablation or named experimental comparison row has a class F1 >0.90 somewhere; full PhantomHunter macro F1 is 0.9624-0.9714, comparison and ablation balance is weaker, and HasteWire is a closed service",
+        "2506.06705": "Tables 1-2, Figure 4, and appendix Table 4; general, medical, legal, no-adaptation, detector-LM, score-ablation, RoBERTa, and named score-baseline states each exceed 0.90 AUROC on a relevant domain/generator cell",
+    "2506.01702": "Tables 1-2 and official Table 4; the TF-IDF validation baseline and all six submitted binary states exceed 0.99 on a validation metric, but OOD AUROC is 0.592-0.700 and official mdok AUROC/F1 0.853/0.898",
     "2505.15261": "Tables 1-3; every listed full/ablation state has a domain AUROC >=0.90, while only full AGENT-X averages 0.9007",
     "2505.13855": "Tables 1-2; every fitted/ensemble configuration crosses 0.90 on MAGE or RAID; DoGEN aggregates are 0.9760 and 0.9581 AUROC",
     "2505.11550": "Table 2; Task-A F1 is 0.949 full, 0.994 optimized, and 0.974 simple, while Task-B is 0.190-0.627",
     "2504.21019": "Tables 2-4; uniform and Gaussian DP-Net states each cross 0.90 accuracy/AUROC on a target domain, with lower averages/paraphrase robustness",
     "2503.22338": "Tables 2-3; all nine classifier-feature states have development F1 >=0.9205; XGBoost test F1 is 0.9454 RAIDAR, 0.9945 NELA, 0.9917 combined",
     "2502.16857": "Tables 2 and 4; three original Task-A states 0.9515-0.9985; three noised Task-A states 0.9985-1.000; double Task-B 0.9167; ensemble Task-B 0.9531",
-    "2501.03940": "Tables 7-8; every PAWN, branch ablation, or ensemble reaches AUROC >=0.90 on one MAGE ID/OOD setting, while paraphrase AUROC is 0.528-0.755",
+    "2501.03940": "Tables 4-12; the fitted and prior comparator states, M4 baselines, every PAWN/branch/ensemble, the MAGE-pretrained states, and the separately one-epoch RAID-fitted states have a threshold metric >=0.90 on a reported slice; PAWN paraphrase AUROC is 0.528-0.755 and RAID uses per-domain 5% FPR thresholds",
 }
 
 EVIDENCE.update(
@@ -852,12 +983,12 @@ EVIDENCE.update(
         "2510.12608": "Tables 2-3; the three comparison detectors and each named StyleDecipher representation cross 0.90 on a domain accuracy/F1 cell, with weaker transfer",
         "2510.00890": "Table 2; full Sci-SpanDet and all six component ablations report AUROC 0.9008-0.9263 on the span-level scientific-text task",
         "2509.25154": "Table 1 and Figure 4; four SLM states, three J-Detector learners, and two feature-removal states reach F1 or AUROC >=0.90 on a judgment dataset/group-size slice",
-        "2509.15550": "main and appendix tables; every listed baseline, repair order, and DNA-DetectLLM model pair has AUC/accuracy >=0.90 on a dataset/generator cell",
+        "2509.15550": "main and appendix tables; every listed baseline, Revise-Detect comparator, repair order, and DNA-DetectLLM model pair has AUC/accuracy >=0.90 on a dataset/generator cell",
         "2509.00731": "Tables 2-4; RoBERTa/BERT/FastText development metrics exceed 0.90, Qwen LoRA ranks 4/8/16 score 0.9431/0.9376/0.9594 accuracy, and DeepSeek ranks 4/8/16 qualify by 0.9079 accuracy, 0.9008 AI F1, and 0.9293 accuracy",
         "2508.18715": "Tables 1-2 and 5; Random Forest/MLP, all six attribution-budget states, and all three utterance PLM states exceed 0.90 macro F1 on a dialogue dataset/task slice",
         "2508.01754": "main comparison; RADAR reaches 0.912 on Books and TDT reaches 0.900-0.919 on a level-3 nonstationarity slice",
         "2506.02959": "main and Appendix Table 16; each listed detector/statistic/backbone has a human- or machine-class F1 >=0.90 on at least one fine-grained coauthorship slice",
-        "2505.14271": "Tables 1, 12, and 13; two baselines, FAID, two alternate encoders, and two alternate clusterers have accuracy/F1 >=0.90 on a known or unseen-generator slice",
+        "2505.14271": "Tables 1, 12, and 13; two baselines, FAID, three alternate encoders, and two alternate clusterers have accuracy/F1 >=0.90 on a known or unseen-generator slice",
         "2505.12507": "Tables 1, 7-18; every listed detector, LM2otifs tokenizer state, or graph ablation has AUC/accuracy >=0.90 on a domain/generator slice; DetectGPT alone never qualifies",
         "2505.05084": "Tables 2 and 7; vanilla, F1-maximized, Platt, isotonic, and MCP Binoculars thresholds each exceed 0.90 F1 on a reported calibration/evaluation slice",
         "2504.02873": "main comparisons; Short-PHD is the paper's explicitly best short-text state although its reported aggregate values stay below 0.90",
@@ -981,6 +1112,47 @@ NO_ACCOUNT_REASONS: dict[str, str] = {
 # Result-specific evidence is required where one paper's configurations differ in
 # metric boundary, mechanism, artifact status, or method-gate disposition.
 RESULT_EVIDENCE: dict[str, str] = {
+    "2501.03940:radar-ft": "Table 4 reproduces the RADAR-FT comparator at AUROC 0.99 in-domain, 0.97 out-of-domain, and 0.98 overall; these are prior-work comparison values rather than a PAWN artifact.",
+    "2501.03940:m4-roberta-base": "Table 9 reports the authors' RoBERTa-base baseline after five training epochs on M4: mean out-of-domain AUROC 0.970, with individual domain cells as high as 1.000.",
+    "2607.03680:vanilla-intellabs-base": "Table 5 reports the separately trained IntelLabs/base Vanilla state at 1.000 AUROC on its IntelLabs diagonal; several cross-corpus cells are much weaker.",
+    "2607.03680:vanilla-mage-large": "Table 5 reports the separately trained MAGE/large Vanilla state at 0.982 AUROC on its MAGE diagonal; cross-corpus cells vary substantially.",
+    "2607.03680:vanilla-faid-base": "Table 5 reports the separately trained FAID/base Vanilla state at 0.997 AUROC on its FAID diagonal; cross-corpus cells vary substantially.",
+    "2607.03680:vanilla-mirage-large": "Table 5 reports the separately trained MIRAGE/large Vanilla state at 0.976 AUROC on its MIRAGE diagonal; cross-corpus cells vary substantially.",
+    "2605.25281:imbd-read": "Table 2 reports ImBD trained on READ at 0.920 AUROC on the per-domain Gemma-2-9B slice but only 0.728 under one global threshold; per-domain and global thresholds are test-label oracle settings.",
+    "2605.25281:imbd-target-adapted": "Table 14 reports target-adapted ImBD* at 0.929 mean AUROC across GPT-4o domains, with individual domain cells up to 0.980; adaptation uses labeled outputs from the same target generator in other domains.",
+    "2605.06903:roberta-chatgpt-meld": "Appendix Table 9 reports the RoBERTa-ChatGPT same-data retrain at 99.93% MELD-eval AUROC and 99.85% Ghostbuster AUROC, but only 73.96% on M4GT.",
+    "2605.06903:modernbert-detect-meld": "Appendix Table 9 reports the ModernBERT-Detect same-data retrain at 99.89% MELD-eval AUROC and 99.70% Ghostbuster AUROC, but only 76.30% on M4GT.",
+    "2605.06903:repreguard-meld": "Appendix Table 9 reports the RepreGuard same-data retrain at 91.35% Ghostbuster AUROC, while MAGE, M4GT, DetectRL, and MELD-eval remain 56.09%-88.67%.",
+    "2604.21223:reward-model-deberta": "Appendix Table 8 reports OpenAssistant RM-DeBERTa-v3-large-v2 at 95.49% AUROC on the Writing domain but only 73.08% average AUROC and 65.01% average F1.",
+    "2606.00016:superannotate-roberta": "Tables 2 and 4 report the released SuperAnnotate RoBERTa detector at 98.35% AUC on the RAID Llama slice and 99.57% on HC3, while several unified, attacked, and external-transfer cells are much weaker.",
+    "2505.14271:faid-unsup-simcse-xlmr": "Table 12 reports the UnSup-SimCSE-XLM-RoBERTa FAID encoder at 92.12% accuracy and 91.75% macro F1 on known generators, falling to 87.45%/86.90% on unseen generators.",
+    "2511.21744:ai-generated-text-detection": "Table 3 reproduces a 99% result (F1 0.994) for the cited optimized transformer ensemble; NEULIF does not provide the primary experiment, dataset split, low-FPR result, or artifact.",
+    "2511.21744:detective-comparator": "Table 3 reproduces 96% average recall for DeTeCtive and the discussion describes roughly 96%-99% cross-domain recall; these are literature values rather than a NEULIF-run comparison.",
+    "2511.21744:restricted-embeddings": "Table 3 reproduces 91%-95% for Restricted Embeddings and describes in-domain performance plus OOD gains without a common dataset, split, or metric denominator.",
+    "2511.21744:chatgpt-detector": "Table 3 reproduces 98%-99% for a fine-tuned CamemBERTa/XLM-R ChatGPT detector and immediately notes substantial degradation on novel or adversarial text.",
+    "2511.21744:roberta-bilstm": "Table 3 reproduces 97% open-set performance for a fine-tuned RoBERTa+BiLSTM system; no common NEULIF dataset, low-FPR comparison, artifact, or timing is supplied.",
+    "2511.21744:styloai-education": "The Table 3 footnote and adjacent discussion report 98% for StyloAI on fewer than 200 Education examples but only 81% on the 55,677-example AuTextification dataset, explicitly warning of overfitting.",
+    "2509.18880:e5-small-lora": "Table 2 reports the fitted e5-small-lora classifier at 93.9% accuracy and 0.986 AUROC on RAID; Table 13 reports high attack-table percentages but no matched low-FPR transfer result.",
+    "2509.18880:desklib": "Table 2 reports Desklib AI at 94.9% accuracy and 0.973 AUROC on RAID; appendix attack rows vary and this paper supplies no new frozen Desklib state.",
+    "2509.18880:superannotate": "Table 2 reports SuperAnnotate at 70.3% accuracy but 0.910 AUROC on RAID; the high threshold-independent value is accompanied by weak fixed-threshold balance.",
+    "2506.15683:roberta-baseline": "Table 3 reports RoBERTa machine-class F1 of 98.47%-97.67% on arXiv but macro F1 of only 79.67%-82.83; Q&A balance is also below 0.90 macro F1.",
+    "2506.15683:t5-sentinel-baseline": "Table 3 reports T5-Sentinel machine-class F1 of 98.95%-99.19% on arXiv while every macro F1 remains below 0.90.",
+    "2506.15683:detective-baseline": "Table 3 reports DeTeCtive machine-class F1 up to 99.39% and macro F1 up to 94.19; the implementation selects K from validation examples with a KNN retrieval rule.",
+    "2506.15683:seqxgpt-baseline": "Table 3 reports SeqXGPT machine-class F1 up to 99.46% and macro F1 up to 93.47, using three white-box proxy probability streams.",
+    "2506.15683:dna-gpt-baseline": "Table 3 reports a 99.00% machine-class F1 slice for DNA-GPT but macro F1 of at most 86.04; the experiment uses ten target continuations.",
+    "2506.15683:detectgpt-baseline": "Table 3 reports DetectGPT machine-class F1 up to 98.31% but macro F1 of at most 78.38; the experiment uses 100 perturbations per target.",
+    "2506.15683:fastdetectgpt-baseline": "Table 3 reports Fast-DetectGPT machine-class F1 up to 99.68% and macro F1 up to 95.25, with lower balance on other slices.",
+    "2506.15683:hastewire": "Table 5 reports HasteWire machine-class F1 of 97.50% but human-class F1 of 65.01%, macro F1 of 81.26%, and TPR at 1% FPR of 69.90%.",
+    "2506.06705:without-adaptation": "Figure 4 reports the named no-domain-adaptation DivScore baseline with a qualifying averaged AUROC cell but materially weaker medical/legal/combined adaptation results.",
+    "2506.06705:divscore-mistral": "Appendix Table 4 reports DivScore with Mistral at 99.04%-99.96% AUROC across the four source-LLM columns and 99.72% average.",
+    "2506.06705:divscore-falcon": "Appendix Table 4 reports DivScore with Falcon at 95.87%-99.70% AUROC and 98.46% average.",
+    "2506.06705:divscore-qwen": "Appendix Table 4 reports DivScore with Qwen at 94.43%-99.96% AUROC and 97.79% average.",
+    "2506.06705:divscore-llama": "Appendix Table 4 reports DivScore with Llama at 99.03%-99.91% AUROC and 99.67% average.",
+    "2506.06705:entropy-mistral": "Appendix Table 4 reports Entropy with Mistral at 85.43%-99.78% AUROC and 95.95% average.",
+    "2506.06705:entropy-falcon": "Appendix Table 4 reports Entropy with Falcon at 89.34%-99.49% AUROC and 95.41% average.",
+    "2506.06705:entropy-qwen": "Appendix Table 4 reports Entropy with Qwen at 89.03%-99.88% AUROC and 96.78% average.",
+    "2506.06705:entropy-llama": "Appendix Table 4 reports Entropy with Llama at 86.75%-99.89% AUROC and 95.94% average.",
+    "2506.06705:cross-entropy-qwen": "Appendix Table 4 reports Cross-Entropy with Qwen at 94.97% on one source-LLM column but only 49.23% average.",
     "2509.00623:roberta-base": "Table 1 test: RoBERTa-base accuracy/F1 is 99.99%/99.99% on news and 100.00%/100.00% on academic abstracts; it is the selected primary submission.",
     "2509.00623:tfidf-svm": "Table 1 test: TF-IDF+SVM accuracy/F1 is 97.90%/97.91% on news and 99.85%/99.85% on academic abstracts.",
     "2509.00623:candace": "Table 1 test: Candace accuracy/F1 is 99.75%/99.75% on news and 99.95%/99.95% on academic abstracts; the paper says its multiple-Llama feature pass is slower.",
@@ -1041,6 +1213,47 @@ RESULT_EVIDENCE: dict[str, str] = {
 }
 
 RESULT_MECHANISM: dict[str, str] = {
+    "2501.03940:radar-ft": "the prior RADAR adversarially trained RoBERTa detector after the paper's named fine-tuning setting",
+    "2501.03940:m4-roberta-base": "a directly supervised RoBERTa-base sequence classifier trained by the PAWN authors on M4 for five epochs",
+    "2607.03680:vanilla-intellabs-base": "a RoBERTa-base sequence classifier fitted separately on IntelLabs",
+    "2607.03680:vanilla-mage-large": "a RoBERTa-large sequence classifier fitted separately on MAGE",
+    "2607.03680:vanilla-faid-base": "a RoBERTa-base sequence classifier fitted separately on FAID",
+    "2607.03680:vanilla-mirage-large": "a RoBERTa-large sequence classifier fitted separately on MIRAGE",
+    "2605.25281:imbd-read": "the ImBD proxy language model fine-tuned toward machine-text preference on the READ training split",
+    "2605.25281:imbd-target-adapted": "the ImBD proxy language model fine-tuned with labeled samples from the target generator on other READ domains",
+    "2605.06903:roberta-chatgpt-meld": "the official RoBERTa-ChatGPT architecture and training recipe refitted on MELD's training mixture",
+    "2605.06903:modernbert-detect-meld": "the official ModernBERT-Detect architecture and training recipe refitted on MELD's training mixture",
+    "2605.06903:repreguard-meld": "the official RepreGuard architecture and training recipe refitted on MELD's training mixture",
+    "2604.21223:reward-model-deberta": "the public OpenAssistant DeBERTa-v3-large reward model used directly as a machine-text score",
+    "2606.00016:superannotate-roberta": "the released SuperAnnotate RoBERTa sequence classifier",
+    "2505.14271:faid-unsup-simcse-xlmr": "the FAID multi-task contrastive detector using an UnSup-SimCSE-XLM-RoBERTa encoder and its retained vector database",
+    "2511.21744:ai-generated-text-detection": "the cited optimized neural transformer ensemble, as described only by NEULIF's secondary comparison",
+    "2511.21744:detective-comparator": "the cited DeTeCtive contrastive encoder followed by KNN lookup over retained training embeddings; NEULIF supplies only a secondary comparison value",
+    "2511.21744:restricted-embeddings": "the cited transformer detector after embedding-subspace pruning, as described only by NEULIF's secondary comparison",
+    "2511.21744:chatgpt-detector": "the cited fine-tuned CamemBERTa/XLM-R transformer classifier, as described only by NEULIF's secondary comparison",
+    "2511.21744:roberta-bilstm": "the cited fine-tuned RoBERTa representation followed by a bidirectional LSTM classifier",
+    "2511.21744:styloai-education": "the cited StyloAI Random Forest over stylometric features on its small Education split",
+    "2509.18880:e5-small-lora": "the released or cited e5-small representation with a fitted low-rank classification head",
+    "2509.18880:desklib": "the cited Desklib AI directly supervised sequence classifier",
+    "2509.18880:superannotate": "the cited SuperAnnotate directly supervised RoBERTa sequence classifier",
+    "2506.15683:roberta-baseline": "the paper's directly supervised RoBERTa black-box comparison classifier",
+    "2506.15683:t5-sentinel-baseline": "the paper's supervised T5-Sentinel text-to-text comparison classifier",
+    "2506.15683:detective-baseline": "the paper's DeTeCtive contrastive encoder followed by validation-set KNN retrieval",
+    "2506.15683:seqxgpt-baseline": "the SeqXGPT CNN/attention detector over white-box token-probability streams from three named proxy LMs",
+    "2506.15683:dna-gpt-baseline": "DNA-GPT scoring over ten generated continuations of each target",
+    "2506.15683:detectgpt-baseline": "DetectGPT curvature estimated from 100 perturbed versions of each target",
+    "2506.15683:fastdetectgpt-baseline": "Fast-DetectGPT conditional-probability curvature with GPT-Neo-2.7B as sampling and scoring model",
+    "2506.15683:hastewire": "the closed HasteWire API detector service",
+    "2506.06705:without-adaptation": "the DivScore scoring architecture before medical/legal domain-knowledge distillation",
+    "2506.06705:divscore-mistral": "the DivScore divergence score computed with the Mistral detector LM",
+    "2506.06705:divscore-falcon": "the DivScore divergence score computed with the Falcon detector LM",
+    "2506.06705:divscore-qwen": "the DivScore divergence score computed with the Qwen detector LM",
+    "2506.06705:divscore-llama": "the DivScore divergence score computed with the Llama detector LM",
+    "2506.06705:entropy-mistral": "mean token entropy computed with the Mistral detector LM",
+    "2506.06705:entropy-falcon": "mean token entropy computed with the Falcon detector LM",
+    "2506.06705:entropy-qwen": "mean token entropy computed with the Qwen detector LM",
+    "2506.06705:entropy-llama": "mean token entropy computed with the Llama detector LM",
+    "2506.06705:cross-entropy-qwen": "the paper's cross-entropy scoring ablation computed with the Qwen detector LM",
     "2509.00623:roberta-base": "a directly fine-tuned RoBERTa-base sequence classifier",
     "2509.00623:tfidf-svm": "a TF-IDF representation classified by a linear support-vector machine",
     "2509.00623:candace": "a custom Transformer over token features extracted from four Llama models",
@@ -1099,6 +1312,47 @@ for _slug in (
     )
 
 RESULT_OUTCOME: dict[str, str] = {
+    "2501.03940:radar-ft": "This is a prior-work comparator; the bound paper provides no exact released RADAR-FT revision or checkpoint and no matched low-FPR, cross-distribution, or fixed two-A6000 near-Binoculars timing basis.",
+    "2501.03940:m4-roberta-base": "The high score is the authors' M4-fitted baseline. No fitted state, transferable low-FPR calibration, or fixed A6000 timing is released; the paper's convenience timing uses one RTX 3090 rather than the required matched two-A6000 screen.",
+    "2607.03680:vanilla-intellabs-base": "The diagonal result does not transfer reliably across the four corpora, and no separately frozen fitted state, transferable low-FPR calibration, or fixed two-A6000 near-Binoculars timing is available.",
+    "2607.03680:vanilla-mage-large": "The diagonal result does not transfer reliably across the four corpora, and no separately frozen fitted state, transferable low-FPR calibration, or fixed two-A6000 near-Binoculars timing is available.",
+    "2607.03680:vanilla-faid-base": "The diagonal result does not transfer reliably across the four corpora, and no separately frozen fitted state, transferable low-FPR calibration, or fixed two-A6000 near-Binoculars timing is available.",
+    "2607.03680:vanilla-mirage-large": "The diagonal result does not transfer reliably across the four corpora, and no separately frozen fitted state, transferable low-FPR calibration, or fixed two-A6000 near-Binoculars timing is available.",
+    "2605.25281:imbd-read": "The qualifying per-domain value depends on an infeasible test-label oracle threshold while the global result is much weaker; no frozen READ-fitted state, transferable low-FPR calibration, or fixed A6000 timing is released.",
+    "2605.25281:imbd-target-adapted": "This slice-specific result requires labeled target-generator adaptation, and the paper releases no exact adapted state, general deployment calibration, low-FPR transfer result, or fixed A6000 timing.",
+    "2605.06903:roberta-chatgpt-meld": "This is a separately fitted appendix state, not the public RoBERTa-ChatGPT checkpoint. No immutable MELD-data retrain, portable calibration, or fixed near-Binoculars timing is released.",
+    "2605.06903:modernbert-detect-meld": "This is a separately fitted appendix state, not the public ModernBERT-Detect checkpoint. No immutable MELD-data retrain, portable calibration, or fixed near-Binoculars timing is released.",
+    "2605.06903:repreguard-meld": "This is a separately fitted appendix state, not a Markov-enhanced or public RepreGuard version. Its weak transfer and missing immutable retrain, calibration, and timing block promotion.",
+    "2604.21223:reward-model-deberta": "The public reward-model checkpoint is runnable, but one high specialist-domain cell beside a weak aggregate supplies no general low-FPR calibration, matched Binoculars/FastDetectGPT comparison, or fixed A6000 timing.",
+    "2606.00016:superannotate-roberta": "The public classifier has a high aligned slice but HC3 was in its training data and transfer/attack cells are much weaker; the paper supplies no portable low-FPR calibration or fixed near-Binoculars timing.",
+    "2505.14271:faid-unsup-simcse-xlmr": "The known-generator high score falls below 0.90 on unseen generators, and the retained vector-database lookup violates the no-retrieval boundary; no exact fitted detector or comparable timing is released.",
+    "2511.21744:ai-generated-text-detection": "This is a secondary, incomparable literature claim: NEULIF preserves neither the primary evaluation split nor an official checkpoint, low-FPR evidence, or timing basis, so it cannot support promotion.",
+    "2511.21744:detective-comparator": "This is a secondary literature value without a like-for-like NEULIF evaluation, immutable state, transferable calibration, or fixed two-A6000 timing basis.",
+    "2511.21744:restricted-embeddings": "The 91%-95% range combines unspecified in-domain and OOD contexts from another paper; no common split, exact state, low-FPR calibration, or timing supports promotion.",
+    "2511.21744:chatgpt-detector": "The cited in-domain score is explicitly reported to degrade on novel or adversarial text, and NEULIF supplies no exact comparator state, common evaluation, or A6000 timing.",
+    "2511.21744:roberta-bilstm": "This is a secondary open-set claim without a bound primary experiment, exact fitted state, portable low-FPR calibration, or matched timing.",
+    "2511.21744:styloai-education": "The paper itself attributes the 98% result to a tiny split and reports only 81% on the much larger corpus; no exact state or matched deployment evidence supports promotion.",
+    "2509.18880:e5-small-lora": "The high RAID score is a separately fitted benchmark comparator; this paper supplies no immutable fitted state, transferable calibration, cross-distribution low-FPR evidence, or fixed A6000 timing.",
+    "2509.18880:desklib": "The high RAID score is a reproduced comparator result rather than a new Desklib artifact; no matched low-FPR transfer or fixed two-A6000 timing is supplied.",
+    "2509.18880:superannotate": "The high AUROC coexists with weak fixed-threshold accuracy, and this paper supplies no new fitted checkpoint, portable threshold, or matched cross-distribution timing.",
+    "2506.15683:roberta-baseline": "A high machine-class F1 beside weak human-class balance does not establish deployable high accuracy; no exact fitted state, low-FPR calibration, or fixed A6000 timing is released.",
+    "2506.15683:t5-sentinel-baseline": "A high machine-class F1 beside sub-0.90 macro F1 does not establish deployable high accuracy; no exact fitted state or matched low-FPR/timing evidence is released.",
+    "2506.15683:detective-baseline": "This experiment retrieves validation examples at inference and therefore violates the no-retrieval boundary; the paper also releases no exact comparator state or matched timing.",
+    "2506.15683:seqxgpt-baseline": "The high slice requires three white-box proxy probability streams and has weaker transfer elsewhere; no exact fitted state, portable calibration, or near-Binoculars timing is released.",
+    "2506.15683:dna-gpt-baseline": "Inference regenerates ten continuations from each target, violating the no-regeneration boundary; the high class-specific value is also poorly balanced.",
+    "2506.15683:detectgpt-baseline": "Inference aggregates 100 perturbed versions of each target, violating the no-multi-perturbation boundary; the high class-specific value is also poorly balanced.",
+    "2506.15683:fastdetectgpt-baseline": "This is an individually visible FastDetectGPT comparison, but the paper supplies no new frozen state, transferable calibration, or fixed matched A6000 timing.",
+    "2506.15683:hastewire": "The high machine-class F1 is paired with weak human-class and low-FPR results, and the closed service has no reproducible public state or A6000 timing basis.",
+    "2506.06705:without-adaptation": "The qualifying cell is a weaker no-adaptation ablation, not a released general detector; no exact fitted state, portable calibration, or fixed near-Binoculars timing is supplied.",
+    "2506.06705:divscore-mistral": "This proxy-specific appendix state is not separately released and lacks matched cross-distribution low-FPR calibration and fixed two-A6000 timing.",
+    "2506.06705:divscore-falcon": "This proxy-specific appendix state is not separately released and lacks matched cross-distribution low-FPR calibration and fixed two-A6000 timing.",
+    "2506.06705:divscore-qwen": "This proxy-specific appendix state is not separately released and lacks matched cross-distribution low-FPR calibration and fixed two-A6000 timing.",
+    "2506.06705:divscore-llama": "This proxy-specific appendix state is not separately released and lacks matched cross-distribution low-FPR calibration and fixed two-A6000 timing.",
+    "2506.06705:entropy-mistral": "The high appendix cells are proxy- and generator-specific; no new frozen state, portable threshold, or fixed matched timing is supplied.",
+    "2506.06705:entropy-falcon": "The high appendix cells are proxy- and generator-specific; no new frozen state, portable threshold, or fixed matched timing is supplied.",
+    "2506.06705:entropy-qwen": "The high appendix cells are proxy- and generator-specific; no new frozen state, portable threshold, or fixed matched timing is supplied.",
+    "2506.06705:entropy-llama": "The high appendix cells are proxy- and generator-specific; no new frozen state, portable threshold, or fixed matched timing is supplied.",
+    "2506.06705:cross-entropy-qwen": "One high source-LLM cell beside a 49.23% average does not establish a general detector, and no exact state, portable calibration, or timing is released.",
     "2509.00623:roberta-base": "The near-perfect score is confined to the M-DAIGT news/academic task; no released trained state, cross-distribution test, low-FPR result, or fixed A6000 timing exists.",
     "2509.00623:tfidf-svm": "The high score is confined to the M-DAIGT news/academic task; no fitted SVM, exact vectorizer, cross-distribution test, low-FPR result, or fixed A6000 timing is released.",
     "2509.00623:candace": "The high score is confined to the M-DAIGT news/academic task; no trained state, exact four-Llama deployment recipe, low-FPR result, or reproducible timing is released, and the paper calls it slower than RoBERTa.",
@@ -1232,6 +1486,17 @@ RESULT_CODE: dict[str, str] = {
     if result_id.startswith("2503.22338:")
     and ("-raidar" in result_id or "-combined" in result_id)
 }
+for _result_id in (
+    "2501.03940:radar-ft",
+    "2501.03940:m4-roberta-base",
+    "2607.03680:vanilla-intellabs-base",
+    "2607.03680:vanilla-mage-large",
+    "2607.03680:vanilla-faid-base",
+    "2607.03680:vanilla-mirage-large",
+    "2605.25281:imbd-read",
+    "2605.25281:imbd-target-adapted",
+):
+    RESULT_CODE[_result_id] = "retain_reject"
 RESULT_CODE["2507.05157:gpt4o-mini"] = "commercial_closed"
 for _slug in (
     "bert",
@@ -1319,6 +1584,290 @@ RESULT_MECHANISM.update(
         "2604.25860:fastdetectgpt": "the FastDetectGPT conditional-probability-curvature statistic",
     }
 )
+
+_BASELINE_MECHANISMS = {
+    "likelihood": "mean token likelihood under the scoring language model",
+    "logrank": "mean token log-rank under the scoring language model",
+    "entropy": "mean token entropy under the scoring language model",
+    "detectlrr": "the DetectLLM likelihood-to-log-rank-ratio statistic",
+    "lastde": "the Lastde local-subsequence statistic over token-probability series",
+    "detectgpt": "DetectGPT scoring over multiple masked-and-filled perturbations of the target text",
+    "detectnpr": "DetectLLM normalized perturbed log-rank over multiple target-text perturbations",
+    "dnagpt": "DNA-GPT scoring over generated continuations",
+    "fastdetectgpt": "the FastDetectGPT conditional-probability-curvature statistic",
+    "lastde-plus": "the Lastde++ local-subsequence statistic over token-probability series",
+    "binoculars": "the Binoculars cross-model perplexity-ratio statistic",
+}
+
+for _parent_id, _slugs in {
+    "2606.02158": (
+        "likelihood",
+        "logrank",
+        "detectlrr",
+        "lastde",
+        "detectgpt",
+        "detectnpr",
+        "dnagpt",
+        "fastdetectgpt",
+        "lastde-plus",
+    ),
+    "2508.11343": (
+        "likelihood",
+        "logrank",
+        "entropy",
+        "detectlrr",
+        "lastde",
+        "detectgpt",
+        "detectnpr",
+        "dnagpt",
+        "fastdetectgpt",
+        "lastde-plus",
+    ),
+}.items():
+    for _slug in _slugs:
+        RESULT_MECHANISM[f"{_parent_id}:{_slug}"] = _BASELINE_MECHANISMS[_slug]
+
+RESULT_MECHANISM.update(
+    {
+        "2606.02158:without-low-probability": "the proposed local/global uncertainty statistic with its low-probability-token feature removed",
+        "2606.02158:without-entropy": "the proposed local/global uncertainty statistic with its entropy feature removed",
+        "2506.06705:roberta-base": "a directly supervised RoBERTa-base sequence classifier",
+        "2506.06705:roberta-large": "a directly supervised RoBERTa-large sequence classifier",
+        "2506.06705:entropy": _BASELINE_MECHANISMS["entropy"],
+        "2506.06705:rank": "mean token rank under the scoring language model",
+        "2506.06705:logrank": _BASELINE_MECHANISMS["logrank"],
+        "2506.06705:likelihood": _BASELINE_MECHANISMS["likelihood"],
+        "2506.06705:detectgpt": _BASELINE_MECHANISMS["detectgpt"],
+        "2506.06705:fastdetectgpt": _BASELINE_MECHANISMS["fastdetectgpt"],
+        "2506.06705:binoculars": _BASELINE_MECHANISMS["binoculars"],
+        "2501.03940:m4-xlm-roberta": "a directly supervised XLM-RoBERTa comparison classifier fitted on M4",
+        "2501.03940:mage-longformer": "the directly supervised 4,096-token Longformer detector fitted on MAGE",
+        "2501.03940:gltr": "the GLTR token-rank-bin heuristic detector",
+        "2501.03940:raid-rb-gpt2": "the published RoBERTa-base GPT-2 detector evaluated on RAID without RAID fitting",
+        "2501.03940:raid-rl-gpt2": "the published RoBERTa-large GPT-2 detector evaluated on RAID without RAID fitting",
+        "2501.03940:raid-rb-cgpt": "the published RoBERTa-base ChatGPT detector evaluated on RAID without RAID fitting",
+        "2501.03940:raid-radar": "the published adversarially trained RADAR detector evaluated on RAID without RAID fitting",
+        "2501.03940:raid-fastdetectgpt": _BASELINE_MECHANISMS["fastdetectgpt"],
+        "2501.03940:raid-binoculars": _BASELINE_MECHANISMS["binoculars"],
+        "2501.03940:raid-gptzero": "the closed GPTZero detector evaluated through its public service",
+        "2501.03940:raid-originality": "the closed Originality.ai detector evaluated through its public service",
+        "2501.03940:raid-winston": "the closed Winston AI detector evaluated through its public service",
+        "2501.03940:raid-zerogpt": "the closed ZeroGPT detector evaluated through its public service",
+        "2501.03940:mage-roberta-base": "the directly supervised RoBERTa-base detector fitted on MAGE",
+        "2501.03940:mage-radar-ptm": "the RADAR pretrained-transformer state fitted on MAGE",
+        "2501.03940:raidft-pawn-gpt2": "PAWN with the GPT-2 backbone after one epoch of supervised RAID fitting",
+        "2501.03940:raidft-pawn-llama": "PAWN with the Llama backbone after one epoch of supervised RAID fitting",
+        "2501.03940:raidft-longformer": "the Longformer detector after one epoch of supervised RAID fitting",
+        "2501.03940:raidft-roberta": "the RoBERTa detector after one epoch of supervised RAID fitting",
+        "2501.03940:raidft-radar-ptm": "the RADAR pretrained-transformer detector after one epoch of supervised RAID fitting",
+        "2501.03940:raidft-radar": "the RADAR detector after one epoch of supervised RAID fitting",
+        "2607.03680:anchor": "the Anchor peer-review score with per-source-LLM thresholds calibrated from reference reviews",
+        "2607.03680:mage-longformer": "the directly supervised 4,096-token Longformer detector fitted on MAGE",
+        "2607.03680:llmdetectaive": "the published directly supervised LLM-DetectAIve comparison classifier",
+        "2607.03680:faid": "the published FAID multi-task contrastive detector with vector-database augmentation",
+        "2607.03680:vanilla-faid-extra-domain": "a RoBERTa-base classifier additionally fitted on the released unseen-domain validation set",
+        "2607.03680:vanilla-faid-extra-domain-generator": "a RoBERTa-base classifier additionally fitted on the released unseen-domain-plus-generator validation set",
+        "2607.03680:detectanyllm": "the published DetectAnyLLM detector trained on 500 paired GPT-3.5-polish examples",
+        "2607.03680:vanilla-mirage-base": "a RoBERTa-base sequence classifier fitted separately on MIRAGE",
+        "2607.03680:fomaml-lora": "a RoBERTa-large detector adapted with FOMAML and LoRA on ten labeled target examples",
+        "2607.03680:fomaml-hc3-k5": "a MAGE-meta-trained RoBERTa-large detector adapted with FOMAML and LoRA on five labeled HC3 examples",
+        "2607.03680:fomaml-hc3-k20": "a MAGE-meta-trained RoBERTa-large detector adapted with FOMAML and LoRA on twenty labeled HC3 examples",
+        "2607.03680:fomaml-hc3-k50": "a MAGE-meta-trained RoBERTa-large detector adapted with FOMAML and LoRA on fifty labeled HC3 examples",
+        "2607.03680:confidence-ensemble": "confidence-weighted score fusion of the Vanilla and target-adapted FOMAML detectors",
+        "2607.03680:reverse-confidence-ensemble": "confidence-weighted score fusion using the FOMAML detector as the confidence source",
+        "2607.03680:pooled-four-way": "a directly supervised RoBERTa detector fitted on a four-benchmark pooled training set",
+        "2607.03680:pooled-stratified-base": "a directly supervised RoBERTa-base detector fitted on the paper's stratified pooled training set",
+        "2607.03680:pooled-stratified-large": "a directly supervised RoBERTa-large detector fitted on the paper's stratified pooled training set",
+        "2605.25281:biscope-read": "the directly supervised BiScope bidirectional cross-entropy classifier fitted on READ",
+        "2605.25281:biscope-target-adapted": "the BiScope classifier additionally fitted with labeled target-generator examples from other READ domains",
+        "2605.25281:npr-gemma": "DetectLLM normalized perturbed log-rank using the Gemma surrogate",
+        "2605.25281:npr-qwen": "DetectLLM normalized perturbed log-rank using the Qwen surrogate",
+        "2605.25281:detectgpt-gemma": "DetectGPT perturbation scoring using Gemma as the surrogate language model",
+        "2605.25281:detectgpt-qwen": "DetectGPT perturbation scoring using Qwen as the surrogate language model",
+        "2605.25281:binoculars-gemma": "the Binoculars cross-model perplexity-ratio statistic with the paper's Gemma model pair",
+        "2605.25281:radar": "the released adversarially trained RADAR-Vicuna-7B classifier",
+        "2605.25281:fastdetectgpt-gemma": "FastDetectGPT conditional-probability curvature with the paper's Gemma scoring and sampling models",
+        "2605.25281:adadetectgpt-gemma": "AdaDetectGPT with the paper's Gemma scoring and sampling models",
+        "2605.25281:adadetectgpt-gemma-target": "AdaDetectGPT with the paper's Gemma models and labeled target-generator adaptation",
+        "2606.07313:polish-only": "the SV-Detect steering-vector classifier separately fitted on MIRAGE polish examples only",
+        "2606.07313:three-task": "the SV-Detect steering-vector classifier separately fitted on MIRAGE generate, polish, and rewrite examples",
+        "2506.01702:tfidf-baseline": "a directly supervised linear classifier over TF-IDF text features",
+        "2509.15550:revise-detect": "Revise-Detect scoring after an LLM rewrites or revises the target text",
+    }
+)
+
+for _slug in (
+    "likelihood",
+    "logrank",
+    "entropy",
+    "detectgpt",
+    "fastgpt",
+    "dnagpt",
+    "repreguard",
+    "lastde",
+    "fouriergpt",
+    "binoculars",
+):
+    _mechanism = {
+        "likelihood": _BASELINE_MECHANISMS["likelihood"],
+        "logrank": _BASELINE_MECHANISMS["logrank"],
+        "entropy": _BASELINE_MECHANISMS["entropy"],
+        "detectgpt": _BASELINE_MECHANISMS["detectgpt"],
+        "fastgpt": _BASELINE_MECHANISMS["fastdetectgpt"],
+        "dnagpt": _BASELINE_MECHANISMS["dnagpt"],
+        "repreguard": "the published RepreGuard representation-based detector without Markov calibration",
+        "lastde": _BASELINE_MECHANISMS["lastde"],
+        "fouriergpt": "the FourierGPT frequency-domain token-probability statistic without Markov calibration",
+        "binoculars": _BASELINE_MECHANISMS["binoculars"],
+    }[_slug]
+    RESULT_MECHANISM[f"2602.08031:{_slug}"] = _mechanism
+
+_NEW_PARENT_OUTCOMES = {
+    "2606.02158": "This named table state has a qualifying slice, but the paper supplies no separately frozen state, transferable low-FPR and cross-distribution calibration, or fixed two-A6000 near-Binoculars timing basis.",
+    "2508.11343": "This named Table 1 comparator has a qualifying dataset/model slice, but the SpecDetect paper supplies no new frozen comparator state or matched low-FPR, cross-distribution, and two-A6000 timing evidence.",
+    "2506.06705": "This named comparison state has a qualifying domain/model slice, but the DivScore paper supplies no new frozen comparator state or matched low-FPR, cross-distribution, and two-A6000 timing evidence.",
+    "2602.08031": "This unmodified comparison detector is distinct from its Markov-calibrated counterpart, but the paper supplies no new frozen baseline state or matched low-FPR, cross-distribution, and two-A6000 timing evidence.",
+}
+for _parent_id, _outcome in _NEW_PARENT_OUTCOMES.items():
+    for _slug, _display in PRIMARY_GROUPS[_parent_id]:
+        _result_id = f"{_parent_id}:{_slug}"
+        if _result_id in RESULT_MECHANISM and _result_id not in RESULT_OUTCOME:
+            RESULT_OUTCOME[_result_id] = _outcome
+
+for _slug, _display in PRIMARY_GROUPS["2501.03940"]:
+    _result_id = f"2501.03940:{_slug}"
+    if _result_id in RESULT_MECHANISM and _result_id not in RESULT_OUTCOME:
+        RESULT_OUTCOME[_result_id] = (
+            "This separately named PAWN-table state crosses 0.90 on at least one reported slice, but the paper supplies no exact frozen state with transferable low-FPR, cross-distribution, and fixed two-A6000 near-Binoculars evidence."
+        )
+for _slug in ("raid-gptzero", "raid-originality", "raid-winston", "raid-zerogpt"):
+    RESULT_OUTCOME[f"2501.03940:{_slug}"] = (
+        "This closed commercial detector crosses 0.90 on a RAID slice, but no reproducible state, portable calibration, or fixed two-A6000 timing basis is publicly available."
+    )
+
+for _slug, _display in PRIMARY_GROUPS["2607.03680"]:
+    _result_id = f"2607.03680:{_slug}"
+    if _result_id in RESULT_MECHANISM and _result_id not in RESULT_OUTCOME:
+        RESULT_OUTCOME[_result_id] = (
+            "This table state has a qualifying in-domain, adapted, or pooled slice, but transfer or low-FPR performance is materially weaker and no exact frozen state with fixed two-A6000 near-Binoculars timing is released."
+        )
+RESULT_OUTCOME["2607.03680:faid"] = (
+    "The published FAID detector uses vector-database augmentation at inference, violating the no-retrieval boundary; this comparison paper also supplies no frozen FAID state or fixed A6000 timing."
+)
+
+for _slug, _display in PRIMARY_GROUPS["2605.25281"]:
+    _result_id = f"2605.25281:{_slug}"
+    if _result_id in RESULT_MECHANISM and _result_id not in RESULT_OUTCOME:
+        RESULT_OUTCOME[_result_id] = (
+            "This named READ or OOD table state crosses 0.90 only under a per-domain oracle threshold, a narrow slice, or target adaptation; it adds no exact frozen state with transferable low-FPR calibration and fixed A6000 timing."
+        )
+for _slug in ("npr-gemma", "npr-qwen", "detectgpt-gemma", "detectgpt-qwen"):
+    RESULT_OUTCOME[f"2605.25281:{_slug}"] = (
+        "Inference aggregates multiple perturbed versions of the target, violating the strict multi-perturbation boundary."
+    )
+
+for _slug in ("polish-only", "three-task"):
+    RESULT_OUTCOME[f"2606.07313:{_slug}"] = (
+        "This separately fitted MIRAGE state has high in-task AUROC, but no exact frozen fitted state, transferable low-FPR calibration, or fixed two-A6000 near-Binoculars timing is released."
+    )
+RESULT_OUTCOME["2506.01702:tfidf-baseline"] = (
+    "The near-perfect value is validation-only and does not survive the paper's OOD evaluation basis; no fitted vectorizer/classifier, transferable low-FPR calibration, or fixed A6000 timing is released."
+)
+RESULT_OUTCOME["2509.15550:revise-detect"] = (
+    "Inference rewrites or revises the target before scoring, violating the no-rewriting boundary."
+)
+
+for _parent_id in (
+    "2606.02158",
+    "2508.11343",
+    "2506.06705",
+    "2602.08031",
+    "2501.03940",
+    "2607.03680",
+    "2605.25281",
+    "2606.07313",
+    "2506.01702",
+    "2509.15550",
+):
+    for _slug, _display in PRIMARY_GROUPS[_parent_id]:
+        _result_id = f"{_parent_id}:{_slug}"
+        if _result_id in RESULT_MECHANISM:
+            RESULT_CODE.setdefault(_result_id, "retain_reject")
+
+for _result_id in (
+    "2606.02158:detectgpt",
+    "2606.02158:detectnpr",
+    "2508.11343:detectgpt",
+    "2602.08031:detectgpt",
+    "2506.06705:detectgpt",
+    "2605.25281:npr-gemma",
+    "2605.25281:npr-qwen",
+    "2605.25281:detectgpt-gemma",
+    "2605.25281:detectgpt-qwen",
+):
+    RESULT_CODE[_result_id] = "exclude_multi_perturbation"
+for _result_id in (
+    "2606.02158:dnagpt",
+    "2508.11343:dnagpt",
+    "2602.08031:dnagpt",
+    "2509.15550:dna-default",
+    "2509.15550:dna-low-high",
+    "2509.15550:dna-high-low",
+    "2509.15550:dna-sequential",
+    "2509.15550:dna-mistral",
+    "2509.15550:dna-llama2",
+    "2509.15550:dna-llama3",
+):
+    RESULT_CODE[_result_id] = "exclude_regeneration"
+RESULT_CODE["2607.03680:faid"] = "exclude_retrieval"
+RESULT_CODE["2509.15550:revise-detect"] = "exclude_rewriting"
+for _result_id in (
+    "2605.06903:roberta-chatgpt-meld",
+    "2605.06903:modernbert-detect-meld",
+    "2605.06903:repreguard-meld",
+    "2604.21223:reward-model-deberta",
+    "2606.00016:superannotate-roberta",
+):
+    RESULT_CODE[_result_id] = "retain_reject"
+RESULT_CODE["2505.14271:faid-unsup-simcse-xlmr"] = "exclude_retrieval"
+for _slug in (
+    "ai-generated-text-detection",
+    "detective-comparator",
+    "restricted-embeddings",
+    "chatgpt-detector",
+    "roberta-bilstm",
+    "styloai-education",
+):
+    RESULT_CODE[f"2511.21744:{_slug}"] = "retain_reject"
+RESULT_CODE["2511.21744:detective-comparator"] = "exclude_retrieval"
+for _slug in ("e5-small-lora", "desklib", "superannotate"):
+    RESULT_CODE[f"2509.18880:{_slug}"] = "retain_reject"
+for _slug in (
+    "roberta-baseline",
+    "t5-sentinel-baseline",
+    "seqxgpt-baseline",
+    "fastdetectgpt-baseline",
+):
+    RESULT_CODE[f"2506.15683:{_slug}"] = "retain_reject"
+RESULT_CODE["2506.15683:detective-baseline"] = "exclude_retrieval"
+RESULT_CODE["2506.15683:dna-gpt-baseline"] = "exclude_regeneration"
+RESULT_CODE["2506.15683:detectgpt-baseline"] = "exclude_multi_perturbation"
+RESULT_CODE["2506.15683:hastewire"] = "commercial_closed"
+for _slug in (
+    "without-adaptation",
+    "divscore-mistral",
+    "divscore-falcon",
+    "divscore-qwen",
+    "divscore-llama",
+    "entropy-mistral",
+    "entropy-falcon",
+    "entropy-qwen",
+    "entropy-llama",
+    "cross-entropy-qwen",
+):
+    RESULT_CODE[f"2506.06705:{_slug}"] = "retain_reject"
+for _slug in ("raid-gptzero", "raid-originality", "raid-winston", "raid-zerogpt"):
+    RESULT_CODE[f"2501.03940:{_slug}"] = "commercial_closed"
 
 for _slug in ("detective", "desklib", "tmr"):
     RESULT_CODE[f"2607.14967:{_slug}"] = "retain_reject"

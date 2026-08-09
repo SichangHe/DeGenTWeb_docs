@@ -58,8 +58,8 @@ one hundred nineteen frozen papers, including ordinary detector papers whose
 titles did not signal a comparison. A fresh adversarial mutation found that the
 first table inventory still omitted named configurations in papers it had
 labeled as non-candidates. The corrected ledger now accounts separately for
-eight hundred five qualifying detector accounts: two hundred forty-one
-previously expanded systems and five hundred sixty-four primary-paper
+nine hundred fifty-eight qualifying detector accounts: two hundred sixty-three
+previously expanded systems and six hundred ninety-five primary-paper
 configurations. No single parent-level account remains. Six papers have a
 table-specific reason that no result qualifies. High validation or narrow
 scores remain beside weak official, transfer, attack, or cross-domain results.
@@ -81,6 +81,22 @@ version one point zero point four is the paper's unweighted multiclass
 DistilRoBERTa classifier, not an ensemble. None of the recovered configurations
 adds the matched low-false-positive, public artifact, two-A6000, and
 near-Binoculars evidence needed to change the recommendation.
+
+An independent table-row and grouped-method extraction now resolves four
+thousand eight hundred sixty PDF-derived candidates with an explicit account or
+content-specific reason. It first exposed the PAWN paper's separately reported RADAR fine-tuned
+and the authors' five-epoch RoBERTa-base baseline. The distribution-shift paper
+has four distinct Vanilla classifiers trained on IntelLabs, MAGE, FAID, and
+MIRAGE, not one generic Vanilla state. The READER paper separately reports ImBD
+trained on READ and a target-adapted ImBD state. The final full-table pass also
+separates the material language and training states in the Central-European
+benchmark; dataset-fitted RoBERTa, DeTeCtive, stylo, and mcgovern states in the
+cross-dataset study; both M4 training-based states in the personalization
+benchmark; and named comparison or ablation rows in NEULIF, DivEye,
+PhantomHunter, and DivScore. Their strongest reported slices
+range from ninety-two percent to one hundred percent, but they lack an exact
+frozen fitted state and a matched low-false-positive, two-A6000,
+near-Binoculars speed comparison. They do not change the recommendation.
 
 Three complete public checkpoints warranted direct testing. DetectRL-X and
 ModernBERT were fast but substantially less accurate than the stored controls.

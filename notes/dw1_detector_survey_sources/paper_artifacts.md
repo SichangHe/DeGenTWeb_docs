@@ -158,7 +158,7 @@ this exact, discoverable path:
 
 Its `README.md` documents scope and provenance. Its 288-entry
 `MANIFEST.sha256` has SHA-256
-`ef79a70d6946056ae1fa6d92c2ef340d94e60f8218ecce31aa61e4fc8a89828a`;
+`1d3537f1833a9463a9eb1399bd45f46ae2056cf8edef9423a67563254a8293b3`;
 `sha256sum --check MANIFEST.sha256` passed for all 288 retained files on
 2026-08-09. The ledger covers every collection file other than itself. This
 repository separately preserves raw benchmark execution and environment files,
@@ -171,7 +171,8 @@ row. Fourteen anonymously public arXiv PDFs were added after the 274-file freeze
 2501.18998, and 2501.14288. Their individual paths and PDF hashes, together with
 the exact extracted-text hashes for all 119 publications, are bound in
 `coverage_fulltext_sources.tsv`. The external README records their anonymous
-public provenance; the manifest includes both that correction and every PDF.
+public provenance and the corrected final count of 958 accounts; the manifest
+includes that exact README and every PDF.
 
 ### Newly decisive primary papers and official releases
 
