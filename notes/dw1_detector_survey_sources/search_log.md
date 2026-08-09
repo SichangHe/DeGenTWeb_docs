@@ -465,8 +465,8 @@ uv run --isolated --no-project --python 3.13 python audit_coverage.py \
 ```
 
 The unchanged exports contain 204 raw entries and 119 unique 2025–2026
-publications. The row layer has 106 semantic flags, 69 explicit dispositions, and
-50 allowlisted non-candidate classes. Title and publication-class rules select 33
+publications. The row layer has 106 semantic flags, 70 explicit dispositions, and
+49 allowlisted non-candidate classes. Title and publication-class rules select 33
 composite sources. At that repair stage, 24 expanded to 180 named qualifying
 system/version results and nine retained table/section-specific no-qualifier or
 parent-only reasons. Eleven regression and negative controls pass, including removal of the
@@ -584,3 +584,90 @@ All 274 entries verified, and a permission audit found zero writable collection
 files or directories. The collection contains only public anonymous evidence;
 no PB, human, authenticated, persistent browser/session, robot-bypass, or
 human-owned tmux state was accessed.
+
+## 2026-08-09 eval5 full-corpus semantic repair
+
+The completed eval5 verdict was read before this repair. Its SHA-256 is
+`83a0ae2d665fda4e549cbb573c4845db685b54fc6880b4004dbb9ae6c4102165`;
+the frozen next-evaluator prompt SHA-256 is
+`ab0c2d2a7bddb41a7739012b18e48ce4aa2cbe6735b287c971045d3cbc30fd87`.
+The repair did not open a new search lane. It completed the already bounded
+119-publication corpus and replaced title/class discovery with primary-PDF
+content review.
+
+Fourteen missing corpus PDFs were fetched from anonymous public arXiv export
+PDF endpoints and checked with `pdfinfo`: 2608.03859, 2607.14905, 2605.03723,
+2605.02712, 2604.21365, 2604.21300, 2604.04932, 2511.17402, 2510.00890,
+2509.25154, 2508.18715, 2503.23622, 2501.18998, and 2501.14288. The reproducible
+request form was:
+
+```text
+curl --fail --location --silent --show-error \
+  https://export.arxiv.org/pdf/ARXIV_ID \
+  --output papers/ARXIV_ID.pdf
+pdfinfo papers/ARXIV_ID.pdf
+sha256sum papers/ARXIV_ID.pdf
+```
+
+No credentials, cookies, persistent browser profile, PB, robot-challenge bypass,
+or human-owned tmux state was used. The resulting collection has 288 manifest
+entries. `MANIFEST.sha256` has SHA-256
+`ef79a70d6946056ae1fa6d92c2ef340d94e60f8218ecce31aa61e4fc8a89828a`;
+all entries and the exact path set verified, and no collection path is writable.
+
+Every primary PDF was extracted with Poppler's `pdftotext -layout -enc UTF-8`.
+`build_fulltext_inventory.py` then materialized the curated table-derived
+inventory:
+
+```text
+uv run --isolated --no-project --python 3.13 python \
+  build_fulltext_inventory.py \
+  --external-root /ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08
+```
+
+The reproducible output is 119 source rows, 805 exact detector accounts, and 564
+primary-result dispositions. No parent-only account remains; six sources have
+table-derived no-account decisions. The immutable account-pair digest is
+`def94a17c54add16e9a6522a01b4b453cb16d706aef596b9f78024cbf3a3b2d9`.
+The four generated input hashes and the exact audit replay command are preserved
+in `coverage_semantic_audit_report.txt`; interpreter, platform, Poppler version,
+and extraction command are in `coverage_semantic_audit_environment.txt`.
+
+The official Leidos paper was re-read directly from
+`papers/2025.genaidetect-1.39.pdf`. Its method and submission tables map
+BC/v1.0.1 to unweighted binary DistilRoBERTa, BW/v1.0.3 to weighted binary,
+MC/v1.0.4 to unweighted multiclass, and MW/v1.0.2 to weighted multiclass. The
+prior v1.0.4 ensemble wording was false and was corrected in the result row and
+E1 evidence card. A dedicated mutation control now rejects that wording.
+
+A fresh adversarial mutation of the first full-text repair exposed two remaining
+manual-list omissions: the nine Chinese encoder/LoRA states in 2509.00731 and
+eight POGER/SeqXGPT/SenDetEX/SenFlow states in 2606.18946. Rechecking the entire
+former zero/parent partition also made five 2501.14288 architecture stages, both
+LuxVeri ensembles, and every other qualifying named configuration explicit. The
+checker now binds these exact ID sets to table text and rejects a lowered-count
+non-English omission plus positive- and zero-decision content detachment.
+
+A final all-paper table pass caught 17 additional narrow-slice accounts that a
+weak aggregate had suppressed: ten TELL comparators in arXiv 2605.27921, five
+late-stage stability baselines in 2601.04833, and ReMoDetect plus ImBD in
+2604.16923. Their exact table cells, weaker aggregate evidence, mechanisms,
+artifact status, and dispositions are now separate rows. Content anchors bind
+all three paper-specific ID sets to their extracted table text. Two additional
+controls reject deletion of ChatGPT-D while lowering the mutable count and
+detachment of that row from its table text.
+
+The next fresh reviewer exposed a disposition-level version of the same
+grouping defect in arXiv 2509.15550: DNA-DetectLLM's regeneration blocker had
+been inherited by eight named baselines. The primary paper was re-read; every
+baseline now has exact Table 1/Table 2 evidence and its actual mechanism.
+DetectGPT retains a multi-perturbation exclusion, seven ordinary baselines are
+evidence-rejected, and only the seven DNA repair/order/model-pair states remain
+regeneration-excluded. A code anchor and mutation control protect this split.
+
+The resulting all-exclusion-parent audit also corrected arXiv 2504.21019. Its
+uniform and Gaussian perturbations alter embeddings during training only; the
+paper explicitly describes direct target-domain inference. The states are now
+evidence-rejected on their 85.48%/86.10% seven-domain average accuracy, absent
+frozen state, absent low-FPR result, and absent fixed A6000 timing rather than
+being falsely method-excluded.

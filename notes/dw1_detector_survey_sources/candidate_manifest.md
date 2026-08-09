@@ -1,8 +1,8 @@
 # Frozen candidate manifest
 
-Candidate date: 2026-08-08, America/Los_Angeles.
+Candidate date: 2026-08-09, America/Los_Angeles.
 
-Candidate state: **FROZEN FOR DISTINCT ADVERSARIAL REVIEW — AWAITING A NEW
+Candidate state: **FROZEN AFTER DISTINCT ADVERSARIAL PASS — AWAITING A NEW
 ONE-SHOT EVALUATOR**. No internal review authorizes delivery. The corrective
 email remains **NOT SENT**.
 
@@ -14,27 +14,31 @@ The owned candidate consists only of:
 - `../dw1_detector_survey_email.md`; and
 - every file in this `dw1_detector_survey_sources/` directory.
 
-The starting documentation commit is
-`45191cb40963a137192795cba0dc7d10ada2f598`, the pushed rev2 semantic repair.
-The accepted survey chain is preserved in Git: original survey
-`d5fb118`, accuracy-first renewal `fe98a1c`, evaluator repair `f749a13`, and rev2
-semantic repair `45191cb`. No DW1 implementation or configuration file is in the
-candidate. A later parent-repository commit may change only the `docs` gitlink to
-the pushed documentation commit.
+The direct predecessor documentation commit is
+`1d2fc389b7cdbcc6ff3af77098c937d59440d29a`, the pushed rev3 composite repair.
+The accepted survey chain is preserved in Git: original survey `d5fb118`,
+accuracy-first renewal `fe98a1c`, evaluator repair `f749a13`, rev2 semantic
+repair `45191cb`, and rev3 composite/E-card repair `1d2fc389`. No DW1
+implementation or configuration file is in the candidate. A later parent-
+repository commit may change only the `docs` gitlink to the pushed documentation
+commit.
 
 ## Repository content binding
 
-`candidate_files.sha256` covers the two top-level documents and 64 source/evidence
-files, 66 files total. It excludes itself and this explanatory manifest; the
+`candidate_files.sha256` covers the two top-level documents and 70 source/evidence
+files, 72 files total. It excludes itself and this explanatory manifest; the
 final Git commit binds those two files. Its current frozen SHA-256 is:
 
-`4bb11271b477f0c9d66752b2b2b895dda0ddf8309c798e59988d374e03e58136`
+`23b3b7b15dd750063b0bb7ab7a7ab88552476452558cf5f507185a64a088439b`
 
 The ledger includes the complete earlier MELD, benchmark, integrity, coverage,
 and review evidence plus this repair's composite source/result mappings,
 generated audits, primary-search record, public-checkpoint benchmark source,
 both raw attempts, 8,022-row CSV, independent verifier, static checks, execution
-environment, and model hashes. From `docs/notes/`, the exact check is:
+environment, and model hashes. It also includes the full-text inventory generator,
+119-source PDF/text ledger, immutable 805-account inventory and map, 564 primary-
+result dispositions, and generated account audit. From `docs/notes/`, the exact
+check is:
 
 ```text
 sha256sum --check dw1_detector_survey_sources/candidate_files.sha256
@@ -51,11 +55,11 @@ Canonical path:
 
 `/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08`
 
-The external `MANIFEST.sha256` covers 274 files and has SHA-256:
+The external `MANIFEST.sha256` covers 288 files and has SHA-256:
 
-`6aeb1d786e1c91eb6c7e3f0723d129a6a562586c57024227c7082bbbdf5f4529`
+`ef79a70d6946056ae1fa6d92c2ef340d94e60f8218ecce31aa61e4fc8a89828a`
 
-`sha256sum --check MANIFEST.sha256` passed for all 274 entries. No file or
+`sha256sum --check MANIFEST.sha256` passed for all 288 entries. No file or
 directory in the collection is writable. It preserves the earlier 150-file
 collection, every composite parent PDF, Task 3 overview and six primary system
 papers, Counter Turing primary papers, bounded primary-absence responses,
@@ -64,12 +68,17 @@ snapshots. The collection contains only anonymous public evidence. No PB,
 credential, authenticated endpoint, persistent browser/session state, cookie
 reuse, robot-challenge bypass, or human-owned tmux session was used.
 
+The final 14 additions are anonymously public arXiv PDFs needed to bind one
+primary paper for every frozen export row. The external README identifies them;
+`coverage_fulltext_sources.tsv` binds all 119 exact PDF and extracted-text
+hashes. The external manifest path set exactly equals the live artifact set.
+
 ## Coverage anchors
 
 The three immutable exact-phrase exports still contain 204 raw rows and 119
 unique 2025–2026 publications. `coverage_row_dispositions.tsv` maps each exactly
-once. The generated row audit flags 106 titles/abstracts, resolves 69 explicit
-dispositions and 50 mechanically allowlisted non-candidate classes, and returns
+once. The generated row audit flags 106 titles/abstracts, resolves 70 explicit
+dispositions and 49 mechanically allowlisted non-candidate classes, and returns
 PASS.
 
 A second level selects 33 overview, benchmark, shared-task, evaluation,
@@ -93,6 +102,24 @@ MOSAIC, Binoculars, GLTR, and OpenAI RoBERTa-large. USTC-BUPT has an explicit
 bounded absence rather than an invented primary paper. Pangram is not method-
 excluded from a training-data preprocessing description; CNLP is excluded for
 inference-stage target normalization/rewrite.
+
+The final content-derived layer does not use the composite selector. It binds all
+119 primary PDFs and exact text extractions, then maps 805 expected accounts
+one-to-one: 241 accepted embedded results and 564 primary-result dispositions,
+with no parent-only account. Six sources have paper- and table-specific
+no-qualifier reasons. Whole-file hashes and an immutable digest of every parent/
+account pair prevent an omitted row from being hidden by lowering a mutable
+count. Content anchors cover the earlier examples, the non-English and SenFlow
+counterexamples, LM2otifs, NEULIF, all 13 TELL rows, all 15 LAPD-paper rows, all
+nine late-stage stability rows, all 15 DNA-DetectLLM-paper rows, both DP-Net
+states, and every no-account decision. Thirteen full-text controls join the
+eleven accepted controls; all twenty-four pass. The exact commands,
+inputs, output hashes, Poppler extraction version, and generated 805-row audit
+are preserved.
+
+The Leidos primary paper maps v1.0.4 to the unweighted multiclass DistilRoBERTa
+state. The prior ensemble wording is removed from the result ledger and E1 card,
+and a mutation control rejects its return.
 
 ## Benchmark anchors
 
@@ -131,11 +158,11 @@ comparators rather than a frozen like-for-like evaluation.
 ## Frozen correction and no-send state
 
 - Human-readable email SHA-256:
-  `5b8ec279d73fb5da5100719c53678b4d2965652bd7f95db516a3c217425d6021`.
+  `a7021d98c4be598bce72145fd042fe0c37b1f2e7bf6429257d5dd1001d0769a9`.
 - Mechanical subject SHA-256:
   `73540e80f5dafef3f3cb5168ad75475f755efade636b7135ea21ccaa4fc9abad`.
 - Mechanical body SHA-256:
-  `a7d276ccd281f50ed68d581824612a08f829442ec2a5b5c908c2275882d9bcb5`.
+  `1ea981e6fcd76c228edf21af4d7b3d8488dc6992f31978390f3f10fe9f41a6a0`.
 
 The mechanical copies exactly equal the subject and body of the human-readable
 draft. Status is **NOT SENT**. `delivery_plan.md` forbids delivery unless a new
@@ -145,7 +172,7 @@ an evaluator PASS.
 
 ## Independent review chain
 
-`adversarial_review.md` preserves nine distinct reviewer verdicts verbatim.
+`adversarial_review.md` preserves thirteen distinct reviewer/evaluator verdicts.
 Reviews 1, 2, 4, 6, 7, and 8 remain FAIL records with their resolved findings;
 reviews 3 and 5 are historical PASS records for predecessor candidate states.
 The dw1eval4 verdict proves that review 5 did not test publication-internal
@@ -162,13 +189,40 @@ bounded conclusion, exact correction, and no-send gate, and returned **PASS —
 no P1/P2 findings**. That internal PASS does not substitute for the required new
 one-shot evaluator and does not authorize delivery.
 
+Review 10 is the fresh dw1eval5 FAIL. It demonstrated that title/class selection
+still omitted multi-configuration ordinary papers and corrected the Leidos
+v1.0.4 mechanism. The 119-PDF/805-account repair and its thirteen full-text controls
+are frozen for a new distinct adversarial reviewer. Review 10 remains a FAIL and
+does not authorize delivery.
+
+Review 11 is the first post-evaluator fresh-review FAIL. It caught the nine
+Chinese encoder/LoRA states and eight SenFlow-related states that the initial
+manual inventory missed. The repaired full-table pass also made the
+2501.14288/LuxVeri rows and 17 weak-aggregate, high-narrow-cell TELL,
+late-stage, ReMoDetect, and ImBD results explicit. Review 11 remains a FAIL and
+does not authorize delivery.
+
+Review 12 is the next distinct fresh-review FAIL. It caught eight baselines in
+2509.15550 that falsely inherited DNA-DetectLLM's regeneration exclusion. The
+repair gives every row its primary-paper mechanism, retains regeneration only
+for actual DNA states, and adds a code-anchor mutation. The same systematic
+check corrects training-only DP-Net noise from method-excluded to
+evidence-rejected. Review 12 remains a FAIL and does not authorize delivery.
+
+Review 13 is a different fresh review over the fully frozen successor repair.
+It independently reproduced all 119 sources, 805 accounts, 564 primary rows,
+and 24 controls; checked the target primary PDFs, mixed-parent exclusions,
+benchmarks, both integrity ledgers, conclusion, owned paths, and exact NOT-SENT
+binding; and returned **PASS — no P1/P2 findings**. That internal PASS freezes
+this candidate for a new one-shot evaluator and does not authorize delivery.
+
 ## Required final verification
 
 Before commit and after checkout of the final commit:
 
-1. replay the semantic audit and its eleven controls;
+1. replay the semantic audit and its twenty-four controls;
 2. replay the independent score verifier and static checks;
-3. verify all 66 repository-ledger entries and 274 external-ledger entries;
+3. verify all 72 repository-ledger entries and 288 external-ledger entries;
 4. prove the human email equals the mechanical subject/body and remains unsent;
 5. prove every candidate-ledger path is staged and no unowned path is staged;
 6. commit and push only owned documentation artifacts; and

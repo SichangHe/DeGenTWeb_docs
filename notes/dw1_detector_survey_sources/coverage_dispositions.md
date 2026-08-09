@@ -150,6 +150,50 @@ much faster than the fixed Binoculars batch, but no state passes every accuracy
 and comparability gate. Desklib remains a runnable follow-up, not a replacement.
 [E3, E9, E18, M8]
 
+## Full-corpus account expansion
+
+The final audit removes the composite selector from discovery. It reads the
+complete primary PDF and every main/appendix result table for all 119 export
+publications. `coverage_fulltext_sources.tsv` binds each paper's PDF hash and the
+hash of its exact `pdftotext -layout -enc UTF-8` extraction.
+
+`coverage_fulltext_expected_accounts.tsv` contains 805 exact detector accounts:
+the accepted 241 embedded results and 564 separately named primary-paper
+configurations. No parent-only account remains. Each maps exactly once in
+`coverage_fulltext_account_map.tsv`; the 564 configuration dispositions are in
+`coverage_primary_results.tsv`. Six papers have source-specific, table-derived
+full-text no-qualifier reasons. The generated 805-row resolution is
+`coverage_fulltext_account_audit.tsv`. [N18]
+
+This content pass recovers all three M-DAIGT systems from 2509.00623, all nine
+classifier-by-feature states in 2503.22338, all eight original/noised/double/
+ensemble DeBERTa states in 2502.16857, and all three Defactify systems in
+2507.05157. Content anchors require both their exact IDs and their names/high
+values in the hash-bound extraction. Six new controls reject an ordinary-title
+omission with a lowered count, an analogous non-anchor omission, PDF/text
+detachment, the former false Leidos mechanism, and removal of any one of the 119
+source reviews. None of the recovered configurations passes the full accuracy,
+low-FPR, artifact, two-A6000, and near-Binoculars gate.
+
+A fresh full-corpus mutation review then found that the first primary list still
+left some inspected non-candidate papers at zero. The exact repair adds all nine
+Chinese encoder/LoRA states in 2509.00731, eight SenFlow-related states, five
+semantic-similarity DeBERTa stages in 2501.14288, both LuxVeri ensembles, and
+every other qualifying row recovered from the former zero/parent partition.
+The final table pass also adds ten narrow-domain TELL comparators, five
+late-stage stability baselines, and ReMoDetect and ImBD from the LAPD comparison.
+The LAPD-paper rows are mechanism-specific: its baselines, RAI, and S score are
+evidence-rejected, DNA-DetectLLM is regeneration-excluded, and only the actual
+LAPD pair states inherit the auxiliary-sampling exclusion.
+The 2509.15550 rows now apply regeneration only to actual DNA-DetectLLM states;
+DetectGPT is separately multi-perturbation-excluded and the other seven
+baselines are evidence-rejected. DP-Net 2504.21019 is also evidence-rejected
+because its noise is training-only, not an inference perturbation.
+Thirteen full-text controls now include non-English and narrow-domain
+lowered-count omissions and content detachment from both positive inventories
+and a table-derived zero decision, plus two false-inheritance controls for
+parent method blockers.
+
 ## Accounting for every export row
 
 The former catch-all buckets are superseded. `coverage_row_dispositions.tsv`
@@ -162,9 +206,9 @@ metrics, or explicit percentages of at least 90.
 The generated `coverage_semantic_audit.tsv` preserves the title, contributing
 exports, every matched text fragment, mapping kind, allowlisted class definition,
 resolution, reason, and primary arXiv URL for every row. The frozen run found 106
-semantic flags. All 69 plausible or method-excluded publication rows have
-explicit dispositions; the other 50 rows have mechanically allowlisted
-non-candidate classes and specific reasons. Every flag in those 50 rows is
+semantic flags. All 70 plausible or method-excluded publication rows have
+explicit dispositions; the other 49 rows have mechanically allowlisted
+non-candidate classes and specific reasons. Every flag in those 49 rows is
 resolved as a documented false positive, such as a metric belonging to a
 source-plagiarism task, an attack, a dataset-only contribution, or a
 special-language task outside the fixed deployment scope.
@@ -175,13 +219,20 @@ It rejects a missing child, wrong parent, count mismatch, absent primary
 source/absence sentinel, absent artifact status, unknown disposition, or generic
 no-qualifier explanation. Eleven regression and negative controls include the
 predecessor Task 3 omission, a one-child CNLP omission, and removal or parent/
-result misbinding of a real Markdown E-card. Unknown, wrong-kind,
-and catch-all codes fail validation at both levels; no identifier-only or
-publication-only group remains.
+result misbinding of a real Markdown E-card. Unknown, wrong-kind, and catch-all
+codes fail validation at both levels.
+
+The final audit layer validates all 119 full-text source records and all 805
+accounts, independent of title or parent class. It requires the immutable exact
+account set, one disposition target per account, all 119 PDF and text hashes, and
+content-derived anchors for evaluator counterexamples and no-account decisions.
+Together the two result-level layers run twenty-four regression and negative controls; no
+identifier-only or publication-only group remains.
 
 `coverage_semantic_audit_report.txt` preserves the exact project-neutral command,
 input/output hashes, raw and deduplicated counts, mapping counts, and PASS.
-`coverage_embedded_result_audit.tsv` preserves the generated child mapping.
+`coverage_embedded_result_audit.tsv` preserves the generated child mapping, and
+`coverage_fulltext_account_audit.tsv` preserves the complete account mapping.
 `coverage_semantic_audit_environment.txt` preserves the Python and platform
 environment; `coverage_semantic_audit_design.md` fixes the control flow and
 failure conditions. The raw Atom exports remain the canonical publication data,

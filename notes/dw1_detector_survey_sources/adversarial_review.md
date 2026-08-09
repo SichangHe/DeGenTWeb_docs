@@ -487,3 +487,171 @@ is exact. No change was required.
 Reviewer 9 final verdict: **PASS — no P1/P2 findings**. This is an internal
 review verdict only, not the required new one-shot evaluator verdict and not
 delivery authorization. The reviewer made no edits and sent nothing.
+
+## Review 10 — FAIL (fresh one-shot evaluator, dw1eval5)
+
+- evaluator workspace: `/ssd1/sichangheagent/dw1eval5`
+- evaluation date: `2026-08-09`, America/Los_Angeles
+- verdict SHA-256:
+  `83a0ae2d665fda4e549cbb573c4845db685b54fc6880b4004dbb9ae6c4102165`
+- frozen next-evaluator prompt SHA-256:
+  `ab0c2d2a7bddb41a7739012b18e48ce4aa2cbe6735b287c971045d3cbc30fd87`
+
+### Findings
+
+1. **P1 — content discovery still stopped at the composite selector.** The
+   title/class rule could omit multiple high named configurations inside an
+   ordinary primary detector paper. The evaluator proved this with three
+   M-DAIGT systems in 2509.00623, nine classifier/feature states in 2503.22338,
+   eight DeBERTa states in 2502.16857, and three Defactify systems in 2507.05157.
+   Existing exact-ID controls only protected children after source selection.
+2. **P2 — Leidos v1.0.4 had a false mechanism.** Its official system paper maps
+   MC/v1.0.4 to an unweighted multiclass DistilRoBERTa classifier, not an
+   ensemble.
+
+### Resolution
+
+The repair derives a content/table inventory from the primary PDF of every one
+of the 119 frozen publications. It binds all PDF and exact extracted-text hashes,
+then maps 537 accounts one-to-one: 241 accepted embedded results, 276 new
+primary-configuration dispositions, and 20 parent dispositions. Twenty-eight
+sources have paper-specific no-qualifier reasons. Immutable whole-file and exact
+account-set hashes prevent a deleted row from being hidden by lowering a count.
+Content anchors cover every evaluator example, and six new controls exercise the
+ordinary-title omission, a non-anchor omission, artifact detachment, source-row
+deletion, and Leidos contradiction. The Leidos result and E1 card now preserve
+the official BC/BW/MC/MW mapping.
+
+Review 10 remains a **FAIL** record. It does not authorize delivery, and the
+correction remains **NOT SENT** pending a new one-shot evaluator and manager
+authorization.
+
+## Review 11 — FAIL
+
+- reviewer identity: `/root/eval5_fulltext_fresh_review`, a distinct read-only
+  reviewer
+- timestamp recorded after receipt: `2026-08-09T04:20:02-07:00`
+- scope: the first all-119-paper full-text repair, generator, exact ledgers,
+  content controls, Leidos correction, integrity bindings, conclusion, and
+  unsent correction
+
+### Finding
+
+1. **P1 — the curated full-text inventory still had a manual-list blind spot.**
+   ArXiv 2509.00731 was incorrectly assigned zero accounts even though Table 1
+   reports high RoBERTa, BERT, FastText, Qwen2.5-7B LoRA, and
+   DeepSeek-R1-Distill-Qwen-7B LoRA results. ArXiv 2606.18946 was a second
+   counterexample: its tables name POGER, SeqXGPT, SenDetEX, SenFlow, and four
+   SenFlow ablations, including 0.924-0.940 macro F1. Hashing a hand-curated
+   account list protected only already selected rows; it did not prove complete
+   content discovery.
+
+### Confirmed by reviewer 11
+
+- The four dw1eval5 examples had separate complete rows and text anchors.
+- Leidos v1.0.4 was correctly repaired to the unweighted multiclass
+  DistilRoBERTa classifier.
+- The then-current audit and generator were reproducible, both integrity
+  ledgers passed, the accepted benchmark evidence was unchanged, and the exact
+  correction remained **NOT SENT**.
+
+### Resolution
+
+The nine Chinese encoder/LoRA states and eight SenFlow-related states now have
+individual table evidence, mechanisms, scope gates, artifact status, and
+dispositions. Rechecking the former zero/parent partition added five
+2501.14288 architecture stages and both LuxVeri ensembles. A final all-paper
+table pass then caught 17 more narrow-cell rows that weak aggregates had hidden:
+ten TELL comparators, five late-stage stability baselines, and ReMoDetect plus
+ImBD in the LAPD paper. The repaired exact inventory has 805 accounts: all 241
+accepted embedded results and 564 primary-paper configurations, with only six
+source-specific table-derived zero-account decisions. Content anchors bind the
+new per-paper ID sets to extracted table text, and lowered-count/content-
+detachment controls cover both the non-English and narrow-domain omissions.
+
+Reviewer 11 final verdict: **FAIL** until the expanded repair is frozen and a
+different fresh reviewer passes. This FAIL remains preserved and is not
+rewritten as a PASS.
+
+## Review 12 — FAIL
+
+- reviewer identity: `/root/eval5_final_fulltext_review3`, a different fresh
+  read-only reviewer
+- timestamp recorded after receipt: `2026-08-09T04:47:06-07:00`
+- scope: the staged 119-paper/805-account repair, result-specific mechanisms,
+  Leidos, audits and integrity bindings, accepted benchmark evidence,
+  conclusion, and unsent correction
+
+### Finding
+
+1. **P1 — DNA-DetectLLM's parent exclusion leaked onto eight baselines.** All
+   15 arXiv 2509.15550 rows carried `exclude_regeneration`, including BiScope,
+   Entropy, Likelihood, LogRank, DetectGPT, FastDetectGPT, Binoculars, and
+   Lastde++. The primary paper distinguishes those comparison mechanisms from
+   DNA-DetectLLM's iterative token repair. A complete account with a false
+   inherited mechanism is not a valid result-specific disposition.
+
+### Confirmed by reviewer 12
+
+- Isolated replay returned 119 sources, 805 accounts, 241 embedded results, 564
+  primary results, and 23 passing controls.
+- The generated ledgers reproduced exactly; Leidos v1.0.4 remained the
+  unweighted multiclass DistilRoBERTa state; both integrity ledgers passed; and
+  the exact correction remained **NOT SENT**.
+
+### Resolution
+
+The eight baselines now carry their actual supervised or score-based mechanisms.
+BiScope, Entropy, Likelihood, LogRank, FastDetectGPT, Binoculars, and Lastde++
+are evidence-rejected; DetectGPT keeps its separate multi-perturbation
+exclusion. Only the seven actual DNA-DetectLLM repair/model-pair states retain
+the regeneration exclusion. Exact Table 1/Table 2 evidence is separate for
+every baseline and repair-order state, a hard-coded code anchor protects the
+partition, and a mutation now rejects restoring the inherited regeneration
+blocker.
+
+The same systematic check corrected DP-Net arXiv 2504.21019: its uniform and
+Gaussian embedding noise is training-only, so neither state is an inference
+multi-perturbation pipeline. Their 85.48%/86.10% seven-domain average accuracy,
+missing frozen state, missing low-FPR evidence, and missing fixed A6000 timing
+leave both evidence-rejected without changing the conclusion.
+
+Reviewer 12 final verdict: **FAIL** until these repairs are refrozen and a
+different fresh reviewer passes. This FAIL remains preserved and is not
+rewritten as a PASS. The reviewer made no edits and sent nothing.
+
+## Review 13 — PASS
+
+- reviewer identity: `/root/eval5_final_fulltext_review4`, a different fresh
+  read-only reviewer
+- timestamp recorded after receipt: `2026-08-09T05:09:19-07:00`
+- scope: the fully staged eval5 successor repair, including every full-text
+  account, result-specific exclusion, Leidos, all accepted benchmark and
+  integrity evidence, conclusion, and unsent correction
+- reviewed candidate-ledger SHA-256:
+  `9982ac6c6dd85563f76b9dbaa8beff8a97d4a189f7294e69b114896e210a8720`
+- reviewed external-manifest SHA-256:
+  `ef79a70d6946056ae1fa6d92c2ef340d94e60f8218ecce31aa61e4fc8a89828a`
+
+### Independent checks
+
+- The reviewer regenerated 119 sources, 805 exact accounts, and 564 primary
+  rows in isolation. All generated bytes matched the staged ledgers.
+- The reviewer reran the audit in isolation. Its three generated audits matched
+  byte-for-byte, and all eleven composite plus thirteen full-text controls
+  passed.
+- All 72 candidate-ledger entries and all 288 external-manifest entries, the
+  external path set, and the read-only freeze passed.
+- The primary PDFs supported the repaired DNA-DetectLLM baseline partition,
+  DP-Net's training-only noise, Leidos v1.0.4's unweighted multiclass
+  DistilRoBERTa mechanism, and the separate LM²otifs and NEULIF dispositions.
+- The reviewer challenged the original eval5 omissions, Chinese encoder/LoRA
+  states, SenFlow, TELL, late-stage stability, LAPD/ReMoDetect/ImBD, LuxVeri,
+  mixed-mechanism parents, benchmark reconstruction, owned-path boundary, and
+  conclusion. No reasonable P1/P2 finding remained.
+- The human draft equalled the mechanical subject/body and remained **NOT
+  SENT**. No file, commit, remote, mail, or external artifact was changed.
+
+Reviewer 13 final verdict: **PASS — no P1/P2 findings**. P3: none. This internal
+PASS freezes the candidate for a new one-shot evaluator; it neither substitutes
+for that evaluator nor authorizes delivery.

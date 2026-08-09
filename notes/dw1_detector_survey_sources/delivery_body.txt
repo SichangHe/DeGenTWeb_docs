@@ -52,15 +52,35 @@ point three percent accuracy on a sixty-text test. The three public source
 releases do not include trained checkpoints, and none reports a matched
 low-false-positive and speed comparison. They do not change the recommendation.
 
-A broader audit then found that overview, benchmark, and shared-task papers still
-hid named systems. A final adversarial check also found that low overall scores
-were masking high per-dataset, generator, domain, prompt, and language results.
-The repair now accounts separately for two hundred forty-one qualifying
-system versions, always recording the weak mean or overall result beside an
-isolated high score. These include four Leidos variants, Pangram, USTC-BUPT,
-ALERT, and CNLP-NITS from one shared-task overview. Each result has a primary
-system source or a documented bounded absence, plus its own artifact and method
-disposition.
+A broader audit first found that overview, benchmark, and shared-task papers hid
+named systems. The final repair then read the full text and result tables of all
+one hundred nineteen frozen papers, including ordinary detector papers whose
+titles did not signal a comparison. A fresh adversarial mutation found that the
+first table inventory still omitted named configurations in papers it had
+labeled as non-candidates. The corrected ledger now accounts separately for
+eight hundred five qualifying detector accounts: two hundred forty-one
+previously expanded systems and five hundred sixty-four primary-paper
+configurations. No single parent-level account remains. Six papers have a
+table-specific reason that no result qualifies. High validation or narrow
+scores remain beside weak official, transfer, attack, or cross-domain results.
+
+This pass recovered all three M-DAIGT systems, nine classical-classifier feature
+combinations, eight DeBERTa training and ensemble states, three Defactify
+systems, all nine Chinese encoder and LoRA states in paper 2509.00731, eight
+SenFlow-related states, five semantic-similarity DeBERTa stages, and both
+LuxVeri inverse-perplexity ensembles. It also recovered ten narrow-domain TELL
+comparators, five late-stage stability baselines, and the ReMoDetect and ImBD
+rows reported inside the LAPD paper. The result-specific pass also stopped
+DNA-DetectLLM's regeneration blocker from being applied to its ordinary
+baselines. It corrected DP-Net in the other direction: its noise is added only
+during training, so the two states are evidence-rejected rather than excluded
+as inference perturbation pipelines. Their best seven-domain average accuracy
+is eighty-six point one percent, with no frozen state or fixed low-false-positive
+and A6000 evidence. It also corrected one mechanism: Leidos
+version one point zero point four is the paper's unweighted multiclass
+DistilRoBERTa classifier, not an ensemble. None of the recovered configurations
+adds the matched low-false-positive, public artifact, two-A6000, and
+near-Binoculars evidence needed to change the recommendation.
 
 Three complete public checkpoints warranted direct testing. DetectRL-X and
 ModernBERT were fast but substantially less accurate than the stored controls.

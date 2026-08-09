@@ -529,7 +529,7 @@ high claims and individually rejected, leaving the recommendation unchanged.
   hard failure, as is binding a child to the wrong E-card. The checker also
   parses and hash-binds the parent and exact result IDs from every real Markdown
   E-card marker.
-- Generalized control: composite selection uses allowlisted source classes and
+- Accepted composite control: composite selection uses allowlisted source classes and
   publication-title semantics rather than a manually chosen identifier count.
   The audit validates exact child identities, counts, parents, and cards.
   Regression tests prove that the predecessor Task 3 omission, a missing CNLP
@@ -539,13 +539,119 @@ high claims and individually rejected, leaving the recommendation unchanged.
   high-cell parent as no-qualifier, and a generic no-qualifier reason fail.
   Complete source-specific negative controls pass.
 - Frozen result: 204 raw export rows deduplicate to 119 publications; 106 have
-  title/abstract performance triggers, 69 have explicit parent dispositions, 50
+  title/abstract performance triggers, 70 have explicit parent dispositions, 49
   have mechanically allowlisted non-candidate classes, 33 require composite
   review, and 241 child results are individually dispositioned. All eleven
   regression/negative controls pass.
 - Interpretation: a publication-row mapping is necessary but no longer
   sufficient. The child ledger prevents plausible high-score systems from being
-  hidden by “benchmark,” “overview,” “shared task,” or an analogous catch-all.
+  hidden within the selected “benchmark,” “overview,” “shared task,” and
+  analogous composite classes. N18 removes that layer's remaining selection
+  boundary across the complete corpus.
+
+### N18 — Full-corpus, content-derived account repair
+
+- Durable source maps:
+  [119-paper source inventory](coverage_fulltext_sources.tsv),
+  [805-account expectation inventory](coverage_fulltext_expected_accounts.tsv),
+  [exact disposition map](coverage_fulltext_account_map.tsv),
+  [564 primary-result dispositions](coverage_primary_results.tsv),
+  [generated account audit](coverage_fulltext_account_audit.tsv), and
+  [inventory generator](build_fulltext_inventory.py).
+- Sourced accounting: every primary PDF and every main/appendix result table for
+  all 119 frozen export publications was read. A separately named submitted,
+  proposed, or fitted detector system, version, ensemble, training state, or
+  configuration is an account when it carries a threshold metric at or above
+  0.90 on any reported slice or an explicit high/best claim. Dataset and
+  operating-point repetitions stay on one account; component-only hyperparameter
+  sweeps do not become deployment accounts.
+- Exact result: 805 accounts resolve one-to-one: all 241 accepted embedded
+  results and 564 explicit primary-paper configurations. No parent-only account
+  remains. Six papers have source-specific, table-derived full-text no-qualifier
+  reasons. Each of the 119 source rows binds the preserved primary
+  PDF hash and the hash of its exact `pdftotext -layout -enc UTF-8` extraction.
+- Ordinary-title controls: arXiv 2509.00623 now has separate RoBERTa-base,
+  TF-IDF plus linear support-vector machine, and Candace rows; 2503.22338 has all
+  nine support-vector, random-forest, and XGBoost combinations over RAIDAR,
+  NELA, and combined features; 2502.16857 has all eight original, noised,
+  double-finetuned, and ensemble DeBERTa states; and 2507.05157 has separate
+  GPT-4o-mini, BERT, and Llama-3-8B rows. Their high development, validation, or
+  narrow test cells remain paired with weaker official, transfer, attack, and
+  out-of-domain results.
+- Full-corpus correction: a fresh mutation review showed that the first curated
+  primary list still treated some inspected papers as account-free. The repair
+  adds all nine encoder/LoRA states from 2509.00731, eight POGER/SeqXGPT/
+  SenDetEX/SenFlow states from 2606.18946, five DeBERTa architecture stages from
+  2501.14288, both LuxVeri inverse-perplexity ensembles from 2501.11914, and all
+  other qualifying named rows found while rechecking the former zero/parent
+  partition. Each now has its own primary-result target.
+- Table-wide correction: a further all-paper table pass adds ten comparators in
+  TELL arXiv 2605.27921 whose aggregate AUROCs are weak but whose domain cells
+  reach 0.909-1.000; Likelihood, Log-Rank, FastDetectGPT, Lastde, and DivEye in
+  arXiv 2601.04833, whose generator slices reach 90.28%-94.17%; and ReMoDetect
+  and ImBD in the LAPD paper, whose RealDet AUROCs are 92.18% and 92.12% but
+  five-benchmark averages are 80.82% and 83.27%. Each row preserves the weaker
+  aggregate, artifact absence, method boundary, and timing gap rather than
+  promoting a narrow cell. The LAPD paper's baselines, RAI, and S score do not
+  inherit LAPD's auxiliary-sampling exclusion; DNA-DetectLLM keeps its separate
+  regeneration exclusion, and only the actual LAPD pair states carry the
+  10,000-sample blocker.
+- Parent-exclusion correction: arXiv 2509.15550 now gives BiScope, Entropy,
+  Likelihood, LogRank, DetectGPT, FastDetectGPT, Binoculars, and Lastde++ their
+  own mechanisms and table evidence. DetectGPT is multi-perturbation-excluded;
+  the other seven are evidence-rejected. Only the seven actual DNA-DetectLLM
+  repair/order/model-pair states retain regeneration exclusion. ArXiv 2504.21019
+  is corrected in the other direction: DP-Net's uniform/Gaussian embedding
+  noise is applied during training, not inference. Its seven-domain average
+  accuracy is 85.48%/86.10%, and no frozen state, low-FPR result, or fixed A6000
+  timing supports promotion.
+- Counterexample dispositions:
+  - arXiv 2509.00731 now has RoBERTa, BERT, FastText, three Qwen2.5-7B LoRA
+    ranks, and three DeepSeek-R1-Distill-Qwen-7B LoRA ranks. Qwen accuracies are
+    0.9431/0.9376/0.9594; DeepSeek rank 8 qualifies through 0.9008 machine-class
+    F1 despite 0.8898 accuracy. These Chinese-only fitted states expose no
+    released checkpoint, cross-distribution/low-FPR result, or fixed timing. A
+    7B LoRA path is plausible on two A6000s but has no scientifically equivalent
+    public paper state to screen.
+  - arXiv 2606.18946 now has POGER, SeqXGPT, SenDetEX, SenFlow, and four named
+    SenFlow ablations. Reported macro F1 is 0.924 for SenDetEX, 0.940 for
+    SenFlow, and 0.922-0.935 for the ablations. Every result labels sentences in
+    hybrid documents rather than general documents; none supplies a qualifying
+    frozen state, fixed calibration, or comparable A6000 timing.
+  - arXiv 2501.14288 now has five separate DeBERTa/architecture-stage/ensemble
+    rows with AUC 91.2%-94.7%. The earlier no-metric reason was false. All five
+    remain evidence-rejected because the paper supplies no public trained state,
+    cross-distribution result, low-FPR calibration, or fixed deployment timing.
+  - arXiv 2501.11914 now has separate English and multilingual LuxVeri
+    inverse-perplexity ensembles. They are explicitly the paper's best systems,
+    but official macro F1 is only 0.7458/0.7513 and no released state establishes
+    the fixed general-detector screen.
+- Result-specific gates are not inherited blindly from a parent. The six
+  RAIDAR-containing 2503.22338 configurations are excluded for seven target
+  rewrites, while the three NELA-only classifiers are evidence-rejected. Eight
+  direct classifiers in 2510.02319 are evidence-rejected, while only the PIFE
+  target-canonicalization state inherits that paper's rewrite exclusion. Hosted
+  GPT-4o-mini is separately marked closed.
+- Leidos correction: the official Task 3 system paper maps MC/v1.0.4 to an
+  unweighted multiclass DistilRoBERTa classifier. It is not an ensemble. The
+  four submitted mappings are BC/v1.0.1 unweighted binary, BW/v1.0.3 weighted
+  binary, MC/v1.0.4 unweighted multiclass, and MW/v1.0.2 weighted multiclass.
+- Mechanical controls: the checker hash-binds all four full-text ledgers and the
+  exact 805-pair set, reruns PDF extraction, and rejects missing or mis-targeted
+  accounts. Thirteen full-text controls cover the ordinary-title selection fixture,
+  Candace deletion with a lowered count, non-anchor PAWN deletion with a lowered
+  count, deletion of a non-English Qwen LoRA state with a lowered count, content
+  detachment for that state, deletion of the narrow-domain ChatGPT-D row with a
+  lowered count, content detachment for that row and for a table-derived
+  no-account decision, PDF/text detachment, the false Leidos ensemble
+  description, false inheritance of parent method blockers by retained LAPD and
+  DNA-DetectLLM-paper comparators, and removal of any one of the 119 source rows.
+  Together with the eleven accepted composite controls, all twenty-four pass.
+- Decision: the recovered configurations are individually visible but do not
+  alter the accuracy-first conclusion. They are validation-only, narrow,
+  shifted, unreleased, excluded-method, weaker on official/transfer evidence, or
+  lack the matched low-FPR, two-A6000, and near-Binoculars timing basis required
+  for promotion.
 
 ### M8 — Public states surfaced by composite sources
 

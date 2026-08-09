@@ -54,8 +54,9 @@ expanded below; a weak aggregate never suppresses a high slice.
   respectively 99.4/97.2, 99.3/97.7, 99.2/97.6, and 99.1/95.7 percent. The
   [primary system paper](https://aclanthology.org/2025.genaidetect-1.39/), PDF
   SHA-256 `9f25944491038204c8799cd691bacb192b342a75b7665779f43908e0e4bd53fc`,
-  describes DistilRoBERTa binary and multiclass submissions, each with and
-  without static class weighting. Training randomly partitions RAID, reserving
+  maps BC/v1.0.1 to unweighted binary, BW/v1.0.3 to weighted binary,
+  MC/v1.0.4 to **unweighted multiclass**, and MW/v1.0.2 to weighted multiclass
+  DistilRoBERTa classifiers; v1.0.4 is not an ensemble. Training randomly partitions RAID, reserving
   50,000 validation and 400,000 internal-test examples, and evaluates the best
   model separately on Task-1-derived generators; the paper does not report a
   maximum input length, batch size, optimizer, learning rate, or epoch count.

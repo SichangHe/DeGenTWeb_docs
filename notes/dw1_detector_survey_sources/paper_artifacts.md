@@ -156,13 +156,22 @@ this exact, discoverable path:
 
 `/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08`
 
-Its `README.md` documents scope and provenance. Its 274-entry
+Its `README.md` documents scope and provenance. Its 288-entry
 `MANIFEST.sha256` has SHA-256
-`6aeb1d786e1c91eb6c7e3f0723d129a6a562586c57024227c7082bbbdf5f4529`;
-`sha256sum --check MANIFEST.sha256` passed for all 274 retained files on
-2026-08-08. The ledger covers every collection file other than itself. This
+`ef79a70d6946056ae1fa6d92c2ef340d94e60f8218ecce31aa61e4fc8a89828a`;
+`sha256sum --check MANIFEST.sha256` passed for all 288 retained files on
+2026-08-09. The ledger covers every collection file other than itself. This
 repository separately preserves raw benchmark execution and environment files,
 which are frozen by `candidate_manifest.md`.
+
+The final content-derived audit requires one primary PDF for every frozen export
+row. Fourteen anonymously public arXiv PDFs were added after the 274-file freeze:
+2608.03859, 2607.14905, 2605.03723, 2605.02712, 2604.21365, 2604.21300,
+2604.04932, 2511.17402, 2510.00890, 2509.25154, 2508.18715, 2503.23622,
+2501.18998, and 2501.14288. Their individual paths and PDF hashes, together with
+the exact extracted-text hashes for all 119 publications, are bound in
+`coverage_fulltext_sources.tsv`. The external README records their anonymous
+public provenance; the manifest includes both that correction and every PDF.
 
 ### Newly decisive primary papers and official releases
 

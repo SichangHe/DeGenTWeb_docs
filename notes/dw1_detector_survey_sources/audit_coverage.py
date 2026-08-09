@@ -8,6 +8,7 @@ import csv
 import hashlib
 import platform
 import re
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from collections.abc import Callable
@@ -52,6 +53,39 @@ EMBEDDED_RESULT_FIELDS = (
     "source_card",
 )
 EXPECTED_RESULT_FIELDS = ("parent_id", "result_id")
+FULLTEXT_SOURCE_FIELDS = (
+    "parent_id",
+    "title",
+    "paper_path",
+    "pdf_sha256",
+    "text_sha256",
+    "mapping_kind",
+    "publication_role",
+    "resolution",
+    "expected_account_count",
+    "inspected_scope",
+    "reason",
+)
+FULLTEXT_ACCOUNT_FIELDS = (
+    "parent_id",
+    "account_id",
+    "system",
+    "account_kind",
+    "evidence_locator",
+    "qualifying_evidence",
+)
+FULLTEXT_ACCOUNT_MAP_FIELDS = (
+    "parent_id",
+    "account_id",
+    "resolution_kind",
+    "target_id",
+)
+ALLOWED_FULLTEXT_RESOLUTIONS = {
+    "embedded_result",
+    "embedded_result+primary_result",
+    "no_qualifying_account",
+    "primary_result",
+}
 ALLOWED_FLAG_RESOLUTIONS = {"candidate_disposition", "false_positive", "not_flagged"}
 ALLOWED_COMPOSITE_RESOLUTIONS = {
     "expanded_results",
@@ -95,10 +129,40 @@ RESULT_CODE_DEFINITIONS = {
     "retain_reject": "individually reviewed result fails one or more fixed evidence gates",
     "runnable_control": "public detector is runnable but fails the accuracy-first gate",
 }
+RESULT_CODE_TEXT_PATTERNS = {
+    "exclude_generation": re.compile(r"generat|autoregress|summar|simplif", re.I),
+    "exclude_multi_perturbation": re.compile(r"perturb|shuffl|auxiliary|sampl", re.I),
+    "exclude_perturbation": re.compile(r"perturb|sanitiz|transform", re.I),
+    "exclude_regeneration": re.compile(
+        r"generat|continuation|ideal|replacement|repair", re.I
+    ),
+    "exclude_retrieval": re.compile(
+        r"retriev|nearest|datastore|lookup|vocabular|retained reference|dictionary",
+        re.I,
+    ),
+    "exclude_rewriting": re.compile(
+        r"rewrit|normaliz|canonical|replace|transform|paraphras", re.I
+    ),
+}
 EXPECTED_RESULT_IDS_SHA256 = (
     "b7fbe5addd85685392ac7cd617ef9bfea6410bf7d5be2482057605ac5589cd8a"
 )
-SOURCE_CARDS_SHA256 = "1a240efcf1c8441eb94e5726716db4967cb8f074f910490923b6071076842387"
+SOURCE_CARDS_SHA256 = "ad4d4b4a4abfefda23ce3d7580b28c7692fb1bb67c343f0a5ba65c4b8c6cd79b"
+FULLTEXT_SOURCES_SHA256 = (
+    "5f258b94e18593582f8172c1bcc43c32d07ca05dc4b4b5b0b7f87af071b9e720"
+)
+FULLTEXT_ACCOUNTS_SHA256 = (
+    "871f3e9b7f0356aece25c5a59b2baae84956cb8ee3181fb59fa47f2aaf76b2ac"
+)
+FULLTEXT_ACCOUNT_MAP_SHA256 = (
+    "5027a7d752966197f120b91262192cd8a1e45a1db424b21bc2e9a5497529fa4f"
+)
+PRIMARY_RESULTS_SHA256 = (
+    "705959809818fa15f2a19a5dcfe0a93e3017652b36ef7d14aee32772e1ff25f9"
+)
+FULLTEXT_ACCOUNT_SET_SHA256 = (
+    "def94a17c54add16e9a6522a01b4b453cb16d706aef596b9f78024cbf3a3b2d9"
+)
 SOURCE_CARD_HEADING_PATTERN = re.compile(
     r"^## (?P<label>E\d+) — .+, arXiv (?P<parent>\d{4}\.\d{5})$"
 )
@@ -139,6 +203,203 @@ ANCHOR_RESULT_IDS = {
         "2605.20761:ai-blues",
         "2605.20761:nlp-great",
     },
+}
+CONTENT_ANCHOR_ACCOUNTS = {
+    "2509.00623": {
+        "2509.00623:roberta-base",
+        "2509.00623:tfidf-svm",
+        "2509.00623:candace",
+    },
+    "2503.22338": {
+        f"2503.22338:{learner}-{feature}"
+        for learner in ("svc", "rf", "xgb")
+        for feature in ("raidar", "nela", "combined")
+    },
+    "2502.16857": {
+        "2502.16857:original-xsmall",
+        "2502.16857:original-small",
+        "2502.16857:original-base",
+        "2502.16857:noised-xsmall",
+        "2502.16857:noised-small",
+        "2502.16857:noised-base",
+        "2502.16857:double-small",
+        "2502.16857:ensemble-small",
+    },
+    "2507.05157": {
+        "2507.05157:gpt4o-mini",
+        "2507.05157:bert",
+        "2507.05157:llama3-8b",
+    },
+    "2607.23805": set(),
+    "2605.14240": set(),
+    "2604.19768": set(),
+    "2510.22874": set(),
+    "2505.15422": set(),
+    "2503.23622": set(),
+    "2606.18946": {
+        "2606.18946:poger",
+        "2606.18946:seqxgpt",
+        "2606.18946:sendetex",
+        "2606.18946:senflow",
+        "2606.18946:senflow-no-gcn",
+        "2606.18946:senflow-no-crf",
+        "2606.18946:senflow-no-cl",
+        "2606.18946:senflow-no-tcn",
+    },
+    "2509.00731": {
+        "2509.00731:roberta",
+        "2509.00731:bert",
+        "2509.00731:fasttext",
+        "2509.00731:qwen-r4",
+        "2509.00731:qwen-r8",
+        "2509.00731:qwen-r16",
+        "2509.00731:deepseek-r4",
+        "2509.00731:deepseek-r8",
+        "2509.00731:deepseek-r16",
+    },
+    "2501.14288": {
+        "2501.14288:deberta",
+        "2501.14288:deberta-lstm",
+        "2501.14288:deberta-lstm-attention",
+        "2501.14288:target-shuffling",
+        "2501.14288:ensemble",
+    },
+    "2501.11914": {
+        "2501.11914:inverse-perplexity-en",
+        "2501.11914:inverse-perplexity-multi",
+    },
+    "2511.21744": {
+        "2511.21744:cnn",
+        "2511.21744:random-forest",
+    },
+    "2505.12507": {
+        "2505.12507:npr",
+        "2505.12507:lrr",
+        "2505.12507:rank",
+        "2505.12507:entropy",
+        "2505.12507:logrank",
+        "2505.12507:likelihood",
+        "2505.12507:glimpse",
+        "2505.12507:binoculars",
+        "2505.12507:dnagpt",
+        "2505.12507:fastdetectgpt",
+        "2505.12507:roberta-qa",
+        "2505.12507:radar",
+        "2505.12507:gptzero",
+        "2505.12507:detective",
+        "2505.12507:lm2",
+        "2505.12507:lm2-gpt2-tokenizer",
+        "2505.12507:lm2-u",
+        "2505.12507:lm2-w",
+        "2505.12507:lm2-uw",
+        "2505.12507:lm2-no-bert",
+    },
+    "2605.27921": {
+        "2605.27921:tell",
+        "2605.27921:mage",
+        "2605.27921:pangram-editlens",
+        "2605.27921:fastdetectgpt",
+        "2605.27921:argugpt",
+        "2605.27921:t5-sentinel",
+        "2605.27921:detectllm-npr",
+        "2605.27921:openai-roberta",
+        "2605.27921:aigc-mpu",
+        "2605.27921:detectllm-lrr",
+        "2605.27921:logrank-gpt2-medium",
+        "2605.27921:radar",
+        "2605.27921:chatgpt-d",
+    },
+    "2604.16923": {
+        "2604.16923:entropy",
+        "2604.16923:likelihood",
+        "2604.16923:logrank",
+        "2604.16923:fastdetectgpt",
+        "2604.16923:lastde-plus",
+        "2604.16923:binoculars",
+        "2604.16923:dna-detectllm",
+        "2604.16923:remodetect",
+        "2604.16923:imbd",
+        "2604.16923:rai",
+        "2604.16923:s-score",
+        "2604.16923:lapd-llama2",
+        "2604.16923:lapd-falcon",
+        "2604.16923:lapd-gptj",
+        "2604.16923:lapd-llama31",
+    },
+    "2601.04833": {
+        "2601.04833:likelihood",
+        "2601.04833:logrank",
+        "2601.04833:fastdetectgpt",
+        "2601.04833:lastde",
+        "2601.04833:diveye",
+        "2601.04833:dd",
+        "2601.04833:lv",
+        "2601.04833:tsd",
+        "2601.04833:tsd-plus",
+    },
+    "2509.15550": {
+        "2509.15550:biscope",
+        "2509.15550:entropy",
+        "2509.15550:likelihood",
+        "2509.15550:logrank",
+        "2509.15550:detectgpt",
+        "2509.15550:fastdetectgpt",
+        "2509.15550:binoculars",
+        "2509.15550:lastde-plus",
+        "2509.15550:dna-default",
+        "2509.15550:dna-low-high",
+        "2509.15550:dna-high-low",
+        "2509.15550:dna-sequential",
+        "2509.15550:dna-mistral",
+        "2509.15550:dna-llama2",
+        "2509.15550:dna-llama3",
+    },
+    "2504.21019": {
+        "2504.21019:uniform",
+        "2504.21019:gaussian",
+    },
+}
+CONTENT_ANCHOR_TEXT = {
+    "2509.00623": ("TF-IDF + SVM", "Candace", "99.95"),
+    "2503.22338": ("RAIDAR + NELA", "Random Forest", "0.9945"),
+    "2502.16857": ("Double Finetune", "Ensemble", "0.9531"),
+    "2507.05157": ("GPT-4o-mini", "BERT", "Llama", "93%"),
+    "2607.23805": ("Fraudulent AI-Generated", "Software Engineering Surveys"),
+    "2605.14240": ("Paraphrasing Attack Resilience", "0.8061"),
+    "2604.19768": ("rhetorical intensity", "miscalibration"),
+    "2510.22874": ("A Comprehensive Dataset", "0.53"),
+    "2505.15422": ("studies conducted from 2015 to 2024", "accuracy of 98%"),
+    "2503.23622": ("AI-Resilient Assessments", "automated feedback"),
+    "2606.18946": ("SenFlow", "0.940"),
+    "2509.00731": ("Qwen2.5-7B", "0.9594", "0.9008"),
+    "2501.14288": ("DeBERTa-v3-large", "94.7"),
+    "2501.11914": ("Inverse Perplexity", "0.7513"),
+    "2511.21744": ("Random Forest", "0.9951"),
+    "2505.12507": ("LM2 OTIFS", "Table 18", "0.97"),
+    "2605.27921": ("T5Sentinel", "ChatGPT-D", "1.000"),
+    "2604.16923": ("ReMoDetect", "ImBD", "92.18", "92.12"),
+    "2601.04833": ("Likelihood", "Diveye", "92.96", "93.80"),
+    "2509.15550": ("Biscope", "Mutation Repair", "98.30"),
+    "2504.21019": ("training phase", "Gaussian noise", "86.10"),
+}
+RESULT_CODE_ANCHORS = {
+    "2509.15550:biscope": "retain_reject",
+    "2509.15550:entropy": "retain_reject",
+    "2509.15550:likelihood": "retain_reject",
+    "2509.15550:logrank": "retain_reject",
+    "2509.15550:detectgpt": "exclude_multi_perturbation",
+    "2509.15550:fastdetectgpt": "retain_reject",
+    "2509.15550:binoculars": "retain_reject",
+    "2509.15550:lastde-plus": "retain_reject",
+    "2509.15550:dna-default": "exclude_regeneration",
+    "2509.15550:dna-low-high": "exclude_regeneration",
+    "2509.15550:dna-high-low": "exclude_regeneration",
+    "2509.15550:dna-sequential": "exclude_regeneration",
+    "2509.15550:dna-mistral": "exclude_regeneration",
+    "2509.15550:dna-llama2": "exclude_regeneration",
+    "2509.15550:dna-llama3": "exclude_regeneration",
+    "2504.21019:uniform": "retain_reject",
+    "2504.21019:gaussian": "retain_reject",
 }
 REQUIRED_SOURCE_CARDS = {
     "2501.08913": "Embedded source card E1",
@@ -318,6 +579,56 @@ class SourceCard:
     label: str
     parent_id: str
     result_ids: frozenset[str]
+
+
+@dataclass(frozen=True)
+class FulltextSource:
+    parent_id: str
+    title: str
+    paper_path: str
+    pdf_sha256: str
+    text_sha256: str
+    mapping_kind: str
+    publication_role: str
+    resolution: str
+    expected_account_count: str
+    inspected_scope: str
+    reason: str
+
+
+@dataclass(frozen=True)
+class FulltextAccount:
+    parent_id: str
+    account_id: str
+    system: str
+    account_kind: str
+    evidence_locator: str
+    qualifying_evidence: str
+
+
+@dataclass(frozen=True)
+class FulltextAccountMap:
+    parent_id: str
+    account_id: str
+    resolution_kind: str
+    target_id: str
+
+
+def validate_result_disposition(result: EmbeddedResult) -> None:
+    if result.disposition_code == "retain_reject" and re.search(
+        r"\bviolat(?:e|es|ing)\b.{0,100}\b(?:boundary|constraint)\b",
+        result.disposition,
+        re.I,
+    ):
+        raise ValueError(
+            f"retained result inherits an exclusion blocker: {result.result_id}"
+        )
+    pattern = RESULT_CODE_TEXT_PATTERNS.get(result.disposition_code)
+    if pattern is not None and pattern.search(result.disposition) is None:
+        raise ValueError(
+            "excluded result lacks mechanism-specific disposition evidence: "
+            f"{result.result_id}"
+        )
 
 
 def compact(text: str) -> str:
@@ -541,6 +852,80 @@ def load_source_cards(path: Path) -> dict[str, SourceCard]:
     return cards
 
 
+def _require_hash(path: Path, expected: str, label: str) -> None:
+    actual = sha256(path)
+    if actual != expected:
+        raise ValueError(f"{label} hash mismatch: expected {expected}, found {actual}")
+
+
+def load_fulltext_sources(path: Path) -> dict[str, FulltextSource]:
+    _require_hash(path, FULLTEXT_SOURCES_SHA256, "full-text source inventory")
+    sources: dict[str, FulltextSource] = {}
+    with path.open(newline="", encoding="utf-8") as stream:
+        reader = csv.DictReader(stream, delimiter="\t")
+        if reader.fieldnames != list(FULLTEXT_SOURCE_FIELDS):
+            raise ValueError(
+                f"full-text-source header must be: {' | '.join(FULLTEXT_SOURCE_FIELDS)}"
+            )
+        for raw in reader:
+            item = FulltextSource(
+                **{field: raw[field].strip() for field in FULLTEXT_SOURCE_FIELDS}
+            )
+            if item.parent_id in sources:
+                raise ValueError(f"duplicate full-text source: {item.parent_id}")
+            sources[item.parent_id] = item
+    return sources
+
+
+def load_fulltext_accounts(path: Path) -> list[FulltextAccount]:
+    _require_hash(path, FULLTEXT_ACCOUNTS_SHA256, "full-text account inventory")
+    accounts: list[FulltextAccount] = []
+    seen: set[str] = set()
+    with path.open(newline="", encoding="utf-8") as stream:
+        reader = csv.DictReader(stream, delimiter="\t")
+        if reader.fieldnames != list(FULLTEXT_ACCOUNT_FIELDS):
+            raise ValueError(
+                "full-text-account header must be: "
+                f"{' | '.join(FULLTEXT_ACCOUNT_FIELDS)}"
+            )
+        for raw in reader:
+            item = FulltextAccount(
+                **{field: raw[field].strip() for field in FULLTEXT_ACCOUNT_FIELDS}
+            )
+            if item.account_id in seen:
+                raise ValueError(f"duplicate full-text account: {item.account_id}")
+            seen.add(item.account_id)
+            accounts.append(item)
+    return accounts
+
+
+def load_fulltext_account_map(path: Path) -> list[FulltextAccountMap]:
+    _require_hash(path, FULLTEXT_ACCOUNT_MAP_SHA256, "full-text account map")
+    account_map: list[FulltextAccountMap] = []
+    seen: set[str] = set()
+    with path.open(newline="", encoding="utf-8") as stream:
+        reader = csv.DictReader(stream, delimiter="\t")
+        if reader.fieldnames != list(FULLTEXT_ACCOUNT_MAP_FIELDS):
+            raise ValueError(
+                "full-text-account-map header must be: "
+                f"{' | '.join(FULLTEXT_ACCOUNT_MAP_FIELDS)}"
+            )
+        for raw in reader:
+            item = FulltextAccountMap(
+                **{field: raw[field].strip() for field in FULLTEXT_ACCOUNT_MAP_FIELDS}
+            )
+            if item.account_id in seen:
+                raise ValueError(f"duplicate full-text account map: {item.account_id}")
+            seen.add(item.account_id)
+            account_map.append(item)
+    return account_map
+
+
+def load_primary_results(path: Path) -> list[EmbeddedResult]:
+    _require_hash(path, PRIMARY_RESULTS_SHA256, "primary-result inventory")
+    return load_embedded_results(path)
+
+
 def is_composite_source(row: ExportRow, mapping: Mapping) -> bool:
     return bool(
         mapping.disposition_code in COMPOSITE_DISPOSITION_CODES
@@ -756,6 +1141,7 @@ def validate_composites(
             )
         if len(result.disposition) < 40 or len(result.artifact_status) < 20:
             raise ValueError(f"underspecified embedded result: {result.result_id}")
+        validate_result_disposition(result)
         expected_card = source_cards[result.parent_id].label
         if result.source_card != expected_card:
             raise ValueError(
@@ -797,6 +1183,228 @@ def validate_composites(
                 )
 
 
+def _fulltext_account_digest(accounts: list[FulltextAccount]) -> str:
+    inventory = "".join(
+        f"{item.parent_id}\t{item.account_id}\n"
+        for item in sorted(accounts, key=lambda item: (item.parent_id, item.account_id))
+    )
+    return hashlib.sha256(inventory.encode()).hexdigest()
+
+
+def _read_fulltext_artifact(
+    paper_root: Path, source: FulltextSource
+) -> tuple[str, str, str]:
+    relative = Path(source.paper_path)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError(f"unsafe paper path for {source.parent_id}: {relative}")
+    root = paper_root.resolve()
+    paper = (root / relative).resolve()
+    if not paper.is_relative_to(root) or not paper.is_file():
+        raise ValueError(f"missing preserved primary PDF for {source.parent_id}")
+    completed = subprocess.run(
+        ["pdftotext", "-layout", "-enc", "UTF-8", str(paper), "-"],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    return (
+        sha256(paper),
+        hashlib.sha256(completed.stdout).hexdigest(),
+        compact(completed.stdout.decode("utf-8", errors="replace")),
+    )
+
+
+def validate_fulltext(
+    rows: list[ExportRow],
+    mappings: dict[str, Mapping],
+    fulltext_sources: dict[str, FulltextSource],
+    accounts: list[FulltextAccount],
+    account_map: list[FulltextAccountMap],
+    embedded_results: list[EmbeddedResult],
+    primary_results: list[EmbeddedResult],
+    paper_root: Path,
+    *,
+    artifacts: dict[str, tuple[str, str, str]] | None = None,
+) -> dict[str, tuple[str, str, str]]:
+    row_by_id = {row.arxiv_id: row for row in rows}
+    row_ids = set(row_by_id)
+    if set(fulltext_sources) != row_ids:
+        missing = sorted(row_ids - set(fulltext_sources))
+        unknown = sorted(set(fulltext_sources) - row_ids)
+        raise ValueError(
+            "full-text source inventory mismatch: "
+            f"missing={','.join(missing) or 'none'}; "
+            f"unknown={','.join(unknown) or 'none'}"
+        )
+
+    if _fulltext_account_digest(accounts) != FULLTEXT_ACCOUNT_SET_SHA256:
+        raise ValueError("immutable full-text account set mismatch")
+    account_by_id = {item.account_id: item for item in accounts}
+    map_by_id = {item.account_id: item for item in account_map}
+    if len(account_by_id) != len(accounts) or len(map_by_id) != len(account_map):
+        raise ValueError("duplicate account IDs escaped a full-text loader")
+    if set(account_by_id) != set(map_by_id):
+        raise ValueError("full-text accounts and disposition map differ")
+
+    embedded_by_id = {item.result_id: item for item in embedded_results}
+    primary_by_id = {item.result_id: item for item in primary_results}
+    if set(embedded_by_id) & set(primary_by_id):
+        raise ValueError("embedded and primary result IDs overlap")
+    for result_id, expected_code in RESULT_CODE_ANCHORS.items():
+        result = primary_by_id.get(result_id)
+        if result is None or result.disposition_code != expected_code:
+            raise ValueError(
+                "result-specific method disposition mismatch: "
+                f"{result_id} expected {expected_code}"
+            )
+
+    by_parent: dict[str, list[FulltextAccount]] = {
+        parent_id: [] for parent_id in fulltext_sources
+    }
+    for account in accounts:
+        if not all(getattr(account, field) for field in FULLTEXT_ACCOUNT_FIELDS):
+            raise ValueError(f"incomplete full-text account: {account.account_id}")
+        if account.parent_id not in fulltext_sources:
+            raise ValueError(
+                f"full-text account has unknown parent: {account.account_id}"
+            )
+        if not (
+            account.account_id == account.parent_id
+            or account.account_id.startswith(f"{account.parent_id}:")
+        ):
+            raise ValueError(
+                f"full-text account has wrong parent: {account.account_id}"
+            )
+        if len(account.evidence_locator) < 8 or len(account.qualifying_evidence) < 12:
+            raise ValueError(f"underspecified full-text account: {account.account_id}")
+        resolution = map_by_id[account.account_id]
+        if (
+            resolution.parent_id != account.parent_id
+            or resolution.resolution_kind != account.account_kind
+        ):
+            raise ValueError(f"misbound full-text account map: {account.account_id}")
+        if resolution.resolution_kind == "embedded_result":
+            target = embedded_by_id.get(resolution.target_id)
+            if target is None or target.parent_id != account.parent_id:
+                raise ValueError(f"missing embedded target: {account.account_id}")
+        elif resolution.resolution_kind == "primary_result":
+            target = primary_by_id.get(resolution.target_id)
+            if target is None or target.parent_id != account.parent_id:
+                raise ValueError(f"missing primary target: {account.account_id}")
+        else:
+            raise ValueError(
+                f"invalid full-text resolution for {account.account_id}: "
+                f"{resolution.resolution_kind}"
+            )
+        by_parent[account.parent_id].append(account)
+
+    embedded_account_ids = {
+        item.account_id for item in accounts if item.account_kind == "embedded_result"
+    }
+    primary_account_ids = {
+        item.account_id for item in accounts if item.account_kind == "primary_result"
+    }
+    if embedded_account_ids != set(embedded_by_id):
+        raise ValueError("full-text inventory does not exactly carry embedded results")
+    if primary_account_ids != set(primary_by_id):
+        raise ValueError("full-text inventory does not exactly carry primary results")
+
+    for result in primary_results:
+        if not all(getattr(result, field) for field in EMBEDDED_RESULT_FIELDS):
+            raise ValueError(f"incomplete primary result: {result.result_id}")
+        if result.disposition_code not in (
+            RESULT_CODE_DEFINITIONS.keys()
+            | CODE_DEFINITIONS["explicit_disposition"].keys()
+        ):
+            raise ValueError(
+                f"unknown primary-result disposition for {result.result_id}"
+            )
+        if result.primary_source != f"https://arxiv.org/abs/{result.parent_id}":
+            raise ValueError(f"primary result has wrong source: {result.result_id}")
+        if result.source_card != f"Full-text source {result.parent_id}":
+            raise ValueError(
+                f"primary result has wrong source binding: {result.result_id}"
+            )
+        if len(result.disposition) < 40 or len(result.artifact_status) < 20:
+            raise ValueError(f"underspecified primary result: {result.result_id}")
+        validate_result_disposition(result)
+
+    leidos = embedded_by_id.get("2501.08913:leidos-v1.0.4")
+    if leidos is None:
+        raise ValueError("Leidos v1.0.4 result is missing")
+    leidos_mechanism = leidos.disposition.lower()
+    if (
+        "unweighted multiclass distilroberta" not in leidos_mechanism
+        or "ensemble" in leidos_mechanism
+    ):
+        raise ValueError("Leidos v1.0.4 mechanism contradicts its primary paper")
+
+    artifact_state: dict[str, tuple[str, str, str]] = {}
+    paper_paths: set[str] = set()
+    for parent_id, source in fulltext_sources.items():
+        row = row_by_id[parent_id]
+        if (
+            source.title != row.title
+            or source.mapping_kind != mappings[parent_id].mapping_kind
+        ):
+            raise ValueError(f"full-text source metadata mismatch for {parent_id}")
+        if not all(getattr(source, field) for field in FULLTEXT_SOURCE_FIELDS):
+            raise ValueError(f"incomplete full-text source: {parent_id}")
+        if len(source.inspected_scope) < 40 or len(source.reason) < 40:
+            raise ValueError(f"underspecified full-text source: {parent_id}")
+        try:
+            expected_count = int(source.expected_account_count)
+        except ValueError as error:
+            raise ValueError(f"non-integer account count for {parent_id}") from error
+        found_accounts = by_parent[parent_id]
+        if expected_count != len(found_accounts):
+            raise ValueError(
+                f"full-text account count mismatch for {parent_id}: "
+                f"expected {expected_count}, found {len(found_accounts)}"
+            )
+        expected_resolution = (
+            "+".join(sorted({item.account_kind for item in found_accounts}))
+            if found_accounts
+            else "no_qualifying_account"
+        )
+        if (
+            source.resolution != expected_resolution
+            or source.resolution not in ALLOWED_FULLTEXT_RESOLUTIONS
+        ):
+            raise ValueError(f"invalid full-text resolution for {parent_id}")
+        if source.paper_path in paper_paths:
+            raise ValueError(f"primary PDF reused across sources: {source.paper_path}")
+        paper_paths.add(source.paper_path)
+        state = (
+            _read_fulltext_artifact(paper_root, source)
+            if artifacts is None
+            else artifacts[parent_id]
+        )
+        if state[0] != source.pdf_sha256 or state[1] != source.text_sha256:
+            raise ValueError(f"preserved full-text artifact mismatch for {parent_id}")
+        artifact_state[parent_id] = state
+
+    if set(CONTENT_ANCHOR_ACCOUNTS) != set(CONTENT_ANCHOR_TEXT):
+        raise ValueError("content-derived account and text controls differ")
+    for parent_id, expected_ids in CONTENT_ANCHOR_ACCOUNTS.items():
+        found_ids = {item.account_id for item in by_parent[parent_id]}
+        if found_ids != expected_ids:
+            raise ValueError(
+                f"content-derived account inventory mismatch for {parent_id}"
+            )
+        text = artifact_state[parent_id][2].lower()
+        missing_tokens = [
+            token
+            for token in CONTENT_ANCHOR_TEXT[parent_id]
+            if token.lower() not in text
+        ]
+        if missing_tokens:
+            raise ValueError(
+                f"content anchors absent from {parent_id}: {', '.join(missing_tokens)}"
+            )
+    return artifact_state
+
+
 def run_regression_tests(
     rows: list[ExportRow],
     mappings: dict[str, Mapping],
@@ -807,7 +1415,7 @@ def run_regression_tests(
 ) -> int:
     tests = 0
 
-    def expect_failure(operation: Callable[[], None], label: str) -> None:
+    def expect_failure(operation: Callable[[], object], label: str) -> None:
         nonlocal tests
         try:
             operation()
@@ -1033,12 +1641,344 @@ def run_regression_tests(
     return tests
 
 
+def run_fulltext_regression_tests(
+    rows: list[ExportRow],
+    mappings: dict[str, Mapping],
+    fulltext_sources: dict[str, FulltextSource],
+    accounts: list[FulltextAccount],
+    account_map: list[FulltextAccountMap],
+    embedded_results: list[EmbeddedResult],
+    primary_results: list[EmbeddedResult],
+    paper_root: Path,
+    artifacts: dict[str, tuple[str, str, str]],
+) -> int:
+    tests = 0
+
+    def expect_failure(operation: Callable[[], object], label: str) -> None:
+        nonlocal tests
+        try:
+            operation()
+        except ValueError:
+            tests += 1
+            return
+        raise ValueError(f"full-text negative control unexpectedly passed: {label}")
+
+    row_by_id = {row.arxiv_id: row for row in rows}
+    if is_composite_source(row_by_id["2509.00623"], mappings["2509.00623"]):
+        raise ValueError(
+            "ordinary-title content fixture unexpectedly matches old selector"
+        )
+    tests += 1
+
+    missing_candace_accounts = [
+        item for item in accounts if item.account_id != "2509.00623:candace"
+    ]
+    missing_candace_map = [
+        item for item in account_map if item.account_id != "2509.00623:candace"
+    ]
+    missing_candace_results = [
+        item for item in primary_results if item.result_id != "2509.00623:candace"
+    ]
+    lowered_candace_sources = dict(fulltext_sources)
+    lowered_candace_sources["2509.00623"] = replace(
+        fulltext_sources["2509.00623"], expected_account_count="2"
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            lowered_candace_sources,
+            missing_candace_accounts,
+            missing_candace_map,
+            embedded_results,
+            missing_candace_results,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "ordinary-title Candace result omitted with lowered mutable count",
+    )
+
+    non_anchor_id = "2501.03940:ens-gpt2-llama-qwen"
+    missing_non_anchor_accounts = [
+        item for item in accounts if item.account_id != non_anchor_id
+    ]
+    missing_non_anchor_map = [
+        item for item in account_map if item.account_id != non_anchor_id
+    ]
+    missing_non_anchor_results = [
+        item for item in primary_results if item.result_id != non_anchor_id
+    ]
+    lowered_non_anchor_sources = dict(fulltext_sources)
+    lowered_non_anchor_sources["2501.03940"] = replace(
+        fulltext_sources["2501.03940"], expected_account_count="10"
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            lowered_non_anchor_sources,
+            missing_non_anchor_accounts,
+            missing_non_anchor_map,
+            embedded_results,
+            missing_non_anchor_results,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "non-anchor primary result omitted with lowered mutable count",
+    )
+
+    non_english_id = "2509.00731:qwen-r16"
+    missing_non_english_accounts = [
+        item for item in accounts if item.account_id != non_english_id
+    ]
+    missing_non_english_map = [
+        item for item in account_map if item.account_id != non_english_id
+    ]
+    missing_non_english_results = [
+        item for item in primary_results if item.result_id != non_english_id
+    ]
+    lowered_non_english_sources = dict(fulltext_sources)
+    lowered_non_english_sources["2509.00731"] = replace(
+        fulltext_sources["2509.00731"], expected_account_count="8"
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            lowered_non_english_sources,
+            missing_non_english_accounts,
+            missing_non_english_map,
+            embedded_results,
+            missing_non_english_results,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "non-English Qwen LoRA state omitted with lowered mutable count",
+    )
+
+    detached_content_artifacts = dict(artifacts)
+    original = artifacts["2509.00731"]
+    detached_content_artifacts["2509.00731"] = (
+        original[0],
+        original[1],
+        original[2].replace("0.9594", "omitted metric"),
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            fulltext_sources,
+            accounts,
+            account_map,
+            embedded_results,
+            primary_results,
+            paper_root,
+            artifacts=detached_content_artifacts,
+        ),
+        "non-English account inventory detached from table content",
+    )
+
+    narrow_domain_id = "2605.27921:chatgpt-d"
+    missing_narrow_domain_accounts = [
+        item for item in accounts if item.account_id != narrow_domain_id
+    ]
+    missing_narrow_domain_map = [
+        item for item in account_map if item.account_id != narrow_domain_id
+    ]
+    missing_narrow_domain_results = [
+        item for item in primary_results if item.result_id != narrow_domain_id
+    ]
+    lowered_narrow_domain_sources = dict(fulltext_sources)
+    lowered_narrow_domain_sources["2605.27921"] = replace(
+        fulltext_sources["2605.27921"], expected_account_count="12"
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            lowered_narrow_domain_sources,
+            missing_narrow_domain_accounts,
+            missing_narrow_domain_map,
+            embedded_results,
+            missing_narrow_domain_results,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "narrow-domain ChatGPT-D result omitted with lowered mutable count",
+    )
+
+    detached_narrow_domain_artifacts = dict(artifacts)
+    original = artifacts["2605.27921"]
+    detached_narrow_domain_artifacts["2605.27921"] = (
+        original[0],
+        original[1],
+        original[2].replace("ChatGPT-D", "omitted result"),
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            fulltext_sources,
+            accounts,
+            account_map,
+            embedded_results,
+            primary_results,
+            paper_root,
+            artifacts=detached_narrow_domain_artifacts,
+        ),
+        "narrow-domain account inventory detached from table content",
+    )
+
+    detached_zero_artifacts = dict(artifacts)
+    original = artifacts["2605.14240"]
+    detached_zero_artifacts["2605.14240"] = (
+        original[0],
+        original[1],
+        original[2].replace("0.8061", "omitted metric"),
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            fulltext_sources,
+            accounts,
+            account_map,
+            embedded_results,
+            primary_results,
+            paper_root,
+            artifacts=detached_zero_artifacts,
+        ),
+        "no-account decision detached from sub-threshold table evidence",
+    )
+
+    wrong_text_sources = dict(fulltext_sources)
+    wrong_text_sources["2503.22338"] = replace(
+        fulltext_sources["2503.22338"], text_sha256="0" * 64
+    )
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            wrong_text_sources,
+            accounts,
+            account_map,
+            embedded_results,
+            primary_results,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "full-text extraction hash detached from preserved PDF",
+    )
+
+    inherited_lapd_blocker = [
+        replace(
+            item,
+            disposition=(
+                "The Binoculars comparator inherits LAPD's auxiliary sampling, "
+                "violating the multi-perturbation constraint."
+            ),
+        )
+        if item.result_id == "2604.16923:binoculars"
+        else item
+        for item in primary_results
+    ]
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            fulltext_sources,
+            accounts,
+            account_map,
+            embedded_results,
+            inherited_lapd_blocker,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "retained comparator falsely inherits the parent method exclusion",
+    )
+
+    inherited_dna_blocker = [
+        replace(
+            item,
+            disposition_code="exclude_regeneration",
+            disposition=(
+                "The Binoculars comparator constructs DNA-DetectLLM's ideal "
+                "sequence, violating the no-regeneration boundary."
+            ),
+        )
+        if item.result_id == "2509.15550:binoculars"
+        else item
+        for item in primary_results
+    ]
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            fulltext_sources,
+            accounts,
+            account_map,
+            embedded_results,
+            inherited_dna_blocker,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "retained baseline falsely inherits DNA-DetectLLM regeneration",
+    )
+
+    ensemble_leidos = [
+        replace(
+            item,
+            disposition=(
+                "A separately submitted ensemble variant has no distinct public "
+                "state and therefore remains only a reported shared-task result."
+            ),
+        )
+        if item.result_id == "2501.08913:leidos-v1.0.4"
+        else item
+        for item in embedded_results
+    ]
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            fulltext_sources,
+            accounts,
+            account_map,
+            ensemble_leidos,
+            primary_results,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "Leidos v1.0.4 falsely described as an ensemble",
+    )
+
+    missing_source = dict(fulltext_sources)
+    missing_source.pop("2608.03859")
+    expect_failure(
+        lambda: validate_fulltext(
+            rows,
+            mappings,
+            missing_source,
+            accounts,
+            account_map,
+            embedded_results,
+            primary_results,
+            paper_root,
+            artifacts=artifacts,
+        ),
+        "one of 119 full-text source audits removed",
+    )
+    return tests
+
+
 def write_audit(
     path: Path,
     rows: list[ExportRow],
     mappings: dict[str, Mapping],
     sources: dict[str, CompositeSource],
     results: list[EmbeddedResult],
+    fulltext_sources: dict[str, FulltextSource],
+    accounts: list[FulltextAccount],
 ) -> None:
     fields = (
         "arxiv_id",
@@ -1057,10 +1997,19 @@ def write_audit(
         "composite_resolution",
         "embedded_result_count",
         "composite_reason",
+        "fulltext_resolution",
+        "fulltext_account_count",
+        "fulltext_paper_path",
+        "fulltext_pdf_sha256",
+        "fulltext_text_sha256",
+        "fulltext_reason",
     )
     result_counts: dict[str, int] = {}
     for result in results:
         result_counts[result.parent_id] = result_counts.get(result.parent_id, 0) + 1
+    account_counts: dict[str, int] = {}
+    for account in accounts:
+        account_counts[account.parent_id] = account_counts.get(account.parent_id, 0) + 1
     with path.open("w", newline="", encoding="utf-8") as target:
         writer = csv.DictWriter(
             target, fieldnames=fields, delimiter="\t", lineterminator="\n"
@@ -1070,6 +2019,7 @@ def write_audit(
             flags, evidence = semantic_flags(row)
             mapping = mappings[row.arxiv_id]
             source = sources.get(row.arxiv_id)
+            fulltext = fulltext_sources[row.arxiv_id]
             writer.writerow(
                 {
                     "arxiv_id": row.arxiv_id,
@@ -1096,6 +2046,12 @@ def write_audit(
                     "composite_reason": (
                         source.reason if source is not None else "not_composite"
                     ),
+                    "fulltext_resolution": fulltext.resolution,
+                    "fulltext_account_count": account_counts.get(row.arxiv_id, 0),
+                    "fulltext_paper_path": fulltext.paper_path,
+                    "fulltext_pdf_sha256": fulltext.pdf_sha256,
+                    "fulltext_text_sha256": fulltext.text_sha256,
+                    "fulltext_reason": fulltext.reason,
                 }
             )
 
@@ -1141,11 +2097,87 @@ def write_embedded_audit(
             )
 
 
+def write_fulltext_account_audit(
+    path: Path,
+    rows: list[ExportRow],
+    mappings: dict[str, Mapping],
+    fulltext_sources: dict[str, FulltextSource],
+    accounts: list[FulltextAccount],
+    account_map: list[FulltextAccountMap],
+    embedded_results: list[EmbeddedResult],
+    primary_results: list[EmbeddedResult],
+) -> None:
+    row_by_id = {row.arxiv_id: row for row in rows}
+    resolution_by_id = {item.account_id: item for item in account_map}
+    result_by_id = {
+        item.result_id: item for item in (*embedded_results, *primary_results)
+    }
+    fields = (
+        *FULLTEXT_ACCOUNT_FIELDS,
+        "parent_title",
+        "paper_path",
+        "pdf_sha256",
+        "text_sha256",
+        "resolution_kind",
+        "target_id",
+        "target_disposition_code",
+        "target_disposition",
+        "target_artifact_status",
+    )
+    with path.open("w", newline="", encoding="utf-8") as target:
+        writer = csv.DictWriter(
+            target, fieldnames=fields, delimiter="\t", lineterminator="\n"
+        )
+        writer.writeheader()
+        for account in sorted(
+            accounts, key=lambda item: (item.parent_id, item.account_id)
+        ):
+            resolution = resolution_by_id[account.account_id]
+            result = result_by_id.get(resolution.target_id)
+            mapping = mappings[account.parent_id]
+            source = fulltext_sources[account.parent_id]
+            writer.writerow(
+                {
+                    **{
+                        field: getattr(account, field)
+                        for field in FULLTEXT_ACCOUNT_FIELDS
+                    },
+                    "parent_title": row_by_id[account.parent_id].title,
+                    "paper_path": source.paper_path,
+                    "pdf_sha256": source.pdf_sha256,
+                    "text_sha256": source.text_sha256,
+                    "resolution_kind": resolution.resolution_kind,
+                    "target_id": resolution.target_id,
+                    "target_disposition_code": (
+                        result.disposition_code
+                        if result is not None
+                        else mapping.disposition_code
+                    ),
+                    "target_disposition": (
+                        result.disposition if result is not None else mapping.reason
+                    ),
+                    "target_artifact_status": (
+                        result.artifact_status if result is not None else mapping.reason
+                    ),
+                }
+            )
+
+
 def write_environment(path: Path) -> None:
+    completed = subprocess.run(
+        ["pdftotext", "-v"],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    pdftotext_version = (completed.stderr or completed.stdout).splitlines()[0]
     path.write_text(
         f"python={sys.version.replace(chr(10), ' ')}\n"
         f"implementation={platform.python_implementation()}\n"
         f"platform={platform.platform()}\n"
+        f"pdftotext={pdftotext_version}\n"
+        "extraction_command=pdftotext -layout -enc UTF-8 PAPER -\n"
         "dependencies=Python standard library only\n",
         encoding="utf-8",
     )
@@ -1159,15 +2191,25 @@ def write_report(
     embedded_results_path: Path,
     expected_results_path: Path,
     source_cards_path: Path,
+    fulltext_sources_path: Path,
+    fulltext_accounts_path: Path,
+    account_map_path: Path,
+    primary_results_path: Path,
+    paper_root: Path,
     audit_path: Path,
     embedded_audit_path: Path,
+    fulltext_audit_path: Path,
     environment_path: Path,
     rows: list[ExportRow],
     raw_rows: int,
     mappings: dict[str, Mapping],
     sources: dict[str, CompositeSource],
     results: list[EmbeddedResult],
-    regression_tests: int,
+    fulltext_sources: dict[str, FulltextSource],
+    accounts: list[FulltextAccount],
+    primary_results: list[EmbeddedResult],
+    composite_regression_tests: int,
+    fulltext_regression_tests: int,
 ) -> str:
     n_flagged = sum(bool(semantic_flags(row)[0]) for row in rows)
     n_explicit = sum(
@@ -1177,8 +2219,26 @@ def write_report(
     n_composite_required = sum(
         is_composite_source(row, mappings[row.arxiv_id]) for row in rows
     )
+    command = (
+        "uv run --isolated --no-project --python 3.13 python audit_coverage.py "
+        "--map coverage_row_dispositions.tsv "
+        "--composite-sources coverage_composite_sources.tsv "
+        "--embedded-results coverage_embedded_results.tsv "
+        "--expected-results coverage_expected_result_ids.tsv "
+        "--source-cards coverage_composite_dispositions.md "
+        "--fulltext-sources coverage_fulltext_sources.tsv "
+        "--fulltext-accounts coverage_fulltext_expected_accounts.tsv "
+        "--account-map coverage_fulltext_account_map.tsv "
+        "--primary-results coverage_primary_results.tsv "
+        f"--paper-root {paper_root} "
+        "--output coverage_semantic_audit.tsv "
+        "--embedded-output coverage_embedded_result_audit.tsv "
+        "--fulltext-output coverage_fulltext_account_audit.tsv "
+        "--report coverage_semantic_audit_report.txt "
+        "--environment coverage_semantic_audit_environment.txt"
+    )
     lines = [
-        "command=uv run --isolated --no-project --python 3.13 python audit_coverage.py --map coverage_row_dispositions.tsv --composite-sources coverage_composite_sources.tsv --embedded-results coverage_embedded_results.tsv --expected-results coverage_expected_result_ids.tsv --source-cards coverage_composite_dispositions.md --output coverage_semantic_audit.tsv --embedded-output coverage_embedded_result_audit.tsv --report coverage_semantic_audit_report.txt --environment coverage_semantic_audit_environment.txt",
+        f"command={command}",
         f"raw_export_rows={raw_rows}",
         f"unique_2025_2026_rows={len(rows)}",
         f"semantically_flagged_rows={n_flagged}",
@@ -1188,7 +2248,13 @@ def write_report(
         f"composite_required_rows={n_composite_required}",
         f"composite_review_rows={len(sources)}",
         f"embedded_result_rows={len(results)}",
-        f"regression_and_negative_controls={regression_tests}",
+        f"fulltext_source_rows={len(fulltext_sources)}",
+        f"fulltext_account_rows={len(accounts)}",
+        f"primary_result_rows={len(primary_results)}",
+        f"composite_regression_controls={composite_regression_tests}",
+        f"fulltext_regression_controls={fulltext_regression_tests}",
+        "regression_and_negative_controls="
+        f"{composite_regression_tests + fulltext_regression_tests}",
     ]
     for export_name in EXPORT_NAMES:
         lines.append(f"sha256 {export_name}={sha256(source_dir / export_name)}")
@@ -1200,8 +2266,13 @@ def write_report(
             f"sha256 {embedded_results_path.name}={sha256(embedded_results_path)}",
             f"sha256 {expected_results_path.name}={sha256(expected_results_path)}",
             f"sha256 {source_cards_path.name}={sha256(source_cards_path)}",
+            f"sha256 {fulltext_sources_path.name}={sha256(fulltext_sources_path)}",
+            f"sha256 {fulltext_accounts_path.name}={sha256(fulltext_accounts_path)}",
+            f"sha256 {account_map_path.name}={sha256(account_map_path)}",
+            f"sha256 {primary_results_path.name}={sha256(primary_results_path)}",
             f"sha256 {audit_path.name}={sha256(audit_path)}",
             f"sha256 {embedded_audit_path.name}={sha256(embedded_audit_path)}",
+            f"sha256 {fulltext_audit_path.name}={sha256(fulltext_audit_path)}",
             f"sha256 {environment_path.name}={sha256(environment_path)}",
             "result=PASS",
         )
@@ -1218,8 +2289,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--embedded-results", type=Path)
     parser.add_argument("--expected-results", type=Path)
     parser.add_argument("--source-cards", type=Path)
+    parser.add_argument("--fulltext-sources", type=Path)
+    parser.add_argument("--fulltext-accounts", type=Path)
+    parser.add_argument("--account-map", type=Path)
+    parser.add_argument("--primary-results", type=Path)
+    parser.add_argument("--paper-root", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--embedded-output", type=Path)
+    parser.add_argument("--fulltext-output", type=Path)
     parser.add_argument("--report", type=Path)
     parser.add_argument("--environment", type=Path)
     parser.add_argument("--inventory", action="store_true")
@@ -1249,16 +2326,24 @@ def main() -> int:
         args.embedded_results,
         args.expected_results,
         args.source_cards,
+        args.fulltext_sources,
+        args.fulltext_accounts,
+        args.account_map,
+        args.primary_results,
+        args.paper_root,
         args.output,
         args.embedded_output,
+        args.fulltext_output,
         args.report,
         args.environment,
     )
     if any(path is None for path in required):
         raise ValueError(
             "--map, --composite-sources, --embedded-results, --expected-results, "
-            "--source-cards, --output, --embedded-output, --report, and "
-            "--environment are required"
+            "--source-cards, --fulltext-sources, --fulltext-accounts, "
+            "--account-map, --primary-results, --paper-root, --output, "
+            "--embedded-output, --fulltext-output, --report, and --environment "
+            "are required"
         )
     (
         map_path,
@@ -1266,8 +2351,14 @@ def main() -> int:
         embedded_results_path,
         expected_results_path,
         source_cards_path,
+        fulltext_sources_path,
+        fulltext_accounts_path,
+        account_map_path,
+        primary_results_path,
+        paper_root,
         output_path,
         embedded_output_path,
+        fulltext_output_path,
         report_path,
         environment_path,
     ) = required
@@ -1276,15 +2367,58 @@ def main() -> int:
     results = load_embedded_results(embedded_results_path)
     expected_result_ids = load_expected_result_ids(expected_results_path)
     source_cards = load_source_cards(source_cards_path)
+    fulltext_sources = load_fulltext_sources(fulltext_sources_path)
+    fulltext_accounts = load_fulltext_accounts(fulltext_accounts_path)
+    fulltext_account_map = load_fulltext_account_map(account_map_path)
+    primary_results = load_primary_results(primary_results_path)
     validate(rows, mappings)
     validate_composites(
         rows, mappings, sources, results, expected_result_ids, source_cards
     )
-    regression_tests = run_regression_tests(
+    artifacts = validate_fulltext(
+        rows,
+        mappings,
+        fulltext_sources,
+        fulltext_accounts,
+        fulltext_account_map,
+        results,
+        primary_results,
+        paper_root,
+    )
+    composite_regression_tests = run_regression_tests(
         rows, mappings, sources, results, expected_result_ids, source_cards
     )
-    write_audit(output_path, rows, mappings, sources, results)
+    fulltext_regression_tests = run_fulltext_regression_tests(
+        rows,
+        mappings,
+        fulltext_sources,
+        fulltext_accounts,
+        fulltext_account_map,
+        results,
+        primary_results,
+        paper_root,
+        artifacts,
+    )
+    write_audit(
+        output_path,
+        rows,
+        mappings,
+        sources,
+        results,
+        fulltext_sources,
+        fulltext_accounts,
+    )
     write_embedded_audit(embedded_output_path, rows, results)
+    write_fulltext_account_audit(
+        fulltext_output_path,
+        rows,
+        mappings,
+        fulltext_sources,
+        fulltext_accounts,
+        fulltext_account_map,
+        results,
+        primary_results,
+    )
     write_environment(environment_path)
     report = write_report(
         report_path,
@@ -1294,15 +2428,25 @@ def main() -> int:
         embedded_results_path,
         expected_results_path,
         source_cards_path,
+        fulltext_sources_path,
+        fulltext_accounts_path,
+        account_map_path,
+        primary_results_path,
+        paper_root,
         output_path,
         embedded_output_path,
+        fulltext_output_path,
         environment_path,
         rows,
         raw_rows,
         mappings,
         sources,
         results,
-        regression_tests,
+        fulltext_sources,
+        fulltext_accounts,
+        primary_results,
+        composite_regression_tests,
+        fulltext_regression_tests,
     )
     print(report, end="")
     return 0

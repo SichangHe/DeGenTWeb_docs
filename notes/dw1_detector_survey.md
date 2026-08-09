@@ -1,6 +1,6 @@
 # DW1 accuracy-first survey of newest LLM-text detectors
 
-Research update: 2026-08-08, America/Los_Angeles. This correction supersedes the
+Research update: 2026-08-09, America/Los_Angeles. This correction supersedes the
 2026-08-07 conclusion and the already-sent incomplete summary. It changes only
 the owned research artifacts; no DW1 implementation or configuration was changed.
 
@@ -57,6 +57,28 @@ at 0.9779 and 0.6608. Desklib is fast and promising at the selected tail, but it
 overall AUROC remains 0.0028 below the incumbent on a convenience corpus with
 historical comparators. It is a runnable follow-up, not a replacement. [N17, M8]
 
+A final content-derived pass removed the remaining title-selection blind spot.
+It read the complete primary PDF and result tables for every one of the 119
+frozen publications, not only papers already labeled as overviews or benchmarks.
+The exact ledger now maps 805 qualifying detector accounts: the accepted 241
+embedded results and 564 separately named primary-paper configurations. No
+parent-only account remains; the six papers with no qualifying result have
+paper- and table-specific reasons. A fresh mutation pass caught and repaired
+the first full-text inventory's remaining manual-list blind spot. In addition
+to the earlier M-DAIGT, classifier-feature, DeBERTa, and Defactify recoveries,
+the ledger now includes all nine Chinese encoder/LoRA states in 2509.00731,
+eight SenFlow/baseline/ablation states, five semantic-similarity DeBERTa stages
+in 2501.14288, both LuxVeri inverse-perplexity ensembles, ten narrow-domain TELL
+comparators, five late-stage stability baselines, and the ReMoDetect and ImBD
+rows in the LAPD paper. Their high narrow or validation cells remain paired
+with weak official, transfer, attack, or cross-domain evidence. Result-specific
+gates now keep DNA-DetectLLM's regeneration blocker off its eight baselines and
+treat DP-Net's embedding noise as training-only rather than an inference
+perturbation. It also corrects Leidos v1.0.4: the primary system paper
+defines it as an unweighted multiclass DistilRoBERTa classifier, not an ensemble.
+None supplies the missing matched low-FPR, artifact, two-A6000, and
+near-Binoculars evidence needed for promotion. [N18]
+
 The corrected disposition is:
 
 1. **Keep DW1 Binoculars.** No replacement has passed every fixed accuracy,
@@ -76,12 +98,12 @@ The corrected disposition is:
 5. **Reject LM²otifs and NEULIF individually.** Their headline values deserve
    preservation, but method, generalization, artifact, low-FPR, two-A6000, and
    timing evidence do not satisfy the fixed screen. [N13, N14]
-6. **Keep all composite-source children individually visible.** The 241 result
-   rows include the earlier seven promotions and every qualifying Task 3,
-   Counter Turing, benchmark, comparison, and shared-task result, including high
-   narrow slices paired with their weak overall results. Missing state, scope,
-   method, accuracy, or comparability blocks each non-control result except
-   Desklib's follow-up status. [N15, N17, E1–E26]
+6. **Keep every full-text detector account individually visible.** The 805-account
+   ledger carries forward all 241 composite-source children and adds 564 primary-
+   paper configurations. It covers all 119 papers without title, class, or
+   parent-only grouping and keeps high narrow slices beside weak overall results.
+   Missing state, scope, method, accuracy, or comparability blocks each
+   non-control result except Desklib's follow-up status. [N15, N17, N18, E1–E26]
 7. **Retain IRM as the runnable recent zero-shot control and SV-Detect as
    reconstruction-only evidence.** Their previously accepted evidence remains
    unchanged. [N2, N3, M4, M5]
@@ -219,7 +241,7 @@ mandatory for the next evaluation, but blocked now.
 
 ## Other recent high-accuracy lanes
 
-### Composite overviews, benchmarks, and public states
+### Full-corpus accounts, composite sources, and public states
 
 The generalized semantic audit treats 33 publications as composite sources in
 addition to mapping all 119 export rows. Twenty-six sources contain 241
@@ -234,13 +256,25 @@ exact predecessor Task 3 omission, the generalized missing-result mutation, and
 reclassification of a known high-cell parent as a no-qualifier, plus deletion
 or misbinding of a real E-card. [N17]
 
+That accepted composite layer is now a subset of a content-derived full-corpus
+audit. Every one of the 119 primary PDFs is bound by both its PDF hash and the
+hash of a reproducible full-text extraction. The resulting 805-account inventory
+maps exactly to 241 accepted embedded-result dispositions and 564 primary-result
+dispositions, with no parent-only target. It records six source-specific
+no-qualifier outcomes. Thirteen additional controls reject ordinary-title,
+non-anchor, non-English, and narrow-domain omissions even when a mutable count
+is lowered; detach table content or a PDF/text hash; restore the false Leidos
+mechanism; or remove any full-text source row. [N18]
+
 Task 3 reports TPR at five-percent FPR on non-adversarial/adversarial RAID-derived
 tests. The four Leidos rows are 99.4/97.2, 99.3/97.7, 99.2/97.6, and 99.1/95.7
 percent: v1.0.3 leads the non-adversarial split, while v1.0.2 ties Pangram's
 adversarial lead. Pangram is 99.3/97.7; USTC-BUPT 98.1/92.7; ALERT 91.8/82.6;
 and CNLP 90.5/41.6. These are matched known-generator/domain results with
 per-domain threshold searches, not DW1's frozen transferable calibration.
-Leidos, Pangram, ALERT, and CNLP primary papers are preserved.
+Leidos, Pangram, ALERT, and CNLP primary papers are preserved. The Leidos primary
+paper maps v1.0.4 to MC, its unweighted multiclass DistilRoBERTa classifier; it is
+not an ensemble.
 USTC-BUPT has no separate paper or state after bounded public exact-team searches.
 None exposes a frozen qualifying detector state. CNLP's attack-conditioned target
 normalization/rewrite violates the method boundary; Pangram does not specify
@@ -378,7 +412,7 @@ does not prove the fixed A6000 screen. Both remain unreproduced watchlist claims
 | DACTYL/Vanguard | Released ModernBERT; PAN AUROC 0.993 | Supervised challenge result; no matched Binoculars, low-FPR, length, memory, or speed row | Released watchlist |
 | LM²otifs | In-domain 0.98 accuracy/1.00 AUC vs same-table Binoculars 0.97/0.99 | Cross-domain 0.79 vs 0.95; nearest-neighbor fallback; no state or comparable cost | Excluded/rejected |
 | NEULIF | In-domain CNN 97% accuracy and 0.9951 ROC-AUC; reported 25 MB | One under-specified corpus split; no matched comparator, state, low-FPR, or reproducible timing | Unreleased in-domain claim |
-| 241 composite-source results | Up to 1.0 on reported F1, accuracy, precision, TPR, or AUROC slices; exact source/artifact disposition per named system/version | Narrow, shifted, language-specific, closed, missing-state, excluded-method, or weaker mean/overall result except Desklib follow-up | Individually accounted; no hidden promotion |
+| 805 full-text detector accounts | Up to 1.0 on reported F1, accuracy, precision, TPR, or AUROC slices; exact source/artifact disposition for 241 embedded results and 564 primary configurations | Narrow, validation-only, shifted, language-specific, closed, missing-state, excluded-method, or weaker mean/overall result except Desklib follow-up | Individually accounted across all 119 papers; no parent-only grouping or hidden promotion |
 | IRM | Best paper pair beats matched Binoculars on three DetectRL AUROCs | Best pair gated; anonymous public pair trails stored Binoculars locally | Runnable control |
 | SV-Detect | 99.83–100 matched-family reported AUROC | No trained detector state; supervised setting; local run is reconstruction only | Reconstruction evidence |
 | LAPD | 92.37 average vs same-pair Binoculars 89.72; measured near-identical cost | 10,000 auxiliary categorical samples | Excluded by method |
@@ -395,11 +429,17 @@ within each source and does not rank numbers across different rows.
 
 The frozen evidence includes three raw date-sorted arXiv query exports, a targeted
 Markov export, 119 deduplicated 2025–2026 publication mappings, a generated
-semantic audit, 33 composite-source reviews, 241 generated child-result audit
-rows, and anonymous public Google Scholar first-page evidence. The first layer
+semantic audit, 33 accepted composite-source reviews, 241 generated child-result
+audit rows, a complete 119-PDF full-text/table review, 564 primary-configuration
+dispositions, an 805-account exact mapping, and anonymous public
+Google Scholar first-page evidence. The first layer
 mechanically flagged 106 titles/abstracts for performance language or metrics;
 every flag has an explicit disposition or documented false-positive reason. The
 second layer rejects missing named results and generic composite-source reasons.
+The final layer removes title/class selection entirely, rehashes every preserved
+PDF and extracted text, and requires every expected account to resolve exactly
+once. Twenty-four regression and negative controls cover both selected composites
+and ordinary-title primary papers.
 A prior Scholar attempt returned a robot challenge and was not bypassed; fresh
 narrow requests returned HTTP 200. The general web-search connector returned HTTP
 404, so direct anonymous primary endpoints were used. No PB, authenticated state,
