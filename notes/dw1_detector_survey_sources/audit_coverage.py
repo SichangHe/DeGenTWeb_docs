@@ -151,25 +151,28 @@ EXPECTED_RESULT_IDS_SHA256 = (
 )
 SOURCE_CARDS_SHA256 = "0ee5e13d9d053987153953525641b1ed45f4d614043efc4960d7b4ad30c61775"
 FULLTEXT_SOURCES_SHA256 = (
-    "541eded2fc1de41fd3ca845035c8b704b96fd19b1fc82210079fdd1f054fedee"
+    "6fc7b4e8e4b9d83e2d31c8dbb40362ac26f3fcc4a71d4f9805b2cae9afc4fa66"
 )
 FULLTEXT_ACCOUNTS_SHA256 = (
-    "78cf40ef5daa64712a926d2c1d822b145beb4635a924b9a2e3c8b93e9cc4c846"
+    "7d73b0888b478b8b0579b59d8859eb14f1932ff077b7f56f56dec4b955ce43c1"
 )
 FULLTEXT_ACCOUNT_MAP_SHA256 = (
-    "459832035eb67b51630ddbe0bfb92355afb18f9485e6c4bef7f0cd64274e04ff"
+    "62d99d534249c0b7ec2a22e152239284de9de8cb45fdd49745fd138a29c9b947"
 )
 PRIMARY_RESULTS_SHA256 = (
-    "9bd6434060456233794f7d5d9b1b7e6c22d7bb9ea1689df3b7f3c7ddc00a0aec"
+    "992595dae98f3c61a6280f5978f55bbdf7f4cdbe9a3b49f7b66626f657db1e9a"
 )
 TABLE_CANDIDATES_SHA256 = (
-    "0460babd82a2aba738e83d53b978f464f0e546305037e92d03a565ab47e045dd"
+    "08a293da9a3e6acc46b3f606939655a1c72b2494b10b7b9399ebe2073ddae2c1"
 )
 TABLE_DISCOVERY_SHA256 = (
-    "296a40b62dd17c828f9dc959a1667a5465803a333efd9d3bf03b086c24033a48"
+    "5ca1b4c7f82d395cedbd02379e168101a669cad54cf39a11f7269de2d5875686"
+)
+ACCOUNT_WITNESSES_SHA256 = (
+    "88c960ac7f8804550f751f9e37269e01f055a776d9a7af8aa041c281bdc697fc"
 )
 FULLTEXT_ACCOUNT_SET_SHA256 = (
-    "1647ac46547ecab7adb0e96f09785e2b06d46a8ae7bb3fc66b3dd4168a6657db"
+    "3a2f45d49a5909e3e13cfd92876eca8656c5a03b478d250f77a1876c35b35cd4"
 )
 SOURCE_CARD_HEADING_PATTERN = re.compile(
     r"^## (?P<label>E\d+) — .+, arXiv (?P<parent>\d{4}\.\d{5})$"
@@ -1273,15 +1276,29 @@ def validate_table_discovery(
     fulltext_accounts_path: Path,
     candidates_path: Path,
     discovery_path: Path,
+    witnesses_path: Path,
     paper_root: Path,
-) -> tuple[list[table_discovery.Candidate], list[table_discovery.Resolution]]:
+) -> tuple[
+    list[table_discovery.Source],
+    list[table_discovery.Candidate],
+    list[table_discovery.Resolution],
+    list[table_discovery.AccountWitness],
+    dict[str, str],
+]:
     """Replay PDF-table discovery independently of the curated generator."""
     if sha256(candidates_path) != TABLE_CANDIDATES_SHA256:
         raise ValueError("table-candidate snapshot hash mismatch")
     if sha256(discovery_path) != TABLE_DISCOVERY_SHA256:
         raise ValueError("table-discovery snapshot hash mismatch")
+    if sha256(witnesses_path) != ACCOUNT_WITNESSES_SHA256:
+        raise ValueError("account-witness snapshot hash mismatch")
     sources = table_discovery.load_sources(fulltext_sources_path)
-    candidates = table_discovery.discover_all(sources, paper_root)
+    source_texts = table_discovery.extract_source_texts(sources, paper_root)
+    candidates = table_discovery.discover_all(
+        sources,
+        paper_root,
+        source_texts=source_texts,
+    )
     if table_discovery.serialize(candidates) != candidates_path.read_text(
         encoding="utf-8"
     ):
@@ -1293,7 +1310,30 @@ def validate_table_discovery(
         encoding="utf-8"
     ):
         raise ValueError("table-discovery account matches do not reproduce")
-    return candidates, resolutions
+    witnesses = table_discovery.build_account_witnesses(
+        sources,
+        paper_root,
+        accounts,
+        candidates,
+        resolutions,
+        source_texts=source_texts,
+    )
+    stored_witnesses = table_discovery.load_witnesses(witnesses_path)
+    table_discovery.validate_account_witnesses(
+        stored_witnesses,
+        sources,
+        paper_root,
+        accounts,
+        candidates,
+        resolutions,
+        source_texts=source_texts,
+    )
+    if witnesses != stored_witnesses or (
+        table_discovery.serialize_witnesses(witnesses)
+        != witnesses_path.read_text(encoding="utf-8")
+    ):
+        raise ValueError("account-witness ledger does not reproduce from PDFs")
+    return sources, candidates, resolutions, witnesses, source_texts
 
 
 def validate_fulltext(
@@ -1472,9 +1512,7 @@ def validate_fulltext(
     for parent_id, expected_ids in CONTENT_ANCHOR_ACCOUNTS.items():
         found_ids = {item.account_id for item in by_parent[parent_id]}
         if not expected_ids <= found_ids:
-            raise ValueError(
-                f"content-derived anchor accounts missing for {parent_id}"
-            )
+            raise ValueError(f"content-derived anchor accounts missing for {parent_id}")
         text = artifact_state[parent_id][2].lower()
         missing_tokens = [
             token
@@ -1744,10 +1782,23 @@ def run_fulltext_regression_tests(
     primary_results: list[EmbeddedResult],
     paper_root: Path,
     artifacts: dict[str, tuple[str, str, str]],
+    table_sources: list[table_discovery.Source],
     table_candidates: list[table_discovery.Candidate],
     table_resolutions: list[table_discovery.Resolution],
+    account_witnesses: list[table_discovery.AccountWitness],
+    table_source_texts: dict[str, str],
 ) -> int:
     tests = 0
+    table_accounts = [
+        table_discovery.Account(
+            item.parent_id,
+            item.account_id,
+            item.system,
+            item.evidence_locator,
+            item.qualifying_evidence,
+        )
+        for item in accounts
+    ]
 
     def expect_failure(operation: Callable[[], object], label: str) -> None:
         nonlocal tests
@@ -1758,17 +1809,201 @@ def run_fulltext_regression_tests(
             return
         raise ValueError(f"full-text negative control unexpectedly passed: {label}")
 
+    def validate_witness_mutation(
+        mutated: list[table_discovery.AccountWitness],
+    ) -> None:
+        table_discovery.validate_account_witnesses(
+            mutated,
+            table_sources,
+            paper_root,
+            table_accounts,
+            table_candidates,
+            table_resolutions,
+            source_texts=table_source_texts,
+        )
+
+    def mutated_witnesses(
+        account_id: str,
+        **changes: object,
+    ) -> list[table_discovery.AccountWitness]:
+        indexes = [
+            index
+            for index, item in enumerate(account_witnesses)
+            if item.account_id == account_id
+        ]
+        if len(indexes) != 1:
+            raise ValueError(f"account-witness control fixture missing: {account_id}")
+        index = indexes[0]
+        mutated = list(account_witnesses)
+        mutated[index] = table_discovery.rekey_witness(
+            replace(account_witnesses[index], **changes)
+        )
+        return mutated
+
+    unicode_metric_fixture = """Table 2
+𝐹 1 scores for two tasks
+Architecture                 Task A    Task B
+Novel Architecture           0.951     0.201
+"""
+    unicode_metric_candidates = [
+        item
+        for item in table_discovery.discover(
+            table_discovery.Source("unicode-fixture", "unused.pdf"),
+            Path("."),
+            source_text=unicode_metric_fixture,
+        )
+        if item.trigger != "source_scope_summary"
+    ]
+    if (
+        len(unicode_metric_candidates) != 1
+        or unicode_metric_candidates[0].row_label != "Novel Architecture"
+        or unicode_metric_candidates[0].trigger != "threshold_decimal"
+        or "0.951" not in unicode_metric_candidates[0].context
+    ):
+        raise ValueError(
+            "source-independent mathematical-Unicode F1 row was not discovered"
+        )
+    tests += 1
+
+    nonmetric_fixture = unicode_metric_fixture.replace("𝐹 1", "loss")
+    if any(
+        item.trigger != "source_scope_summary"
+        for item in table_discovery.discover(
+            table_discovery.Source("unicode-fixture", "unused.pdf"),
+            Path("."),
+            source_text=nonmetric_fixture,
+        )
+    ):
+        raise ValueError(
+            "source-independent Unicode fixture ignored its metric-context guard"
+        )
+    tests += 1
+
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses("2505.11550:full", raw_candidate_id="")
+        ),
+        "mathematical-Unicode F1 account detached from its raw table row",
+    )
+
+    expect_failure(
+        lambda: validate_witness_mutation(account_witnesses[:-1]),
+        "one source-derived account witness removed",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2602.11871:fdgpt-llama",
+                source_text_sha256="0" * 64,
+            )
+        ),
+        "account witness detached from its extracted PDF hash",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2501.11012:english-unibuc-nlp",
+                identity_text="2 AdvacheckEnglish 83.07 83.33",
+            )
+        ),
+        "shared-task rank identity redirected to another team",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2501.11012:english-unibuc-nlp",
+                metric_text="2 83.3 66.7 75.9 82.6 83.01",
+                metric_value="83.01",
+            )
+        ),
+        "shared-task metric-side rank join detached from its qualifying result",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2605.02374:react-64shot",
+                join_key="table=1;column=REACT;shot=32",
+            )
+        ),
+        "REACT shot column join redirected to another fitted state",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2508.11933:gpt4o-mini",
+                join_key="figure=4;domain=Code;series=2",
+            )
+        ),
+        "CAMF Figure 4 series identity detached from its plotted value",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2501.03940:m4-xlm-roberta",
+                join_key="table=9;row=Arabic;series=2",
+            )
+        ),
+        "M4 Table 9 column identity detached from its Arabic result",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2502.12734:greater-d",
+                join_key="locator=table1;row=avg;series=11",
+            )
+        ),
+        "GREATER-D source-table column detached from its average",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2511.01192:domain-f1",
+                join_key="figure=4;series=2;metric=f1",
+            )
+        ),
+        "DEER Figure 4 routing series detached from its plotted value",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2607.22026:window-std",
+                join_key=(
+                    "locator=table7;state=window-std;"
+                    "classification=threshold_qualifying"
+                ),
+            )
+        ),
+        "below-threshold named state falsely promoted to a qualifying result",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2502.12611:xgb-classifier",
+                join_key="figures=42,43;metric=accuracy;plot_value=0.98",
+                metric_value="0.98",
+            )
+        ),
+        "hash-bound visual plot reading reassigned to another classifier value",
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2510.16549:qwen3-rs",
+                join_key="locator=tablevi;model=robertars;metric=precision",
+            )
+        ),
+        "vertical Table VI model group detached from its precision row",
+    )
+
     expect_failure(
         lambda: table_discovery.validate_resolutions(
-            table_candidates, table_resolutions[:-1], accounts
+            table_candidates, table_resolutions[:-1], table_accounts
         ),
         "one PDF-derived candidate resolution removed",
     )
 
     target_index = next(
-        index
-        for index, item in enumerate(table_resolutions)
-        if item.target_account_ids
+        index for index, item in enumerate(table_resolutions) if item.target_account_ids
     )
     unknown_target_resolutions = list(table_resolutions)
     unknown_target_resolutions[target_index] = replace(
@@ -1777,29 +2012,44 @@ def run_fulltext_regression_tests(
     )
     expect_failure(
         lambda: table_discovery.validate_resolutions(
-            table_candidates, unknown_target_resolutions, accounts
+            table_candidates, unknown_target_resolutions, table_accounts
         ),
         "PDF-derived resolution redirected to an unknown account",
     )
 
-    required_index = next(
+    required_target = "2510.12476:detective-m4"
+    required_indexes = [
         index
         for index, item in enumerate(table_resolutions)
-        if "2510.12476:detective-m4" in item.target_account_ids
-    )
+        if required_target in item.target_account_ids
+    ]
+    if not required_indexes:
+        raise ValueError("grouped table negative-control fixture is missing")
+    required_index = required_indexes[0]
     hidden_required_resolutions = list(table_resolutions)
-    hidden_required_resolutions[required_index] = replace(
-        table_resolutions[required_index],
-        resolution_kind="nonqualifying_metric_context",
-        target_account_ids=(),
-        reason=(
-            "Negative control falsely suppresses the grouped DeTeCtive M4 "
-            "table state despite its directly extracted high cells."
-        ),
-    )
+    for hidden_index in required_indexes:
+        item = table_resolutions[hidden_index]
+        remaining = tuple(
+            target for target in item.target_account_ids if target != required_target
+        )
+        hidden_required_resolutions[hidden_index] = replace(
+            item,
+            resolution_kind=(
+                item.resolution_kind if remaining else "nonqualifying_metric_context"
+            ),
+            target_account_ids=remaining,
+            reason=(
+                item.reason
+                if remaining
+                else (
+                    "Negative control falsely suppresses the grouped DeTeCtive M4 "
+                    "table state despite its directly extracted high cells."
+                )
+            ),
+        )
     expect_failure(
         lambda: table_discovery.validate_resolutions(
-            table_candidates, hidden_required_resolutions, accounts
+            table_candidates, hidden_required_resolutions, table_accounts
         ),
         "content-required grouped table state reclassified as a false positive",
     )
@@ -1810,9 +2060,139 @@ def run_fulltext_regression_tests(
     )
     expect_failure(
         lambda: table_discovery.validate_resolutions(
-            mutated_candidates, table_resolutions, accounts
+            mutated_candidates, table_resolutions, table_accounts
         ),
         "raw PDF candidate content mutated without updating its resolution",
+    )
+
+    summary_index = next(
+        index
+        for index, item in enumerate(table_candidates)
+        if item.parent_id == "2605.16107" and item.trigger == "source_scope_summary"
+    )
+    missing_summary_candidates = [
+        item for index, item in enumerate(table_candidates) if index != summary_index
+    ]
+    missing_summary_resolutions = [
+        item for index, item in enumerate(table_resolutions) if index != summary_index
+    ]
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            missing_summary_candidates,
+            missing_summary_resolutions,
+            table_accounts,
+        ),
+        "content-hash-bound source scope summary removed",
+    )
+
+    arabic_roman_candidates = list(table_candidates)
+    arabic_roman_resolutions = list(table_resolutions)
+    roman_indexes = [
+        index
+        for index, item in enumerate(table_resolutions)
+        if set(item.target_account_ids) & table_discovery.ROMAN_CONTENT_ACCOUNT_IDS
+        and re.search(
+            r"\bTABLE [IVXLCDM]+\b",
+            item.candidate.table_locator,
+            re.IGNORECASE,
+        )
+    ]
+    if not roman_indexes:
+        raise ValueError("Roman-caption negative-control fixture is missing")
+    for roman_index in roman_indexes:
+        arabic_locator = re.sub(
+            r"\bTABLE [IVXLCDM]+\b",
+            "Table 0",
+            table_candidates[roman_index].table_locator,
+            flags=re.IGNORECASE,
+        )
+        arabic_candidate = replace(
+            table_candidates[roman_index], table_locator=arabic_locator
+        )
+        arabic_roman_candidates[roman_index] = arabic_candidate
+        arabic_roman_resolutions[roman_index] = replace(
+            table_resolutions[roman_index], candidate=arabic_candidate
+        )
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            arabic_roman_candidates, arabic_roman_resolutions, table_accounts
+        ),
+        "Roman-caption evidence silently normalized to an Arabic table locator",
+    )
+
+    figure_indexes = [
+        index
+        for index, item in enumerate(table_resolutions)
+        if "2508.11933:gpt4o-mini" in item.target_account_ids
+        and item.candidate.trigger == "figure_legend_threshold"
+    ]
+    if not figure_indexes:
+        raise ValueError("Figure 4 negative-control fixture is missing")
+    nonfigure_candidates = list(table_candidates)
+    nonfigure_resolutions = list(table_resolutions)
+    for figure_index in figure_indexes:
+        nonfigure_candidate = replace(
+            table_candidates[figure_index], trigger="threshold_wide"
+        )
+        nonfigure_candidates[figure_index] = nonfigure_candidate
+        nonfigure_resolutions[figure_index] = replace(
+            table_resolutions[figure_index], candidate=nonfigure_candidate
+        )
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            nonfigure_candidates, nonfigure_resolutions, table_accounts
+        ),
+        "Figure 4 legend evidence reclassified as an ordinary table candidate",
+    )
+
+    zero_yield_target = "2510.16573:mdeberta-v3-base"
+    carry_only_zero_yield = [
+        replace(item, resolution_kind="targeted_carry_forward")
+        if zero_yield_target in item.target_account_ids
+        and item.candidate.parent_id == "2510.16573"
+        else item
+        for item in table_resolutions
+    ]
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            table_candidates, carry_only_zero_yield, table_accounts
+        ),
+        "former zero-yield source account loses direct same-parent PDF evidence",
+    )
+
+    offpage_candidates = list(table_candidates)
+    offpage_resolutions = list(table_resolutions)
+    offpage_indexes = [
+        index
+        for index, item in enumerate(table_resolutions)
+        if item.candidate.parent_id == "2602.11871"
+        and item.candidate.trigger.startswith("offpage_metric_")
+    ]
+    if not offpage_indexes:
+        raise ValueError("off-page metric negative-control fixture is missing")
+    for offpage_index in offpage_indexes:
+        candidate = table_candidates[offpage_index]
+        ordinary_candidate = replace(
+            candidate,
+            table_locator=candidate.table_locator.replace(
+                " | off-page metric definition", ""
+            ),
+            trigger=candidate.trigger.removeprefix("offpage_metric_"),
+            context=re.sub(
+                r" \|\| document metric context line \d+:.*$",
+                "",
+                candidate.context,
+            ),
+        )
+        offpage_candidates[offpage_index] = ordinary_candidate
+        offpage_resolutions[offpage_index] = replace(
+            table_resolutions[offpage_index], candidate=ordinary_candidate
+        )
+    expect_failure(
+        lambda: table_discovery.validate_resolutions(
+            offpage_candidates, offpage_resolutions, table_accounts
+        ),
+        "off-page AUROC definition detached from DMAP Table 1 accounts",
     )
 
     row_by_id = {row.arxiv_id: row for row in rows}
@@ -2438,6 +2818,7 @@ def write_report(
     primary_results_path: Path,
     table_candidates_path: Path,
     table_discovery_path: Path,
+    account_witnesses_path: Path,
     paper_root: Path,
     audit_path: Path,
     embedded_audit_path: Path,
@@ -2452,6 +2833,7 @@ def write_report(
     accounts: list[FulltextAccount],
     primary_results: list[EmbeddedResult],
     table_candidates: list[table_discovery.Candidate],
+    account_witnesses: list[table_discovery.AccountWitness],
     composite_regression_tests: int,
     fulltext_regression_tests: int,
 ) -> str:
@@ -2476,6 +2858,7 @@ def write_report(
         "--primary-results coverage_primary_results.tsv "
         "--table-candidates coverage_table_candidates.tsv "
         "--table-discovery coverage_table_discovery.tsv "
+        "--account-witnesses coverage_account_witnesses.tsv "
         f"--paper-root {paper_root} "
         "--output coverage_semantic_audit.tsv "
         "--embedded-output coverage_embedded_result_audit.tsv "
@@ -2498,6 +2881,12 @@ def write_report(
         f"fulltext_account_rows={len(accounts)}",
         f"primary_result_rows={len(primary_results)}",
         f"independent_table_candidates={len(table_candidates)}",
+        f"source_derived_account_witnesses={len(account_witnesses)}",
+        "account_witness_kinds="
+        + ",".join(
+            f"{kind}:{sum(item.join_kind == kind for item in account_witnesses)}"
+            for kind in sorted({item.join_kind for item in account_witnesses})
+        ),
         f"composite_regression_controls={composite_regression_tests}",
         f"fulltext_regression_controls={fulltext_regression_tests}",
         "regression_and_negative_controls="
@@ -2519,6 +2908,7 @@ def write_report(
             f"sha256 {primary_results_path.name}={sha256(primary_results_path)}",
             f"sha256 {table_candidates_path.name}={sha256(table_candidates_path)}",
             f"sha256 {table_discovery_path.name}={sha256(table_discovery_path)}",
+            f"sha256 {account_witnesses_path.name}={sha256(account_witnesses_path)}",
             f"sha256 {audit_path.name}={sha256(audit_path)}",
             f"sha256 {embedded_audit_path.name}={sha256(embedded_audit_path)}",
             f"sha256 {fulltext_audit_path.name}={sha256(fulltext_audit_path)}",
@@ -2544,6 +2934,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--primary-results", type=Path)
     parser.add_argument("--table-candidates", type=Path)
     parser.add_argument("--table-discovery", type=Path)
+    parser.add_argument("--account-witnesses", type=Path)
     parser.add_argument("--paper-root", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--embedded-output", type=Path)
@@ -2583,6 +2974,7 @@ def main() -> int:
         args.primary_results,
         args.table_candidates,
         args.table_discovery,
+        args.account_witnesses,
         args.paper_root,
         args.output,
         args.embedded_output,
@@ -2595,7 +2987,7 @@ def main() -> int:
             "--map, --composite-sources, --embedded-results, --expected-results, "
             "--source-cards, --fulltext-sources, --fulltext-accounts, "
             "--account-map, --primary-results, --paper-root, --output, "
-            "--table-candidates, --table-discovery, "
+            "--table-candidates, --table-discovery, --account-witnesses, "
             "--embedded-output, --fulltext-output, --report, and --environment "
             "are required"
         )
@@ -2611,6 +3003,7 @@ def main() -> int:
         primary_results_path,
         table_candidates_path,
         table_discovery_path,
+        account_witnesses_path,
         paper_root,
         output_path,
         embedded_output_path,
@@ -2631,11 +3024,18 @@ def main() -> int:
     validate_composites(
         rows, mappings, sources, results, expected_result_ids, source_cards
     )
-    table_candidates, table_resolutions = validate_table_discovery(
+    (
+        table_sources,
+        table_candidates,
+        table_resolutions,
+        account_witnesses,
+        table_source_texts,
+    ) = validate_table_discovery(
         fulltext_sources_path,
         fulltext_accounts_path,
         table_candidates_path,
         table_discovery_path,
+        account_witnesses_path,
         paper_root,
     )
     artifacts = validate_fulltext(
@@ -2662,8 +3062,11 @@ def main() -> int:
         primary_results,
         paper_root,
         artifacts,
+        table_sources,
         table_candidates,
         table_resolutions,
+        account_witnesses,
+        table_source_texts,
     )
     write_audit(
         output_path,
@@ -2700,6 +3103,7 @@ def main() -> int:
         primary_results_path,
         table_candidates_path,
         table_discovery_path,
+        account_witnesses_path,
         paper_root,
         output_path,
         embedded_output_path,
@@ -2714,6 +3118,7 @@ def main() -> int:
         fulltext_accounts,
         primary_results,
         table_candidates,
+        account_witnesses,
         composite_regression_tests,
         fulltext_regression_tests,
     )

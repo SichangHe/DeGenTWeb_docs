@@ -17,39 +17,40 @@ The owned candidate consists only of:
 - every file in this `dw1_detector_survey_sources/` directory.
 
 The direct predecessor documentation commit is
-`15acd6c23aeb12f3caad2409dbdbac915977c010`, the pushed rev4 full-text repair.
+`c9968e74eb0de03151e7c1d563f8145edb12505b`, the pushed eval6 successor repair.
 The accepted survey chain is preserved in Git: original survey `d5fb118`,
 accuracy-first renewal `fe98a1c`, evaluator repair `f749a13`, rev2 semantic
-repair `45191cb`, and rev3 composite/E-card repair `1d2fc389`. No DW1
+repair `45191cb`, rev3 composite/E-card repair `1d2fc389`, rev4 full-text repair
+`15acd6c`, and eval6 successor `c9968e7`. No DW1
 implementation or configuration file is in the candidate. A later parent-
 repository commit may change only the `docs` gitlink to the pushed documentation
 commit.
 
 ## Repository content binding
 
-`candidate_files.sha256` covers 74 stable scientific, audit, benchmark,
+`candidate_files.sha256` covers 76 stable scientific, audit, benchmark,
 delivery, and evidence files. To avoid recursive or post-review invalidation it
 excludes exactly four control artifacts: itself, this manifest,
 `review_subject_files.sha256`, and `adversarial_review.md`. The final Git commit
 binds all four exclusions. The separate review-subject ledger directly hashes
-all 74 stable scientific, audit, benchmark, evidence, and exact-email files plus
+all 76 stable scientific, audit, benchmark, evidence, and exact-email files plus
 the external README and manifest. It deliberately excludes both metadata
 ledgers, this manifest, itself, and the review record, avoiding recursive or
 obsolete indirect bindings; the final Git commit binds those control artifacts,
 and the direct subject hashes remain reconstructable after the verdict is
 appended. The candidate-ledger and review-subject-ledger SHA-256 values are:
 
-`cd3a03c28bcb492e1a9633d6b25584150eba5a9024cd799f3d72bf49a74e5b0a`
+`5553cf03754a967459e89ff9a47bf95248caaa2f465da16a648ba2c37d06d348`
 
-`af49e1af8f4a2fb188783fc206bc84ae9725a9246cb74af3919c8adc4052e243`
+`a77ee6245431ac39364193bf0e1bd5d93e2e50ece4cbdcf069890969336a6bbc`
 
 The ledger includes the complete earlier MELD, benchmark, integrity, coverage,
 and review evidence plus this repair's composite source/result mappings,
 generated audits, primary-search record, public-checkpoint benchmark source,
 both raw attempts, 8,022-row CSV, independent verifier, static checks, execution
 environment, and model hashes. It also includes the full-text inventory generator,
-independent table-discovery program and snapshots, 119-source PDF/text ledger,
-immutable 958-account inventory and map, 695 primary-result dispositions, and
+independent table-discovery program, candidate/resolution/witness snapshots, 119-source PDF/text ledger,
+immutable 987-account inventory and map, 724 primary-result dispositions, and
 generated account audit. From `docs/notes/`, the exact
 check is:
 
@@ -60,7 +61,10 @@ sha256sum --check dw1_detector_survey_sources/candidate_files.sha256
 Broad `*.txt`, `*.csv`, and `*.tsv` ignore rules apply in this repository. Every
 owned ignored evidence file must therefore be force-added, and a staged-path
 comparison must prove that every ledger path is present in the index. Raw CSV
-bytes are bound by the ledger and must not be silently normalized.
+bytes are bound by the ledger and must not be silently normalized. The owned
+`.gitignore` explicitly unignores `__pycache__/` and `*.pyc`, so interpreter
+caches cannot disappear from ordinary Git status; the frozen live scope contains
+none, and all replay commands route caches to `/tmp`.
 
 ## External public evidence binding
 
@@ -70,7 +74,7 @@ Canonical path:
 
 The external `MANIFEST.sha256` covers 288 files and has SHA-256:
 
-`1d3537f1833a9463a9eb1399bd45f46ae2056cf8edef9423a67563254a8293b3`
+`59d702dfb9ff1a8bebc1563bacc4b37f63dd02828d88068eed8712144e43474f`
 
 `sha256sum --check MANIFEST.sha256` passed for all 288 entries. No file or
 directory in the collection is writable. It preserves the earlier 150-file
@@ -117,8 +121,8 @@ excluded from a training-data preprocessing description; CNLP is excluded for
 inference-stage target normalization/rewrite.
 
 The final content-derived layer does not use the composite selector. It binds all
-119 primary PDFs and exact text extractions, then maps 958 expected accounts
-one-to-one: 263 accepted embedded results and 695 primary-result dispositions,
+119 primary PDFs and exact text extractions, then maps 987 expected accounts
+one-to-one: 263 accepted embedded results and 724 primary-result dispositions,
 with no parent-only account. Six sources have paper- and table-specific
 no-qualifier reasons. Whole-file hashes and an immutable digest of every parent/
 account pair prevent an omitted row from being hidden by lowering a mutable
@@ -126,14 +130,22 @@ count. Content anchors cover the earlier examples, the non-English and SenFlow
 counterexamples, LM2otifs, NEULIF, all 13 TELL rows, all 15 LAPD-paper rows, all
 nine late-stage stability rows, all 15 DNA-DetectLLM-paper rows, both DP-Net
 states, and every no-account decision. A separate program scans all 119 PDFs
-before account matching and freezes 4,860 high-metric table-row and grouped-method
-candidates. Every candidate has an explicit resolution; content requirements
+before account matching and freezes 4,812 high-metric table-row, grouped-method,
+Roman-table, and figure-legend candidates plus 119 content-hash-bound source
+summaries. Every candidate has an explicit resolution; content requirements
 cover PAWN's fitted baseline, all four distribution-trained Vanilla states,
 both ImBD training states, the evaluator-confirmed fitted additions, and the
-final composite and primary comparison states. Twenty full-text
-controls join the eleven accepted controls; all thirty-one pass. The exact
+final composite and primary comparison states. A distinct account-adjudication
+phase then emits exactly one source-derived identity/metric witness for all 987
+accounts without seeding or suppressing the raw candidate queue. The last repair directly requires
+all 29 evaluator-confirmed Roman-table/Figure 4 accounts, exact source scope for
+all 119 PDFs, and the six arXiv 2602.11871 scorer configurations whose Table 1
+AUROC definition occurs only in Appendix K. The scanner normalizes mathematical
+Unicode metric glyphs and spaced F1 labels; all three arXiv 2505.11550 Table 2
+architectures now have direct raw candidates and witnesses. Forty full-text
+controls join the eleven accepted controls; all fifty-one pass. The exact
 commands, inputs, output hashes, Poppler extraction version, and generated
-958-row audit
+987-row audit
 are preserved.
 
 The Leidos primary paper maps v1.0.4 to the unweighted multiclass DistilRoBERTa
@@ -162,7 +174,8 @@ The generalized repair executes only three complete public states:
 The score CSV has 8,022 data rows and SHA-256
 `c635d2b98583f9f9bcf3917f7ecb18469185550ab66d46ff60021a977195e786`.
 `verify_composite_scores.py` independently reconstructs both seeded splits and
-all five methods' AUROCs and operating points. Ruff and basedpyright pass. The
+all five methods' AUROCs and operating points. That score verifier passes the
+recorded Ruff 0.14.9 and basedpyright 1.36.0 checks. The
 first ModernBERT compilation-optimization failure is preserved; the successful
 run changes only `reference_compile`, not weights or mathematical scoring. The
 non-destructive layout helper verifies 25 model files and deterministically maps
@@ -177,11 +190,11 @@ comparators rather than a frozen like-for-like evaluation.
 ## Frozen correction and no-send state
 
 - Human-readable email SHA-256:
-  `fb3bf756779ab210baf13162b2302d2bdeab02339b9dcc39f0a4d4894be1fc3b`.
+  `99a0cc35565d4b531c58a9fa1be68e412242860af0f2e6f24f947da5ecfbffae`.
 - Mechanical subject SHA-256:
   `73540e80f5dafef3f3cb5168ad75475f755efade636b7135ea21ccaa4fc9abad`.
 - Mechanical body SHA-256:
-  `43fd5a9c4d35e0bd8edfc3ee3a100701579c2f84bacb1ab074f530b80c3df7a6`.
+  `71ea7a2f4b122e65477f8574d71fbaa2712be24edf614fa40a66037248d91d4f`.
 
 The mechanical copies exactly equal the subject and body of the human-readable
 draft. Status is **NOT SENT**. `delivery_plan.md` forbids delivery unless a new
@@ -191,7 +204,7 @@ an evaluator PASS.
 
 ## Independent review chain
 
-`adversarial_review.md` preserves thirteen predecessor reviewer/evaluator verdicts.
+`adversarial_review.md` preserves nineteen predecessor reviewer/evaluator verdicts.
 Reviews 1, 2, 4, 6, 7, and 8 remain FAIL records with their resolved findings;
 reviews 3 and 5 are historical PASS records for predecessor candidate states.
 The dw1eval4 verdict proves that review 5 did not test publication-internal
@@ -236,19 +249,50 @@ binding; and returned **PASS — no P1/P2 findings**. The eval6 one-shot verdict
 then showed that Review 13 neither discovered all fitted states nor bound final
 nonrecursive bytes, so it does not pass this repair or authorize delivery.
 
-The distinct eval6 reviewer must inspect every one of the 119 papers beyond the
-curated list, challenge the 4,860 raw table candidates and their resolutions,
-trace the evaluator-confirmed and full-table additions, replay all 31 controls, and record direct
-final hashes from `review_subject_files.sha256`. Its verdict will be appended as
-Review 14 without changing any reviewed subject byte.
+Review 14 is the distinct eval6 internal PASS. It reproduced the then-frozen
+119-source/958-account/4,860-candidate state and all 31 controls. The fresh
+dw1eval7 one-shot evaluator then proved that its scanner omitted Roman-numbered
+tables, figure results, and 14 zero-yield sources; its environment bytes were
+inconsistent; it did not directly hash this manifest; and ignored bytecode was
+present. Review 14 therefore does not pass this repair or authorize delivery.
+
+Review 15 is the dw1eval7 **FAIL** and is preserved with verdict SHA-256
+`b90483ac670a29a0dde34a3e4420d0b5b7ee7fe1943b93395b9f72392882994f`.
+Review 16 is the distinct read-only eval7 successor **FAIL**. It directly bound
+the manifest and verified the 29 Roman/Figure accounts, but proved that arXiv
+2602.11871 was still an account-bearing zero-yield source and that only 623 of
+987 accounts had any candidate target. Review 17 is a different distinct
+read-only **FAIL**. It proved that shared-task accounts were co-bound to the
+wrong team row: Unibuc-NLP's qualifying Table 8 accuracy appeared only in prose,
+while the raw candidate row belonged to AdvacheckEnglish. Review 18 is a further
+distinct **FAIL** because an ignored, uncommitted legacy witness TSV remained in
+the live owned directory; it was removed. Review 19 is another distinct **FAIL**:
+it showed that mathematical Unicode `𝐹 1` suppressed all three qualifying Table
+2 rows in arXiv 2505.11550, leaving inventory-driven witnesses with no raw
+candidate. Every verdict remains non-authorizing. The repair now spans Unicode
+metric normalization, off-page metric definitions, structured
+same-PDF rank joins, table columns and vertical groups, text-extracted figure
+series, hash-bound visual plot readings, and explicit below-threshold states,
+with one source-derived witness for every account.
+
+The new distinct final reviewer must independently challenge all 119 source
+summaries, the 4,812 result candidates, the 29 evaluator-confirmed accounts,
+the six off-page-metric accounts, all 987 source-derived witnesses, Roman-table,
+rank-join, column, vertical-group, and Figure 4 provenance, predecessor zero-yield sources,
+the three Unicode-F1 Table 2 rows, the exact Python 3.13 replay, clean owned path
+set, all 51 controls, and the unsent correction. It must directly record this final
+`candidate_manifest.md` SHA-256 in addition to every hash in
+`review_subject_files.sha256`. Its verdict will be appended as Review 20 without
+changing any reviewed subject byte.
 
 ## Required final verification
 
 Before commit and after checkout of the final commit:
 
-1. replay the semantic audit and its thirty-one controls;
+1. replay the semantic audit and its fifty-one controls under the recorded
+   Python 3.13 command;
 2. replay the independent score verifier and static checks;
-3. verify all 74 repository-ledger entries and 288 external-ledger entries;
+3. verify all 76 repository-ledger entries and 288 external-ledger entries;
 4. prove the human email equals the mechanical subject/body and remains unsent;
 5. prove every candidate-ledger path is staged and no unowned path is staged;
 6. commit and push only owned documentation artifacts; and

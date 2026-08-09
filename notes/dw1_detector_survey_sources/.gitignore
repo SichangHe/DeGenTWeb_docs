@@ -1,0 +1,4 @@
+# Owned survey evidence must expose interpreter caches to ordinary Git status.
+!__pycache__/
+!__pycache__/**
+!*.pyc

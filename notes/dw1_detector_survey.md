@@ -60,8 +60,9 @@ historical comparators. It is a runnable follow-up, not a replacement. [N17, M8]
 A final content-derived pass removed the remaining title-selection blind spot.
 It read the complete primary PDF and result tables for every one of the 119
 frozen publications, not only papers already labeled as overviews or benchmarks.
-The exact ledger now maps 958 qualifying detector accounts: the accepted 263
-embedded results and 695 separately named primary-paper configurations. No
+The exact ledger now maps 987 reviewed detector accounts under the frozen
+threshold-or-explicit-best rule: the accepted 263 embedded results and 724
+separately named primary-paper configurations. No
 parent-only account remains; the six papers with no qualifying result have
 paper- and table-specific reasons. A fresh mutation pass caught and repaired
 the first full-text inventory's remaining manual-list blind spot. In addition
@@ -79,12 +80,32 @@ the material language/training states in the Central-European benchmark, the
 dataset-fitted RoBERTa, DeTeCtive, stylo, and mcgovern states in the cross-dataset
 study, both M4 training-based states in the personalization benchmark, and named
 comparison or ablation rows in NEULIF, DivEye, PhantomHunter, and DivScore.
-Their high narrow or validation cells remain paired
+The last independent-discovery repair recognizes Roman-numbered table captions,
+figure legends, and every formerly zero-yield source. It adds eight unmodified
+baselines from DNA-DetectLLM's Table III; ten base, DALD, and Glimpse alignment
+states from the proxy-alignment paper; four zero-shot comparators from the PIFE
+paper's Table VIII; and seven RAIDAR, hosted-prompt, and CAMF-backbone states
+from CAMF's Table I and Figure 4. Those 29 states are now independently recovered
+from the PDFs rather than seeded by the curated list. Their high narrow or
+validation cells remain paired
 with weak official, transfer, attack, or cross-domain evidence. Result-specific
 gates now keep DNA-DetectLLM's regeneration blocker off its eight baselines and
 treat DP-Net's embedding noise as training-only rather than an inference
 perturbation. It also corrects Leidos v1.0.4: the primary system paper
 defines it as an unweighted multiclass DistilRoBERTa classifier, not an ensemble.
+The final reviewer exposed one more generalized audit gap: DMAP Table 1 put its
+AUROC definition in Appendix K, so a same-page-header rule produced no candidate
+for six FastDetectGPT/Binoculars scorer configurations, and only 623 of 987
+accounts had a direct candidate target. The corrected scanner carries explicit
+metric context across the document and resolves 4,812 independently extracted
+content candidates plus 119 hash-bound source summaries. A separate 987-row
+account-witness ledger then binds every account to its own PDF identity, metric,
+configuration, locator, and extracted-text hash, including structured rank,
+column, Roman-table, vertical-group, and figure joins. The witness ledger cannot
+seed or suppress the independent unknown-row queue; both checks are required.
+Mathematical Unicode metric labels are normalized before discovery, so Table 2
+of arXiv 2505.11550 now yields direct rows for its 0.949, 0.994, and 0.974 F1
+architectures instead of relying on the curated witness fallback.
 None supplies the missing matched low-FPR, artifact, two-A6000, and
 near-Binoculars evidence needed for promotion. [N18]
 
@@ -107,8 +128,8 @@ The corrected disposition is:
 5. **Reject LM²otifs and NEULIF individually.** Their headline values deserve
    preservation, but method, generalization, artifact, low-FPR, two-A6000, and
    timing evidence do not satisfy the fixed screen. [N13, N14]
-6. **Keep every full-text detector account individually visible.** The 958-account
-   ledger carries forward all 263 composite-source children and adds 695 primary-
+6. **Keep every full-text detector account individually visible.** The 987-account
+   ledger carries forward all 263 composite-source children and adds 724 primary-
    paper configurations. It covers all 119 papers without title, class, or
    parent-only grouping and keeps high narrow slices beside weak overall results.
    Missing state, scope, method, accuracy, or comparability blocks each
@@ -267,19 +288,29 @@ or misbinding of a real E-card. [N17]
 
 That accepted composite layer is now a subset of a content-derived full-corpus
 audit. Every one of the 119 primary PDFs is bound by both its PDF hash and the
-hash of a reproducible full-text extraction. The resulting 958-account inventory
-maps exactly to 263 accepted embedded-result dispositions and 695 primary-result
+hash of a reproducible full-text extraction. The resulting 987-account inventory
+maps exactly to 263 accepted embedded-result dispositions and 724 primary-result
 dispositions, with no parent-only target. It records six source-specific
-no-qualifier outcomes. A separate table-page extractor regenerates 4,860
-high-metric row-label and grouped-method candidates from all 119 PDFs before
+no-qualifier outcomes. A separate full-document extractor regenerates 4,812
+high-metric row-label, grouped-method, Roman-table, and figure-legend candidates
+from all 119 PDFs, plus one content-hash-bound scope summary per paper, before
 requiring one explicit account, carry-forward, duplicate, or content-specific
-non-candidate decision for every candidate. Twenty additional controls reject ordinary-title,
+non-candidate decision for every candidate. It then regenerates exactly one
+source-derived witness for every account without using those bindings to seed
+the raw candidate queue. Forty full-text controls reject ordinary-title,
 non-anchor, non-English, and narrow-domain omissions even when a mutable count
 is lowered; detach table content or a PDF/text hash; restore the false Leidos
 mechanism; delete a fitted baseline or collapse a separately trained state while
 lowering the mutable count; make an ImBD baseline inherit READER's generation
 exclusion; remove any full-text source row; or remove, mutate, suppress, or
-mis-target a PDF-derived candidate resolution. [N18]
+mis-target a PDF-derived candidate resolution; remove a source-scope summary;
+erase the Roman or figure provenance of a required result; or leave an account
+in a formerly zero-yield source without direct same-parent PDF evidence; detach
+an off-page metric definition; remove any account witness; or mutate the
+identity/metric sides of shared-task, column, figure, visual-plot,
+below-threshold, or vertical-group joins; they also require source-independent
+Unicode-F1 discovery and direct binding of the three recovered architecture
+rows. [N18]
 
 Task 3 reports TPR at five-percent FPR on non-adversarial/adversarial RAID-derived
 tests. The four Leidos rows are 99.4/97.2, 99.3/97.7, 99.2/97.6, and 99.1/95.7
@@ -427,7 +458,7 @@ does not prove the fixed A6000 screen. Both remain unreproduced watchlist claims
 | DACTYL/Vanguard | Released ModernBERT; PAN AUROC 0.993 | Supervised challenge result; no matched Binoculars, low-FPR, length, memory, or speed row | Released watchlist |
 | LM²otifs | In-domain 0.98 accuracy/1.00 AUC vs same-table Binoculars 0.97/0.99 | Cross-domain 0.79 vs 0.95; nearest-neighbor fallback; no state or comparable cost | Excluded/rejected |
 | NEULIF | In-domain CNN 97% accuracy and 0.9951 ROC-AUC; reported 25 MB | One under-specified corpus split; no matched comparator, state, low-FPR, or reproducible timing | Unreleased in-domain claim |
-| 958 full-text detector accounts | Up to 1.0 on reported F1, accuracy, precision, TPR, or AUROC slices; exact source/artifact disposition for 263 embedded results and 695 primary configurations | Narrow, validation-only, shifted, language-specific, closed, missing-state, excluded-method, or weaker mean/overall result except Desklib follow-up | Individually accounted across all 119 papers; no parent-only grouping or hidden promotion |
+| 987 full-text detector accounts | Up to 1.0 on reported F1, accuracy, precision, TPR, or AUROC slices; exact source/artifact disposition for 263 embedded results and 724 primary configurations | Narrow, validation-only, shifted, language-specific, closed, missing-state, excluded-method, or weaker mean/overall result except Desklib follow-up | Individually accounted across all 119 papers; no parent-only grouping or hidden promotion |
 | IRM | Best paper pair beats matched Binoculars on three DetectRL AUROCs | Best pair gated; anonymous public pair trails stored Binoculars locally | Runnable control |
 | SV-Detect | 99.83–100 matched-family reported AUROC | No trained detector state; supervised setting; local run is reconstruction only | Reconstruction evidence |
 | LAPD | 92.37 average vs same-pair Binoculars 89.72; measured near-identical cost | 10,000 auxiliary categorical samples | Excluded by method |
@@ -445,16 +476,18 @@ within each source and does not rank numbers across different rows.
 The frozen evidence includes three raw date-sorted arXiv query exports, a targeted
 Markov export, 119 deduplicated 2025–2026 publication mappings, a generated
 semantic audit, 33 accepted composite-source reviews, 263 generated child-result
-audit rows, a complete 119-PDF full-text/table review, 695 primary-configuration
-dispositions, a 958-account exact mapping, and anonymous public
+audit rows, a complete 119-PDF full-text/table/figure review, 724 primary-configuration
+dispositions, a 987-account exact mapping, and anonymous public
 Google Scholar first-page evidence. The first layer
 mechanically flagged 106 titles/abstracts for performance language or metrics;
 every flag has an explicit disposition or documented false-positive reason. The
 second layer rejects missing named results and generic composite-source reasons.
 The final layer removes title/class selection entirely, rehashes every preserved
-PDF and extracted text, and requires every expected account to resolve exactly
-once. Thirty-one regression and negative controls cover both selected composites
-and ordinary-title primary papers.
+PDF and extracted text, requires a scope summary for every source, and requires
+every expected account to resolve exactly once with a source-derived witness.
+Fifty-one regression and negative controls cover selected composites,
+ordinary-title primary papers, Roman-numbered tables, figure legends, former
+zero-yield sources, Unicode metric labels, and structured per-account joins.
 A prior Scholar attempt returned a robot challenge and was not bypassed; fresh
 narrow requests returned HTTP 200. The general web-search connector returned HTTP
 404, so direct anonymous primary endpoints were used. No PB, authenticated state,

@@ -118,6 +118,14 @@ grpo-noncot|READER GRPO non-CoT
 grpo-cot|READER GRPO CoT
 """),
     "2605.16107": _pairs("""
+likelihood|Likelihood baseline
+logrank|Log-Rank baseline
+entropy|Entropy baseline
+detectgpt|DetectGPT baseline
+fastgpt|FastGPT baseline
+binoculars|Binoculars baseline
+fouriergpt|FourierGPT baseline
+adagpt|AdaGPT baseline
 likelihood-m|Likelihood-M
 likelihood-mult|Likelihood-Mult
 logrank-m|Log-Rank-M
@@ -145,10 +153,10 @@ modernbert-detect-meld|ModernBERT-Detect retrained on MELD data
 repreguard-meld|RepreGuard retrained on MELD data
 """),
     "2605.02374": _pairs("""
-react-4shot|REACT 4-shot
-react-8shot|REACT 8-shot
-react-16shot|REACT 16-shot
 react-32shot|REACT 32-shot
+react-64shot|REACT 64-shot
+react-128shot|REACT 128-shot
+react-256shot|REACT 256-shot
 """),
     "2604.21223": _pairs("""
 llama32-pair|IRM Llama-3.2 model pair
@@ -163,6 +171,16 @@ unified|AEyeDE unified-generator arrangement
 superannotate-roberta|SuperAnnotate RoBERTa comparator
 """),
     "2604.02008": _pairs("""
+likelihood|Likelihood comparator
+logrank|LogRank comparator
+fastdetectgpt|FastDetectGPT comparator
+binoculars|Binoculars comparator
+fastdetectgpt-dald|FastDetectGPT+DALD
+fastdetectgpt-glimpse-gpt4-geometric|FastDetectGPT+Glimpse GPT-4 geometric
+fastdetectgpt-glimpse-gpt4-zipfian|FastDetectGPT+Glimpse GPT-4 Zipfian
+fastdetectgpt-glimpse-gpt4-mlp|FastDetectGPT+Glimpse GPT-4 MLP
+fastdetectgpt-glimpse-davinci-geometric|FastDetectGPT+Glimpse DaVinci-002 geometric
+binoculars-dald|Binoculars+DALD
 likelihood-knnproxy|Likelihood+kNNProxy
 fastdetectgpt-knnproxy|FastDetectGPT+kNNProxy
 binoculars-knnproxy|Binoculars+kNNProxy
@@ -273,6 +291,10 @@ deberta|Fine-tuned DeBERTa
 modernbert|Fine-tuned ModernBERT
 adv-modernbert|Adversarially trained ModernBERT
 pife-modernbert|PIFE-augmented ModernBERT
+fastdetectgpt|FastDetectGPT comparator
+glimpse|Glimpse comparator
+binoculars|Binoculars comparator
+logrank|LogRank comparator
 """),
     "2509.14268": _pairs("""
 qwen2-0.5b|DetectAnyLLM Qwen2-0.5B scoring model
@@ -297,9 +319,16 @@ roberta-base|MGT-Prism RoBERTa-base
 roberta-large|MGT-Prism RoBERTa-large
 """),
     "2508.11933": _pairs("""
+raidar|RAIDAR direct baseline
+gpt4o-direct|GPT-4o direct baseline
+gpt-cot|GPT+CoT baseline
+gpt-react|GPT+ReAct baseline
 gpt35|CAMF GPT-3.5-Turbo agents
 gpt4o|CAMF GPT-4o agents
 llama3-70b|CAMF Llama-3-70B agents
+gpt4o-mini|CAMF GPT-4o-mini agents
+gemini15-pro|CAMF Gemini-1.5 Pro agents
+deepseek-v3|CAMF DeepSeek-V3 agents
 """),
     "2508.11343": _pairs("""
 specdetect|SpecDetect
@@ -931,7 +960,7 @@ EVIDENCE: dict[str, str] = {
     "2601.04641": "main DP-MGTD tables; every named detector instantiation has a qualifying high sanitized-text cell and depends on privacy-budget target sanitization",
     "2601.03812": "main classifier table; BiLSTM ROC-AUC 0.94 and DistilBERT 0.96, with lower accuracy/topic-transfer evidence",
     "2511.21744": "Tables 2-3 and the Table 3 discussion; CNN and Random Forest are separately fitted, while six named literature comparison states expose a >=0.90 claim on at least one in-domain or small-dataset slice; NEULIF's best balanced-split ROC-AUC is 0.9951 without cross-domain evidence",
-    "2511.01192": "routing comparison figure and Tables 3, 6, 8; every named routing state has F1 >=0.90 on a domain/length cell, with weaker OOD/attack averages",
+    "2511.01192": "Figure 4 routing-objective series and Tables 3, 6, 8; the four named routing states are separately plotted, and the F1-routed states reach 91.4 and 94.1 while entropy-routed states reach 1.05 and 0.39 entropy on the plotted series; downstream F1 is >=0.90 on a domain/length cell, with weaker OOD/attack averages",
     "2511.00988": "main/appendix AUROC tables and KD table; every enhanced state crosses 0.90 on at least one LLM/domain cell, with variable low-FPR transfer",
     "2509.22147": "binary Tables 3-4; every listed feature/learner or implicit transformer has accuracy/F1 >=0.90; segmentation and multiclass tables are excluded tasks",
     "2509.18880": "Tables 1-4, 6, and 13; each listed backbone/boosted state or fitted e5-small-lora, Desklib, and SuperAnnotate comparator reaches AUROC, accuracy, or a reported attack-slice percentage >=0.90 somewhere; boosted Binoculars stays below 0.90 and is not an account",
@@ -945,8 +974,8 @@ EVIDENCE: dict[str, str] = {
     "2508.06913": "Tables 1-3; SDC and SDP each exceed 0.90 F1 on a domain/generator cell, while averages are about 0.70-0.85 and attacks degrade them",
     "2507.23577": "Tables 1-2; standalone T-Detect has Books AUROC 0.926 and CT(T-Detect) has named high domain cells despite 0.876/0.881 aggregates",
     "2507.05157": "validation/test tables: GPT-4o-mini 0.97 validation and 0.9547 test; BERT 1.00 validation but 0.767 test; Llama Task-B validation macro F1 0.93 but 0.14 test",
-        "2506.15683": "Tables 3 and 5; every full/ablation or named experimental comparison row has a class F1 >0.90 somewhere; full PhantomHunter macro F1 is 0.9624-0.9714, comparison and ablation balance is weaker, and HasteWire is a closed service",
-        "2506.06705": "Tables 1-2, Figure 4, and appendix Table 4; general, medical, legal, no-adaptation, detector-LM, score-ablation, RoBERTa, and named score-baseline states each exceed 0.90 AUROC on a relevant domain/generator cell",
+    "2506.15683": "Tables 3 and 5; every full/ablation or named experimental comparison row has a class F1 >0.90 somewhere; full PhantomHunter macro F1 is 0.9624-0.9714, comparison and ablation balance is weaker, and HasteWire is a closed service",
+    "2506.06705": "Tables 1-2, Figure 4, and appendix Table 4; general, medical, legal, no-adaptation, detector-LM, score-ablation, RoBERTa, and named score-baseline states each exceed 0.90 AUROC on a relevant domain/generator cell",
     "2506.01702": "Tables 1-2 and official Table 4; the TF-IDF validation baseline and all six submitted binary states exceed 0.99 on a validation metric, but OOD AUROC is 0.592-0.700 and official mdok AUROC/F1 0.853/0.898",
     "2505.15261": "Tables 1-3; every listed full/ablation state has a domain AUROC >=0.90, while only full AGENT-X averages 0.9007",
     "2505.13855": "Tables 1-2; every fitted/ensemble configuration crosses 0.90 on MAGE or RAID; DoGEN aggregates are 0.9760 and 0.9581 AUROC",
@@ -994,7 +1023,7 @@ EVIDENCE.update(
         "2504.02873": "main comparisons; Short-PHD is the paper's explicitly best short-text state although its reported aggregate values stay below 0.90",
         "2503.00032": "main feature/classifier tables; the Exaone paraphrase detector and nine named KatFishNet feature-learner states cross 0.90 accuracy/F1 on a Korean corpus/domain cell",
         "2502.12734": "Tables 1-2; GREATER-D is the explicitly best defense, while query and zero-query GREATER-A are separately reported best/second-best attack states",
-        "2502.12064": "Tables 4-5; the English GPT-2-small and multilingual GPT-2-XL threshold ensembles are the separately selected best GLTR configurations despite 0.8019/0.6620 macro F1",
+        "2502.12064": "Tables 4 and 6; the English GPT-2-small and multilingual GPT-2-XL threshold ensembles are the separately selected best GLTR configurations at 0.8019 and 0.6620 macro F1, below the high-accuracy threshold",
         "2502.11336": "Table 2 and datastore ablation; RoBERTa, LR-GLTR, DNA-GPT, and all three named ExaGPT datastore states cross 0.90 AUROC on a source/domain cell",
         "2502.04528": "Tables 3 and 8; FairOPT preserves about 0.90 dataset accuracy while reducing disparity, and Desklib with FairOPT or static thresholds crosses 0.90 accuracy/F1 on RAID/MAGE/SemEval slices",
         "2501.18998": "Table 1 and Appendix Table 5; unperturbed FastDetectGPT and each named embedding-attack state retain AUROC >=0.90 on at least one source/model black-box or white-box cell",
@@ -1211,6 +1240,87 @@ RESULT_EVIDENCE: dict[str, str] = {
     "2504.21019:uniform": "Table 2: training-time uniform-noise DP-Net reaches 96.88% accuracy on Wikipedia/ChatGPT but averages 85.48% over seven unseen domains.",
     "2504.21019:gaussian": "Table 2: training-time Gaussian-noise DP-Net reaches 96.04% accuracy on Wikipedia/ChatGPT but averages 86.10% over seven unseen domains.",
 }
+
+RESULT_EVIDENCE.update(
+    {
+        "2511.01192:domain-f1": "Figure 4 plots the Domain-Matching (F1) routing series and labels its selected value 91.4; Tables 3, 6, and 8 give the downstream domain/length evidence.",
+        "2511.01192:domain-entropy": "Figure 4 plots the Domain-Matching (Entropy) routing series and labels its selected value 1.05; Tables 3, 6, and 8 give the downstream domain/length evidence.",
+        "2511.01192:reward-f1": "Figure 4 plots the Reward-Driven (F1) routing series and labels its selected value 94.1; Tables 3, 6, and 8 give the downstream domain/length evidence.",
+        "2511.01192:reward-entropy": "Figure 4 plots the Reward-Driven (Entropy) routing series and labels its selected value 0.39; Tables 3, 6, and 8 give the downstream domain/length evidence.",
+        "2605.02712:qwen3-32b-st-07": "Table 1 reports Qwen3-32B_ST_th0.7 at macro F1 0.78; it is the separately selected Task-10 submission but does not qualify as a high-accuracy result.",
+        "2605.02374:react-32shot": "Table 1, DetectRL 32-shot row: REACT accuracy is 99.46% (99.46% F1).",
+        "2605.02374:react-64shot": "Table 1, DetectRL 64-shot row: REACT accuracy is 99.82% (99.82% F1).",
+        "2605.02374:react-128shot": "Table 1, DetectRL 128-shot row: REACT accuracy is 99.74% (99.74% F1).",
+        "2605.02374:react-256shot": "Table 1, DetectRL 256-shot row: REACT accuracy is 99.79% (99.79% F1).",
+        "2502.12734:greater-d": "Table 1: GREATER-D has 1.78% average ASR under text perturbations and 12.42% under adversarial attacks, both best among the compared defenses.",
+        "2502.12734:greater-a-query": "Table 2 query-based row: GREATER-A reaches 96.58% ASR with 62.63 average queries.",
+        "2502.12734:greater-a-zero-query": "Table 2 zero-query row: GREATER-A reaches 69.11% ASR.",
+        "2502.12064:english-gpt2-small": "Table 4 reports the selected English GPT-2-small GLTR threshold ensemble at 0.8019 macro F1; it is separately disposed but below the high-accuracy threshold.",
+        "2502.12064:multilingual-gpt2-xl": "Table 6 reports the selected multilingual GPT-2-XL GLTR threshold ensemble at 0.6620 macro F1; it is separately disposed but below the high-accuracy threshold.",
+        "2501.11914:inverse-perplexity-en": "Table 5 reports the selected English Inverse Perplexity ensemble at 0.7458 macro F1; it is separately disposed but below the high-accuracy threshold.",
+        "2501.11914:inverse-perplexity-multi": "Table 5 reports the selected multilingual Inverse Perplexity ensemble at 0.7513 macro F1; it is separately disposed but below the high-accuracy threshold.",
+        "2501.03940:ens-2gpt2": "Table 8: the two-GPT-2 PAWN ensemble reports 0.983 AUROC in-distribution and 0.943 on the wilderness testbeds.",
+        "2501.03940:m4-xlm-roberta": "Table 9 reports the fitted XLM-RoBERTa M4 comparator at 92.18% accuracy and 92.12% macro F1 on Arabic, and 94.39% on both metrics for Urdu; AUROC is not reported for this column.",
+        "2607.22026:window-std": "Table 7 reports the strongest window_std state on HC3 at 0.7137 AUROC, 0.5835 AUPRC, 0.7640 F1, and 0.0000 TPR at 1% FPR. It is retained as an individually disposed proposed state, not as a threshold-qualifying high-accuracy result.",
+        "2510.16549:qwen3-rs": "Table VI reports the Qwen 3-8B real-plus-synthetic state with 0.9034 precision on the Multi-DR R+S test column; its recall and F1 on that cell are 0.8504 and 0.8738, and its binary-task F1 peaks at 0.8068.",
+        "2605.16107:likelihood": "Table III reports the unmodified Likelihood baseline at 95.58% average AUROC on Essay and 90.17% on TruthfulQA.",
+        "2605.16107:logrank": "Table III reports the unmodified Log-Rank baseline at 95.39% average AUROC on Essay; its TruthfulQA average is 89.37%.",
+        "2605.16107:entropy": "Table III reports the unmodified Entropy baseline with 96.02% AUROC on the TruthfulQA/ChatGLM slice, while the two benchmark averages are 81.53% and 88.23%.",
+        "2605.16107:detectgpt": "Table III reports the unmodified DetectGPT baseline at 92.84% AUROC on two TruthfulQA generator slices, while the Essay and TruthfulQA averages are 49.33% and 84.07%.",
+        "2605.16107:fastgpt": "Table III reports the unmodified FastGPT baseline at 96.26% AUROC on TruthfulQA/ChatGLM, while the Essay and TruthfulQA averages are 65.17% and 89.34%.",
+        "2605.16107:binoculars": "Table III reports the unmodified Binoculars baseline at 97.36% average AUROC on Essay and 86.97% on TruthfulQA.",
+        "2605.16107:fouriergpt": "Table III reports the unmodified FourierGPT baseline at 90.23% average AUROC on Essay and 92.68% on TruthfulQA, with one Essay generator cell at 52.38%.",
+        "2605.16107:adagpt": "Table III reports the unmodified AdaGPT baseline at 92.69% AUROC on Essay/ChatGLM and 96.67% on TruthfulQA/ChatGLM, while the averages are 82.81% and 88.19%.",
+        "2604.02008:likelihood": "Table III reports the unaligned Likelihood comparator at 0.907 AUROC on the GPT-3.5 slice but only 0.808 average on Mix8.",
+        "2604.02008:logrank": "Table III reports the unaligned LogRank comparator at 0.906 AUROC on GPT-3.5 and 0.904 on Gemini-1.5 Pro but only 0.808 average on Mix8.",
+        "2604.02008:fastdetectgpt": "Table III reports unaligned FastDetectGPT at 0.900-0.955 on four Mix8 source slices and 0.893 average.",
+        "2604.02008:binoculars": "Table III reports unaligned Binoculars at 0.920-0.994 across the eight Mix8 source slices and 0.974 average.",
+        "2604.02008:fastdetectgpt-dald": "Table III reports FastDetectGPT+DALD at 0.923 average AUROC on Mix8, with source-specific values from 0.811 to 0.981.",
+        "2604.02008:fastdetectgpt-glimpse-gpt4-geometric": "Table III reports FastDetectGPT+Glimpse with the GPT-4 API and geometric reconstruction at 0.895-0.982 AUROC on the five available Mix8 source slices; three cells are unavailable.",
+        "2604.02008:fastdetectgpt-glimpse-gpt4-zipfian": "Table III reports FastDetectGPT+Glimpse with the GPT-4 API and Zipfian reconstruction at 0.899-0.979 AUROC on the five available Mix8 source slices; three cells are unavailable.",
+        "2604.02008:fastdetectgpt-glimpse-gpt4-mlp": "Table III reports FastDetectGPT+Glimpse with the GPT-4 API and MLP reconstruction at 0.900-0.981 AUROC on the five available Mix8 source slices; three cells are unavailable.",
+        "2604.02008:fastdetectgpt-glimpse-davinci-geometric": "Table III reports FastDetectGPT+Glimpse with the DaVinci-002 API and geometric reconstruction at 0.930 average AUROC on Mix8.",
+        "2604.02008:binoculars-dald": "Table III reports Binoculars+DALD at 0.866 average AUROC on Mix8 despite individual source cells up to 0.960.",
+        "2510.02319:fastdetectgpt": "Table VIII reports FastDetectGPT at 0.972 AUROC and 0.813 TPR at 1% FPR on the non-adversarial split, falling to 0.492-0.635 AUROC on the attack mixes.",
+        "2510.02319:glimpse": "Table VIII reports Glimpse at 0.965 AUROC and 0.790 TPR at 1% FPR on the non-adversarial split, falling to 0.474-0.618 AUROC on the attack mixes.",
+        "2510.02319:binoculars": "Table VIII reports Binoculars at 0.985 AUROC and 0.857 TPR at 1% FPR on the non-adversarial split, falling to 0.553-0.662 AUROC on the attack mixes.",
+        "2510.02319:logrank": "Table VIII reports LogRank at 0.921 AUROC and 0.682 TPR at 1% FPR on the non-adversarial split, falling to 0.396-0.534 AUROC on the attack mixes.",
+        "2508.11933:raidar": "Table I reports the RAIDAR baseline at 90.11% F1 and 90.46% accuracy on Code, while its four other domain F1 values are 63.18%-82.56%.",
+        "2508.11933:gpt4o-direct": "Table I reports direct GPT-4o prompting at 93.05% F1 and 93.21% accuracy on Code, while its four other domain F1 values are 70.53%-86.81%.",
+        "2508.11933:gpt-cot": "Table I reports GPT+CoT at 93.64% F1 and 93.88% accuracy on Code, while its four other domain F1 values are 71.89%-87.44%.",
+        "2508.11933:gpt-react": "Table I reports GPT+ReAct at 94.27% F1 and 94.51% accuracy on Code, while its four other domain F1 values are 72.52%-88.07%.",
+        "2508.11933:gpt35": "Figure 4 reports the CAMF GPT-3.5-Turbo backbone at 95.18% F1 on Code; the figure provides no low-FPR result or uncertainty interval.",
+        "2508.11933:gpt4o": "Figure 4 reports the CAMF GPT-4o backbone at 98.49% F1 on Code; the figure provides no low-FPR result or uncertainty interval.",
+        "2508.11933:llama3-70b": "Figure 4 reports the CAMF Llama3-70B backbone at 96.64% F1 on Code; the figure provides no low-FPR result or uncertainty interval.",
+        "2508.11933:gpt4o-mini": "Figure 4 reports the CAMF GPT-4o-mini backbone at 96.89% F1 on Code; the figure provides no low-FPR result or uncertainty interval.",
+        "2508.11933:gemini15-pro": "Figure 4 reports the CAMF Gemini-1.5 Pro backbone at 96.45% F1 on Code; the figure provides no low-FPR result or uncertainty interval.",
+        "2508.11933:deepseek-v3": "Figure 4 reports the CAMF DeepSeek-V3 backbone at 95.60% F1 on Code; the figure provides no low-FPR result or uncertainty interval.",
+    }
+)
+
+for slug, system in PRIMARY_GROUPS["2601.20006"]:
+    account_id = f"2601.20006:{slug}"
+    if slug == "external-deberta":
+        table = "8"
+    elif slug.startswith("master-"):
+        table = "9"
+    elif slug.startswith("gpt41nano-"):
+        table = "10"
+    elif slug.startswith("self-"):
+        table = "11"
+    elif slug == "ensemble-per-llm":
+        table = "12"
+    elif slug.startswith("family-"):
+        table = "13"
+    elif slug == "ensemble-per-family":
+        table = "14"
+    else:
+        raise ValueError(f"unmapped 2601.20006 account: {account_id}")
+    RESULT_EVIDENCE[account_id] = (
+        f"Table {table} reports the {system} row with accuracy, F1, AUC, or recall "
+        ">=0.90 on its named master, validation, self-model, family, or ensemble "
+        "evaluation; this is not a shared disposition inherited from another row."
+    )
 
 RESULT_MECHANISM: dict[str, str] = {
     "2501.03940:radar-ft": "the prior RADAR adversarially trained RoBERTa detector after the paper's named fine-tuning setting",
@@ -1975,6 +2085,180 @@ for _slug in (
     RESULT_OUTCOME[f"2505.12507:{_slug}"] = (
         "This is an individually visible comparison result, not LM2otifs itself; the cited table does not establish a new frozen state with like-for-like low-FPR, two-A6000, and near-Binoculars timing evidence."
     )
+
+
+# Eval7's independent Roman-caption/figure challenge exposed 29 exact states
+# that the preceding Arabic-table scanner could not see.  Keep their method
+# identities and dispositions local: none may inherit the parent paper's
+# proposed-method exclusion.
+RESULT_MECHANISM.update(
+    {
+        "2605.16107:likelihood": _BASELINE_MECHANISMS["likelihood"],
+        "2605.16107:logrank": _BASELINE_MECHANISMS["logrank"],
+        "2605.16107:entropy": _BASELINE_MECHANISMS["entropy"],
+        "2605.16107:detectgpt": _BASELINE_MECHANISMS["detectgpt"],
+        "2605.16107:fastgpt": _BASELINE_MECHANISMS["fastdetectgpt"],
+        "2605.16107:binoculars": _BASELINE_MECHANISMS["binoculars"],
+        "2605.16107:fouriergpt": "the unmodified FourierGPT likelihood-spectrum statistic",
+        "2605.16107:adagpt": "the unmodified AdaDetectGPT classifier that learns witness functions from training data",
+        "2604.02008:likelihood": _BASELINE_MECHANISMS["likelihood"],
+        "2604.02008:logrank": _BASELINE_MECHANISMS["logrank"],
+        "2604.02008:fastdetectgpt": _BASELINE_MECHANISMS["fastdetectgpt"],
+        "2604.02008:binoculars": _BASELINE_MECHANISMS["binoculars"],
+        "2604.02008:fastdetectgpt-dald": "FastDetectGPT after DALD supervised fine-tuning aligns the proxy on proprietary-LLM outputs before inference",
+        "2604.02008:fastdetectgpt-glimpse-gpt4-geometric": "FastDetectGPT after geometric full-distribution reconstruction from GPT-4 API top-k probabilities",
+        "2604.02008:fastdetectgpt-glimpse-gpt4-zipfian": "FastDetectGPT after Zipfian full-distribution reconstruction from GPT-4 API top-k probabilities",
+        "2604.02008:fastdetectgpt-glimpse-gpt4-mlp": "FastDetectGPT after learned-MLP full-distribution reconstruction from GPT-4 API top-k probabilities",
+        "2604.02008:fastdetectgpt-glimpse-davinci-geometric": "FastDetectGPT after geometric full-distribution reconstruction from DaVinci-002 API top-k probabilities",
+        "2604.02008:binoculars-dald": "Binoculars using a DALD proxy fine-tuned on proprietary-LLM outputs before inference",
+        "2510.02319:fastdetectgpt": _BASELINE_MECHANISMS["fastdetectgpt"],
+        "2510.02319:glimpse": "Glimpse reconstructs a source-model token distribution from commercial API top-k probabilities before zero-shot scoring",
+        "2510.02319:binoculars": _BASELINE_MECHANISMS["binoculars"],
+        "2510.02319:logrank": _BASELINE_MECHANISMS["logrank"],
+        "2508.11933:raidar": "RAIDAR reasoning features derived from multiple target-text rewrites",
+        "2508.11933:gpt4o-direct": "direct binary prompting of the hosted GPT-4o model",
+        "2508.11933:gpt-cot": "chain-of-thought binary prompting of the hosted GPT-4o model",
+        "2508.11933:gpt-react": "a ReAct-inspired multi-agent GPT-4o inference setup",
+        "2508.11933:gpt4o-mini": "CAMF's multi-stage, multi-agent adversarial-probing and judgment pipeline using GPT-4o-mini",
+        "2508.11933:gemini15-pro": "CAMF's multi-stage, multi-agent adversarial-probing and judgment pipeline using Gemini-1.5 Pro",
+        "2508.11933:deepseek-v3": "CAMF's multi-stage, multi-agent adversarial-probing and judgment pipeline using DeepSeek-V3",
+    }
+)
+
+for _result_id in (
+    "2605.16107:likelihood",
+    "2605.16107:logrank",
+    "2605.16107:entropy",
+    "2605.16107:fastgpt",
+    "2605.16107:fouriergpt",
+    "2605.16107:adagpt",
+):
+    RESULT_OUTCOME[_result_id] = (
+        "The high value is confined to the paper's source/generator slices; the paper releases no runnable detector state, transferable low-FPR calibration, or fixed two-A6000 near-Binoculars timing for this baseline."
+    )
+RESULT_OUTCOME["2605.16107:detectgpt"] = (
+    "Inference scores multiple masked-and-filled perturbations of every target, violating the strict multi-perturbation boundary."
+)
+RESULT_OUTCOME["2605.16107:binoculars"] = (
+    "This is the existing DW1 incumbent used as a paper comparator, not a newly promoted candidate."
+)
+
+for _result_id in (
+    "2604.02008:likelihood",
+    "2604.02008:logrank",
+    "2604.02008:fastdetectgpt",
+    "2604.02008:fastdetectgpt-dald",
+    "2604.02008:binoculars-dald",
+):
+    RESULT_OUTCOME[_result_id] = (
+        "This individually reported comparator or training-time proxy alignment supplies no new frozen detector state, transferable low-FPR calibration, or fixed two-A6000 near-Binoculars timing sufficient for promotion."
+    )
+RESULT_OUTCOME["2604.02008:binoculars"] = (
+    "This is the existing DW1 incumbent used as a paper comparator, not a newly promoted candidate."
+)
+for _result_id in (
+    "2604.02008:fastdetectgpt-glimpse-gpt4-geometric",
+    "2604.02008:fastdetectgpt-glimpse-gpt4-zipfian",
+    "2604.02008:fastdetectgpt-glimpse-gpt4-mlp",
+    "2604.02008:fastdetectgpt-glimpse-davinci-geometric",
+):
+    RESULT_OUTCOME[_result_id] = (
+        "This state depends on a proprietary model's hosted top-k probability API; the paper says GPT-4 no longer exposes those probabilities, and no frozen service state, portable calibration, or A6000 deployment exists."
+    )
+
+for _result_id in (
+    "2510.02319:fastdetectgpt",
+    "2510.02319:logrank",
+):
+    RESULT_OUTCOME[_result_id] = (
+        "The high value is confined to the non-adversarial split and collapses on all attack mixes; this paper supplies no new frozen state, transferable low-FPR calibration, or fixed A6000 timing."
+    )
+RESULT_OUTCOME["2510.02319:glimpse"] = (
+    "The high non-adversarial result depends on proprietary source-model top-k probability access, collapses on the attack mixes, and supplies no reproducible frozen service or two-A6000 state."
+)
+RESULT_OUTCOME["2510.02319:binoculars"] = (
+    "This is the existing DW1 incumbent used as a paper comparator; the attack-mix collapse is evidence against treating the narrow high cell as a new candidate."
+)
+
+RESULT_OUTCOME["2508.11933:raidar"] = (
+    "Inference derives features from multiple rewrites of the target text, violating the no-rewriting boundary."
+)
+for _result_id in (
+    "2508.11933:gpt4o-direct",
+    "2508.11933:gpt-cot",
+    "2508.11933:gpt-react",
+):
+    RESULT_OUTCOME[_result_id] = (
+        "This is a closed hosted GPT-4o configuration with no reproducible public state, low-FPR calibration, or two-A6000 deployment basis; only the Code-domain result crosses 0.90 F1."
+    )
+for _result_id in (
+    "2508.11933:gpt4o-mini",
+    "2508.11933:gemini15-pro",
+):
+    RESULT_OUTCOME[_result_id] = (
+        "This CAMF state requires repeated calls to a closed hosted backbone in a multi-agent pipeline; no public frozen state, low-FPR result, or two-A6000 deployment exists, and the paper's default CAMF timing is 22.5 seconds per sample."
+    )
+RESULT_OUTCOME["2508.11933:deepseek-v3"] = (
+    "The figure's high Code-domain value has no released CAMF implementation or exact fitted state, low-FPR result, fixed two-A6000 timing, or plausible near-Binoculars multi-agent deployment basis."
+)
+
+for _result_id in (
+    "2605.16107:likelihood",
+    "2605.16107:logrank",
+    "2605.16107:entropy",
+    "2605.16107:fastgpt",
+    "2605.16107:binoculars",
+    "2605.16107:fouriergpt",
+    "2605.16107:adagpt",
+    "2604.02008:likelihood",
+    "2604.02008:logrank",
+    "2604.02008:fastdetectgpt",
+    "2604.02008:binoculars",
+    "2604.02008:fastdetectgpt-dald",
+    "2604.02008:binoculars-dald",
+    "2510.02319:fastdetectgpt",
+    "2510.02319:binoculars",
+    "2510.02319:logrank",
+    "2508.11933:deepseek-v3",
+):
+    RESULT_CODE[_result_id] = "retain_reject"
+RESULT_CODE["2605.16107:detectgpt"] = "exclude_multi_perturbation"
+for _result_id in (
+    "2605.16107:detectgpt-m",
+    "2605.16107:detectgpt-mult",
+):
+    RESULT_MECHANISM[_result_id] = (
+        "DetectGPT scoring over multiple masked-and-filled target perturbations, followed by the paper's named Markov or multi-level contextual layer"
+    )
+    RESULT_OUTCOME[_result_id] = (
+        "The underlying detector still scores multiple target perturbations, violating the strict multi-perturbation boundary."
+    )
+    RESULT_CODE[_result_id] = "exclude_multi_perturbation"
+for _result_id in (
+    "2605.16107:detectllm-m",
+    "2605.16107:detectllm-mult",
+):
+    RESULT_MECHANISM[_result_id] = (
+        "DNA-DetectLLM scoring against a regenerated ideal sequence, followed by the paper's named Markov or multi-level contextual layer"
+    )
+    RESULT_OUTCOME[_result_id] = (
+        "The underlying detector constructs a regenerated ideal sequence, violating the no-regeneration boundary."
+    )
+    RESULT_CODE[_result_id] = "exclude_regeneration"
+for _result_id in (
+    "2604.02008:fastdetectgpt-glimpse-gpt4-geometric",
+    "2604.02008:fastdetectgpt-glimpse-gpt4-zipfian",
+    "2604.02008:fastdetectgpt-glimpse-gpt4-mlp",
+    "2604.02008:fastdetectgpt-glimpse-davinci-geometric",
+    "2510.02319:glimpse",
+    "2508.11933:gpt4o-direct",
+    "2508.11933:gpt-cot",
+    "2508.11933:gpt-react",
+    "2508.11933:gpt4o-mini",
+    "2508.11933:gemini15-pro",
+):
+    RESULT_CODE[_result_id] = "commercial_closed"
+RESULT_CODE["2508.11933:raidar"] = "exclude_rewriting"
 
 
 CANONICAL_PAPERS = {

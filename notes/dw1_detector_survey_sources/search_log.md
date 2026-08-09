@@ -615,7 +615,7 @@ sha256sum papers/ARXIV_ID.pdf
 No credentials, cookies, persistent browser profile, PB, robot-challenge bypass,
 or human-owned tmux state was used. The resulting collection has 288 manifest
 entries. `MANIFEST.sha256` has SHA-256
-`1d3537f1833a9463a9eb1399bd45f46ae2056cf8edef9423a67563254a8293b3`;
+`59d702dfb9ff1a8bebc1563bacc4b37f63dd02828d88068eed8712144e43474f`;
 all entries and the exact path set verified, and no collection path is writable.
 
 Every primary PDF was extracted with Poppler's `pdftotext -layout -enc UTF-8`.
@@ -628,10 +628,10 @@ uv run --isolated --no-project --python 3.13 python \
   --external-root /ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08
 ```
 
-The reproducible output is 119 source rows, 958 exact detector accounts, and 695
+The reproducible output is 119 source rows, 987 exact detector accounts, and 724
 primary-result dispositions. No parent-only account remains; six sources have
 table-derived no-account decisions. The immutable account-pair digest is
-`1647ac46547ecab7adb0e96f09785e2b06d46a8ae7bb3fc66b3dd4168a6657db`.
+`3a2f45d49a5909e3e13cfd92876eca8656c5a03b478d250f77a1876c35b35cd4`.
 The four generated input hashes and the exact audit replay command are preserved
 in `coverage_semantic_audit_report.txt`; interpreter, platform, Poppler version,
 and extraction command are in `coverage_semantic_audit_environment.txt`.
@@ -690,13 +690,31 @@ RoBERTa, DeTeCtive, stylo, and mcgovern states in 2604.16607; both M4
 training-based states in 2510.12476; comparison states in NEULIF, DivEye, and
 PhantomHunter; and method/backbone ablations in DivScore. Every added row keeps
 its weaker aggregate, domain, artifact, method, calibration, and timing limits.
-The complete result sets are 263 embedded rows plus 695 primary rows.
+The complete result sets are 263 embedded rows plus 724 primary rows.
+
+The eval7 challenge showed that the preceding scanner recognized only Arabic
+table numbers and therefore missed Roman-caption tables, Figure 4 legends, and
+all candidate evidence in fourteen predecessor zero-yield sources. Direct
+inspection identified 29 omitted states: eight base rows in 2605.16107, ten
+base/DALD/Glimpse rows in 2604.02008, four zero-shot comparators in 2510.02319,
+and seven RAIDAR/hosted-prompt/CAMF rows in 2508.11933. Each now has exact strong
+and weak evidence, mechanism, artifact status, method disposition, two-A6000
+feasibility, and timing treatment. None passes the fixed promotion screen.
 
 To separate discovery from the curator-authored inventory,
 `discover_table_accounts.py` independently runs `pdftotext -layout` over all
-119 source-ledger PDFs, finds 4,860 high-threshold table-row and grouped-method
-candidates, and only then resolves every candidate against the account ledger
-or a content-specific non-candidate class:
+119 source-ledger PDFs, recognizes Arabic and Roman tables plus compact figure
+legends, carries explicit metric declarations across page boundaries, normalizes
+mathematical Unicode metric glyphs and spaced F1 labels, and finds 4,812
+high-threshold result candidates. It also emits one
+content-hash-bound scope summary for each of the 119 PDFs, including every
+former zero-yield source, and only then resolves every candidate against the
+account ledger or a content-specific non-candidate class. A separate binding
+phase emits one hash-bound source witness for every one of the 987 accounts,
+without using those bindings to seed or suppress the raw queue. This
+closes Review 16's concrete DMAP counterexample: Table 1's six
+FastDetectGPT/Binoculars scorer configurations now bind to the AUROC definition
+in Appendix K.
 
 ```text
 uv run --isolated --no-project --python 3.13 python \
@@ -705,15 +723,26 @@ uv run --isolated --no-project --python 3.13 python \
   --paper-root /ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08 \
   --output coverage_table_candidates.tsv \
   --accounts coverage_fulltext_expected_accounts.tsv \
-  --match-output coverage_table_discovery.tsv
+  --match-output coverage_table_discovery.tsv \
+  --witness-output coverage_account_witnesses.tsv
 ```
 
 The raw-candidate SHA-256 is
-`0460babd82a2aba738e83d53b978f464f0e546305037e92d03a565ab47e045dd`;
+`08a293da9a3e6acc46b3f606939655a1c72b2494b10b7b9399ebe2073ddae2c1`;
 the match-ledger SHA-256 is
-`296a40b62dd17c828f9dc959a1667a5465803a333efd9d3bf03b086c24033a48`.
-The semantic audit regenerates both byte-for-byte and rejects an unresolved,
-removed, mutated, or mis-targeted resolution. Twenty full-text controls include
+`5ca1b4c7f82d395cedbd02379e168101a669cad54cf39a11f7269de2d5875686`.
+The 987-row witness-ledger SHA-256 is
+`88c960ac7f8804550f751f9e37269e01f055a776d9a7af8aa041c281bdc697fc`.
+The semantic audit regenerates all three byte-for-byte and rejects an unresolved,
+removed, mutated, or mis-targeted resolution or witness. Forty full-text controls include
 the content-discovered fitted baseline, four separately trained states,
-READER method inheritance, and four direct resolution-ledger mutations. With
-the eleven composite controls, all 31 pass.
+READER method inheritance, four direct resolution-ledger mutations, and four
+source-form mutations covering scope summaries, Roman captions, figure legends,
+and direct evidence under predecessor zero-yield sources, plus mutations of the
+987-witness source, identity, metric, configuration, and join bindings and
+detachment of an off-page metric definition, source-independent Unicode-F1
+discovery with a metric-context guard, and direct candidate binding for the
+recovered architecture row. With the eleven composite controls, all 51 pass.
+The audit was run by the exact recorded
+`uv run --isolated --no-project --python 3.13` command; its environment record
+now reports CPython 3.13.11 rather than bytes produced by a different interpreter.

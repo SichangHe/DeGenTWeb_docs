@@ -157,12 +157,12 @@ complete primary PDF and every main/appendix result table for all 119 export
 publications. `coverage_fulltext_sources.tsv` binds each paper's PDF hash and the
 hash of its exact `pdftotext -layout -enc UTF-8` extraction.
 
-`coverage_fulltext_expected_accounts.tsv` contains 958 exact detector accounts:
-the accepted 263 embedded results and 695 separately named primary-paper
+`coverage_fulltext_expected_accounts.tsv` contains 987 exact detector accounts:
+the accepted 263 embedded results and 724 separately named primary-paper
 configurations. No parent-only account remains. Each maps exactly once in
-`coverage_fulltext_account_map.tsv`; the 695 configuration dispositions are in
+`coverage_fulltext_account_map.tsv`; the 724 configuration dispositions are in
 `coverage_primary_results.tsv`. Six papers have source-specific, table-derived
-full-text no-qualifier reasons. The generated 958-row resolution is
+full-text no-qualifier reasons. The generated 987-row resolution is
 `coverage_fulltext_account_audit.tsv`. [N18]
 
 This content pass recovers all three M-DAIGT systems from 2509.00623, all nine
@@ -178,12 +178,18 @@ low-FPR, artifact, two-A6000, and near-Binoculars gate.
 The final fitted-state pass separates PAWN's RADAR-FT comparator and the
 authors' five-epoch M4 RoBERTa-base baseline; four IntelLabs-, MAGE-, FAID-, and
 MIRAGE-trained Vanilla states in 2607.03680; and READ-trained versus
-target-adapted ImBD in READER. A separate PDF-table extractor freezes 4,860
-high-metric row-label candidates from all 119 papers before matching them to
-the curated inventory. Its content-derived controls reject deletion of the M4
+target-adapted ImBD in READER. A separate PDF-content extractor freezes 4,812
+high-metric row-label, grouped-method, Roman-table, and figure-legend candidates
+from all 119 papers, plus one hash-bound source-scope summary per paper, before
+matching them to the curated inventory. It separately emits exactly one
+source-derived account witness for all 987 accounts; these bindings do not seed
+or suppress the independent raw-candidate queue. Its content-derived controls reject deletion of the M4
 baseline, collapse of a trained Vanilla state, and false inheritance of
 READER's generation exclusion by ImBD. These eight explicit states add seven
-net accounts and none passes the complete deployment screen. [N18]
+net accounts and none passes the complete deployment screen. Mathematical
+Unicode metric labels are normalized before extraction; arXiv 2505.11550's
+three Table 2 architectures therefore have direct row candidates and witnesses
+rather than inventory-only fallback evidence. [N18]
 
 A fresh full-corpus mutation review then found that the first primary list still
 left some inspected non-candidate papers at zero. The exact repair adds all nine
@@ -199,10 +205,24 @@ The 2509.15550 rows now apply regeneration only to actual DNA-DetectLLM states;
 DetectGPT is separately multi-perturbation-excluded and the other seven
 baselines are evidence-rejected. DP-Net 2504.21019 is also evidence-rejected
 because its noise is training-only, not an inference perturbation.
-Sixteen full-text controls now include non-English and narrow-domain
+The first twenty full-text controls include non-English and narrow-domain
 lowered-count omissions and content detachment from both positive inventories
 and a table-derived zero decision, fitted-baseline deletion, collapsed training
 state, plus three false-inheritance controls for parent method blockers.
+
+The final discovery repair adds 29 evaluator-confirmed states that were hidden
+behind Roman-numbered table captions or Figure 4: eight unmodified baselines in
+2605.16107, ten base/DALD/Glimpse alignment states in 2604.02008, four zero-shot
+comparators in 2510.02319, and seven RAIDAR/hosted-prompt/CAMF states in
+2508.11933. Each has exact strong and weak evidence, mechanism, artifact,
+method-boundary, two-A6000, and timing treatment. The scanner also requires a
+scope summary for all 119 PDFs and direct same-parent evidence for every account
+under each predecessor zero-yield source. Four added mutations exercise those
+source, Roman-caption, figure-legend, and direct-evidence requirements. The
+generalized 987-row witness ledger then binds every account to one same-parent
+identity/metric witness, including rank, column, figure, visual-plot,
+below-threshold, and vertical-group joins; mutation controls reject removal or
+misbinding of each new evidence form.
 
 ## Accounting for every export row
 
@@ -232,11 +252,13 @@ predecessor Task 3 omission, a one-child CNLP omission, and removal or parent/
 result misbinding of a real Markdown E-card. Unknown, wrong-kind, and catch-all
 codes fail validation at both levels.
 
-The final audit layer validates all 119 full-text source records and all 958
+The final audit layer validates all 119 full-text source records and all 987
 accounts, independent of title or parent class. It requires the immutable exact
-account set, one disposition target per account, all 119 PDF and text hashes, and
-content-derived anchors for evaluator counterexamples and no-account decisions.
-Together the two result-level layers run thirty-one regression and negative controls; no
+account set, one disposition target per account, all 119 PDF and text hashes,
+one source-scope record per PDF, and one same-parent source-derived witness per
+account, with content-derived anchors for evaluator counterexamples and
+no-account decisions. Together the two result-level layers run fifty-one
+regression and negative controls; no
 identifier-only or publication-only group remains.
 
 `coverage_semantic_audit_report.txt` preserves the exact project-neutral command,

@@ -751,3 +751,211 @@ Reviewer 14 final verdict: **PASS — no P1/P2 findings**. This is an internal
 review verdict only. It does not replace a fresh one-shot evaluator, authorize
 delivery, or change the correction's **NOT SENT** state. The reviewer made no
 edit and sent nothing.
+
+## Review 15 — FAIL (fresh one-shot evaluator, dw1eval7)
+
+- evaluator workspace: `/ssd1/sichangheagent/dw1eval7`
+- evaluation date: `2026-08-09`, America/Los_Angeles
+- evaluated documentation commit:
+  `c9968e74eb0de03151e7c1d563f8145edb12505b`
+- evaluator verdict SHA-256:
+  `b90483ac670a29a0dde34a3e4420d0b5b7ee7fe1943b93395b9f72392882994f`
+- frozen successor prompt SHA-256:
+  `929e4ec96c33878916e44a8d2ca1a8875dd57ce0c1b2a6946ad4b520d5e09d0e`
+
+The evaluator preserved the accepted scientific, benchmark, integrity, and
+no-send work but found four remaining defects. First, the independent scanner
+recognized only Arabic-numbered tables and covered only 105 sources; direct PDF
+inspection proved 29 omitted accounts in Roman-caption tables or Figure 4 of
+arXiv 2605.16107, 2604.02008, 2510.02319, and 2508.11933. Second, the recorded
+Python 3.13 replay command contradicted an environment file produced by Python
+3.10. Third, Review 14 did not directly hash `candidate_manifest.md`. Fourth,
+four ignored bytecode-cache files made the live owned directory broader than
+the committed candidate. The evaluator also recorded nonblocking Ruff-format
+and basedpyright findings.
+
+Review 15 remains a decisive **FAIL** and authorizes no delivery. Its repair is
+limited to generalized Roman/figure/zero-yield discovery, exact replay
+environment, direct final-manifest review binding, and a genuinely clean owned
+scope. No email was sent.
+
+## Review 16 — FAIL (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval7_final_manifest_review16`
+- timestamp recorded after receipt: `2026-08-09T11:25:17-07:00`
+- reviewed candidate-manifest SHA-256:
+  `6f644af04ed77ca934c2760dd9efe42788d41ec2f4cfc110a48e8b527e3d01f1`
+- 75-file candidate-ledger SHA-256:
+  `ab3aa2d255a0ae2aa2d1515ec82fcd1d329f85c22a2db98fa1bd2b794090912b`
+- 77-entry review-subject-ledger SHA-256:
+  `d0d28c4b65a4f1df438f42022d241923475893b03052f99f159858a8c16f2349`
+- 288-entry external-manifest SHA-256:
+  `6c10a9aba91deddec49773068dadf825224fdbbaca2830bfd65ca4b6dc88b01e`
+- frozen next-evaluator prompt SHA-256:
+  `929e4ec96c33878916e44a8d2ca1a8875dd57ce0c1b2a6946ad4b520d5e09d0e`
+- staged index tree before this review record was appended:
+  `b894263ef615e1445a5a5737e5247b55a369b51a`
+
+The reviewer verified both ledgers, the clean 79-file owned live scope, the
+owned-only staged diff, the immutable 288-file external path set, exact unsent
+subject/body bytes, the 8,022-row score verifier, Ruff and basedpyright, and an
+isolated Python 3.13.11 replay. That replay reproduced 119 sources, 987
+accounts, 724 primary rows, 5,010 discovery rows, and all 35 controls. The 29
+Roman/Figure-4 repairs and every account in the fixed predecessor-zero-yield set
+had direct evidence.
+
+The reviewer nevertheless found a generalized P1. ArXiv 2602.11871 declared
+six FastDetectGPT/Binoculars scorer accounts but its discovery scope contained
+zero candidates. Table 1 reports qualifying AUROC values for the Llama,
+Mistral, and Qwen configurations, while the AUROC definition appears only in
+Appendix K; the scanner wrongly required a metric header on the same page.
+Across the complete inventory, only 623 of 987 accounts appeared in any
+candidate target, and validation required direct evidence only for a fixed
+96-account predecessor subset. The reviewer required document-spanning metric
+context, direct same-parent evidence for all qualifying accounts, and an
+off-page-metric negative control.
+
+Review 16 final verdict: **FAIL**. It authorizes no delivery, email, lifecycle
+closure, or commit. The reviewer made no edit and sent nothing.
+
+## Review 17 — FAIL (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval7_final_manifest_review17`
+- timestamp recorded after receipt: `2026-08-09T11:54:12-07:00`
+- reviewed candidate-manifest SHA-256:
+  `284442f740eb7503b337fd42888209c82a44bc2bb949967c2e87f688a3a7b0b1`
+- 75-file candidate-ledger SHA-256:
+  `fd9c02d6a7b7878c59e3bb256f3701114e8b1d3c8fe7ec6e0ab998ff8d8f0e0a`
+- 77-entry review-subject-ledger SHA-256:
+  `b6133d1f25a4e322b6c453d2927d22cb7e3b61197a82c14ecf70875b88905ec8`
+- 288-entry external-manifest SHA-256:
+  `59d702dfb9ff1a8bebc1563bacc4b37f63dd02828d88068eed8712144e43474f`
+- frozen next-evaluator prompt SHA-256:
+  `929e4ec96c33878916e44a8d2ca1a8875dd57ce0c1b2a6946ad4b520d5e09d0e`
+- staged index tree before this review record was appended:
+  `d97f8e6e85606f8f0d735df0fbbaf7b3fe858a54`
+
+The reviewer verified the clean owned scope, both ledgers, the immutable
+external collection, and the exact unsent delivery bytes. It then found that
+the generalized direct-evidence completion still allowed a false semantic
+join. Candidate `2501.11012:f776877b6c242dd4` was an Advacheck English row,
+yet it was made evidence for Unibuc-NLP and 30 unrelated English and
+multilingual accounts. Unibuc-NLP's qualifying 94.1% PeerReview accuracy is
+established only by joining its rank-two identity in English Table 4 to the
+rank-two metric row in Table 8. Neither side of that join was represented or
+validated by the chosen candidate; the desired qualifier appeared only in a
+free-text reason.
+
+The reviewer required structured per-account evidence for both sides of every
+rank/configuration join and validation of parent, task track, rank or
+configuration, account identity, and qualifying metric. It also required
+negative controls that detach or mutate either side. The reviewer expressly
+retracted a tentative working-directory concern after confirming the current
+candidate-ledger command is correct; no P2 remained.
+
+Review 17 final verdict: **FAIL**. It authorizes no delivery, email, lifecycle
+closure, or commit. The reviewer made no edit and sent nothing.
+
+## Review 18 — FAIL (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval7_final_witness_review18`
+- timestamp recorded after receipt: `2026-08-09T14:57:15-07:00`
+- reviewed candidate-manifest SHA-256:
+  `3f91ca928a6a955723e76f9aee51254cb563b44e9cccaec07c50549e88cbea3a`
+- 76-file candidate-ledger SHA-256:
+  `37cda938250d985628e027d79beba1be164865484d74da640f6ebc746c07d82f`
+- 78-entry review-subject-ledger SHA-256:
+  `d5648ebc3898e16ec785b82e3afab9d4d4228e3bcb7217f3005ff5d3d2833f31`
+- staged index tree before this review record was appended:
+  `1b128173c4b566ba283c4abf5db9099bf7cbb129`
+
+The reviewer replayed the 119-PDF extraction and semantic audit under CPython
+3.13.11, reproducing 987 account witnesses and all 48 then-current controls.
+The 8,022-row score verifier, 25-file layout verifier, 288-file read-only
+external collection, direct manifest bindings, and exact NOT-SENT email bytes
+also passed substantive inspection.
+
+The reviewer nevertheless found a P2 owned-scope defect. The staged source
+scope contained 78 files, while the live source directory contained an ignored,
+uncommitted 697,266-byte legacy `coverage_account_content_witnesses.tsv`. Its
+presence meant the frozen candidate did not equal the complete live owned scope.
+The file was obsolete and was removed; no ignored or untracked replacement was
+created. Review 18 final verdict: **FAIL**. It authorizes no delivery, email,
+lifecycle closure, or commit. The reviewer made no edit and sent nothing.
+
+## Review 19 — FAIL (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval7_final_clean_review19`
+- timestamp recorded after receipt: `2026-08-09T14:57:15-07:00`
+- reviewed candidate-manifest SHA-256:
+  `3f91ca928a6a955723e76f9aee51254cb563b44e9cccaec07c50549e88cbea3a`
+- 76-file candidate-ledger SHA-256:
+  `37cda938250d985628e027d79beba1be164865484d74da640f6ebc746c07d82f`
+- 78-entry review-subject-ledger SHA-256:
+  `d5648ebc3898e16ec785b82e3afab9d4d4228e3bcb7217f3005ff5d3d2833f31`
+- staged index tree before this review record was appended:
+  `1b128173c4b566ba283c4abf5db9099bf7cbb129`
+
+The reviewer confirmed a clean 78-file live/indexed scope, byte-identical
+CPython 3.13.11 replay, 119 sources, 4,808 content candidates plus 119 scope
+summaries, 987 account witnesses, all 48 controls, both repository ledgers, the
+external collection, score and model-layout verifiers, accepted scientific
+constraints, and the NOT-SENT correction. It found no other P1/P2.
+
+The decisive P1 was a generalized Unicode-metric blind spot. ArXiv 2505.11550
+reports three qualifying Table 2 architectures at F1 0.949, 0.994, and 0.974,
+but its extracted metric label is mathematical Unicode `𝐹 1`. The scanner
+recognized only ASCII `f1`, emitted zero raw candidates for the paper, and let
+all three accounts survive only through inventory-driven text witnesses with
+blank raw-candidate IDs. An unlisted configuration in the same format would
+therefore remain invisible. The repair normalizes mathematical metric glyphs,
+directly resolves all three rows, rejects unsupported account-bearing
+zero-yield sources, and adds source-independent format controls plus a direct
+witness-detachment control.
+
+The reviewer also recorded a nonblocking static-analysis observation. The
+candidate-manifest wording is now narrowed to the score verifier and its
+recorded Ruff 0.14.9/basedpyright 1.36.0 checks; it no longer implies that the
+expanded audit scripts pass a newer unpinned tool release. Review 19 final
+verdict: **FAIL**. It authorizes no delivery, email, lifecycle closure, or
+commit. The reviewer made no edit and sent nothing.
+
+## Review 20 — PASS (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval7_final_unicode_review20`
+- timestamp recorded after receipt: `2026-08-09T15:17:37-07:00`
+- reviewed candidate-manifest SHA-256:
+  `b2bad2b7fffdaad9ea43ffc65297e3eecd09fb7a52bcb86d06797095c3ea6ce3`
+- 76-file candidate-ledger SHA-256:
+  `5553cf03754a967459e89ff9a47bf95248caaa2f465da16a648ba2c37d06d348`
+- 78-entry review-subject-ledger SHA-256:
+  `a77ee6245431ac39364193bf0e1bd5d93e2e50ece4cbdcf069890969336a6bbc`
+- 288-entry external-manifest SHA-256:
+  `59d702dfb9ff1a8bebc1563bacc4b37f63dd02828d88068eed8712144e43474f`
+- reviewed staged index tree before this review record was appended:
+  `611a862d7c936f8778dc47071a689eec68d254f6`
+
+The reviewer independently reconstructed the index-only candidate and replayed
+the exact CPython 3.13.11 audit byte-for-byte: 119 sources, 4,812 content
+candidates plus 119 summaries, 987 witnesses, and 51 controls. A novel
+unregistered mathematical-Unicode F1 row was discovered without the account
+inventory, while a matched non-metric mutation was rejected. The three arXiv
+2505.11550 Table 2 architectures bound directly and individually to 0.949,
+0.994, and 0.974; detaching their raw witness or required resolution failed.
+The generalized zero-yield guard also rejected an account-bearing non-required
+fixture, and the newly surfaced `Life Sciences 99` count retained its explicit
+non-detector false-positive decision.
+
+The reviewer also verified every accepted Roman-table, figure, off-page metric,
+shared-task rank, column, vertical-group, weak-state, full-table, LM2otifs,
+NEULIF, Leidos, DNA-DetectLLM, and DP-Net binding; all 76 repository-ledger and
+78 review-subject entries; the exact 288-file read-only external path set; the
+8,022-row score verifier and 25-file model-layout verifier; and the clean 78-file
+live/indexed owned source scope. No ignored, untracked, bytecode, unstaged owned,
+or unowned staged byte was present. The human-readable draft and mechanical
+subject/body remained exact and **NOT SENT**.
+
+Review 20 final verdict: **PASS — no P1/P2 findings**. The reviewer made no edit
+and sent nothing. This internal PASS completes the required adversarial review
+but does not authorize email delivery; the one-shot evaluator and manager gate
+in `delivery_plan.md` remains binding.

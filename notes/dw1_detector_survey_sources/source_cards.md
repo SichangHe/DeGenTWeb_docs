@@ -553,14 +553,15 @@ high claims and individually rejected, leaving the recommendation unchanged.
 
 - Durable source maps:
   [119-paper source inventory](coverage_fulltext_sources.tsv),
-  [958-account expectation inventory](coverage_fulltext_expected_accounts.tsv),
+  [987-account expectation inventory](coverage_fulltext_expected_accounts.tsv),
   [exact disposition map](coverage_fulltext_account_map.tsv),
-  [695 primary-result dispositions](coverage_primary_results.tsv),
+  [724 primary-result dispositions](coverage_primary_results.tsv),
   [independent raw table candidates](coverage_table_candidates.tsv),
   [candidate-to-account discovery ledger](coverage_table_discovery.tsv),
+  [source-derived account witnesses](coverage_account_witnesses.tsv),
   [generated account audit](coverage_fulltext_account_audit.tsv), and
   the separate [inventory generator](build_fulltext_inventory.py) and
-  [PDF-table discovery program](discover_table_accounts.py).
+  [PDF-content discovery program](discover_table_accounts.py).
 - Sourced accounting: every primary PDF and every main/appendix result table for
   all 119 frozen export publications was read. A separately named submitted,
   proposed, or fitted detector system, version, ensemble, training state, or
@@ -568,8 +569,8 @@ high claims and individually rejected, leaving the recommendation unchanged.
   0.90 on any reported slice or an explicit high/best claim. Dataset and
   operating-point repetitions stay on one account; component-only hyperparameter
   sweeps do not become deployment accounts.
-- Exact result: 958 accounts resolve one-to-one: all 263 accepted embedded
-  results and 695 explicit primary-paper configurations. No parent-only account
+- Exact result: 987 accounts resolve one-to-one: all 263 accepted embedded
+  results and 724 explicit primary-paper configurations. No parent-only account
   remains. Six papers have source-specific, table-derived full-text no-qualifier
   reasons. Each of the 119 source rows binds the preserved primary
   PDF hash and the hash of its exact `pdftotext -layout -enc UTF-8` extraction.
@@ -619,6 +620,32 @@ high claims and individually rejected, leaving the recommendation unchanged.
   row keeps its exact high cell beside weaker aggregate or transfer evidence,
   public-artifact status, method boundary, two-A6000 feasibility, and missing
   near-Binoculars timing. None changes the recommendation.
+- Roman-table and figure correction: the final source-derived pass adds 29
+  evaluator-confirmed states. ArXiv 2605.16107 now separates base Likelihood,
+  Log-Rank, Entropy, DetectGPT, FastGPT, Binoculars, FourierGPT, and AdaGPT from
+  their `-M` and `-Mult` variants in Roman Tables II-III. ArXiv 2604.02008 adds
+  base Likelihood, LogRank, FastDetectGPT, and Binoculars; FastDetectGPT+DALD;
+  four exact FastDetectGPT+Glimpse model/reconstruction configurations; and
+  Binoculars+DALD from Roman Tables III-V. ArXiv 2510.02319 adds FastDetectGPT,
+  Glimpse, Binoculars, and LogRank from Roman Table VIII. ArXiv 2508.11933 adds
+  RAIDAR, direct GPT-4o, GPT+CoT, GPT+ReAct, and CAMF with GPT-4o-mini,
+  Gemini-1.5 Pro, or DeepSeek-V3 from Table I and Figure 4. The ledger preserves
+  each narrow high value beside weak averages or attack transfer, closed or
+  absent artifacts, method exclusions, and missing comparable deployment
+  timing. None changes the recommendation.
+- Generalized account-witness correction: the 987-row witness ledger gives
+  every account one same-parent PDF binding rather than accepting a target ID in
+  an unrelated candidate row. In the shared-task paper arXiv 2501.11012, each
+  team now uses a structured track/rank join from the exact Table 4 or 6 team
+  row to the exact Table 8-11 metric row; Unibuc-NLP's 94.1% English result is
+  no longer co-bound to AdvacheckEnglish's 83.07 leaderboard row. Dedicated
+  joins also bind REACT shot columns, M4 and GREATER table columns, Qwen's
+  vertical Table VI group, CAMF and DEER figure series, and all fourteen
+  image-only classifier plot readings. Seven explicitly selected but
+  below-threshold states—including window_std at 0.7137, the Qwen3 Task-10
+  submission at 0.78, both LuxVeri ensembles, and the selected English and
+  multilingual GLTR systems—remain visible as nonqualifying named states rather
+  than being promoted or silently dropped.
 - Parent-exclusion correction: arXiv 2509.15550 now gives BiScope, Entropy,
   Likelihood, LogRank, DetectGPT, FastDetectGPT, Binoculars, and Lastde++ their
   own mechanisms and table evidence. DetectGPT is multi-perturbation-excluded;
@@ -652,21 +679,30 @@ high claims and individually rejected, leaving the recommendation unchanged.
 - Result-specific gates are not inherited blindly from a parent. The six
   RAIDAR-containing 2503.22338 configurations are excluded for seven target
   rewrites, while the three NELA-only classifiers are evidence-rejected. Eight
-  direct classifiers in 2510.02319 are evidence-rejected, while only the PIFE
-  target-canonicalization state inherits that paper's rewrite exclusion. Hosted
-  GPT-4o-mini is separately marked closed.
+  supervised classifier states and four zero-shot comparators in 2510.02319 are
+  evidence-rejected or commercially blocked, while only the PIFE
+  target-canonicalization state inherits that paper's rewrite exclusion. CAMF's
+  hosted backbones are commercially blocked; RAIDAR is separately excluded for
+  rewriting, and the public DeepSeek-V3 backbone still lacks a released CAMF
+  pipeline state and comparable timing.
 - Leidos correction: the official Task 3 system paper maps MC/v1.0.4 to an
   unweighted multiclass DistilRoBERTa classifier. It is not an ensemble. The
   four submitted mappings are BC/v1.0.1 unweighted binary, BW/v1.0.3 weighted
   binary, MC/v1.0.4 unweighted multiclass, and MW/v1.0.2 weighted multiclass.
-- Independent discovery and controls: a separate program scans table pages in
-  every bound PDF without importing the curator-authored account list, freezing
-  4,860 high-metric row-label and grouped-method candidates before resolving
+- Independent discovery and controls: a separate program scans all pages in
+  every bound PDF without importing the curator-authored account list. It
+  recognizes Arabic and Roman table captions, grouped method rows, and compact
+  figure legends, plus result tables whose metric is defined elsewhere in the
+  paper, freezing 4,812 high-metric result candidates plus 119
+  content-hash-bound source-scope summaries before resolving
   every candidate to one account, carry-forward, duplicate, or content-specific
   non-candidate decision. The checker regenerates both snapshots byte-for-byte,
-  hash-binds all four full-text ledgers and the exact 958-pair set, reruns PDF
+  hash-binds the full-text ledgers and the exact 987-pair set, reruns PDF
   extraction, and rejects missing, unresolved, mutated, or mis-targeted rows and
-  accounts. Twenty full-text controls cover the
+  accounts. After independent extraction, a 987-row source-derived witness
+  ledger binds every account's identity, metric/configuration, locator, join
+  semantics, and text hash; those bindings cannot seed or suppress the raw
+  queue. Forty full-text controls cover the
   ordinary-title selection fixture,
   Candace deletion with a lowered count, non-anchor PAWN deletion with a lowered
   count, deletion of a non-English Qwen LoRA state with a lowered count, content
@@ -677,8 +713,17 @@ high claims and individually rejected, leaving the recommendation unchanged.
   DNA-DetectLLM-paper comparators; delete the independently discovered fitted
   M4 baseline or collapse a separately trained Vanilla state while lowering
   their mutable counts; make ImBD inherit READER's method exclusion; and remove
-  any one of the 119 source rows. Together with the eleven accepted composite
-  controls, all thirty-one pass.
+  any one of the 119 source rows. Four added mutations reject removal of a
+  source-scope summary, loss of required Roman-table or figure provenance, and
+  replacement of direct same-parent evidence by carry-forward under a formerly
+  zero-yield source. Generalized witness mutations remove a witness, detach its
+  PDF hash, and alter shared-task rank, column, Roman-table, figure, visual-plot,
+  below-threshold, and vertical-group joins; another detaches the six DMAP Table
+  1 scorer accounts from their Appendix K AUROC definition. Mathematical
+  Unicode metric labels are normalized before discovery, directly recovering
+  all three arXiv 2505.11550 Table 2 architecture rows. Two source-independent
+  fixtures and one witness mutation protect that path. Together with the eleven
+  accepted composite controls, all fifty-one pass.
 - Decision: the recovered configurations are individually visible but do not
   alter the accuracy-first conclusion. They are validation-only, narrow,
   shifted, unreleased, excluded-method, weaker on official/transfer evidence, or

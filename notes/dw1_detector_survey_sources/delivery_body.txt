@@ -58,9 +58,10 @@ one hundred nineteen frozen papers, including ordinary detector papers whose
 titles did not signal a comparison. A fresh adversarial mutation found that the
 first table inventory still omitted named configurations in papers it had
 labeled as non-candidates. The corrected ledger now accounts separately for
-nine hundred fifty-eight qualifying detector accounts: two hundred sixty-three
-previously expanded systems and six hundred ninety-five primary-paper
-configurations. No single parent-level account remains. Six papers have a
+nine hundred eighty-seven reviewed detector accounts under the frozen threshold
+or explicit-best rule: two hundred sixty-three previously expanded systems and
+seven hundred twenty-four primary-paper configurations. No single parent-level
+account remains. Six papers have a
 table-specific reason that no result qualifies. High validation or narrow
 scores remain beside weak official, transfer, attack, or cross-domain results.
 
@@ -82,9 +83,18 @@ DistilRoBERTa classifier, not an ensemble. None of the recovered configurations
 adds the matched low-false-positive, public artifact, two-A6000, and
 near-Binoculars evidence needed to change the recommendation.
 
-An independent table-row and grouped-method extraction now resolves four
-thousand eight hundred sixty PDF-derived candidates with an explicit account or
-content-specific reason. It first exposed the PAWN paper's separately reported RADAR fine-tuned
+An independent full-document extraction now resolves four thousand eight hundred
+twelve PDF-derived result candidates with an explicit account or content-specific
+reason. It also records one hash-bound scope summary for each of the one hundred
+nineteen papers. A separate account-witness ledger binds every one of the nine
+hundred eighty-seven accounts to its own paper identity, metric, configuration,
+locator, and text hash, including structured rank, column, and figure joins.
+The extractor now normalizes mathematical Unicode metric labels, so three F one
+architectures that had appeared only through a curated fallback are direct table
+rows with their reported values.
+This last check caught six
+FastDetectGPT and Binoculars scorer configurations whose table put its AUROC
+definition in a later appendix. The extraction first exposed the PAWN paper's separately reported RADAR fine-tuned
 and the authors' five-epoch RoBERTa-base baseline. The distribution-shift paper
 has four distinct Vanilla classifiers trained on IntelLabs, MAGE, FAID, and
 MIRAGE, not one generic Vanilla state. The READER paper separately reports ImBD
@@ -97,6 +107,16 @@ PhantomHunter, and DivScore. Their strongest reported slices
 range from ninety-two percent to one hundred percent, but they lack an exact
 frozen fitted state and a matched low-false-positive, two-A6000,
 near-Binoculars speed comparison. They do not change the recommendation.
+
+The last discovery repair also found twenty-nine named states that an earlier
+extractor missed because their evidence was in Roman-numbered tables or a figure.
+They include eight ordinary baselines in the DNA-DetectLLM paper; ten base,
+training-aligned, and hosted-distribution configurations in the proxy-alignment
+paper; four zero-shot comparators in the PIFE paper; and seven RAIDAR,
+hosted-prompt, and CAMF-backbone states in the CAMF paper. Their strongest cells
+remain narrow, attack-fragile, closed-service, unreleased, method-excluded, or
+unsupported by matched low-false-positive and deployment timing evidence. None
+changes the recommendation.
 
 Three complete public checkpoints warranted direct testing. DetectRL-X and
 ModernBERT were fast but substantially less accurate than the stored controls.
