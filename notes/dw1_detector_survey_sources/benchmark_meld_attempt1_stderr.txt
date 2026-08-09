@@ -1,0 +1,69 @@
+/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Traceback (most recent call last):
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/utils/import_utils.py", line 2347, in _get_module
+    raise e
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sichangheagent/.local/share/uv/python/cpython-3.14.1-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1398, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1342, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 938, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 759, in exec_module
+  File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/models/modernbert/modeling_modernbert.py", line 195, in <module>
+    class ModernBertEmbeddings(nn.Module):
+    ...<26 lines>...
+            return hidden_states
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/models/modernbert/modeling_modernbert.py", line 207, in ModernBertEmbeddings
+    @torch.compile(dynamic=True)
+     ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/torch/__init__.py", line 2590, in compile
+    raise RuntimeError("torch.compile is not supported on Python 3.14+")
+RuntimeError: torch.compile is not supported on Python 3.14+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/ssd1/sichangheagent/dw1/docs/notes/dw1_detector_survey_sources/benchmark_meld.py", line 746, in <module>
+    main()
+    ~~~~^^
+  File "/ssd1/sichangheagent/dw1/docs/notes/dw1_detector_survey_sources/benchmark_meld.py", line 670, in main
+    _load_model(model_dir, cfg, torch.device("cuda:0")),
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ssd1/sichangheagent/dw1/docs/notes/dw1_detector_survey_sources/benchmark_meld.py", line 253, in _load_model
+    model = Meld(model_dir, cfg).to(device)
+            ~~~~^^^^^^^^^^^^^^^^
+  File "/ssd1/sichangheagent/dw1/docs/notes/dw1_detector_survey_sources/benchmark_meld.py", line 135, in __init__
+    self.backbone: PreTrainedModel = AutoModel.from_config(
+                                     ~~~~~~~~~~~~~~~~~~~~~^
+        AutoConfig.from_pretrained(model_dir, local_files_only=True),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        attn_implementation="sdpa",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/models/auto/auto_factory.py", line 455, in from_config
+    model_class = _get_model_class(config, cls._model_mapping)
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/models/auto/auto_factory.py", line 394, in _get_model_class
+    supported_models = model_mapping[type(config)]
+                       ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/models/auto/auto_factory.py", line 807, in __getitem__
+    return self._load_attr_from_module(model_type, model_name)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/models/auto/auto_factory.py", line 821, in _load_attr_from_module
+    return getattribute_from_module(self._modules[module_name], attr)
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/models/auto/auto_factory.py", line 733, in getattribute_from_module
+    if hasattr(module, attr):
+       ~~~~~~~^^^^^^^^^^^^^^
+  File "/ssd1/sichangheagent/dw1/.venv/lib/python3.14/site-packages/transformers/utils/import_utils.py", line 2320, in __getattr__
+    raise ModuleNotFoundError(
+        f"Could not import module '{name}'. Are this object's requirements defined correctly?"
+    ) from e
+ModuleNotFoundError: Could not import module 'ModernBertModel'. Are this object's requirements defined correctly?

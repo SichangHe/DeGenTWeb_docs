@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/SblGA6SsDZzXRmCmtfGezpI2NXo</id>
+  <title>arXiv Query: search_query=all:Markov AND all:"text detection"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-08-08T23:13:52Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:Markov+AND+all:%22text+detection%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>6</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.16107v1</id>
+    <title>Multi-Level Contextual Token Relation Modeling for Machine-Generated Text Detection</title>
+    <updated>2026-05-15T15:55:58Z</updated>
+    <link href="https://arxiv.org/abs/2605.16107v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.16107v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine-generated texts (MGTs) pose risks such as disinformation and phishing, underscoring the need for reliable detection. Metric-based methods, which extract statistically distinguishable features of MGTs, are often more practical than complex model-based methods that are prone to overfitting. Given their diverse designs, we first place representative metric-based methods within a unified framework, enabling a clear assessment of their advantages and limitations. Our analysis identifies a core challenge across these methods: the token-level detection score is easily biased by the inherent randomness of the MGTs generation process. Then, we theoretically derive the multi-hop transitions of the token-level detection score and explore their local and global relations. Based on these findings, we propose a multi-level contextual token relation modeling framework for MGT detection. Specifically, for local relations, we model them through a lightweight Markov-informed calibration module that refines token-level evidence before aggregation. For global relations, we introduce a rule-support reasoning module that uses explicit logical rules derived from contextual score statistics. Finally, we combine the local calibrated score and the global rule-support reasoning signal in a joint multi-level inference framework. Extensive experiments show broad and substantial improvements across various real-world scenarios, including cross-LLM and cross-domain settings, with low computational overhead.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-15T15:55:58Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Chenwang Wu</name>
+    </author>
+    <author>
+      <name>Yiuming Cheung</name>
+    </author>
+    <author>
+      <name>Bo Han</name>
+    </author>
+    <author>
+      <name>Shuhai Zhang</name>
+    </author>
+    <author>
+      <name>Defu Lian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.08031v1</id>
+    <title>Beyond Raw Detection Scores: Markov-Informed Calibration for Boosting Machine-Generated Text Detection</title>
+    <updated>2026-02-08T16:06:12Z</updated>
+    <link href="https://arxiv.org/abs/2602.08031v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.08031v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While machine-generated texts (MGTs) offer great convenience, they also pose risks such as disinformation and phishing, highlighting the need for reliable detection. Metric-based methods, which extract statistically distinguishable features of MGTs, are often more practical than complex model-based methods that are prone to overfitting. Given their diverse designs, we first place representative metric-based methods within a unified framework, enabling a clear assessment of their advantages and limitations. Our analysis identifies a core challenge across these methods: the token-level detection score is easily biased by the inherent randomness of the MGTs generation process. To address this, we theoretically and empirically reveal two relationships of context detection scores that may aid calibration: Neighbor Similarity and Initial Instability. We then propose a Markov-informed score calibration strategy that models these relationships using Markov random fields, and implements it as a lightweight component via a mean-field approximation, allowing our method to be seamlessly integrated into existing detectors. Extensive experiments in various real-world scenarios, such as cross-LLM and paraphrasing attacks, demonstrate significant gains over baselines with negligible computational overhead. The code is available at https://github.com/tmlr-group/MRF_Calibration.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-08T16:06:12Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Chenwang Wu</name>
+    </author>
+    <author>
+      <name>Yiu-ming Cheung</name>
+    </author>
+    <author>
+      <name>Shuhai Zhang</name>
+    </author>
+    <author>
+      <name>Bo Han</name>
+    </author>
+    <author>
+      <name>Defu Lian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2008.00036v2</id>
+    <title>TweepFake: about Detecting Deepfake Tweets</title>
+    <updated>2021-05-06T16:40:26Z</updated>
+    <link href="https://arxiv.org/abs/2008.00036v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2008.00036v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The recent advances in language modeling significantly improved the generative capabilities of deep neural models: in 2019 OpenAI released GPT-2, a pre-trained language model that can autonomously generate coherent, non-trivial and human-like text samples. Since then, ever more powerful text generative models have been developed. Adversaries can exploit these tremendous generative capabilities to enhance social bots that will have the ability to write plausible deepfake messages, hoping to contaminate public debate. To prevent this, it is crucial to develop deepfake social media messages detection systems. However, to the best of our knowledge no one has ever addressed the detection of machine-generated texts on social networks like Twitter or Facebook. With the aim of helping the research in this detection field, we collected the first dataset of \real deepfake tweets, TweepFake. It is real in the sense that each deepfake tweet was actually posted on Twitter. We collected tweets from a total of 23 bots, imitating 17 human accounts. The bots are based on various generation techniques, i.e., Markov Chains, RNN, RNN+Markov, LSTM, GPT-2. We also randomly selected tweets from the humans imitated by the bots to have an overall balanced dataset of 25,572 tweets (half human and half bots generated). The dataset is publicly available on Kaggle. Lastly, we evaluated 13 deepfake text detection methods (based on various state-of-the-art approaches) to both demonstrate the challenges that Tweepfake poses and create a solid baseline of detection techniques. We hope that TweepFake can offer the opportunity to tackle the deepfake detection on social media messages as well.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-31T19:01:13Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tiziano Fagni</name>
+    </author>
+    <author>
+      <name>Fabrizio Falchi</name>
+    </author>
+    <author>
+      <name>Margherita Gambini</name>
+    </author>
+    <author>
+      <name>Antonio Martella</name>
+    </author>
+    <author>
+      <name>Maurizio Tesconi</name>
+    </author>
+    <arxiv:doi>10.1371/journal.pone.0251415</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1371/journal.pone.0251415" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.08365v1</id>
+    <title>Learning Markov Clustering Networks for Scene Text Detection</title>
+    <updated>2018-05-22T02:46:39Z</updated>
+    <link href="https://arxiv.org/abs/1805.08365v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.08365v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A novel framework named Markov Clustering Network (MCN) is proposed for fast and robust scene text detection. MCN predicts instance-level bounding boxes by firstly converting an image into a Stochastic Flow Graph (SFG) and then performing Markov Clustering on this graph. Our method can detect text objects with arbitrary size and orientation without prior knowledge of object size. The stochastic flow graph encode objects' local correlation and semantic information. An object is modeled as strongly connected nodes, which allows flexible bottom-up detection for scale-varying and rotated objects. MCN generates bounding boxes without using Non-Maximum Suppression, and it can be fully parallelized on GPUs. The evaluation on public benchmarks shows that our method outperforms the existing methods by a large margin in detecting multioriented text objects. MCN achieves new state-of-art performance on challenging MSRA-TD500 dataset with precision of 0.88, recall of 0.79 and F-score of 0.83. Also, MCN achieves realtime inference with frame rate of 34 FPS, which is $1.5\times$ speedup when compared with the fastest scene text detection algorithm.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-22T02:46:39Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zichuan Liu</name>
+    </author>
+    <author>
+      <name>Guosheng Lin</name>
+    </author>
+    <author>
+      <name>Sheng Yang</name>
+    </author>
+    <author>
+      <name>Jiashi Feng</name>
+    </author>
+    <author>
+      <name>Weisi Lin</name>
+    </author>
+    <author>
+      <name>Wang Ling Goh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1707.07150v2</id>
+    <title>Multi-Oriented Text Detection and Verification in Video Frames and Scene Images</title>
+    <updated>2017-10-04T16:48:08Z</updated>
+    <link href="https://arxiv.org/abs/1707.07150v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1707.07150v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we bring forth a novel approach of video text detection using Fourier-Laplacian filtering in the frequency domain that includes a verification technique using Hidden Markov Model (HMM). The proposed approach deals with the text region appearing not only in horizontal or vertical directions, but also in any other oblique or curved orientation in the image. Until now only a few methods have been proposed that look into curved text detection in video frames, wherein lies our novelty. In our approach, we first apply Fourier-Laplacian transform on the image followed by an ideal Laplacian-Gaussian filtering. Thereafter K-means clustering is employed to obtain the asserted text areas depending on a maximum difference map. Next, the obtained connected components (CC) are skeletonized to distinguish various text strings. Complex components are disintegrated into simpler ones according to a junction removal algorithm followed by a concatenation performed on possible combination of the disjoint skeletons to obtain the corresponding text area. Finally these text hypotheses are verified using HMM-based text/non-text classification system. False positives are thus eliminated giving us a robust text detection performance. We have tested our framework in multi-oriented text lines in four scripts, namely, English, Chinese, Devanagari and Bengali, in video frames and scene texts. The results obtained show that proposed approach surpasses existing methods on text detection.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-07-22T12:09:28Z</published>
+    <arxiv:comment>Accepted in Neurocomputing, Elsevier</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Aneeshan Sain</name>
+    </author>
+    <author>
+      <name>Ayan Kumar Bhunia</name>
+    </author>
+    <author>
+      <name>Partha Pratim Roy</name>
+    </author>
+    <author>
+      <name>Umapada Pal</name>
+    </author>
+    <arxiv:doi>10.1016/j.neucom.2017.09.089</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.neucom.2017.09.089" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1309.6691v1</id>
+    <title>Characterness: An Indicator of Text in the Wild</title>
+    <updated>2013-09-25T23:30:18Z</updated>
+    <link href="https://arxiv.org/abs/1309.6691v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1309.6691v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Text in an image provides vital information for interpreting its contents, and text in a scene can aide with a variety of tasks from navigation, to obstacle avoidance, and odometry. Despite its value, however, identifying general text in images remains a challenging research problem. Motivated by the need to consider the widely varying forms of natural text, we propose a bottom-up approach to the problem which reflects the `characterness' of an image region. In this sense our approach mirrors the move from saliency detection methods to measures of `objectness'. In order to measure the characterness we develop three novel cues that are tailored for character detection, and a Bayesian method for their integration. Because text is made up of sets of characters, we then design a Markov random field (MRF) model so as to exploit the inherent dependencies between characters.
+  We experimentally demonstrate the effectiveness of our characterness cues as well as the advantage of Bayesian multi-cue integration. The proposed text detector outperforms state-of-the-art methods on a few benchmark scene text detection datasets. We also show that our measurement of `characterness' is superior than state-of-the-art saliency detection models when applied to the same task.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-09-25T23:30:18Z</published>
+    <arxiv:comment>11 pages; Appearing in IEEE Trans. on Image Processing</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yao Li</name>
+    </author>
+    <author>
+      <name>Wenjing Jia</name>
+    </author>
+    <author>
+      <name>Chunhua Shen</name>
+    </author>
+    <author>
+      <name>Anton van den Hengel</name>
+    </author>
+  </entry>
+</feed>

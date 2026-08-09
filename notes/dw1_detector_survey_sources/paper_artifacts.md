@@ -1,8 +1,9 @@
 # Preserved primary paper artifacts
 
-The following PDFs are retained in the established external paper collection.
-Hashes are SHA-256. Long author-bearing filenames follow the existing collection
-convention.
+The following is the accepted historical filename/hash ledger. It is preserved
+verbatim as research provenance. The final section replaces its previously vague
+collection reference with a discoverable absolute path, a complete integrity
+ledger, and the actual frozen filenames. Hashes are SHA-256.
 
 - Binoculars: `Spotting LLMs With Binoculars- Zero-Shot Detection of
   Machine-Generated Text, Abhimanyu Hans, Avi Schwarzschild, Valeriia
@@ -146,3 +147,134 @@ Repository snapshots and model downloads were inspected in ephemeral workspaces.
 Their immutable commits, revisions, public URLs, relevant file hashes, and exact
 execution outputs are durable here and in `search_log.md` and the benchmark result
 files. No authenticated artifact was copied or accessed.
+
+## Frozen discoverable collection after evaluator repair
+
+The earlier phrase “established external paper collection” was not independently
+verifiable. The repaired survey's canonical public evidence collection is now at
+this exact, discoverable path:
+
+`/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08`
+
+Its `README.md` documents scope and provenance. Its 105-entry
+`MANIFEST.sha256` has SHA-256
+`0afacad6dc7921c2f43e794f590604be49d9464ee2e9e7a8d3c91d227cd9c989`;
+`sha256sum --check MANIFEST.sha256` passed for all 105 retained files on
+2026-08-08. The ledger covers every collection file other than itself. This
+repository separately preserves raw benchmark execution and environment files,
+which are frozen by `candidate_manifest.md`.
+
+### Newly decisive primary papers and official releases
+
+- MELD paper, arXiv 2605.06903: `papers/2605.06903.pdf`, SHA-256
+  `be6113f650736e4213712442e1e775c7284563ceda84684804057b7a31ec5df9`.
+- ICLR 2026 Markov-informed calibration paper, arXiv 2602.08031:
+  `papers/2602.08031.pdf`, SHA-256
+  `11eb54df919e3feb2532bc51930f932f3abd604b801d159407203d2f67be5f77`.
+- Exons-Detect paper, arXiv 2603.24981: `papers/2603.24981.pdf`, SHA-256
+  `aa168b104cb89db81bbe82b458844b2e836f2751b1a20b3d3a7a50ae3abdefbe`.
+- DACTYL/PAN 2026 paper, arXiv 2607.17382: `papers/2607.17382.pdf`, SHA-256
+  `60fbe410d18e586aa4720669721791a9f920c08bcd4d955b91feb86e5fe3c9f4`.
+- MELD paper-era complete official Hugging Face snapshot at revision
+  `51f3ac2d4ce8de9f6f3a1eba9ca4276b077bb808`; its 1,584,091,048-byte weight
+  file has SHA-256
+  `b829b8f9482df9cbd5bc287baa484cceae0f5d0b9af77528fda42da12f06660e`.
+- MELD current complete official Hugging Face snapshot at revision
+  `453acf594d48f8c55c3a38bde396f9178516d817`; its weight file has SHA-256
+  `32b0fbf6a5bd2083b53d41db24dcd5b6756fa82c688b7396552da9fbcaf8bb91`.
+- Official MRF_Calibration source snapshot, commit
+  `a21add14e162943907c1af01ddbd299db8b7faf8`, archive SHA-256
+  `21d09e736224f660abfbcce63eb0fad3db9bf48f16dab41e0ef9e2a2c444eb28`.
+- Official Exons-Detect source snapshot, commit
+  `239862c0a9bb580b7cf883b5efdfab1570bb0e8f`, archive SHA-256
+  `764a2f5c28e22435e44f021691271519e3923ea104927d86b3231c2f57ac43ae`.
+
+The full MELD official commit history and revision metadata, and official GitHub
+metadata for the two source archives, are retained under `snapshots/metadata/`.
+The paper-era companion endpoint's one anonymous HTTP 401 response and headers
+are retained under `http/`; no authenticated follow-up was attempted.
+
+### Coverage-table primary papers added after adversarial review
+
+The second distinct reviewer identified 13 disposition-table papers that had
+public links and raw Atom metadata but no retained primary PDF. All 13 exact
+public arXiv PDFs are now under `papers/` and included in the 105-entry manifest:
+
+- 2502.04528, Group-Adaptive Threshold Optimization:
+  `15dfbe23b08579198050b7bd165b24cb85ed8c44450373ac62ed14e7db9ba999`.
+- 2502.11336, ExaGPT:
+  `bd1460aeb13bf6d8f82e76dc319e35157501807f28ab0757182cdcf0371902cb`.
+- 2504.02873, Short-PHD:
+  `7e8470e9dc5d0ede422d3d4af675c5db76dffcec10cf2fd1c21aff33d474b007`.
+- 2504.21019, dynamic perturbations:
+  `fe26d45528f8c491db21c83eeafe8ec0a800ffd8376dc20886368a9869750f76`.
+- 2505.13855, Domain Gating Ensemble Networks:
+  `e8e347b136b64d0bcfde5c130d5821f8e441119b1a7d53a68892cde7bc7fc752`.
+- 2508.01754, Temporal Tomography:
+  `3b25c3fa0f92a8be635d68c35cb65b8ba1ed32a9594cabfb47350167699dc2f3`.
+- 2508.13768, MGT-Prism:
+  `faae15bd2898d026e3698d96c9da92f70d94e4e5781e68df2d86959038d08389`.
+- 2509.22147, Mixture of Detectors:
+  `545b497b017cef041d5d8d53ec8a275d303bcfb9d267dca3d58a25dae69d8ecd`.
+- 2510.12608, StyleDecipher:
+  `a5854a81a7323403307de64c619b000dd9f33db8ae06f5ab127e5245129f36d5`.
+- 2602.01240, prototype-based proxy routing:
+  `cb1dec41905277a687fb25c351e0f5493ccdc26c0a0886fa88a3e856455838be`.
+- 2603.05617, NOTAI.AI:
+  `fd9271b6536f814eb0341107ed67cb512389ccebc4345b8c53af644ce3e35f5b`.
+- 2604.02008, kNNProxy:
+  `48fd6d511e7940371c3e44b8a652391b55e547618bf0f21e31826a3f3379afbc`.
+- 2606.00016, AEyeDE:
+  `4286cbb4d617297eb393ef3e9b360ab5820e61407657a649fb10013442087e1c`.
+
+A mechanical audit of every arXiv URL in the plausible-result and targeted
+carry-forward tables found 49 distinct identifiers; all 49 now have a PDF whose
+frozen filename contains that identifier. This is a preservation claim for the
+bounded table, not a universal literature-completeness claim.
+
+### Raw coverage and Scholar evidence
+
+- Date-sorted exact-phrase arXiv exports have SHA-256 values
+  `0b9dead4e200076f560eee47422a2d24c0a338e7c95d6e92503050e1d5e9d3e9`,
+  `dbc0e01e6f859b7b59b40c982ed1f8667b98e6f387c8d4f93c8ccc6a692cb8dc`, and
+  `6da5b39f5ff7bac05c1c2ecee0bb982a4b7928c23e1850a5c0019328a6787e7d`.
+- The targeted Markov export has SHA-256
+  `1f5b2b8478e4e2ff4db95deb37b492d0137c6c18c9227dff1d79ade58cbb00d8`.
+- The one-page Google Scholar result TSV has SHA-256
+  `1e3d6df8ceb0ac2de96e8abeca444551b8b4c2df31170c6fe19fa4a09135e679`.
+  Its raw HTML body has SHA-256
+  `502892b1f8bec6201496f4acbf05dfa4d0fea5931c5b244ce1ba7cedec014b8d`;
+  sanitized headers have SHA-256
+  `05225a60c4e75dd9a04f76439bab0cf6e9cb308c12bab84b263f94b6207a069a`.
+  `Set-Cookie` was removed, and no cookie was stored or reused.
+
+### Canonical comparator preservation
+
+The same collection now includes exact public canonical copies supporting the
+accepted comparator evidence. In particular:
+
+- arXiv Binoculars, `canonical_binoculars_2401.12070.pdf`, SHA-256
+  `ac5915c5b2bd275da288e439cb2047213a09e59e94ec451faf8e027bd709f404`;
+- arXiv FastDetectGPT, `canonical_fastdetectgpt_2310.05130.pdf`, SHA-256
+  `4cb2f768f8b815cdce2bf2ceba61722d015cd6b7644ca147177270f5e6a42415`;
+- ICLR Lastde, `canonical_lastde_2410.06072.pdf`, SHA-256
+  `b775fb10c5dfae152552107b5b283a85cf175195191c47932c3fec39702a1cdb`;
+- AAAI SpecDetect, `canonical_specdetect_aaai2026.pdf`, SHA-256
+  `0909a40e83540372defe5dce9bc54240054e2ec71400405ab884758956e99c66`;
+- ACL WaveDetect, `canonical_wavedetect_acl2026.pdf`, SHA-256
+  `e86bd0986fd30a7c7bfc5532a30178515d185f3b92e221b16635ec9052bb12d2`;
+- arXiv PAWN v1, `canonical_pawn_2501.03940v1.pdf`, SHA-256
+  `ff91c1168e705d1111d0ce32f5c12ac80461eb9c5dd2b64c96befd4738e8f50a`;
+- arXiv DetectAnyLLM, `canonical_detectanyllm_2509.14268.pdf`, SHA-256
+  `4cdeb806579c5f6e4053a746e380d7c67890cde939ddea828a32fe83b9e09877`;
+- EMNLP FourierGPT, `canonical_fouriergpt_emnlp2024.pdf`, SHA-256
+  `b6bb36ee3e0750722d6a80e8e7a21ef58f72af468f2a1604d3a0a66fb0f9fc11`;
+- NeurIPS RADAR, `canonical_radar_neurips2023.pdf`, SHA-256
+  `e84b2fc44bd9915c4d592cc2a038495fa7c89da8b2c6b8ed51d9a46ff37fbfb7`;
+  and
+- arXiv RAID, `canonical_raid_2405.07940.pdf`, SHA-256
+  `291b3e73ebc087dfd432789fcc2f9b55f97b174aea6092d2f5999501182b806c`.
+
+Alternative official venue/arXiv renderings are also retained when their bytes
+differ. The manifest records those differences rather than pretending that two
+official PDFs with different metadata are byte-identical.

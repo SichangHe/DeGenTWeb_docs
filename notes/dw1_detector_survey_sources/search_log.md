@@ -216,3 +216,118 @@ verified to produce identical token IDs on all 1,000 selected texts. Trial,
 selected-record, and selected-text hashes were added to the durable result. The
 review also caused the SV-Detect timing to be relabeled as an optimized
 reconstruction rather than an exact release-path result.
+
+## Evaluator-failure repair: frozen 2026-08-08 search
+
+This repair preserves every earlier source and result above, but supersedes the
+19-paper coverage boundary and the conclusion drawn from it. The fresh evaluator
+correctly identified MELD and broader recent-result omissions.
+
+### Date-sorted public exports
+
+The public arXiv API was queried anonymously with `start=0`, `max_results=100`,
+`sortBy=submittedDate`, and `sortOrder=descending` for each exact phrase:
+
+> all:"AI-generated text detection"
+
+> all:"LLM-generated text detection"
+
+> all:"machine-generated text detection"
+
+The server returned 93, 40, and 71 rows respectively. Raw Atom responses, server
+update timestamps, query links, and hashes are preserved as
+`coverage_query_ai_generated.atom`, `coverage_query_llm_generated.atom`, and
+`coverage_query_machine_generated.atom`. Deduplication by arXiv identifier and a
+2025–2026 date filter yield 119 results. A fourth targeted query,
+`all:Markov AND all:"text detection"`, is retained as
+`coverage_query_markov.atom`. The date-sorted disposition ledger is
+`coverage_dispositions.md`; it gives a source-mapped reason for every plausible
+high-accuracy row and accounts for every other exported identifier by scope.
+
+The general web-search connector was invoked for relevant public discovery but
+returned HTTP 404 from its search gateway. It contributed no substantive source.
+Direct anonymous primary endpoints remained usable.
+
+### Fresh public Google Scholar boundary
+
+One anonymous request used the exact first-page query:
+
+> https://scholar.google.com/scholar?as_ylo=2025&as_yhi=2026&scisbd=1&q=%22AI-generated+text+detection%22
+
+It returned HTTP 200 and ten visible results without a robot challenge. No cookie
+jar, stored cookie, browser profile, persistent session, second page, retry, or
+challenge bypass was used. The complete HTML body and response headers with every
+`Set-Cookie` field removed are retained in the external collection; the ten
+mechanically extracted titles and target URLs are preserved in
+`coverage_query_google_scholar.tsv`. This fresh result does not erase the earlier
+403 attempt recorded above: both are true bounded observations from different
+requests. Scholar is supplemental discovery evidence, not an exhaustive census.
+
+### MELD public artifact resolution
+
+The primary manuscript is arXiv 2605.06903. Anonymous Hugging Face API metadata
+and commit history resolved two immutable official states:
+
+- paper-era revision
+  `51f3ac2d4ce8de9f6f3a1eba9ca4276b077bb808`, with a 1,584,091,048-byte FP32
+  weight file and model card describing 396 million parameters; and
+- current v5 revision
+  `453acf594d48f8c55c3a38bde396f9178516d817`, whose model-release commit is
+  `9b6379cdf62961a443d972fd27ff705ea9a07dd3` and whose exact executable state has
+  394,833,461 parameters.
+
+Both complete repositories were downloaded anonymously and preserved. The
+paper-era model card's official companion URL redirected to a JSON HTTP 401
+response, `{"error":"not_connected"}`. The response was recorded once and not
+bypassed. The current card explicitly says v5 replaced earlier checkpoints and
+that scores across eras are incomparable. Therefore the repair did not infer or
+substitute missing paper-era code.
+
+### Other omitted releases resolved
+
+- Markov-informed calibration: ICLR 2026 manuscript arXiv 2602.08031 and official
+  `tmlr-group/MRF_Calibration` commit
+  `a21add14e162943907c1af01ddbd299db8b7faf8`; the immutable public source archive
+  is preserved.
+- Exons-Detect: manuscript arXiv 2603.24981 and official
+  `Xiaoweizhu57/Exons-Detect` commit
+  `239862c0a9bb580b7cf883b5efdfab1570bb0e8f`; the immutable public source archive
+  is preserved. The repository states that its tests validate scoring math rather
+  than end-to-end model downloads and does not ship the paper's complete
+  mutation-repair path or detector state.
+- DACTYL/Vanguard: manuscript arXiv 2607.17382; official public Hugging Face
+  ModernBERT revision `82306100e5a8f1d31e495579d740ac7ff6f62336` and DeBERTa
+  revision `c2e282cedc8d4ef8dd30d1cc1098d297b26ce258`. Their model-card claims are
+  retained as released watchlist evidence, not treated as a DW1 reproduction.
+
+No credential, authenticated model, PB state, persistent browser/session state,
+or human-owned tmux session was accessed.
+
+### MELD execution and preservation
+
+`benchmark_meld.py` reproduces only the exact self-contained v5 model-card
+architecture. It validates immutable current and paper-era weight hashes, tests
+one-GPU batch 1, one-GPU batch 8, and two concurrent batch-4 replicas at exactly
+2,048 tokens, then scores all 8,022 available trial texts. It preserves the prior
+seed-42 direct screen and adds a disjoint human calibration/evaluation split over
+the 4,907 texts meeting v5's 100-word minimum.
+
+The first isolated run used Python 3.14 and failed before inference because the
+third-party ModernBERT implementation decorates a function with `torch.compile`,
+which rejects that interpreter. Its raw stdout and stderr are retained. The
+successful run used Python 3.13; raw stdout, raw stderr, all 8,022 score rows,
+package/interpreter/GPU manifests, and model-file hashes are retained without
+curation. `benchmark_meld_design.md` fixes the question, sample selection, timing
+boundary, metrics, command, and interpretation.
+
+### Discoverable public evidence collection
+
+Every new public paper, raw query, official snapshot, API metadata record, and
+relevant HTTP response is preserved at:
+
+`/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08`
+
+The collection has its own README and `MANIFEST.sha256` covering every retained
+file other than the ledger itself. `paper_artifacts.md` records the path and key
+identities. This replaces the earlier unverifiable phrase “established external
+paper collection” with a discoverable, integrity-checkable location.

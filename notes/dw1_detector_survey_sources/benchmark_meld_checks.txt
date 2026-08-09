@@ -1,0 +1,18 @@
+Static-check date: 2026-08-08, America/Los_Angeles
+
+ruff 0.14.9
+Command: uvx ruff check benchmark_meld.py
+Result: PASS — All checks passed.
+
+Command: uvx ruff format --check benchmark_meld.py
+Result: PASS — 1 file already formatted.
+
+basedpyright 1.36.0, based on pyright 1.1.407
+Interpreter: /tmp/dw1-meld-venv/bin/python (Python 3.13.11)
+Command: uvx basedpyright --pythonpath /tmp/dw1-meld-venv/bin/python --pythonversion 3.13 benchmark_meld.py
+Result: PASS — 0 errors, 0 warnings, 0 notes.
+
+Boundary: invoking basedpyright without the successful isolated interpreter does
+not describe the execution environment and can report missing ML dependencies or
+an older default Python target. The interpreter and Python-version flags above
+are part of the recorded check.

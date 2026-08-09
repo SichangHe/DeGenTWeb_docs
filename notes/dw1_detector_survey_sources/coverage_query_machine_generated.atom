@@ -1,0 +1,2105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/f1kxJoxMQNQoJ/72AblYGKAWuio</id>
+  <title>arXiv Query: search_query=all:"machine-generated text detection"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-08-08T22:58:43Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22machine-generated+text+detection%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>71</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.23336v1</id>
+    <title>WaveDetect: Robust Framework for Machine-Generated Text Detection via Wavelet Transform</title>
+    <updated>2026-06-22T13:42:36Z</updated>
+    <link href="https://arxiv.org/abs/2606.23336v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.23336v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As Large Language Models asymptotically approach human-level fluency in natural language generation, solely relying on surface-level semantic artifacts for detecting LLM-generated texts has become increasingly precarious. Existing detectors often falter when facing three critical challenges: adversarial perturbations, cross-domain shifts, and the rapid temporal evolution of the foundation model. To address these issues, we propose \wavedetect, a novel framework that reformulates text detection as a signal processing task within the time-frequency domain. Unlike previous methods that analyze static token probability distributions, \wavedetect models the generated output as a probability signal, upon which a differentiable Continuous Wavelet Transform is applied to convert them into learnable spectral representations. This process reveals the intrinsic ``spectral fingerprints'' in machine-generated texts--patterns that remain invisible in time domain. Comprehensive evaluations on three well-curated datasets (RAID, EvoBench, and Domain-Shift) show that our method achieves a new state-of-the-art. It not only achieves superior accuracy but also exhibits remarkable robustness against sophisticated attacks, generalization across out-of-distribution topics and unseen evolving LLMs. Our results validate the efficacy of spectral analysis as a promising paradigm for LLM-generated texts detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-22T13:42:36Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhichen Liu</name>
+    </author>
+    <author>
+      <name>Kaitong Qin</name>
+    </author>
+    <author>
+      <name>Linhan He</name>
+    </author>
+    <author>
+      <name>Yang Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.16107v1</id>
+    <title>Multi-Level Contextual Token Relation Modeling for Machine-Generated Text Detection</title>
+    <updated>2026-05-15T15:55:58Z</updated>
+    <link href="https://arxiv.org/abs/2605.16107v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.16107v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine-generated texts (MGTs) pose risks such as disinformation and phishing, underscoring the need for reliable detection. Metric-based methods, which extract statistically distinguishable features of MGTs, are often more practical than complex model-based methods that are prone to overfitting. Given their diverse designs, we first place representative metric-based methods within a unified framework, enabling a clear assessment of their advantages and limitations. Our analysis identifies a core challenge across these methods: the token-level detection score is easily biased by the inherent randomness of the MGTs generation process. Then, we theoretically derive the multi-hop transitions of the token-level detection score and explore their local and global relations. Based on these findings, we propose a multi-level contextual token relation modeling framework for MGT detection. Specifically, for local relations, we model them through a lightweight Markov-informed calibration module that refines token-level evidence before aggregation. For global relations, we introduce a rule-support reasoning module that uses explicit logical rules derived from contextual score statistics. Finally, we combine the local calibrated score and the global rule-support reasoning signal in a joint multi-level inference framework. Extensive experiments show broad and substantial improvements across various real-world scenarios, including cross-LLM and cross-domain settings, with low computational overhead.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-15T15:55:58Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Chenwang Wu</name>
+    </author>
+    <author>
+      <name>Yiuming Cheung</name>
+    </author>
+    <author>
+      <name>Bo Han</name>
+    </author>
+    <author>
+      <name>Shuhai Zhang</name>
+    </author>
+    <author>
+      <name>Defu Lian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.14240v1</id>
+    <title>Paraphrasing Attack Resilience of Various AI-Generated Text Detection Methods</title>
+    <updated>2026-05-14T01:12:34Z</updated>
+    <link href="https://arxiv.org/abs/2605.14240v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.14240v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The recent large-scale emergence of LLMs has left an open space for dealing with their consequences, such as plagiarism or the spread of false information on the Internet. Coupling this with the rise of AI detector bypassing tools, reliable machine-generated text detection is in increasingly high demand. We investigate the paraphrasing attack resilience of various machine-generated text detection methods, evaluating three approaches: fine-tuned RoBERTa, Binoculars, and text feature analysis, along with their ensembles using Random Forest classifiers. We discovered that Binoculars-inclusive ensembles yield the strongest results, but they also suffer the most significant losses during attacks. In this paper, we present the dichotomy of performance versus resilience in the world of AI text detection, which complicates the current perception of reliability among state-of-the-art techniques.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-14T01:12:34Z</published>
+    <arxiv:comment>NAACL 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Andrii Shportko</name>
+    </author>
+    <author>
+      <name>Inessa Verbitsky</name>
+    </author>
+    <arxiv:doi>10.18653/v1/2025.naacl-srw.46</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.18653/v1/2025.naacl-srw.46" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.02712v1</id>
+    <title>mdok-style at SemEval-2026 Task 10: Finetuning LLMs for Conspiracy Detection</title>
+    <updated>2026-05-04T15:17:44Z</updated>
+    <link href="https://arxiv.org/abs/2605.02712v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.02712v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>SemEval-2026 Task 10 is focused on conspiracy detection. Specifically, the goal is to detect whether a Reddit comment expresses a conspiracy belief. Our submitted mdok-style system utilizes data augmentation and self-training (to cope with a rather small amount of training data) to finetune the Qwen3-32B model for a binary text-classification task. The submitted system is very competitive, ranking in the 85th percentile (8th out of 52 submissions). The results shown that our approach, which originated in machine-generated text detection, can be used for conspiracy detection as well.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-04T15:17:44Z</published>
+    <arxiv:comment>Accepted to the SemEval-2026 workshop of the ACL 2026 conference</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Dominik Macko</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.02374v1</id>
+    <title>Fight Poison with Poison: Enhancing Robustness in Few-shot Machine-Generated Text Detection with Adversarial Training</title>
+    <updated>2026-05-04T09:16:57Z</updated>
+    <link href="https://arxiv.org/abs/2605.02374v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.02374v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine-generated text (MGT) detection is critical for regulating online information ecosystems, yet existing detectors often underperform in few-shot settings and remain vulnerable to adversarial, humanizing attacks. To build accurate and robust detectors under limited supervision, we adopt a threat-modeling perspective and study detector vulnerabilities from an attacker's viewpoint under an output-only black-box setting. Motivated by this perspective, we propose RAG-GuidEd Attacker Strengthens ConTrastive Few-shot Detector (REACT), an adversarial training framework that improves both few-shot detection performance and robustness against attacks. REACT couples a humanization-oriented attacker with a target detector: the attacker leverages retrieval-augmented generation (RAG) to craft highly human-like adversarial examples to evade detection, while the detector learns from these adversaries with a contrastive objective to stabilize few-shot representation learning and enhance robustness. We alternately update the attacker and the detector to enable their co-evolution. Experiments on 4 datasets with 4 shot sizes and 3 random seeds show that REACT improves average detection F1 by 4.95 points over 8 state-of-the-art (SOTA) detectors and reduces the average attack success rate (ASR) under 4 strong attacks by 3.66 percentage points.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-04T09:16:57Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Wenjing Duan</name>
+    </author>
+    <author>
+      <name>Qi Zhou</name>
+    </author>
+    <author>
+      <name>Yuanfan Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.25860v2</id>
+    <title>Luminol-AIDetect: Fast Zero-shot Machine-Generated Text Detection based on Perplexity under Text Shuffling</title>
+    <updated>2026-06-03T16:42:07Z</updated>
+    <link href="https://arxiv.org/abs/2604.25860v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.25860v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine-generated text (MGT) detection requires identifying structurally invariant signals across generation models, rather than relying on model-specific fingerprints. In this respect, we hypothesize that while large language models excel at local semantic consistency, their autoregressive nature results in a specific kind of structural fragility compared to human writing. We propose Luminol-AIDetect, a novel, zero-shot statistical approach that exposes this fragility through coherence disruption. By applying a simple randomized text-shuffling procedure, we demonstrate that the resulting shift in perplexity serves as a principled, model-agnostic discriminant, as MGT displays a characteristic dispersion in perplexity-under-shuffling that differs markedly from the more stable structural variability of human-written text. Luminol-AIDetect leverages this distinction to inform its decision process, where a handful of perplexity-based scalar features are extracted from an input text and its shuffled version, then detection is performed via density estimation and ensemble-based prediction. Evaluated across 8 content domains, 11 adversarial attack types, and 18 languages, Luminol-AIDetect demonstrates state-of-the-art performance, with gains up to 17x lower FPR while being cheaper than prior methods.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-28T16:58:55Z</published>
+    <arxiv:comment>Under Review</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Lucio La Cava</name>
+    </author>
+    <author>
+      <name>Andrea Tagarelli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.21365v1</id>
+    <title>mcdok at SemEval-2026 Task 13: Finetuning LLMs for Detection of Machine-Generated Code</title>
+    <updated>2026-04-23T07:29:06Z</updated>
+    <link href="https://arxiv.org/abs/2604.21365v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.21365v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multi-domain detection of the machine-generated code snippets in various programming languages is a challenging task. SemEval-2026 Task~13 copes with this challenge in various angles, as a binary detection problem as well as attribution of the source. Specifically, its subtasks also cover generator LLM family detection, as well as a hybrid code co-generated by humans and machines, or adversarially modified codes hiding its origin. Our submitted systems adjusted the existing mdok approach (focused on machine-generated text detection) to these specific kinds of problems by exploring various base models, more suitable for code understanding. The results indicate that the submitted systems are competitive in all three subtasks. However, the margins from the top-performing systems are significant, and thus further improvements are possible.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-23T07:29:06Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Adam Skurla</name>
+    </author>
+    <author>
+      <name>Dominik Macko</name>
+    </author>
+    <author>
+      <name>Jakub Simko</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.16607v2</id>
+    <title>Spotlights and Blindspots: Evaluating Machine-Generated Text Detection</title>
+    <updated>2026-04-22T04:41:17Z</updated>
+    <link href="https://arxiv.org/abs/2604.16607v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.16607v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the rise of generative language models, machine-generated text detection has become a critical challenge. A wide variety of models is available, but inconsistent datasets, evaluation metrics, and assessment strategies obscure comparisons of model effectiveness. To address this, we evaluate 15 different detection models from six distinct systems, as well as seven trained models, across seven English-language textual test sets and three creative human-written datasets. We provide an empirical analysis of model performance, the influence of training and evaluation data, and the impact of key metrics. We find that no single system excels in all areas and nearly all are effective for certain tasks, and the representation of model performance is critically linked to dataset and metric choices. We find high variance in model ranks based on datasets and metrics, and overall poor performance on novel human-written texts in high-risk domains. Across datasets and metrics, we find that methodological choices that are often assumed or overlooked are essential for clearly and accurately reflecting model performance.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-17T18:01:10Z</published>
+    <arxiv:comment>15 pages, 4 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kevin Stowe</name>
+    </author>
+    <author>
+      <name>Kailash Patil</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.05617v1</id>
+    <title>NOTAI.AI: Explainable Detection of Machine-Generated Text via Curvature and Feature Attribution</title>
+    <updated>2026-03-05T19:19:12Z</updated>
+    <link href="https://arxiv.org/abs/2603.05617v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.05617v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present NOTAI.AI, an explainable framework for machine-generated text detection that extends Fast-DetectGPT by integrating curvature-based signals with neural and stylometric features in a supervised setting. The system combines 17 interpretable features, including Conditional Probability Curvature, ModernBERT detector score, readability metrics, and stylometric cues, within a gradient-boosted tree (XGBoost) meta-classifier to determine whether a text is human- or AI-generated. Furthermore, NOTAI.AI applies Shapley Additive Explanations (SHAP) to provide both local and global feature-level attribution. These attributions are further translated into structured natural-language rationales through an LLM-based explanation layer, which enables user-facing interpretability. The system is deployed as an interactive web application that supports real-time analysis, visual feature inspection, and structured evidence presentation. A web interface allows users to input text and inspect how neural and statistical signals influence the final decision. The source code and demo video are publicly available to support reproducibility.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-05T19:19:12Z</published>
+    <arxiv:comment>8 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Oleksandr Marchenko Breneur</name>
+    </author>
+    <author>
+      <name>Adelaide Danilov</name>
+    </author>
+    <author>
+      <name>Aria Nourbakhsh</name>
+    </author>
+    <author>
+      <name>Salima Lamsiyah</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.11871v3</id>
+    <title>DMAP: A Distribution Map for Text</title>
+    <updated>2026-05-14T12:23:49Z</updated>
+    <link href="https://arxiv.org/abs/2602.11871v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.11871v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) are a powerful tool for statistical text analysis, with derived sequences of next-token probability distributions offering a wealth of information. Extracting this signal typically relies on metrics such as perplexity, which do not adequately account for context; how one should interpret a given next-token probability is dependent on the number of reasonable choices encoded by the shape of the conditional distribution. In this work, we present DMAP, a mathematically grounded method that maps a text, via a language model, to a set of samples in the unit interval that jointly encode rank and probability information. This representation enables efficient, model-agnostic analysis and supports a range of applications. We illustrate its utility through three case studies: (i) validation of generation parameters to ensure data integrity, (ii) examining the role of probability curvature in machine-generated text detection, and (iii) a forensic analysis revealing statistical fingerprints left in downstream models that have been subject to post-training on synthetic data. Our results demonstrate that DMAP offers a unified statistical view of text that is simple to compute on consumer hardware, widely applicable, and provides a foundation for further research into text analysis with LLMs.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-12T12:21:24Z</published>
+    <arxiv:comment>ICLR 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tom Kempton</name>
+    </author>
+    <author>
+      <name>Julia Rozanova</name>
+    </author>
+    <author>
+      <name>Parameswaran Kamalaruban</name>
+    </author>
+    <author>
+      <name>Maeve Madigan</name>
+    </author>
+    <author>
+      <name>Karolina Wresilo</name>
+    </author>
+    <author>
+      <name>Yoann L. Launay</name>
+    </author>
+    <author>
+      <name>David Sutton</name>
+    </author>
+    <author>
+      <name>Stuart Burrell</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.08031v1</id>
+    <title>Beyond Raw Detection Scores: Markov-Informed Calibration for Boosting Machine-Generated Text Detection</title>
+    <updated>2026-02-08T16:06:12Z</updated>
+    <link href="https://arxiv.org/abs/2602.08031v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.08031v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While machine-generated texts (MGTs) offer great convenience, they also pose risks such as disinformation and phishing, highlighting the need for reliable detection. Metric-based methods, which extract statistically distinguishable features of MGTs, are often more practical than complex model-based methods that are prone to overfitting. Given their diverse designs, we first place representative metric-based methods within a unified framework, enabling a clear assessment of their advantages and limitations. Our analysis identifies a core challenge across these methods: the token-level detection score is easily biased by the inherent randomness of the MGTs generation process. To address this, we theoretically and empirically reveal two relationships of context detection scores that may aid calibration: Neighbor Similarity and Initial Instability. We then propose a Markov-informed score calibration strategy that models these relationships using Markov random fields, and implements it as a lightweight component via a mean-field approximation, allowing our method to be seamlessly integrated into existing detectors. Extensive experiments in various real-world scenarios, such as cross-LLM and paraphrasing attacks, demonstrate significant gains over baselines with negligible computational overhead. The code is available at https://github.com/tmlr-group/MRF_Calibration.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-08T16:06:12Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Chenwang Wu</name>
+    </author>
+    <author>
+      <name>Yiu-ming Cheung</name>
+    </author>
+    <author>
+      <name>Shuhai Zhang</name>
+    </author>
+    <author>
+      <name>Bo Han</name>
+    </author>
+    <author>
+      <name>Defu Lian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.04641v2</id>
+    <title>DP-MGTD: Privacy-Preserving Machine-Generated Text Detection via Adaptive Differentially Private Entity Sanitization</title>
+    <updated>2026-07-28T20:47:49Z</updated>
+    <link href="https://arxiv.org/abs/2601.04641v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.04641v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The deployment of Machine-Generated Text (MGT) detection systems necessitates processing sensitive user data, creating a fundamental conflict between authorship verification and privacy preservation. Standard anonymization techniques often disrupt linguistic fluency, while rigorous Differential Privacy (DP) mechanisms typically degrade the statistical signals required for accurate detection. To resolve this dilemma, we propose \textbf{DP-MGTD}, a framework incorporating an Adaptive Differentially Private Entity Sanitization algorithm. Our approach utilizes a two-stage mechanism that performs noisy frequency estimation and dynamically calibrates privacy budgets, applying Laplace and Exponential mechanisms to numerical and textual entities respectively. Crucially, we identify a counter-intuitive phenomenon where the application of DP noise amplifies the distinguishability between human and machine text by exposing distinct sensitivity patterns to perturbation. Extensive experiments on the MGTBench-2.0 dataset show that our method achieves near-perfect detection accuracy, significantly outperforming non-private baselines while satisfying strict privacy guarantees.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-08T06:33:15Z</published>
+    <arxiv:comment>This article is unable to reproduce the experimental results, and we no longer have confidence in the main conclusion of this article</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Lionel Z. Wang</name>
+    </author>
+    <author>
+      <name>Yusheng Zhao</name>
+    </author>
+    <author>
+      <name>Jiabin Luo</name>
+    </author>
+    <author>
+      <name>Xinfeng Li</name>
+    </author>
+    <author>
+      <name>Lixu Wang</name>
+    </author>
+    <author>
+      <name>Yinan Peng</name>
+    </author>
+    <author>
+      <name>Haoyang Li</name>
+    </author>
+    <author>
+      <name>XiaoFeng Wang</name>
+    </author>
+    <author>
+      <name>Wei Dong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.09292v2</id>
+    <title>Identifying Bias in Machine-generated Text Detection</title>
+    <updated>2026-04-23T17:30:42Z</updated>
+    <link href="https://arxiv.org/abs/2512.09292v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.09292v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The meteoric rise in text generation capability has been accompanied by parallel growth in interest in machine-generated text detection: the capability to identify whether a given text was generated using a model or written by a person. While detection models show strong performance, they have the capacity to cause significant negative impacts. We explore potential biases in English machine-generated text detection systems. We curate a dataset of student essays and assess 16 different detection systems for bias across four attributes: gender, race/ethnicity, English-language learner (ELL) status, and economic status. We evaluate these attributes using regression-based models to determine the significance and power of the effects, as well as performing subgroup analysis. We find that while biases are generally inconsistent across systems, there are several key issues: several models tend to classify disadvantaged groups as machine-generated, ELL essays are more likely to be classified as machine-generated, economically disadvantaged students' essays are less likely to be classified as machine-generated, and non-White ELL essays are disproportionately classified as machine-generated relative to their White counterparts. Finally, we perform human annotation and find that while humans perform generally poorly at the detection task, they show no significant biases on the studied attributes.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-10T03:34:12Z</published>
+    <arxiv:comment>13 pages, 2 figures, 7 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kevin Stowe</name>
+    </author>
+    <author>
+      <name>Svetlana Afanaseva</name>
+    </author>
+    <author>
+      <name>Rodolfo Raimundo</name>
+    </author>
+    <author>
+      <name>Yitao Sun</name>
+    </author>
+    <author>
+      <name>Kailash Patil</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.17402v2</id>
+    <title>PUCP-Metrix: An Open-source and Comprehensive Toolkit for Linguistic Analysis of Spanish Texts</title>
+    <updated>2025-12-04T16:36:37Z</updated>
+    <link href="https://arxiv.org/abs/2511.17402v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.17402v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Linguistic features remain essential for interpretability and tasks that involve style, structure, and readability, but existing Spanish tools offer limited coverage. We present PUCP-Metrix, an open-source and comprehensive toolkit for linguistic analysis of Spanish texts. PUCP-Metrix includes 182 linguistic metrics spanning lexical diversity, syntactic and semantic complexity, cohesion, psycholinguistics, and readability. It enables fine-grained, interpretable text analysis. We evaluate its usefulness on Automated Readability Assessment and Machine-Generated Text Detection, showing competitive performance compared to an existing repository and strong neural baselines. PUCP-Metrix offers a comprehensive and extensible resource for Spanish, supporting diverse NLP applications.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-21T17:03:00Z</published>
+    <arxiv:comment>1 figure, Submitted to EACL Demo track (under review)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Javier Alonso Villegas Luis</name>
+    </author>
+    <author>
+      <name>Marco Antonio Sobrevilla Cabezudo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.01192v2</id>
+    <title>DEER: Disentangled Mixture of Experts with Instance-Adaptive Routing for Generalizable Machine-Generated Text Detection</title>
+    <updated>2026-06-03T05:41:12Z</updated>
+    <link href="https://arxiv.org/abs/2511.01192v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.01192v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting machine-generated text has become a critical challenge amid the rapid advancement of LLMs, yet existing detectors degrade severely under domain shift. Through systematic pilot studies, we trace this vulnerability to two fundamental flaws in current generalization strategies, namely the incomplete preservation of domain-specific knowledge during multi-domain training and the misalignment between knowledge retrieval and the detection objective at inference. To address these gaps, we propose DEER, a Disentangled mixturE-of-ExpeRts framework that explicitly decouples domain-local and domain-invariant knowledge into specialized expert modules. Instead of static domain matching, DEER employs a reinforcement learning-driven router that selects expert pathways based on instance-level detection rewards. This task-aligned, domain-agnostic mechanism ensures robust adaptation to unseen distributions by prioritizing detection utility over stylistic resemblance. Extensive experiments demonstrate that DEER consistently outperforms state-of-the-art detectors, achieving average F1 improvements of 1.28% and 2.92%, and accuracy gains of 1.35% and 2.26% on in-domain and out-of-domain datasets, offering reliable generalization for open-world deployment.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-03T03:36:48Z</published>
+    <arxiv:comment>ARR Under Review</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Guoxin Ma</name>
+    </author>
+    <author>
+      <name>Xiaoming Liu</name>
+    </author>
+    <author>
+      <name>Hongyang Chen</name>
+    </author>
+    <author>
+      <name>Chengzhengxu Li</name>
+    </author>
+    <author>
+      <name>Zhaohan Zhang</name>
+    </author>
+    <author>
+      <name>Shengchao Liu</name>
+    </author>
+    <author>
+      <name>Yu Lan</name>
+    </author>
+    <author>
+      <name>Cong Wang</name>
+    </author>
+    <author>
+      <name>Chao Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.00988v1</id>
+    <title>Advancing Machine-Generated Text Detection from an Easy to Hard Supervision Perspective</title>
+    <updated>2025-11-02T15:59:31Z</updated>
+    <link href="https://arxiv.org/abs/2511.00988v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.00988v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Existing machine-generated text (MGT) detection methods implicitly assume labels as the "golden standard". However, we reveal boundary ambiguity in MGT detection, implying that traditional training paradigms are inexact. Moreover, limitations of human cognition and the superintelligence of detectors make inexact learning widespread and inevitable. To this end, we propose an easy-to-hard enhancement framework to provide reliable supervision under such inexact conditions. Distinct from knowledge distillation, our framework employs an easy supervisor targeting relatively simple longer-text detection tasks (despite weaker capabilities), to enhance the more challenging target detector. Firstly, longer texts targeted by supervisors theoretically alleviate the impact of inexact labels, laying the foundation for reliable supervision. Secondly, by structurally incorporating the detector into the supervisor, we theoretically model the supervisor as a lower performance bound for the detector. Thus, optimizing the supervisor indirectly optimizes the detector, ultimately approximating the underlying "golden" labels. Extensive experiments across diverse practical scenarios, including cross-LLM, cross-domain, mixed text, and paraphrase attacks, demonstrate the framework's significant detection effectiveness. The code is available at: https://github.com/tmlr-group/Easy2Hard.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-02T15:59:31Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Chenwang Wu</name>
+    </author>
+    <author>
+      <name>Yiu-ming Cheung</name>
+    </author>
+    <author>
+      <name>Bo Han</name>
+    </author>
+    <author>
+      <name>Defu Lian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.19492v2</id>
+    <title>Machine Text Detectors are Membership Inference Attacks</title>
+    <updated>2026-02-10T05:34:41Z</updated>
+    <link href="https://arxiv.org/abs/2510.19492v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.19492v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Although membership inference attacks (MIAs) and machine-generated text detection target different goals, their methods often exploit similar signals based on a language model's probability distribution, and the two tasks have been studied independently. This can result in conclusions that overlook stronger methods and valuable insights from the other task. In this work, we theoretically and empirically demonstrate the transferability, i.e., how well a method originally developed for one task performs on the other, between MIAs and machine text detection. We prove that the metric achieving asymptotically optimal performance is identical for both tasks. We unify existing methods under this optimal metric and hypothesize that the accuracy with which a method approximates this metric is directly correlated with its transferability. Our large-scale empirical experiments demonstrate very strong rank correlation ($ρ\approx 0.7$) in cross-task performance. Notably, we also find that a machine text detector achieves the strongest performance among evaluated methods on both tasks, demonstrating the practical impact of transferability. To facilitate cross-task development and fair evaluation, we introduce MINT, a unified evaluation suite for MIAs and machine-generated text detection, implementing 15 recent methods from both tasks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-22T11:39:01Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ryuto Koike</name>
+    </author>
+    <author>
+      <name>Liam Dugan</name>
+    </author>
+    <author>
+      <name>Masahiro Kaneko</name>
+    </author>
+    <author>
+      <name>Chris Callison-Burch</name>
+    </author>
+    <author>
+      <name>Naoaki Okazaki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.12476v3</id>
+    <title>When Personalization Tricks Detectors: The Feature-Inversion Trap in Machine-Generated Text Detection</title>
+    <updated>2026-04-30T06:59:55Z</updated>
+    <link href="https://arxiv.org/abs/2510.12476v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.12476v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have grown more powerful in language generation, producing fluent text and even imitating personal style. Yet, this ability also heightens the risk of identity impersonation. To the best of our knowledge, no prior work has examined personalized machine-generated text (MGT) detection. In this paper, we introduce \dataset, the first benchmark for evaluating detector robustness in personalized settings, built from literary and blog texts paired with their LLM-generated imitations. Our experimental results demonstrate large performance gaps across detectors in personalized settings: some state-of-the-art models suffer significant drops. We attribute this limitation to the \textit{feature-inversion trap}, where features that are discriminative in general domains become inverted and misleading when applied to personalized text. Based on this finding, we propose \method, a simple and reliable way to predict detector performance changes in personalized settings. \method identifies latent directions corresponding to inverted features and constructs probe datasets that differ primarily along these features to evaluate detector dependence. Our experiments show that \method can accurately predict both the direction and the magnitude of post-transfer changes, showing 85\% correlation with the actual performance gaps. We hope that this work will encourage further research on personalized text detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-14T13:10:23Z</published>
+    <arxiv:comment>Oral of ACL 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Lang Gao</name>
+    </author>
+    <author>
+      <name>Xuhui Li</name>
+    </author>
+    <author>
+      <name>Chenxi Wang</name>
+    </author>
+    <author>
+      <name>Mingzhe Li</name>
+    </author>
+    <author>
+      <name>Wei Liu</name>
+    </author>
+    <author>
+      <name>Zirui Song</name>
+    </author>
+    <author>
+      <name>Jinghui Zhang</name>
+    </author>
+    <author>
+      <name>Rui Yan</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+    <author>
+      <name>Xiuying Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.26051v1</id>
+    <title>CEAID: Benchmark of Multilingual Machine-Generated Text Detection Methods for Central European Languages</title>
+    <updated>2025-09-30T10:27:53Z</updated>
+    <link href="https://arxiv.org/abs/2509.26051v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.26051v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine-generated text detection, as an important task, is predominantly focused on English in research. This makes the existing detectors almost unusable for non-English languages, relying purely on cross-lingual transferability. There exist only a few works focused on any of Central European languages, leaving the transferability towards these languages rather unexplored. We fill this gap by providing the first benchmark of detection methods focused on this region, while also providing comparison of train-languages combinations to identify the best performing ones. We focus on multi-domain, multi-generator, and multilingual evaluation, pinpointing the differences of individual aspects, as well as adversarial robustness of detection methods. Supervised finetuned detectors in the Central European languages are found the most performant in these languages as well as the most resistant against obfuscation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-30T10:27:53Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Dominik Macko</name>
+    </author>
+    <author>
+      <name>Jakub Kopal</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.22147v1</id>
+    <title>Mixture of Detectors: A Compact View of Machine-Generated Text Detection</title>
+    <updated>2025-09-26T10:05:22Z</updated>
+    <link href="https://arxiv.org/abs/2509.22147v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.22147v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) are gearing up to surpass human creativity. The veracity of the statement needs careful consideration. In recent developments, critical questions arise regarding the authenticity of human work and the preservation of their creativity and innovative abilities. This paper investigates such issues. This paper addresses machine-generated text detection across several scenarios, including document-level binary and multiclass classification or generator attribution, sentence-level segmentation to differentiate between human-AI collaborative text, and adversarial attacks aimed at reducing the detectability of machine-generated text. We introduce a new work called BMAS English: an English language dataset for binary classification of human and machine text, for multiclass classification, which not only identifies machine-generated text but can also try to determine its generator, and Adversarial attack addressing where it is a common act for the mitigation of detection, and Sentence-level segmentation, for predicting the boundaries between human and machine-generated text. We believe that this paper will address previous work in Machine-Generated Text Detection (MGTD) in a more meaningful way.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-26T10:05:22Z</published>
+    <arxiv:comment>20 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Sai Teja Lekkala</name>
+    </author>
+    <author>
+      <name>Yadagiri Annepaka</name>
+    </author>
+    <author>
+      <name>Arun Kumar Challa</name>
+    </author>
+    <author>
+      <name>Samatha Reddy Machireddy</name>
+    </author>
+    <author>
+      <name>Partha Pakray</name>
+    </author>
+    <author>
+      <name>Chukhu Chunka</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.14268v1</id>
+    <title>DetectAnyLLM: Towards Generalizable and Robust Detection of Machine-Generated Text Across Domains and Models</title>
+    <updated>2025-09-15T10:59:57Z</updated>
+    <link href="https://arxiv.org/abs/2509.14268v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.14268v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid advancement of large language models (LLMs) has drawn urgent attention to the task of machine-generated text detection (MGTD). However, existing approaches struggle in complex real-world scenarios: zero-shot detectors rely heavily on scoring model's output distribution while training-based detectors are often constrained by overfitting to the training data, limiting generalization. We found that the performance bottleneck of training-based detectors stems from the misalignment between training objective and task needs. To address this, we propose Direct Discrepancy Learning (DDL), a novel optimization strategy that directly optimizes the detector with task-oriented knowledge. DDL enables the detector to better capture the core semantics of the detection task, thereby enhancing both robustness and generalization. Built upon this, we introduce DetectAnyLLM, a unified detection framework that achieves state-of-the-art MGTD performance across diverse LLMs. To ensure a reliable evaluation, we construct MIRAGE, the most diverse multi-task MGTD benchmark. MIRAGE samples human-written texts from 10 corpora across 5 text-domains, which are then re-generated or revised using 17 cutting-edge LLMs, covering a wide spectrum of proprietary models and textual styles. Extensive experiments on MIRAGE reveal the limitations of existing methods in complex environment. In contrast, DetectAnyLLM consistently outperforms them, achieving over a 70% performance improvement under the same training data and base scoring model, underscoring the effectiveness of our DDL. Project page: {https://fjc2005.github.io/detectanyllm}.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-15T10:59:57Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jiachen Fu</name>
+    </author>
+    <author>
+      <name>Chun-Le Guo</name>
+    </author>
+    <author>
+      <name>Chongyi Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.18715v1</id>
+    <title>EMMM, Explain Me My Model! Explainable Machine Generated Text Detection in Dialogues</title>
+    <updated>2025-08-26T06:27:10Z</updated>
+    <link href="https://arxiv.org/abs/2508.18715v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.18715v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid adoption of large language models (LLMs) in customer service introduces new risks, as malicious actors can exploit them to conduct large-scale user impersonation through machine-generated text (MGT). Current MGT detection methods often struggle in online conversational settings, reducing the reliability and interpretability essential for trustworthy AI deployment. In customer service scenarios where operators are typically non-expert users, explanation become crucial for trustworthy MGT detection. In this paper, we propose EMMM, an explanation-then-detection framework that balances latency, accuracy, and non-expert-oriented interpretability. Experimental results demonstrate that EMMM provides explanations accessible to non-expert users, with 70\% of human evaluators preferring its outputs, while achieving competitive accuracy compared to state-of-the-art models and maintaining low latency, generating outputs within 1 second. Our code and dataset are open-sourced at https://github.com/AngieYYF/EMMM-explainable-chatbot-detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-26T06:27:10Z</published>
+    <arxiv:comment>15 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Angela Yifei Yuan</name>
+    </author>
+    <author>
+      <name>Haoyi Li</name>
+    </author>
+    <author>
+      <name>Soyeon Caren Han</name>
+    </author>
+    <author>
+      <name>Christopher Leckie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.13768v2</id>
+    <title>MGT-Prism: Enhancing Domain Generalization for Machine-Generated Text Detection via Spectral Alignment</title>
+    <updated>2025-08-24T08:10:41Z</updated>
+    <link href="https://arxiv.org/abs/2508.13768v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.13768v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models have shown growing ability to generate fluent and coherent texts that are highly similar to the writing style of humans. Current detectors for Machine-Generated Text (MGT) perform well when they are trained and tested in the same domain but generalize poorly to unseen domains, due to domain shift between data from different sources. In this work, we propose MGT-Prism, an MGT detection method from the perspective of the frequency domain for better domain generalization. Our key insight stems from analyzing text representations in the frequency domain, where we observe consistent spectral patterns across diverse domains, while significant discrepancies in magnitude emerge between MGT and human-written texts (HWTs). The observation initiates the design of a low frequency domain filtering module for filtering out the document-level features that are sensitive to domain shift, and a dynamic spectrum alignment strategy to extract the task-specific and domain-invariant features for improving the detector's performance in domain generalization. Extensive experiments demonstrate that MGT-Prism outperforms state-of-the-art baselines by an average of 0.90% in accuracy and 0.92% in F1 score on 11 test datasets across three domain-generalization scenarios.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-19T12:09:45Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shengchao Liu</name>
+    </author>
+    <author>
+      <name>Xiaoming Liu</name>
+    </author>
+    <author>
+      <name>Chengzhengxu Li</name>
+    </author>
+    <author>
+      <name>Zhaohan Zhang</name>
+    </author>
+    <author>
+      <name>Guoxin Ma</name>
+    </author>
+    <author>
+      <name>Yu Lan</name>
+    </author>
+    <author>
+      <name>Shuai Xiao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.11933v1</id>
+    <title>CAMF: Collaborative Adversarial Multi-agent Framework for Machine Generated Text Detection</title>
+    <updated>2025-08-16T06:25:27Z</updated>
+    <link href="https://arxiv.org/abs/2508.11933v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.11933v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting machine-generated text (MGT) from contemporary Large Language Models (LLMs) is increasingly crucial amid risks like disinformation and threats to academic integrity. Existing zero-shot detection paradigms, despite their practicality, often exhibit significant deficiencies. Key challenges include: (1) superficial analyses focused on limited textual attributes, and (2) a lack of investigation into consistency across linguistic dimensions such as style, semantics, and logic. To address these challenges, we introduce the \textbf{C}ollaborative \textbf{A}dversarial \textbf{M}ulti-agent \textbf{F}ramework (\textbf{CAMF}), a novel architecture using multiple LLM-based agents. CAMF employs specialized agents in a synergistic three-phase process: \emph{Multi-dimensional Linguistic Feature Extraction}, \emph{Adversarial Consistency Probing}, and \emph{Synthesized Judgment Aggregation}. This structured collaborative-adversarial process enables a deep analysis of subtle, cross-dimensional textual incongruities indicative of non-human origin. Empirical evaluations demonstrate CAMF's significant superiority over state-of-the-art zero-shot MGT detection techniques.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-16T06:25:27Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yue Wang</name>
+    </author>
+    <author>
+      <name>Liesheng Wei</name>
+    </author>
+    <author>
+      <name>Yuxiang Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.23577v2</id>
+    <title>T-Detect: Tail-Aware Statistical Normalization for Robust Detection of Adversarial Machine-Generated Text</title>
+    <updated>2025-09-23T14:22:04Z</updated>
+    <link href="https://arxiv.org/abs/2507.23577v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.23577v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have shown the capability to generate fluent and logical content, presenting significant challenges to machine-generated text detection, particularly text polished by adversarial perturbations such as paraphrasing. Current zero-shot detectors often employ Gaussian distributions as statistical measure for computing detection thresholds, which falters when confronted with the heavy-tailed statistical artifacts characteristic of adversarial or non-native English texts. In this paper, we introduce T-Detect, a novel detection method that fundamentally redesigns the curvature-based detectors. Our primary innovation is the replacement of standard Gaussian normalization with a heavy-tailed discrepancy score derived from the Student's t-distribution. This approach is theoretically grounded in the empirical observation that adversarial texts exhibit significant leptokurtosis, rendering traditional statistical assumptions inadequate. T-Detect computes a detection score by normalizing the log-likelihood of a passage against the expected moments of a t-distribution, providing superior resilience to statistical outliers. We validate our approach on the challenging RAID benchmark for adversarial text and the comprehensive HART dataset. Experiments show that T-Detect provides a consistent performance uplift over strong baselines, improving AUROC by up to 3.9\% in targeted domains. When integrated into a two-dimensional detection framework (CT), our method achieves state-of-the-art performance, with an AUROC of 0.926 on the Books domain of RAID. Our contributions are a new, theoretically-justified statistical foundation for text detection, an ablation-validated method that demonstrates superior robustness, and a comprehensive analysis of its performance under adversarial conditions. Ours code are released at https://github.com/ResearAI/t-detect.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-31T14:08:04Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Alva West</name>
+    </author>
+    <author>
+      <name>Luodan Zhang</name>
+    </author>
+    <author>
+      <name>Liuliu Zhang</name>
+    </author>
+    <author>
+      <name>Minjun Zhu</name>
+    </author>
+    <author>
+      <name>Yixuan Weng</name>
+    </author>
+    <author>
+      <name>Yue Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.02959v1</id>
+    <title>HACo-Det: A Study Towards Fine-Grained Machine-Generated Text Detection under Human-AI Coauthoring</title>
+    <updated>2025-06-03T14:52:44Z</updated>
+    <link href="https://arxiv.org/abs/2506.02959v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.02959v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The misuse of large language models (LLMs) poses potential risks, motivating the development of machine-generated text (MGT) detection. Existing literature primarily concentrates on binary, document-level detection, thereby neglecting texts that are composed jointly by human and LLM contributions. Hence, this paper explores the possibility of fine-grained MGT detection under human-AI coauthoring. We suggest fine-grained detectors can pave pathways toward coauthored text detection with a numeric AI ratio. Specifically, we propose a dataset, HACo-Det, which produces human-AI coauthored texts via an automatic pipeline with word-level attribution labels. We retrofit seven prevailing document-level detectors to generalize them to word-level detection. Then we evaluate these detectors on HACo-Det on both word- and sentence-level detection tasks. Empirical results show that metric-based methods struggle to conduct fine-grained detection with a 0.462 average F1 score, while finetuned models show superior performance and better generalization across domains. However, we argue that fine-grained co-authored text detection is far from solved. We further analyze factors influencing performance, e.g., context window, and highlight the limitations of current methods, pointing to potential avenues for improvement.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-03T14:52:44Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhixiong Su</name>
+    </author>
+    <author>
+      <name>Yichen Wang</name>
+    </author>
+    <author>
+      <name>Herun Wan</name>
+    </author>
+    <author>
+      <name>Zhaohan Zhang</name>
+    </author>
+    <author>
+      <name>Minnan Luo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.24523v1</id>
+    <title>Stress-testing Machine Generated Text Detection: Shifting Language Models Writing Style to Fool Detectors</title>
+    <updated>2025-05-30T12:33:30Z</updated>
+    <link href="https://arxiv.org/abs/2505.24523v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.24523v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advancements in Generative AI and Large Language Models (LLMs) have enabled the creation of highly realistic synthetic content, raising concerns about the potential for malicious use, such as misinformation and manipulation. Moreover, detecting Machine-Generated Text (MGT) remains challenging due to the lack of robust benchmarks that assess generalization to real-world scenarios. In this work, we present a pipeline to test the resilience of state-of-the-art MGT detectors (e.g., Mage, Radar, LLM-DetectAIve) to linguistically informed adversarial attacks. To challenge the detectors, we fine-tune language models using Direct Preference Optimization (DPO) to shift the MGT style toward human-written text (HWT). This exploits the detectors' reliance on stylistic clues, making new generations more challenging to detect. Additionally, we analyze the linguistic shifts induced by the alignment and which features are used by detectors to detect MGT texts. Our results show that detectors can be easily fooled with relatively few examples, resulting in a significant drop in detection performance. This highlights the importance of improving detection methods and making them robust to unseen in-domain texts.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-30T12:33:30Z</published>
+    <arxiv:comment>Accepted at Findings of ACL 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Andrea Pedrotti</name>
+    </author>
+    <author>
+      <name>Michele Papucci</name>
+    </author>
+    <author>
+      <name>Cristiano Ciaccio</name>
+    </author>
+    <author>
+      <name>Alessio Miaschi</name>
+    </author>
+    <author>
+      <name>Giovanni Puccetti</name>
+    </author>
+    <author>
+      <name>Felice Dell'Orletta</name>
+    </author>
+    <author>
+      <name>Andrea Esuli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.12507v2</id>
+    <title>Towards Structurally Explainable Machine-Generated Text Detection: A Graph-Perspective Framework</title>
+    <updated>2026-07-30T02:38:50Z</updated>
+    <link href="https://arxiv.org/abs/2505.12507v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.12507v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite the success of machine-generated text detectors, the black-box nature remains a critical limitation. Traditional explainability methods rely on token-level saliency, insufficient to reveal the high-order structural dependencies that distinguish LLM outputs. In this paper, we propose \textsc{LM$^2$otifs}, a principled framework that shifts detection from linear sequences to graph-structured manifolds. We first provide a theoretical grounding based on probabilistic graphical models, demonstrating that detection performance is more distinguishable in the graph-topological space. Driven by this theory, \textsc{LM$^2$otifs} transforms text into lexical co-occurrence graphs to preserve latent structural fingerprints. The framework employs Graph Neural Networks for robust detection and utilizes graph-specific explainers to extract interpretable motifs. Crucially, our experiments reveal that these structural motifs achieve higher faithfulness compared to traditional methods. This empirical evidence confirms the existence of high-order structural explanations that linear methods fail to capture. Experimental results show that \textsc{LM$^2$otifs} achieves state-of-the-art performance while providing multi-level \textit{distinct linguistic fingerprints} that are more faithful to the model's decision.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-18T17:55:45Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xu Zheng</name>
+    </author>
+    <author>
+      <name>Zhuomin Chen</name>
+    </author>
+    <author>
+      <name>Esteban Schafir</name>
+    </author>
+    <author>
+      <name>Sipeng Chen</name>
+    </author>
+    <author>
+      <name>Hojat Allah Salehi</name>
+    </author>
+    <author>
+      <name>Haifeng Chen</name>
+    </author>
+    <author>
+      <name>Farhad Shirani</name>
+    </author>
+    <author>
+      <name>Mo Sha</name>
+    </author>
+    <author>
+      <name>Wei Cheng</name>
+    </author>
+    <author>
+      <name>Dongsheng Luo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.05084v2</id>
+    <title>Reliably Bounding False Positives: A Zero-Shot Machine-Generated Text Detection Framework via Multiscaled Conformal Prediction</title>
+    <updated>2025-05-14T04:38:15Z</updated>
+    <link href="https://arxiv.org/abs/2505.05084v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.05084v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid advancement of large language models has raised significant concerns regarding their potential misuse by malicious actors. As a result, developing effective detectors to mitigate these risks has become a critical priority. However, most existing detection methods focus excessively on detection accuracy, often neglecting the societal risks posed by high false positive rates (FPRs). This paper addresses this issue by leveraging Conformal Prediction (CP), which effectively constrains the upper bound of FPRs. While directly applying CP constrains FPRs, it also leads to a significant reduction in detection performance. To overcome this trade-off, this paper proposes a Zero-Shot Machine-Generated Text Detection Framework via Multiscaled Conformal Prediction (MCP), which both enforces the FPR constraint and improves detection performance. This paper also introduces RealDet, a high-quality dataset that spans a wide range of domains, ensuring realistic calibration and enabling superior detection performance when combined with MCP. Empirical evaluations demonstrate that MCP effectively constrains FPRs, significantly enhances detection performance, and increases robustness against adversarial attacks across multiple detectors and datasets.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-08T09:32:38Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xiaowei Zhu</name>
+    </author>
+    <author>
+      <name>Yubing Ren</name>
+    </author>
+    <author>
+      <name>Yanan Cao</name>
+    </author>
+    <author>
+      <name>Xixun Lin</name>
+    </author>
+    <author>
+      <name>Fang Fang</name>
+    </author>
+    <author>
+      <name>Yangxi Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.11369v1</id>
+    <title>OpenTuringBench: An Open-Model-based Benchmark and Framework for Machine-Generated Text Detection and Attribution</title>
+    <updated>2025-04-15T16:36:14Z</updated>
+    <link href="https://arxiv.org/abs/2504.11369v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.11369v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Open Large Language Models (OLLMs) are increasingly leveraged in generative AI applications, posing new challenges for detecting their outputs. We propose OpenTuringBench, a new benchmark based on OLLMs, designed to train and evaluate machine-generated text detectors on the Turing Test and Authorship Attribution problems. OpenTuringBench focuses on a representative set of OLLMs, and features a number of challenging evaluation tasks, including human/machine-manipulated texts, out-of-domain texts, and texts from previously unseen models. We also provide OTBDetector, a contrastive learning framework to detect and attribute OLLM-based machine-generated texts. Results highlight the relevance and varying degrees of difficulty of the OpenTuringBench tasks, with our detector achieving remarkable capabilities across the various tasks and outperforming most existing detectors. Resources are available on the OpenTuringBench Hugging Face repository at https://huggingface.co/datasets/MLNTeam-Unical/OpenTuringBench</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-15T16:36:14Z</published>
+    <arxiv:comment>Under review with ARR</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Lucio La Cava</name>
+    </author>
+    <author>
+      <name>Andrea Tagarelli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.15044v2</id>
+    <title>SPADE: Structured Prompting Augmentation for Dialogue Enhancement in Machine-Generated Text Detection</title>
+    <updated>2025-07-01T01:18:26Z</updated>
+    <link href="https://arxiv.org/abs/2503.15044v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.15044v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The increasing capability of large language models (LLMs) to generate synthetic content has heightened concerns about their misuse, driving the development of Machine-Generated Text (MGT) detection models. However, these detectors face significant challenges due to the lack of high-quality synthetic datasets for training. To address this issue, we propose SPADE, a structured framework for detecting synthetic dialogues using prompt-based positive and negative samples. Our proposed methods yield 14 new dialogue datasets, which we benchmark against eight MGT detection models. The results demonstrate improved generalization performance when utilizing a mixed dataset produced by proposed augmentation frameworks, offering a practical approach to enhancing LLM application security. Considering that real-world agents lack knowledge of future opponent utterances, we simulate online dialogue detection and examine the relationship between chat history length and detection accuracy. Our open-source datasets, code and prompts can be downloaded from https://github.com/AngieYYF/SPADE-customer-service-dialogue.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-19T09:32:52Z</published>
+    <arxiv:comment>ACL LLMSEC</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Haoyi Li</name>
+    </author>
+    <author>
+      <name>Angela Yifei Yuan</name>
+    </author>
+    <author>
+      <name>Soyeon Caren Han</name>
+    </author>
+    <author>
+      <name>Christopher Leckie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.15654v6</id>
+    <title>Machine-generated text detection prevents language model collapse</title>
+    <updated>2025-09-21T18:59:15Z</updated>
+    <link href="https://arxiv.org/abs/2502.15654v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.15654v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As Large Language Models (LLMs) become increasingly prevalent, their generated outputs are proliferating across the web, risking a future where machine-generated content dilutes human-authored text. Since online data is the primary resource for LLM pre-training, subsequent models could be trained on an unknown portion of synthetic samples. This could lead to model collapse, a degenerative process whereby LLMs reinforce their own errors, reduce output diversity, and ultimately yield declining performance. In this study, we investigate the impact of decoding strategy on model collapse, analysing the text characteristics at each model generation, the similarity to human references, and the resulting model performance. Using the decoding strategies that lead to the most significant degradation, we evaluate model collapse in a more realistic scenario where the origin of the data (human or synthetic) is unknown. We train a machine-generated text detector and propose an importance resampling approach to prevent model collapse by up-sampling likely human content in the training data. Our method is validated on four LLMs from two model families (GPT-2 and SmolLM2), across a range of model sizes 124M to 1.7B). We demonstrate that it not only prevents model collapse but also improves performance compared to training on purely human data, underscoring the benefit of synthetic samples and the importance of data curation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-21T18:22:36Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>George Drayson</name>
+    </author>
+    <author>
+      <name>Emine Yilmaz</name>
+    </author>
+    <author>
+      <name>Vasileios Lampos</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.12734v2</id>
+    <title>Iron Sharpens Iron: Defending Against Attacks in Machine-Generated Text Detection with Adversarial Training</title>
+    <updated>2025-04-30T00:44:22Z</updated>
+    <link href="https://arxiv.org/abs/2502.12734v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.12734v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine-generated Text (MGT) detection is crucial for regulating and attributing online texts. While the existing MGT detectors achieve strong performance, they remain vulnerable to simple perturbations and adversarial attacks. To build an effective defense against malicious perturbations, we view MGT detection from a threat modeling perspective, that is, analyzing the model's vulnerability from an adversary's point of view and exploring effective mitigations. To this end, we introduce an adversarial framework for training a robust MGT detector, named GREedy Adversary PromoTed DefendER (GREATER). The GREATER consists of two key components: an adversary GREATER-A and a detector GREATER-D. The GREATER-D learns to defend against the adversarial attack from GREATER-A and generalizes the defense to other attacks. GREATER-A identifies and perturbs the critical tokens in embedding space, along with greedy search and pruning to generate stealthy and disruptive adversarial examples. Besides, we update the GREATER-A and GREATER-D synchronously, encouraging the GREATER-D to generalize its defense to different attacks and varying attack intensities. Our experimental results across 10 text perturbation strategies and 6 adversarial attacks show that our GREATER-D reduces the Attack Success Rate (ASR) by 0.67% compared with SOTA defense methods while our GREATER-A is demonstrated to be more effective and efficient than SOTA attack approaches. Codes and dataset are available in https://github.com/Liyuuuu111/GREATER.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-18T10:48:53Z</published>
+    <arxiv:comment>Accepted by ACL 2025 Main Conference</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Yuanfan Li</name>
+    </author>
+    <author>
+      <name>Zhaohan Zhang</name>
+    </author>
+    <author>
+      <name>Chengzhengxu Li</name>
+    </author>
+    <author>
+      <name>Chao Shen</name>
+    </author>
+    <author>
+      <name>Xiaoming Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.11336v2</id>
+    <title>ExaGPT: Example-Based Machine-Generated Text Detection for Human Interpretability</title>
+    <updated>2026-05-05T14:15:33Z</updated>
+    <link href="https://arxiv.org/abs/2502.11336v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.11336v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting texts generated by Large Language Models (LLMs) could cause grave mistakes due to incorrect decisions, such as undermining students' academic dignity. LLM text detection thus needs to ensure the interpretability of the decision, which can help users judge how reliably correct its prediction is. When humans verify whether a text is human-written or LLM-generated, they intuitively investigate which of them it shares more similar spans with. However, existing interpretable detectors are not aligned with the human decision-making process and fail to offer evidence that users easily understand. To bridge this gap, we introduce ExaGPT, an interpretable detection approach grounded in the human decision-making process for verifying the origin of a text. ExaGPT identifies a text by checking whether it shares more similar spans with human-written vs. with LLM-generated texts from a datastore. This approach can provide similar span examples that contribute to the decision for each span in the text as evidence. Our human evaluation demonstrates that providing similar span examples contributes more effectively to judging the correctness of the decision than existing interpretable methods. Moreover, extensive experiments in four domains and three generators show that ExaGPT massively outperforms prior interpretable detectors by up to +37.0 points of accuracy at a false positive rate of 1%.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-17T01:15:07Z</published>
+    <arxiv:comment>ACL 2026 Findings camera ready</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ryuto Koike</name>
+    </author>
+    <author>
+      <name>Masahiro Kaneko</name>
+    </author>
+    <author>
+      <name>Ayana Niwa</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+    <author>
+      <name>Naoaki Okazaki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.11914v1</id>
+    <title>LuxVeri at GenAI Detection Task 1: Inverse Perplexity Weighted Ensemble for Robust Detection of AI-Generated Text across English and Multilingual Contexts</title>
+    <updated>2025-01-21T06:32:32Z</updated>
+    <link href="https://arxiv.org/abs/2501.11914v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.11914v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a system developed for Task 1 of the COLING 2025 Workshop on Detecting AI-Generated Content, focusing on the binary classification of machine-generated versus human-written text. Our approach utilizes an ensemble of models, with weights assigned according to each model's inverse perplexity, to enhance classification accuracy. For the English text detection task, we combined RoBERTa-base, RoBERTa-base with the OpenAI detector, and BERT-base-cased, achieving a Macro F1-score of 0.7458, which ranked us 12th out of 35 teams. We ensembled RemBERT, XLM-RoBERTa-base, and BERT-base-multilingual-case for the multilingual text detection task, employing the same inverse perplexity weighting technique. This resulted in a Macro F1-score of 0.7513, positioning us 4th out of 25 teams. Our results demonstrate the effectiveness of inverse perplexity weighting in improving the robustness of machine-generated text detection across both monolingual and multilingual settings, highlighting the potential of ensemble methods for this challenging task.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-21T06:32:32Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Md Kamrujjaman Mobin</name>
+    </author>
+    <author>
+      <name>Md Saiful Islam</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.11012v2</id>
+    <title>GenAI Content Detection Task 1: English and Multilingual Machine-Generated Text Detection: AI vs. Human</title>
+    <updated>2025-02-22T12:49:12Z</updated>
+    <link href="https://arxiv.org/abs/2501.11012v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.11012v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present the GenAI Content Detection Task~1 -- a shared task on binary machine generated text detection, conducted as a part of the GenAI workshop at COLING 2025. The task consists of two subtasks: Monolingual (English) and Multilingual. The shared task attracted many participants: 36 teams made official submissions to the Monolingual subtask during the test phase and 26 teams -- to the Multilingual. We provide a comprehensive overview of the data, a summary of the results -- including system rankings and performance scores -- detailed descriptions of the participating systems, and an in-depth analysis of submissions. https://github.com/mbzuai-nlp/COLING-2025-Workshop-on-MGT-Detection-Task1</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-19T11:11:55Z</published>
+    <arxiv:comment>18 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Proceedings of the 1stWorkshop on GenAI Content Detection (GenAIDetect) in COLING 2025</arxiv:journal_ref>
+    <author>
+      <name>Yuxia Wang</name>
+    </author>
+    <author>
+      <name>Artem Shelmanov</name>
+    </author>
+    <author>
+      <name>Jonibek Mansurov</name>
+    </author>
+    <author>
+      <name>Akim Tsvigun</name>
+    </author>
+    <author>
+      <name>Vladislav Mikhailov</name>
+    </author>
+    <author>
+      <name>Rui Xing</name>
+    </author>
+    <author>
+      <name>Zhuohan Xie</name>
+    </author>
+    <author>
+      <name>Jiahui Geng</name>
+    </author>
+    <author>
+      <name>Giovanni Puccetti</name>
+    </author>
+    <author>
+      <name>Ekaterina Artemova</name>
+    </author>
+    <author>
+      <name>Jinyan Su</name>
+    </author>
+    <author>
+      <name>Minh Ngoc Ta</name>
+    </author>
+    <author>
+      <name>Mervat Abassy</name>
+    </author>
+    <author>
+      <name>Kareem Ashraf Elozeiri</name>
+    </author>
+    <author>
+      <name>Saad El Dine Ahmed El Etter</name>
+    </author>
+    <author>
+      <name>Maiya Goloburda</name>
+    </author>
+    <author>
+      <name>Tarek Mahmoud</name>
+    </author>
+    <author>
+      <name>Raj Vardhan Tomar</name>
+    </author>
+    <author>
+      <name>Nurkhan Laiyk</name>
+    </author>
+    <author>
+      <name>Osama Mohammed Afzal</name>
+    </author>
+    <author>
+      <name>Ryuto Koike</name>
+    </author>
+    <author>
+      <name>Masahiro Kaneko</name>
+    </author>
+    <author>
+      <name>Alham Fikri Aji</name>
+    </author>
+    <author>
+      <name>Nizar Habash</name>
+    </author>
+    <author>
+      <name>Iryna Gurevych</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.09813v1</id>
+    <title>Qwen it detect machine-generated text?</title>
+    <updated>2025-01-16T19:59:16Z</updated>
+    <link href="https://arxiv.org/abs/2501.09813v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.09813v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper describes the approach of the Unibuc - NLP team in tackling the Coling 2025 GenAI Workshop, Task 1: Binary Multilingual Machine-Generated Text Detection. We explored both masked language models and causal models. For Subtask A, our best model achieved first-place out of 36 teams when looking at F1 Micro (Auxiliary Score) of 0.8333, and second-place when looking at F1 Macro (Main Score) of 0.8301</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-16T19:59:16Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Teodor-George Marchitan</name>
+    </author>
+    <author>
+      <name>Claudiu Creanga</name>
+    </author>
+    <author>
+      <name>Liviu P. Dinu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.08913v1</id>
+    <title>GenAI Content Detection Task 3: Cross-Domain Machine-Generated Text Detection Challenge</title>
+    <updated>2025-01-15T16:21:09Z</updated>
+    <link href="https://arxiv.org/abs/2501.08913v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.08913v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently there have been many shared tasks targeting the detection of generated text from Large Language Models (LLMs). However, these shared tasks tend to focus either on cases where text is limited to one particular domain or cases where text can be from many domains, some of which may not be seen during test time. In this shared task, using the newly released RAID benchmark, we aim to answer whether or not models can detect generated text from a large, yet fixed, number of domains and LLMs, all of which are seen during training. Over the course of three months, our task was attempted by 9 teams with 23 detector submissions. We find that multiple participants were able to obtain accuracies of over 99% on machine-generated text from RAID while maintaining a 5% False Positive Rate -- suggesting that detectors are able to robustly detect text from many domains and models simultaneously. We discuss potential interpretations of this result and provide directions for future research.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-15T16:21:09Z</published>
+    <arxiv:comment>COLING 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Liam Dugan</name>
+    </author>
+    <author>
+      <name>Andrew Zhu</name>
+    </author>
+    <author>
+      <name>Firoj Alam</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+    <author>
+      <name>Marianna Apidianaki</name>
+    </author>
+    <author>
+      <name>Chris Callison-Burch</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.12600v2</id>
+    <title>On the Risk of Evidence Pollution for Malicious Social Text Detection in the Era of LLMs</title>
+    <updated>2025-05-29T03:17:33Z</updated>
+    <link href="https://arxiv.org/abs/2410.12600v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.12600v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Evidence-enhanced detectors present remarkable abilities in identifying malicious social text. However, the rise of large language models (LLMs) brings potential risks of evidence pollution to confuse detectors. This paper explores potential manipulation scenarios including basic pollution, and rephrasing or generating evidence by LLMs. To mitigate the negative impact, we propose three defense strategies from the data and model sides, including machine-generated text detection, a mixture of experts, and parameter updating. Extensive experiments on four malicious social text detection tasks with ten datasets illustrate that evidence pollution significantly compromises detectors, where the generating strategy causes up to a 14.4% performance drop. Meanwhile, the defense strategies could mitigate evidence pollution, but they faced limitations for practical employment. Further analysis illustrates that polluted evidence (i) is of high quality, evaluated by metrics and humans; (ii) would compromise the model calibration, increasing expected calibration error up to 21.6%; and (iii) could be integrated to amplify the negative impact, especially for encoder-based LMs, where the accuracy drops by 21.8%.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-16T14:17:53Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Herun Wan</name>
+    </author>
+    <author>
+      <name>Minnan Luo</name>
+    </author>
+    <author>
+      <name>Zhixiong Su</name>
+    </author>
+    <author>
+      <name>Guang Dai</name>
+    </author>
+    <author>
+      <name>Xiang Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.15875v1</id>
+    <title>Zero-Shot Detection of AI-Generated Images</title>
+    <updated>2024-09-24T08:46:13Z</updated>
+    <link href="https://arxiv.org/abs/2409.15875v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.15875v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting AI-generated images has become an extraordinarily difficult challenge as new generative architectures emerge on a daily basis with more and more capabilities and unprecedented realism. New versions of many commercial tools, such as DALLE, Midjourney, and Stable Diffusion, have been released recently, and it is impractical to continually update and retrain supervised forensic detectors to handle such a large variety of models. To address this challenge, we propose a zero-shot entropy-based detector (ZED) that neither needs AI-generated training data nor relies on knowledge of generative architectures to artificially synthesize their artifacts. Inspired by recent works on machine-generated text detection, our idea is to measure how surprising the image under analysis is compared to a model of real images. To this end, we rely on a lossless image encoder that estimates the probability distribution of each pixel given its context. To ensure computational efficiency, the encoder has a multi-resolution architecture and contexts comprise mostly pixels of the lower-resolution version of the image.Since only real images are needed to learn the model, the detector is independent of generator architectures and synthetic training data. Using a single discriminative feature, the proposed detector achieves state-of-the-art performance. On a wide variety of generative models it achieves an average improvement of more than 3% over the SoTA in terms of accuracy. Code is available at https://grip-unina.github.io/ZED/.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-24T08:46:13Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Davide Cozzolino</name>
+    </author>
+    <author>
+      <name>Giovanni Poggi</name>
+    </author>
+    <author>
+      <name>Matthias Nießner</name>
+    </author>
+    <author>
+      <name>Luisa Verdoliva</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.04284v3</id>
+    <title>LLM-DetectAIve: a Tool for Fine-Grained Machine-Generated Text Detection</title>
+    <updated>2025-03-14T11:52:30Z</updated>
+    <link href="https://arxiv.org/abs/2408.04284v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.04284v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The ease of access to large language models (LLMs) has enabled a widespread of machine-generated texts, and now it is often hard to tell whether a piece of text was human-written or machine-generated. This raises concerns about potential misuse, particularly within educational and academic domains. Thus, it is important to develop practical systems that can automate the process. Here, we present one such system, LLM-DetectAIve, designed for fine-grained detection. Unlike most previous work on machine-generated text detection, which focused on binary classification, LLM-DetectAIve supports four categories: (i) human-written, (ii) machine-generated, (iii) machine-written, then machine-humanized, and (iv) human-written, then machine-polished. Category (iii) aims to detect attempts to obfuscate the fact that a text was machine-generated, while category (iv) looks for cases where the LLM was used to polish a human-written text, which is typically acceptable in academic writing, but not in education. Our experiments show that LLM-DetectAIve can effectively identify the above four categories, which makes it a potentially useful tool in education, academia, and other domains.
+  LLM-DetectAIve is publicly accessible at https://github.com/mbzuai-nlp/LLM-DetectAIve. The video describing our system is available at https://youtu.be/E8eT_bE7k8c.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-08T07:43:17Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Mervat Abassy</name>
+    </author>
+    <author>
+      <name>Kareem Elozeiri</name>
+    </author>
+    <author>
+      <name>Alexander Aziz</name>
+    </author>
+    <author>
+      <name>Minh Ngoc Ta</name>
+    </author>
+    <author>
+      <name>Raj Vardhan Tomar</name>
+    </author>
+    <author>
+      <name>Bimarsha Adhikari</name>
+    </author>
+    <author>
+      <name>Saad El Dine Ahmed</name>
+    </author>
+    <author>
+      <name>Yuxia Wang</name>
+    </author>
+    <author>
+      <name>Osama Mohammed Afzal</name>
+    </author>
+    <author>
+      <name>Zhuohan Xie</name>
+    </author>
+    <author>
+      <name>Jonibek Mansurov</name>
+    </author>
+    <author>
+      <name>Ekaterina Artemova</name>
+    </author>
+    <author>
+      <name>Vladislav Mikhailov</name>
+    </author>
+    <author>
+      <name>Rui Xing</name>
+    </author>
+    <author>
+      <name>Jiahui Geng</name>
+    </author>
+    <author>
+      <name>Hasan Iqbal</name>
+    </author>
+    <author>
+      <name>Zain Muhammad Mujahid</name>
+    </author>
+    <author>
+      <name>Tarek Mahmoud</name>
+    </author>
+    <author>
+      <name>Akim Tsvigun</name>
+    </author>
+    <author>
+      <name>Alham Fikri Aji</name>
+    </author>
+    <author>
+      <name>Artem Shelmanov</name>
+    </author>
+    <author>
+      <name>Nizar Habash</name>
+    </author>
+    <author>
+      <name>Iryna Gurevych</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.02978v1</id>
+    <title>Mast Kalandar at SemEval-2024 Task 8: On the Trail of Textual Origins: RoBERTa-BiLSTM Approach to Detect AI-Generated Text</title>
+    <updated>2024-07-03T10:22:23Z</updated>
+    <link href="https://arxiv.org/abs/2407.02978v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.02978v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have showcased impressive abilities in generating fluent responses to diverse user queries. However, concerns regarding the potential misuse of such texts in journalism, educational, and academic contexts have surfaced. SemEval 2024 introduces the task of Multigenerator, Multidomain, and Multilingual Black-Box Machine-Generated Text Detection, aiming to develop automated systems for identifying machine-generated text and detecting potential misuse. In this paper, we i) propose a RoBERTa-BiLSTM based classifier designed to classify text into two categories: AI-generated or human ii) conduct a comparative study of our model with baseline approaches to evaluate its effectiveness. This paper contributes to the advancement of automatic text detection systems in addressing the challenges posed by machine-generated text misuse. Our architecture ranked 46th on the official leaderboard with an accuracy of 80.83 among 125.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-03T10:22:23Z</published>
+    <arxiv:comment>SemEval-2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jainit Sushil Bafna</name>
+    </author>
+    <author>
+      <name>Hardik Mittal</name>
+    </author>
+    <author>
+      <name>Suyash Sethia</name>
+    </author>
+    <author>
+      <name>Manish Shrivastava</name>
+    </author>
+    <author>
+      <name>Radhika Mamidi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.12570v1</id>
+    <title>Applying Ensemble Methods to Model-Agnostic Machine-Generated Text Detection</title>
+    <updated>2024-06-18T12:58:01Z</updated>
+    <link href="https://arxiv.org/abs/2406.12570v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.12570v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we study the problem of detecting machine-generated text when the large language model (LLM) it is possibly derived from is unknown. We do so by apply ensembling methods to the outputs from DetectGPT classifiers (Mitchell et al. 2023), a zero-shot model for machine-generated text detection which is highly accurate when the generative (or base) language model is the same as the discriminative (or scoring) language model. We find that simple summary statistics of DetectGPT sub-model outputs yield an AUROC of 0.73 (relative to 0.61) while retaining its zero-shot nature, and that supervised learning methods sharply boost the accuracy to an AUROC of 0.94 but require a training dataset. This suggests the possibility of further generalisation to create a highly-accurate, model-agnostic machine-generated text detector.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-18T12:58:01Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ivan Ong</name>
+    </author>
+    <author>
+      <name>Boon King Quek</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.12549v2</id>
+    <title>MultiSocial: Multilingual Benchmark of Machine-Generated Text Detection of Social-Media Texts</title>
+    <updated>2025-07-25T06:08:21Z</updated>
+    <link href="https://arxiv.org/abs/2406.12549v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.12549v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent LLMs are able to generate high-quality multilingual texts, indistinguishable for humans from authentic human-written ones. Research in machine-generated text detection is however mostly focused on the English language and longer texts, such as news articles, scientific papers or student essays. Social-media texts are usually much shorter and often feature informal language, grammatical errors, or distinct linguistic items (e.g., emoticons, hashtags). There is a gap in studying the ability of existing methods in detection of such texts, reflected also in the lack of existing multilingual benchmark datasets. To fill this gap we propose the first multilingual (22 languages) and multi-platform (5 social media platforms) dataset for benchmarking machine-generated text detection in the social-media domain, called MultiSocial. It contains 472,097 texts, of which about 58k are human-written and approximately the same amount is generated by each of 7 multilingual LLMs. We use this benchmark to compare existing detection methods in zero-shot as well as fine-tuned form. Our results indicate that the fine-tuned detectors have no problem to be trained on social-media texts and that the platform selection for training matters.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-18T12:26:09Z</published>
+    <arxiv:comment>ACL 2025 main</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (ACL 2025 Volume 1: Long Papers)</arxiv:journal_ref>
+    <author>
+      <name>Dominik Macko</name>
+    </author>
+    <author>
+      <name>Jakub Kopal</name>
+    </author>
+    <author>
+      <name>Robert Moro</name>
+    </author>
+    <author>
+      <name>Ivan Srba</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.11073v2</id>
+    <title>Exploring the Limitations of Detecting Machine-Generated Text</title>
+    <updated>2024-12-12T06:44:12Z</updated>
+    <link href="https://arxiv.org/abs/2406.11073v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.11073v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent improvements in the quality of the generations by large language models have spurred research into identifying machine-generated text. Such work often presents high-performing detectors. However, humans and machines can produce text in different styles and domains, yet the performance impact of such on machine generated text detection systems remains unclear. In this paper, we audit the classification performance for detecting machine-generated text by evaluating on texts with varying writing styles. We find that classifiers are highly sensitive to stylistic changes and differences in text complexity, and in some cases degrade entirely to random classifiers. We further find that detection systems are particularly susceptible to misclassify easy-to-read texts while they have high performance for complex texts, leading to concerns about the reliability of detection systems. We recommend that future work attends to stylistic factors and reading difficulty levels of human-written and machine-generated text.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-16T21:02:02Z</published>
+    <arxiv:comment>Accepted to COLING 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jad Doughman</name>
+    </author>
+    <author>
+      <name>Osama Mohammed Afzal</name>
+    </author>
+    <author>
+      <name>Hawau Olamide Toyin</name>
+    </author>
+    <author>
+      <name>Shady Shehata</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+    <author>
+      <name>Zeerak Talat</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.17964v1</id>
+    <title>Transformer and Hybrid Deep Learning Based Models for Machine-Generated Text Detection</title>
+    <updated>2024-05-28T08:48:08Z</updated>
+    <link href="https://arxiv.org/abs/2405.17964v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.17964v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper describes the approach of the UniBuc - NLP team in tackling the SemEval 2024 Task 8: Multigenerator, Multidomain, and Multilingual Black-Box Machine-Generated Text Detection. We explored transformer-based and hybrid deep learning architectures. For subtask B, our transformer-based model achieved a strong \textbf{second-place} out of $77$ teams with an accuracy of \textbf{86.95\%}, demonstrating the architecture's suitability for this task. However, our models showed overfitting in subtask A which could potentially be fixed with less fine-tunning and increasing maximum sequence length. For subtask C (token-level classification), our hybrid model overfit during training, hindering its ability to detect transitions between human and machine-generated text.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-28T08:48:08Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Teodor-George Marchitan</name>
+    </author>
+    <author>
+      <name>Claudiu Creanga</name>
+    </author>
+    <author>
+      <name>Liviu P. Dinu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.10629v1</id>
+    <title>DeepPavlov at SemEval-2024 Task 8: Leveraging Transfer Learning for Detecting Boundaries of Machine-Generated Texts</title>
+    <updated>2024-05-17T08:44:48Z</updated>
+    <link href="https://arxiv.org/abs/2405.10629v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.10629v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Multigenerator, Multidomain, and Multilingual Black-Box Machine-Generated Text Detection shared task in the SemEval-2024 competition aims to tackle the problem of misusing collaborative human-AI writing. Although there are a lot of existing detectors of AI content, they are often designed to give a binary answer and thus may not be suitable for more nuanced problem of finding the boundaries between human-written and machine-generated texts, while hybrid human-AI writing becomes more and more popular. In this paper, we address the boundary detection problem. Particularly, we present a pipeline for augmenting data for supervised fine-tuning of DeBERTaV3. We receive new best MAE score, according to the leaderboard of the competition, with this pipeline.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-17T08:44:48Z</published>
+    <arxiv:comment>New best score from the leaderboard, to appear in SemEval-2024 Workshop proceedings</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Anastasia Voznyuk</name>
+    </author>
+    <author>
+      <name>Vasily Konovalov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.07940v2</id>
+    <title>RAID: A Shared Benchmark for Robust Evaluation of Machine-Generated Text Detectors</title>
+    <updated>2024-06-10T15:51:16Z</updated>
+    <link href="https://arxiv.org/abs/2405.07940v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.07940v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Many commercial and open-source models claim to detect machine-generated text with extremely high accuracy (99% or more). However, very few of these detectors are evaluated on shared benchmark datasets and even when they are, the datasets used for evaluation are insufficiently challenging-lacking variations in sampling strategy, adversarial attacks, and open-source generative models. In this work we present RAID: the largest and most challenging benchmark dataset for machine-generated text detection. RAID includes over 6 million generations spanning 11 models, 8 domains, 11 adversarial attacks and 4 decoding strategies. Using RAID, we evaluate the out-of-domain and adversarial robustness of 8 open- and 4 closed-source detectors and find that current detectors are easily fooled by adversarial attacks, variations in sampling strategies, repetition penalties, and unseen generative models. We release our data along with a leaderboard to encourage future research.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-13T17:15:14Z</published>
+    <arxiv:comment>ACL 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Liam Dugan</name>
+    </author>
+    <author>
+      <name>Alyssa Hwang</name>
+    </author>
+    <author>
+      <name>Filip Trhlik</name>
+    </author>
+    <author>
+      <name>Josh Magnus Ludan</name>
+    </author>
+    <author>
+      <name>Andrew Zhu</name>
+    </author>
+    <author>
+      <name>Hainiu Xu</name>
+    </author>
+    <author>
+      <name>Daphne Ippolito</name>
+    </author>
+    <author>
+      <name>Chris Callison-Burch</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.14183v1</id>
+    <title>SemEval-2024 Task 8: Multidomain, Multimodel and Multilingual Machine-Generated Text Detection</title>
+    <updated>2024-04-22T13:56:07Z</updated>
+    <link href="https://arxiv.org/abs/2404.14183v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.14183v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present the results and the main findings of SemEval-2024 Task 8: Multigenerator, Multidomain, and Multilingual Machine-Generated Text Detection. The task featured three subtasks. Subtask A is a binary classification task determining whether a text is written by a human or generated by a machine. This subtask has two tracks: a monolingual track focused solely on English texts and a multilingual track. Subtask B is to detect the exact source of a text, discerning whether it is written by a human or generated by a specific LLM. Subtask C aims to identify the changing point within a text, at which the authorship transitions from human to machine. The task attracted a large number of participants: subtask A monolingual (126), subtask A multilingual (59), subtask B (70), and subtask C (30). In this paper, we present the task, analyze the results, and discuss the system submissions and the methods they used. For all subtasks, the best systems used LLMs.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-22T13:56:07Z</published>
+    <arxiv:comment>23 pages, 12 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Proceedings of the 18th International Workshop on Semantic Evaluation (SemEval-2024)</arxiv:journal_ref>
+    <author>
+      <name>Yuxia Wang</name>
+    </author>
+    <author>
+      <name>Jonibek Mansurov</name>
+    </author>
+    <author>
+      <name>Petar Ivanov</name>
+    </author>
+    <author>
+      <name>Jinyan Su</name>
+    </author>
+    <author>
+      <name>Artem Shelmanov</name>
+    </author>
+    <author>
+      <name>Akim Tsvigun</name>
+    </author>
+    <author>
+      <name>Osama Mohammed Afzal</name>
+    </author>
+    <author>
+      <name>Tarek Mahmoud</name>
+    </author>
+    <author>
+      <name>Giovanni Puccetti</name>
+    </author>
+    <author>
+      <name>Thomas Arnold</name>
+    </author>
+    <author>
+      <name>Chenxi Whitehouse</name>
+    </author>
+    <author>
+      <name>Alham Fikri Aji</name>
+    </author>
+    <author>
+      <name>Nizar Habash</name>
+    </author>
+    <author>
+      <name>Iryna Gurevych</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.05483v1</id>
+    <title>PetKaz at SemEval-2024 Task 8: Can Linguistics Capture the Specifics of LLM-generated Text?</title>
+    <updated>2024-04-08T13:05:02Z</updated>
+    <link href="https://arxiv.org/abs/2404.05483v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.05483v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we present our submission to the SemEval-2024 Task 8 "Multigenerator, Multidomain, and Multilingual Black-Box Machine-Generated Text Detection", focusing on the detection of machine-generated texts (MGTs) in English. Specifically, our approach relies on combining embeddings from the RoBERTa-base with diversity features and uses a resampled training set. We score 12th from 124 in the ranking for Subtask A (monolingual track), and our results show that our approach is generalizable across unseen models and domains, achieving an accuracy of 0.91.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-08T13:05:02Z</published>
+    <arxiv:comment>8 pages, 3 figures, 5 tables, to be published in the Proceedings of the 18th International Workshop on Semantic Evaluation (SemEval-2024), for associated code, see https://github.com/sachertort/petkaz-semeval-m4</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kseniia Petukhova</name>
+    </author>
+    <author>
+      <name>Roman Kazakov</name>
+    </author>
+    <author>
+      <name>Ekaterina Kochmar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.16592v1</id>
+    <title>TrustAI at SemEval-2024 Task 8: A Comprehensive Analysis of Multi-domain Machine Generated Text Detection Techniques</title>
+    <updated>2024-03-25T10:09:03Z</updated>
+    <link href="https://arxiv.org/abs/2403.16592v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.16592v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Large Language Models (LLMs) exhibit remarkable ability to generate fluent content across a wide spectrum of user queries. However, this capability has raised concerns regarding misinformation and personal information leakage. In this paper, we present our methods for the SemEval2024 Task8, aiming to detect machine-generated text across various domains in both mono-lingual and multi-lingual contexts. Our study comprehensively analyzes various methods to detect machine-generated text, including statistical, neural, and pre-trained model approaches. We also detail our experimental setup and perform a in-depth error analysis to evaluate the effectiveness of these methods. Our methods obtain an accuracy of 86.9\% on the test set of subtask-A mono and 83.7\% for subtask-B. Furthermore, we also highlight the challenges and essential factors for consideration in future studies.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-25T10:09:03Z</published>
+    <arxiv:comment>8 pages, 1 Figure</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ashok Urlana</name>
+    </author>
+    <author>
+      <name>Aditya Saibewar</name>
+    </author>
+    <author>
+      <name>Bala Mallikarjunarao Garlapati</name>
+    </author>
+    <author>
+      <name>Charaka Vinayak Kumar</name>
+    </author>
+    <author>
+      <name>Ajeet Kumar Singh</name>
+    </author>
+    <author>
+      <name>Srinivasa Rao Chalamala</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.14989v2</id>
+    <title>MasonTigers at SemEval-2024 Task 8: Performance Analysis of Transformer-based Models on Machine-Generated Text Detection</title>
+    <updated>2024-04-05T07:49:09Z</updated>
+    <link href="https://arxiv.org/abs/2403.14989v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.14989v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents the MasonTigers entry to the SemEval-2024 Task 8 - Multigenerator, Multidomain, and Multilingual Black-Box Machine-Generated Text Detection. The task encompasses Binary Human-Written vs. Machine-Generated Text Classification (Track A), Multi-Way Machine-Generated Text Classification (Track B), and Human-Machine Mixed Text Detection (Track C). Our best performing approaches utilize mainly the ensemble of discriminator transformer models along with sentence transformer and statistical machine learning approaches in specific cases. Moreover, zero-shot prompting and fine-tuning of FLAN-T5 are used for Track A and B.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-22T06:47:28Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Sadiya Sayara Chowdhury Puspo</name>
+    </author>
+    <author>
+      <name>Md Nishat Raihan</name>
+    </author>
+    <author>
+      <name>Dhiman Goswami</name>
+    </author>
+    <author>
+      <name>Al Nahian Bin Emran</name>
+    </author>
+    <author>
+      <name>Amrita Ganguly</name>
+    </author>
+    <author>
+      <name>Ozlem Uzuner</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.15873v2</id>
+    <title>SemEval-2024 Task 8: Weighted Layer Averaging RoBERTa for Black-Box Machine-Generated Text Detection</title>
+    <updated>2024-04-09T10:19:48Z</updated>
+    <link href="https://arxiv.org/abs/2402.15873v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.15873v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This document contains the details of the authors' submission to the proceedings of SemEval 2024's Task 8: Multigenerator, Multidomain, and Multilingual Black-Box Machine-Generated Text Detection Subtask A (monolingual) and B. Detection of machine-generated text is becoming an increasingly important task, with the advent of large language models (LLMs). In this paper, we lay out how using weighted averages of RoBERTa layers lets us capture information about text that is relevant to machine-generated text detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-24T17:44:56Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ayan Datta</name>
+    </author>
+    <author>
+      <name>Aryan Chandramania</name>
+    </author>
+    <author>
+      <name>Radhika Mamidi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.13671v2</id>
+    <title>KInIT at SemEval-2024 Task 8: Fine-tuned LLMs for Multilingual Machine-Generated Text Detection</title>
+    <updated>2024-06-17T13:43:28Z</updated>
+    <link href="https://arxiv.org/abs/2402.13671v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.13671v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>SemEval-2024 Task 8 is focused on multigenerator, multidomain, and multilingual black-box machine-generated text detection. Such a detection is important for preventing a potential misuse of large language models (LLMs), the newest of which are very capable in generating multilingual human-like texts. We have coped with this task in multiple ways, utilizing language identification and parameter-efficient fine-tuning of smaller LLMs for text classification. We have further used the per-language classification-threshold calibration to uniquely combine fine-tuned models predictions with statistical detection metrics to improve generalization of the system detection performance. Our submitted method achieved competitive results, ranking at the fourth place, just under 1 percentage point behind the winner.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-21T10:09:56Z</published>
+    <arxiv:comment>SemEval-2024 Task 8</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Michal Spiegel</name>
+    </author>
+    <author>
+      <name>Dominik Macko</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11815v2</id>
+    <title>HU at SemEval-2024 Task 8A: Can Contrastive Learning Learn Embeddings to Detect Machine-Generated Text?</title>
+    <updated>2024-03-27T20:30:08Z</updated>
+    <link href="https://arxiv.org/abs/2402.11815v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11815v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper describes our system developed for SemEval-2024 Task 8, ``Multigenerator, Multidomain, and Multilingual Black-Box Machine-Generated Text Detection'' Machine-generated texts have been one of the main concerns due to the use of large language models (LLM) in fake text generation, phishing, cheating in exams, or even plagiarizing copyright materials. A lot of systems have been developed to detect machine-generated text. Nonetheless, the majority of these systems rely on the text-generating model. This limitation is impractical in real-world scenarios, as it's often impossible to know which specific model the user has used for text generation. In this work, we propose a $\textbf{single}$ model based on contrastive learning, which uses $\textbf{$\approx$40% of the baseline's parameters}$ (149M vs. 355M) but shows a comparable performance on the test dataset $(\textbf{21st out of 137 participants})$. Our key finding is that even without an ensemble of multiple models, a single base model can have comparable performance with the help of data augmentation and contrastive learning. Our code is publicly available at https://github.com/dipta007/SemEval24-Task8.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-19T04:11:34Z</published>
+    <arxiv:comment>Camera Ready Version - Accepted in SemEval 2024 (Colocated with NAACL 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shubhashis Roy Dipta</name>
+    </author>
+    <author>
+      <name>Sadat Shahriar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11399v2</id>
+    <title>k-SemStamp: A Clustering-Based Semantic Watermark for Detection of Machine-Generated Text</title>
+    <updated>2024-06-08T04:24:27Z</updated>
+    <link href="https://arxiv.org/abs/2402.11399v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11399v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent watermarked generation algorithms inject detectable signatures during language generation to facilitate post-hoc detection. While token-level watermarks are vulnerable to paraphrase attacks, SemStamp (Hou et al., 2023) applies watermark on the semantic representation of sentences and demonstrates promising robustness. SemStamp employs locality-sensitive hashing (LSH) to partition the semantic space with arbitrary hyperplanes, which results in a suboptimal tradeoff between robustness and speed. We propose k-SemStamp, a simple yet effective enhancement of SemStamp, utilizing k-means clustering as an alternative of LSH to partition the embedding space with awareness of inherent semantic structure. Experimental results indicate that k-SemStamp saliently improves its robustness and sampling efficiency while preserving the generation quality, advancing a more effective tool for machine-generated text detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-17T22:50:38Z</published>
+    <arxiv:comment>Accepted to ACL 24 Findings</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Abe Bohan Hou</name>
+    </author>
+    <author>
+      <name>Jingyu Zhang</name>
+    </author>
+    <author>
+      <name>Yichen Wang</name>
+    </author>
+    <author>
+      <name>Daniel Khashabi</name>
+    </author>
+    <author>
+      <name>Tianxing He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.11175v2</id>
+    <title>M4GT-Bench: Evaluation Benchmark for Black-Box Machine-Generated Text Detection</title>
+    <updated>2024-06-27T05:42:12Z</updated>
+    <link href="https://arxiv.org/abs/2402.11175v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.11175v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The advent of Large Language Models (LLMs) has brought an unprecedented surge in machine-generated text (MGT) across diverse channels. This raises legitimate concerns about its potential misuse and societal implications. The need to identify and differentiate such content from genuine human-generated text is critical in combating disinformation, preserving the integrity of education and scientific fields, and maintaining trust in communication. In this work, we address this problem by introducing a new benchmark based on a multilingual, multi-domain, and multi-generator corpus of MGTs -- M4GT-Bench. The benchmark is compiled of three tasks: (1) mono-lingual and multi-lingual binary MGT detection; (2) multi-way detection where one need to identify, which particular model generated the text; and (3) mixed human-machine text detection, where a word boundary delimiting MGT from human-written content should be determined. On the developed benchmark, we have tested several MGT detection baselines and also conducted an evaluation of human performance. We see that obtaining good performance in MGT detection usually requires an access to the training data from the same domain and generators. The benchmark is available at https://github.com/mbzuai-nlp/M4GT-Bench.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-17T02:50:33Z</published>
+    <arxiv:comment>29 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>ACL 2024 main</arxiv:journal_ref>
+    <author>
+      <name>Yuxia Wang</name>
+    </author>
+    <author>
+      <name>Jonibek Mansurov</name>
+    </author>
+    <author>
+      <name>Petar Ivanov</name>
+    </author>
+    <author>
+      <name>Jinyan Su</name>
+    </author>
+    <author>
+      <name>Artem Shelmanov</name>
+    </author>
+    <author>
+      <name>Akim Tsvigun</name>
+    </author>
+    <author>
+      <name>Osama Mohanned Afzal</name>
+    </author>
+    <author>
+      <name>Tarek Mahmoud</name>
+    </author>
+    <author>
+      <name>Giovanni Puccetti</name>
+    </author>
+    <author>
+      <name>Thomas Arnold</name>
+    </author>
+    <author>
+      <name>Alham Fikri Aji</name>
+    </author>
+    <author>
+      <name>Nizar Habash</name>
+    </author>
+    <author>
+      <name>Iryna Gurevych</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.12326v1</id>
+    <title>Fine-tuning Large Language Models for Multigenerator, Multidomain, and Multilingual Machine-Generated Text Detection</title>
+    <updated>2024-01-22T19:39:05Z</updated>
+    <link href="https://arxiv.org/abs/2401.12326v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.12326v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>SemEval-2024 Task 8 introduces the challenge of identifying machine-generated texts from diverse Large Language Models (LLMs) in various languages and domains. The task comprises three subtasks: binary classification in monolingual and multilingual (Subtask A), multi-class classification (Subtask B), and mixed text detection (Subtask C). This paper focuses on Subtask A &amp; B. Each subtask is supported by three datasets for training, development, and testing. To tackle this task, two methods: 1) using traditional machine learning (ML) with natural language preprocessing (NLP) for feature extraction, and 2) fine-tuning LLMs for text classification. The results show that transformer models, particularly LoRA-RoBERTa, exceed traditional ML methods in effectiveness, with majority voting being particularly effective in multilingual contexts for identifying machine-generated texts.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-22T19:39:05Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Feng Xiong</name>
+    </author>
+    <author>
+      <name>Thanet Markchom</name>
+    </author>
+    <author>
+      <name>Ziwei Zheng</name>
+    </author>
+    <author>
+      <name>Subin Jung</name>
+    </author>
+    <author>
+      <name>Varun Ojha</name>
+    </author>
+    <author>
+      <name>Huizhi Liang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.07867v3</id>
+    <title>Authorship Obfuscation in Multilingual Machine-Generated Text Detection</title>
+    <updated>2024-10-04T07:45:22Z</updated>
+    <link href="https://arxiv.org/abs/2401.07867v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.07867v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>High-quality text generation capability of recent Large Language Models (LLMs) causes concerns about their misuse (e.g., in massive generation/spread of disinformation). Machine-generated text (MGT) detection is important to cope with such threats. However, it is susceptible to authorship obfuscation (AO) methods, such as paraphrasing, which can cause MGTs to evade detection. So far, this was evaluated only in monolingual settings. Thus, the susceptibility of recently proposed multilingual detectors is still unknown. We fill this gap by comprehensively benchmarking the performance of 10 well-known AO methods, attacking 37 MGT detection methods against MGTs in 11 languages (i.e., 10 $\times$ 37 $\times$ 11 = 4,070 combinations). We also evaluate the effect of data augmentation on adversarial robustness using obfuscated texts. The results indicate that all tested AO methods can cause evasion of automated detection in all tested languages, where homoglyph attacks are especially successful. However, some of the AO methods severely damaged the text, making it no longer readable or easily recognizable by humans (e.g., changed language, weird characters).</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-15T17:57:41Z</published>
+    <arxiv:comment>Accepted to EMNLP 2024 Findings</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Findings of the Association for Computational Linguistics: EMNLP 2024</arxiv:journal_ref>
+    <author>
+      <name>Dominik Macko</name>
+    </author>
+    <author>
+      <name>Robert Moro</name>
+    </author>
+    <author>
+      <name>Adaku Uchendu</name>
+    </author>
+    <author>
+      <name>Ivan Srba</name>
+    </author>
+    <author>
+      <name>Jason Samuel Lucas</name>
+    </author>
+    <author>
+      <name>Michiharu Yamashita</name>
+    </author>
+    <author>
+      <name>Nafis Irtiza Tripto</name>
+    </author>
+    <author>
+      <name>Dongwon Lee</name>
+    </author>
+    <author>
+      <name>Jakub Simko</name>
+    </author>
+    <author>
+      <name>Maria Bielikova</name>
+    </author>
+    <arxiv:doi>10.18653/v1/2024.findings-emnlp.369</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.18653/v1/2024.findings-emnlp.369" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.12918v2</id>
+    <title>Assaying on the Robustness of Zero-Shot Machine-Generated Text Detectors</title>
+    <updated>2023-12-21T02:09:52Z</updated>
+    <link href="https://arxiv.org/abs/2312.12918v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.12918v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>To combat the potential misuse of Natural Language Generation (NLG) technology, a variety of algorithms have been developed for the detection of AI-generated texts. Traditionally, this task is treated as a binary classification problem. Although supervised learning has demonstrated promising results, acquiring labeled data for detection purposes poses real-world challenges and the risk of overfitting. In an effort to address these issues, we delve into the realm of zero-shot machine-generated text detection. Existing zero-shot detectors, typically designed for specific tasks or topics, often assume uniform testing scenarios, limiting their practicality. In our research, we explore various advanced Large Language Models (LLMs) and their specialized variants, contributing to this field in several ways. In empirical studies, we uncover a significant correlation between topics and detection performance. Secondly, we delve into the influence of topic shifts on zero-shot detectors. These investigations shed light on the adaptability and robustness of these detection methods across diverse topics. The code is available at \url{https://github.com/yfzhang114/robustness-detection}.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-20T10:53:53Z</published>
+    <arxiv:comment>8 pages, 3 figures, AAAI 2024 Workshop on Responsible Language Models</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yi-Fan Zhang</name>
+    </author>
+    <author>
+      <name>Zhang Zhang</name>
+    </author>
+    <author>
+      <name>Liang Wang</name>
+    </author>
+    <author>
+      <name>Tieniu Tan</name>
+    </author>
+    <author>
+      <name>Rong Jin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.15425v1</id>
+    <title>Machine-Generated Text Detection using Deep Learning</title>
+    <updated>2023-11-26T21:16:01Z</updated>
+    <link href="https://arxiv.org/abs/2311.15425v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.15425v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Our research focuses on the crucial challenge of discerning text produced by Large Language Models (LLMs) from human-generated text, which holds significance for various applications. With ongoing discussions about attaining a model with such functionality, we present supporting evidence regarding the feasibility of such models. We evaluated our models on multiple datasets, including Twitter Sentiment, Football Commentary, Project Gutenberg, PubMedQA, and SQuAD, confirming the efficacy of the enhanced detection approaches. These datasets were sampled with intricate constraints encompassing every possibility, laying the foundation for future research. We evaluate GPT-3.5-Turbo against various detectors such as SVM, RoBERTa-base, and RoBERTa-large. Based on the research findings, the results predominantly relied on the sequence length of the sentence.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-26T21:16:01Z</published>
+    <arxiv:comment>9 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Raghav Gaggar</name>
+    </author>
+    <author>
+      <name>Ashish Bhagchandani</name>
+    </author>
+    <author>
+      <name>Harsh Oza</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.12574v1</id>
+    <title>IMGTB: A Framework for Machine-Generated Text Detection Benchmarking</title>
+    <updated>2023-11-21T12:40:01Z</updated>
+    <link href="https://arxiv.org/abs/2311.12574v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.12574v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the era of large language models generating high quality texts, it is a necessity to develop methods for detection of machine-generated text to avoid harmful use or simply due to annotation purposes. It is, however, also important to properly evaluate and compare such developed methods. Recently, a few benchmarks have been proposed for this purpose; however, integration of newest detection methods is rather challenging, since new methods appear each month and provide slightly different evaluation pipelines. In this paper, we present the IMGTB framework, which simplifies the benchmarking of machine-generated text detection methods by easy integration of custom (new) methods and evaluation datasets. Its configurability and flexibility makes research and development of new detection methods easier, especially their comparison to the existing state-of-the-art detectors. The default set of analyses, metrics and visualizations offered by the tool follows the established practices of machine-generated text detection benchmarking found in state-of-the-art literature.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-21T12:40:01Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>ACL 2024 System Demonstrations</arxiv:journal_ref>
+    <author>
+      <name>Michal Spiegel</name>
+    </author>
+    <author>
+      <name>Dominik Macko</name>
+    </author>
+    <arxiv:doi>10.18653/v1/2024.acl-demos.17</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.18653/v1/2024.acl-demos.17" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.13606v1</id>
+    <title>MULTITuDE: Large-Scale Multilingual Machine-Generated Text Detection Benchmark</title>
+    <updated>2023-10-20T15:57:17Z</updated>
+    <link href="https://arxiv.org/abs/2310.13606v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.13606v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>There is a lack of research into capabilities of recent LLMs to generate convincing text in languages other than English and into performance of detectors of machine-generated text in multilingual settings. This is also reflected in the available benchmarks which lack authentic texts in languages other than English and predominantly cover older generators. To fill this gap, we introduce MULTITuDE, a novel benchmarking dataset for multilingual machine-generated text detection comprising of 74,081 authentic and machine-generated texts in 11 languages (ar, ca, cs, de, en, es, nl, pt, ru, uk, and zh) generated by 8 multilingual LLMs. Using this benchmark, we compare the performance of zero-shot (statistical and black-box) and fine-tuned detectors. Considering the multilinguality, we evaluate 1) how these detectors generalize to unseen languages (linguistically similar as well as dissimilar) and unseen LLMs and 2) whether the detectors improve their performance when trained on multiple languages.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-20T15:57:17Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing</arxiv:journal_ref>
+    <author>
+      <name>Dominik Macko</name>
+    </author>
+    <author>
+      <name>Robert Moro</name>
+    </author>
+    <author>
+      <name>Adaku Uchendu</name>
+    </author>
+    <author>
+      <name>Jason Samuel Lucas</name>
+    </author>
+    <author>
+      <name>Michiharu Yamashita</name>
+    </author>
+    <author>
+      <name>Matúš Pikuliak</name>
+    </author>
+    <author>
+      <name>Ivan Srba</name>
+    </author>
+    <author>
+      <name>Thai Le</name>
+    </author>
+    <author>
+      <name>Dongwon Lee</name>
+    </author>
+    <author>
+      <name>Jakub Simko</name>
+    </author>
+    <author>
+      <name>Maria Bielikova</name>
+    </author>
+    <arxiv:doi>10.18653/v1/2023.emnlp-main.616</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.18653/v1/2023.emnlp-main.616" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.14902v2</id>
+    <title>M4: Multi-generator, Multi-domain, and Multi-lingual Black-Box Machine-Generated Text Detection</title>
+    <updated>2024-03-10T01:04:48Z</updated>
+    <link href="https://arxiv.org/abs/2305.14902v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.14902v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have demonstrated remarkable capability to generate fluent responses to a wide variety of user queries. However, this has also raised concerns about the potential misuse of such texts in journalism, education, and academia. In this study, we strive to create automated systems that can detect machine-generated texts and pinpoint potential misuse. We first introduce a large-scale benchmark \textbf{M4}, which is a multi-generator, multi-domain, and multi-lingual corpus for machine-generated text detection. Through an extensive empirical study of this dataset, we show that it is challenging for detectors to generalize well on instances from unseen domains or LLMs. In such cases, detectors tend to misclassify machine-generated text as human-written. These results show that the problem is far from solved and that there is a lot of room for improvement. We believe that our dataset will enable future research towards more robust approaches to this pressing societal problem. The dataset is available at https://github.com/mbzuai-nlp/M4.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-24T08:55:11Z</published>
+    <arxiv:comment>41 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yuxia Wang</name>
+    </author>
+    <author>
+      <name>Jonibek Mansurov</name>
+    </author>
+    <author>
+      <name>Petar Ivanov</name>
+    </author>
+    <author>
+      <name>Jinyan Su</name>
+    </author>
+    <author>
+      <name>Artem Shelmanov</name>
+    </author>
+    <author>
+      <name>Akim Tsvigun</name>
+    </author>
+    <author>
+      <name>Chenxi Whitehouse</name>
+    </author>
+    <author>
+      <name>Osama Mohammed Afzal</name>
+    </author>
+    <author>
+      <name>Tarek Mahmoud</name>
+    </author>
+    <author>
+      <name>Toru Sasaki</name>
+    </author>
+    <author>
+      <name>Thomas Arnold</name>
+    </author>
+    <author>
+      <name>Alham Fikri Aji</name>
+    </author>
+    <author>
+      <name>Nizar Habash</name>
+    </author>
+    <author>
+      <name>Iryna Gurevych</name>
+    </author>
+    <author>
+      <name>Preslav Nakov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.13242v3</id>
+    <title>MAGE: Machine-generated Text Detection in the Wild</title>
+    <updated>2024-05-21T04:21:53Z</updated>
+    <link href="https://arxiv.org/abs/2305.13242v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.13242v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have achieved human-level text generation, emphasizing the need for effective AI-generated text detection to mitigate risks like the spread of fake news and plagiarism. Existing research has been constrained by evaluating detection methods on specific domains or particular language models. In practical scenarios, however, the detector faces texts from various domains or LLMs without knowing their sources. To this end, we build a comprehensive testbed by gathering texts from diverse human writings and texts generated by different LLMs. Empirical results show challenges in distinguishing machine-generated texts from human-authored ones across various scenarios, especially out-of-distribution. These challenges are due to the decreasing linguistic distinctions between the two sources. Despite challenges, the top-performing detector can identify 86.54% out-of-domain texts generated by a new LLM, indicating the feasibility for application scenarios. We release our resources at https://github.com/yafuly/MAGE.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-22T17:13:29Z</published>
+    <arxiv:comment>ACL 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yafu Li</name>
+    </author>
+    <author>
+      <name>Qintong Li</name>
+    </author>
+    <author>
+      <name>Leyang Cui</name>
+    </author>
+    <author>
+      <name>Wei Bi</name>
+    </author>
+    <author>
+      <name>Zhilin Wang</name>
+    </author>
+    <author>
+      <name>Longyue Wang</name>
+    </author>
+    <author>
+      <name>Linyi Yang</name>
+    </author>
+    <author>
+      <name>Shuming Shi</name>
+    </author>
+    <author>
+      <name>Yue Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.12680v2</id>
+    <title>G3Detector: General GPT-Generated Text Detector</title>
+    <updated>2023-08-04T06:07:49Z</updated>
+    <link href="https://arxiv.org/abs/2305.12680v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.12680v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The burgeoning progress in the field of Large Language Models (LLMs) heralds significant benefits due to their unparalleled capacities. However, it is critical to acknowledge the potential misuse of these models, which could give rise to a spectrum of social and ethical dilemmas. Despite numerous preceding efforts centered around distinguishing synthetic text, most existing detection systems fail to identify data synthesized by the latest LLMs, such as ChatGPT and GPT-4. In response to this challenge, we introduce an unpretentious yet potent detection approach proficient in identifying synthetic text across a wide array of fields. Moreover, our detector demonstrates outstanding performance uniformly across various model architectures and decoding strategies. It also possesses the capability to identify text generated utilizing a potent detection-evasion technique. Our comprehensive research underlines our commitment to boosting the robustness and efficiency of machine-generated text detection mechanisms, particularly in the context of swiftly progressing and increasingly adaptive AI technologies.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-22T03:35:00Z</published>
+    <arxiv:comment>Encounter some tech bugs, need to refresh corresponding results</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Haolan Zhan</name>
+    </author>
+    <author>
+      <name>Xuanli He</name>
+    </author>
+    <author>
+      <name>Qiongkai Xu</name>
+    </author>
+    <author>
+      <name>Yuxiang Wu</name>
+    </author>
+    <author>
+      <name>Pontus Stenetorp</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.14822v3</id>
+    <title>MGTBench: Benchmarking Machine-Generated Text Detection</title>
+    <updated>2024-01-16T02:48:05Z</updated>
+    <link href="https://arxiv.org/abs/2303.14822v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.14822v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Nowadays, powerful large language models (LLMs) such as ChatGPT have demonstrated revolutionary power in a variety of tasks. Consequently, the detection of machine-generated texts (MGTs) is becoming increasingly crucial as LLMs become more advanced and prevalent. These models have the ability to generate human-like language, making it challenging to discern whether a text is authored by a human or a machine. This raises concerns regarding authenticity, accountability, and potential bias. However, existing methods for detecting MGTs are evaluated using different model architectures, datasets, and experimental settings, resulting in a lack of a comprehensive evaluation framework that encompasses various methodologies. Furthermore, it remains unclear how existing detection methods would perform against powerful LLMs. In this paper, we fill this gap by proposing the first benchmark framework for MGT detection against powerful LLMs, named MGTBench. Extensive evaluations on public datasets with curated texts generated by various powerful LLMs such as ChatGPT-turbo and Claude demonstrate the effectiveness of different detection methods. Our ablation study shows that a larger number of words in general leads to better performance and most detection methods can achieve similar performance with much fewer training samples. Moreover, we delve into a more challenging task: text attribution. Our findings indicate that the model-based detection methods still perform well in the text attribution task. To investigate the robustness of different detection methods, we consider three adversarial attacks, namely paraphrasing, random spacing, and adversarial perturbations. We discover that these attacks can significantly diminish detection effectiveness, underscoring the critical need for the development of more robust detection methods.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-26T21:12:36Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Xinlei He</name>
+    </author>
+    <author>
+      <name>Xinyue Shen</name>
+    </author>
+    <author>
+      <name>Zeyuan Chen</name>
+    </author>
+    <author>
+      <name>Michael Backes</name>
+    </author>
+    <author>
+      <name>Yang Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2301.11305v2</id>
+    <title>DetectGPT: Zero-Shot Machine-Generated Text Detection using Probability Curvature</title>
+    <updated>2023-07-23T04:18:36Z</updated>
+    <link href="https://arxiv.org/abs/2301.11305v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2301.11305v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The increasing fluency and widespread usage of large language models (LLMs) highlight the desirability of corresponding tools aiding detection of LLM-generated text. In this paper, we identify a property of the structure of an LLM's probability function that is useful for such detection. Specifically, we demonstrate that text sampled from an LLM tends to occupy negative curvature regions of the model's log probability function. Leveraging this observation, we then define a new curvature-based criterion for judging if a passage is generated from a given LLM. This approach, which we call DetectGPT, does not require training a separate classifier, collecting a dataset of real or generated passages, or explicitly watermarking generated text. It uses only log probabilities computed by the model of interest and random perturbations of the passage from another generic pre-trained language model (e.g., T5). We find DetectGPT is more discriminative than existing zero-shot methods for model sample detection, notably improving detection of fake news articles generated by 20B parameter GPT-NeoX from 0.81 AUROC for the strongest zero-shot baseline to 0.95 AUROC for DetectGPT. See https://ericmitchell.ai/detectgpt for code, data, and other project information.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-01-26T18:44:06Z</published>
+    <arxiv:comment>ICML 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Eric Mitchell</name>
+    </author>
+    <author>
+      <name>Yoonho Lee</name>
+    </author>
+    <author>
+      <name>Alexander Khazatsky</name>
+    </author>
+    <author>
+      <name>Christopher D. Manning</name>
+    </author>
+    <author>
+      <name>Chelsea Finn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2212.10341v2</id>
+    <title>CoCo: Coherence-Enhanced Machine-Generated Text Detection Under Data Limitation With Contrastive Learning</title>
+    <updated>2023-10-20T13:21:51Z</updated>
+    <link href="https://arxiv.org/abs/2212.10341v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2212.10341v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine-Generated Text (MGT) detection, a task that discriminates MGT from Human-Written Text (HWT), plays a crucial role in preventing misuse of text generative models, which excel in mimicking human writing style recently. Latest proposed detectors usually take coarse text sequences as input and fine-tune pretrained models with standard cross-entropy loss. However, these methods fail to consider the linguistic structure of texts. Moreover, they lack the ability to handle the low-resource problem which could often happen in practice considering the enormous amount of textual data online. In this paper, we present a coherence-based contrastive learning model named CoCo to detect the possible MGT under low-resource scenario. To exploit the linguistic feature, we encode coherence information in form of graph into text representation. To tackle the challenges of low data resource, we employ a contrastive learning framework and propose an improved contrastive loss for preventing performance degradation brought by simple samples. The experiment results on two public datasets and two self-constructed datasets prove our approach outperforms the state-of-art methods significantly. Also, we surprisingly find that MGTs originated from up-to-date language models could be easier to detect than these from previous models, in our experiments. And we propose some preliminary explanations for this counter-intuitive phenomena. All the codes and datasets are open-sourced.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-12-20T15:26:19Z</published>
+    <arxiv:comment>Accepted by EMNLP 2023 main cofference</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xiaoming Liu</name>
+    </author>
+    <author>
+      <name>Zhaohan Zhang</name>
+    </author>
+    <author>
+      <name>Yichen Wang</name>
+    </author>
+    <author>
+      <name>Hang Pu</name>
+    </author>
+    <author>
+      <name>Yu Lan</name>
+    </author>
+    <author>
+      <name>Chao Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.07321v4</id>
+    <title>Machine Generated Text: A Comprehensive Survey of Threat Models and Detection Methods</title>
+    <updated>2023-05-08T01:56:38Z</updated>
+    <link href="https://arxiv.org/abs/2210.07321v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.07321v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine generated text is increasingly difficult to distinguish from human authored text. Powerful open-source models are freely available, and user-friendly tools that democratize access to generative models are proliferating. ChatGPT, which was released shortly after the first edition of this survey, epitomizes these trends. The great potential of state-of-the-art natural language generation (NLG) systems is tempered by the multitude of avenues for abuse. Detection of machine generated text is a key countermeasure for reducing abuse of NLG models, with significant technical challenges and numerous open problems. We provide a survey that includes both 1) an extensive analysis of threat models posed by contemporary NLG systems, and 2) the most complete review of machine generated text detection methods to date. This survey places machine generated text within its cybersecurity and social context, and provides strong guidance for future work addressing the most critical threat models, and ensuring detection systems themselves demonstrate trustworthiness through fairness, robustness, and accountability.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-13T19:46:14Z</published>
+    <arxiv:comment>Manuscript submitted to ACM Special Session on Trustworthy AI. 2022/11/19 - Updated references</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Evan Crothers</name>
+    </author>
+    <author>
+      <name>Nathalie Japkowicz</name>
+    </author>
+    <author>
+      <name>Herna Viktor</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.03742v2</id>
+    <title>SynSciPass: detecting appropriate uses of scientific text generation</title>
+    <updated>2022-09-09T20:13:14Z</updated>
+    <link href="https://arxiv.org/abs/2209.03742v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.03742v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Approaches to machine generated text detection tend to focus on binary classification of human versus machine written text. In the scientific domain where publishers might use these models to examine manuscripts under submission, misclassification has the potential to cause harm to authors. Additionally, authors may appropriately use text generation models such as with the use of assistive technologies like translation tools. In this setting, a binary classification scheme might be used to flag appropriate uses of assistive text generation technology as simply machine generated which is a cause of concern. In our work, we simulate this scenario by presenting a state-of-the-art detector trained on the DAGPap22 with machine translated passages from Scielo and find that the model performs at random. Given this finding, we develop a framework for dataset development that provides a nuanced approach to detecting machine generated text by having labels for the type of technology used such as for translation or paraphrase resulting in the construction of SynSciPass. By training the same model that performed well on DAGPap22 on SynSciPass, we show that not only is the model more robust to domain shifts but also is able to uncover the type of technology used for machine generated text. Despite this, we conclude that current datasets are neither comprehensive nor realistic enough to understand how these models would perform in the wild where manuscript submissions can come from many unknown or novel distributions, how they would perform on scientific full-texts rather than small passages, and what might happen when there is a mix of appropriate and inappropriate uses of natural language generation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-07T13:16:40Z</published>
+    <arxiv:comment>Accepted to SDProc 2022 Workshop @ COLING 2022 (First Place Submission on https://www.kaggle.com/competitions/detecting-generated-scientific-papers/leaderboard)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Domenic Rosati</name>
+    </author>
+  </entry>
+</feed>

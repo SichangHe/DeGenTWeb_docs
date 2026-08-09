@@ -1,0 +1,1091 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/N1cy/Yv0xHI9ZETTSAPUTxu/Km4</id>
+  <title>arXiv Query: search_query=all:"LLM-generated text detection"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-08-08T22:58:40Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22LLM-generated+text+detection%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>40</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2608.03859v1</id>
+    <title>Beyond Representational Similarity: Source-Conditioned Description-Length Gain for Generative Plagiarism Detection and Candidate Source Reranking</title>
+    <updated>2026-08-04T16:03:45Z</updated>
+    <link href="https://arxiv.org/abs/2608.03859v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.03859v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) pose challenges to academic integrity and peer review. Yet generative plagiarism detection remains an underexplored and largely unresolved challenge. Prior work on LLM-generated-text detection targets AI involvement, which may be permissible, rather than source reuse, while similarity-based methods struggle after extensive rewriting and multi-source synthesis. Motivated by the description-length view of probabilistic prediction, in which relevant side information can reduce a target sequence's code length, we introduce Source-Conditioned Description-Length Gain (SCDG), a directional, training-free framework that contrasts a frozen language model's description length of a suspicious document $P$ with and without a candidate source $S$. This contrast yields token-level log-likelihood gains that measure the incremental predictive evidence supplied by $S$. We evaluate SCDG on the PAN at CLEF benchmarks for generative plagiarism. On a PAN 2025-derived pairwise benchmark, SCDG achieves 0.92 Precision, 0.97 Recall, and 0.94 F1, outperforming all baselines; on PAN 2026's multi-source retrieval task, it reaches 0.83 nDCG@10 and 0.96 Recall@100, surpassing all baselines. On a same-topic, same-event Multi-News test, the calibrated gain-distribution SCDG classifier predicts source reuse for only $0.125\%$ of pairs, supporting robustness to topical overlap under this evaluation protocol. These results establish SCDG as a unified and token-decomposable signal for source-specific content reuse under extensive transformation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-04T16:03:45Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Peijia Guo</name>
+    </author>
+    <author>
+      <name>Wenxuan Xie</name>
+    </author>
+    <author>
+      <name>ZiGuang Li</name>
+    </author>
+    <author>
+      <name>Ming Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.22026v1</id>
+    <title>DWT-Fusion: A Signal-Based Framework for Training-Free LLM-Generated Text Detection</title>
+    <updated>2026-07-24T06:48:22Z</updated>
+    <link href="https://arxiv.org/abs/2607.22026v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.22026v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting LLM-generated text remains challenging under zero-shot and training-free conditions, especially when detectors must generalize across datasets, domains, and unseen generators. While existing training-free approaches exploit language-model statistics as detection signals, they typically characterize a text through global measures that summarize overall model behavior. Consequently, potentially informative local and multiscale variations in token-level predictability may remain underutilized. Motivated by this observation, we introduce DWT-Fusion, a training-free signal-based framework for detecting LLM-generated text using discrete wavelet analysis of token-level log-probability sequences produced by a proxy causal language model. The proposed framework analyzes these sequences through wavelet-based multiresolution signal representations and derives detection signals from localized probability dynamics. We further evaluate four training-free voting variants, including equal-weight hard voting, equal-weight soft voting, calibration-weighted hard voting, and calibration-weighted soft voting, to combine multiple wavelet configurations without training a supervised meta-classifier. We evaluate the framework on HC3, M4, and MAGE using GPT-Neo-2.7B, GPT-J-6B, Falcon-7B, and LLaMA-3-8B as proxy models. The best single wavelet configurations achieve AUROC values of 0.9872, 0.8185, and 0.7138 on HC3, M4, and MAGE, respectively. With calibration-weighted voting, the best ensemble variants further improve AUROC to 0.9919, 0.8477, and 0.7471. These findings show that DWT-based multiresolution scoring and calibration-guided voting fusion provide effective and interpretable signals for training-free LLM-generated text detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-24T06:48:22Z</published>
+    <arxiv:comment>40 pages, 4 figures, 6 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Mehmet Batuhan Özdaş</name>
+    </author>
+    <author>
+      <name>Murat Osmanoğlu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.14905v2</id>
+    <title>Show Me How You Reason and I'll Tell You Who You Are: Reasoning Graphs for Robust LLM Authorship Attribution</title>
+    <updated>2026-07-18T15:36:07Z</updated>
+    <link href="https://arxiv.org/abs/2607.14905v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.14905v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given the current trend to employ large language models (LLMs) in almost any imaginable context, LLM-generated text detection and authorship attribution have become a pressing issue. Prior work has primarily focused on surface-level linguistic features, an approach shown to be susceptible to paraphrasing and other obfuscation techniques. In this paper, we go beyond the linguistic surface, extracting and analysing reasoning structures in LLM-generated texts with the goal of capturing more complex signals of LLM authorship. We propose a graph neural network approach that leverages reasoning graphs extracted by an argument mining pipeline, demonstrating improved robustness and generalisation over a traditional Longformer baseline. Our approach outperforms the baseline by up to 27 percentage points under the obfuscation attacks such as paraphrasing and backtranslation, and 19 percentage points when evaluated on the texts generated by the unseen model versions, simulating real-world conditions in which new LLM versions are continuously released.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-16T12:25:16Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zlata Kikteva</name>
+    </author>
+    <author>
+      <name>Artur Romazanov</name>
+    </author>
+    <author>
+      <name>Annette Hautli-Janisz</name>
+    </author>
+    <author>
+      <name>Ramon Ruiz-Dolz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.23336v1</id>
+    <title>WaveDetect: Robust Framework for Machine-Generated Text Detection via Wavelet Transform</title>
+    <updated>2026-06-22T13:42:36Z</updated>
+    <link href="https://arxiv.org/abs/2606.23336v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.23336v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As Large Language Models asymptotically approach human-level fluency in natural language generation, solely relying on surface-level semantic artifacts for detecting LLM-generated texts has become increasingly precarious. Existing detectors often falter when facing three critical challenges: adversarial perturbations, cross-domain shifts, and the rapid temporal evolution of the foundation model. To address these issues, we propose \wavedetect, a novel framework that reformulates text detection as a signal processing task within the time-frequency domain. Unlike previous methods that analyze static token probability distributions, \wavedetect models the generated output as a probability signal, upon which a differentiable Continuous Wavelet Transform is applied to convert them into learnable spectral representations. This process reveals the intrinsic ``spectral fingerprints'' in machine-generated texts--patterns that remain invisible in time domain. Comprehensive evaluations on three well-curated datasets (RAID, EvoBench, and Domain-Shift) show that our method achieves a new state-of-the-art. It not only achieves superior accuracy but also exhibits remarkable robustness against sophisticated attacks, generalization across out-of-distribution topics and unseen evolving LLMs. Our results validate the efficacy of spectral analysis as a promising paradigm for LLM-generated texts detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-22T13:42:36Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhichen Liu</name>
+    </author>
+    <author>
+      <name>Kaitong Qin</name>
+    </author>
+    <author>
+      <name>Linhan He</name>
+    </author>
+    <author>
+      <name>Yang Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.00402v1</id>
+    <title>A Distribution-Free Framework for Rewrite-Based Human-text Detection via Knockoff Filtering</title>
+    <updated>2026-05-29T22:37:13Z</updated>
+    <link href="https://arxiv.org/abs/2606.00402v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.00402v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a distribution-free statistical framework that converts arbitrary rewrite-based detectors into detectors with finite-sample FDR guarantees without retraining. Our key observation is that rewrite-based detection implicitly constructs knockoff samples, enabling LLM-generated text detection to be formulated as a multiple hypothesis testing problem with knockoff structure. This perspective separates the design of detection statistics from the control of false discoveries, allowing existing rewrite detectors to inherit finite-sample false discovery rate (FDR) guarantees through a simple calibration procedure. We demonstrate reliable FDR control with meaningful detection power across three detection models, 19 domains, and four LLMs.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-29T22:37:13Z</published>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Yi Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.15518v2</id>
+    <title>DetectRL-X: Towards Reliable Multilingual and Real-World LLM-Generated Text Detection</title>
+    <updated>2026-05-19T03:31:23Z</updated>
+    <link href="https://arxiv.org/abs/2605.15518v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.15518v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The effective detection and governance of Large Language Model (LLM) generated content has become increasingly critical due to the growing risk of misuse. Despite the impressive performance of existing detectors, their reliability and potential in multilingual, real-world scenarios remain largely underexplored. In this study, we introduce DetectRL-X, a comprehensive multilingual benchmark designed to evaluate advanced detectors across 8 dimensions. The benchmark encompasses 8 languages commonly used in commercial contexts and collects human-written texts from 6 domains highly susceptible to LLM misuse. To better aligned with real-world applications, We create LLM-generated texts using 4 popular commercial LLMs, and include typical AI-assisted writing operations such as polishing, expanding, and condensing to capture authentic usage patterns. Furthermore, we develop a multilingual framework for paraphrasing and perturbation attacks to simulate diverse human modifications and writing noise, enabling stress testing of detectors across languages. Experimental results on DetectRL-X reveal the strengths and limitations of current state-of-the-art detectors when applied to diverse linguistic resources. We further analyze how domains, generators, attack strategies, text length, and refinement operations influence performance in different languages, underscoring DetectRL-X as an effective benchmark for strengthening multilingual and language-specific detectors.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-15T01:29:26Z</published>
+    <arxiv:comment>ACL 2026 Main. Code and data are available at https://github.com/AIDC-AI/Marco-LLM/tree/main/DetectRL-X</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Junchao Wu</name>
+    </author>
+    <author>
+      <name>Yefeng Liu</name>
+    </author>
+    <author>
+      <name>Chenyu Zhu</name>
+    </author>
+    <author>
+      <name>Hao Zhang</name>
+    </author>
+    <author>
+      <name>Zeyu Wu</name>
+    </author>
+    <author>
+      <name>Tianqi Shi</name>
+    </author>
+    <author>
+      <name>Yichao Du</name>
+    </author>
+    <author>
+      <name>Longyue Wang</name>
+    </author>
+    <author>
+      <name>Weihua Luo</name>
+    </author>
+    <author>
+      <name>Jinsong Su</name>
+    </author>
+    <author>
+      <name>Derek F. Wong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.03723v2</id>
+    <title>Segmenting Human-LLM Co-authored Text via Change Point Detection</title>
+    <updated>2026-07-16T12:42:56Z</updated>
+    <link href="https://arxiv.org/abs/2605.03723v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.03723v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rise of large language models (LLMs) has created an urgent need to distinguish between human-written and LLM-generated text to ensure authenticity and societal trust. Existing detectors typically provide a binary classification for an entire passage; however, this is insufficient for human--LLM co-authored text, where the objective is to localize specific segments authored by humans or LLMs. To bridge this gap, we propose algorithms to segment text into human- and LLM-authored pieces. Our key observation is that such a segmentation task is conceptually similar to classical change point detection in time-series analysis. Leveraging this analogy, we adapt change point detection to LLM-generated text detection, develop a weighted algorithm and a generalized algorithm to accommodate heterogeneous detection score variability, and establish the minimax optimality of our procedure. Empirically, we demonstrate the strong performance of our approach against a wide range of existing baselines. The python implementation of our proposal is available at https://github.com/Mamba413/DetectLLMSegmentation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-05T13:08:55Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Mengchu Li</name>
+    </author>
+    <author>
+      <name>Jin Zhu</name>
+    </author>
+    <author>
+      <name>Jinglai Li</name>
+    </author>
+    <author>
+      <name>Chengchun Shi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.21223v1</id>
+    <title>Zero-Shot Detection of LLM-Generated Text via Implicit Reward Model</title>
+    <updated>2026-04-23T02:37:34Z</updated>
+    <link href="https://arxiv.org/abs/2604.21223v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.21223v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have demonstrated remarkable capabilities across various tasks. However, their ability to generate human-like text has raised concerns about potential misuse. This underscores the need for reliable and effective methods to detect LLM-generated text. In this paper, we propose IRM, a novel zero-shot approach that leverages Implicit Reward Models for LLM-generated text detection. Such implicit reward models can be derived from publicly available instruction-tuned and base models. Previous reward-based method relies on preference construction and task-specific fine-tuning. In comparison, IRM requires neither preference collection nor additional training. We evaluate IRM on the DetectRL benchmark and demonstrate that IRM can achieve superior detection performance, outperforms existing zero-shot and supervised methods in LLM-generated text detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-23T02:37:34Z</published>
+    <arxiv:comment>NeurIPS 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Runheng Liu</name>
+    </author>
+    <author>
+      <name>Heyan Huang</name>
+    </author>
+    <author>
+      <name>Xingchen Xiao</name>
+    </author>
+    <author>
+      <name>Zhijing Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.04932v3</id>
+    <title>Beyond the Final Actor: Modeling the Dual Roles of Creator and Editor for Fine-Grained LLM-Generated Text Detection</title>
+    <updated>2026-05-18T06:23:00Z</updated>
+    <link href="https://arxiv.org/abs/2604.04932v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.04932v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The misuse of large language models (LLMs) requires precise detection of synthetic text. Existing works mainly follow binary or ternary classification settings, which can only distinguish pure human/LLM text or collaborative text at best. This remains insufficient for the nuanced regulation, as the LLM-polished human text and humanized LLM text often trigger different policy consequences. In this paper, we explore fine-grained LLM-generated text detection under a rigorous four-class setting. To handle such complexities, we propose RACE (Rhetorical Analysis for Creator-Editor Modeling), a fine-grained detection method that characterizes the distinct signatures of creator and editor. Specifically, RACE utilizes Rhetorical Structure Theory (RST) to construct a logic graph for the creator's foundation while extracting Elementary Discourse Unit (EDU)-level features for the editor's style. Experiments show that RACE outperforms 12 baselines in identifying fine-grained types with low false alarms, offering a policy-aligned solution for LLM regulation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-06T17:59:55Z</published>
+    <arxiv:comment>ACL 2026 (Oral)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yang Li</name>
+    </author>
+    <author>
+      <name>Qiang Sheng</name>
+    </author>
+    <author>
+      <name>Zhengjia Wang</name>
+    </author>
+    <author>
+      <name>Yehan Yang</name>
+    </author>
+    <author>
+      <name>Danding Wang</name>
+    </author>
+    <author>
+      <name>Juan Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.02008v1</id>
+    <title>$k$NNProxy: Efficient Training-Free Proxy Alignment for Black-Box Zero-Shot LLM-Generated Text Detection</title>
+    <updated>2026-04-02T13:11:06Z</updated>
+    <link href="https://arxiv.org/abs/2604.02008v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.02008v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM-generated text (LGT) detection is essential for reliable forensic analysis and for mitigating LLM misuse. Existing LGT detectors can generally be categorized into two broad classes: learning-based approaches and zero-shot methods. Compared with learning-based detectors, zero-shot methods are particularly promising because they eliminate the need to train task-specific classifiers. However, the reliability of zero-shot methods fundamentally relies on the assumption that an off-the-shelf proxy LLM is well aligned with the often unknown source LLM, a premise that rarely holds in real-world black-box scenarios. To address this discrepancy, existing proxy alignment methods typically rely on supervised fine-tuning of the proxy or repeated interactions with commercial APIs, thereby increasing deployment costs, exposing detectors to silent API changes, and limiting robustness under domain shift. Motivated by these limitations, we propose the $k$-nearest neighbor proxy ($k$NNProxy), a training-free and query-efficient proxy alignment framework that repurposes the $k$NN language model ($k$NN-LM) retrieval mechanism as a domain adapter for a fixed proxy LLM. Specifically, a lightweight datastore is constructed once from a target-reflective LGT corpus, either via fixed-budget querying or from existing datasets. During inference, nearest-neighbor evidence induces a token-level predictive distribution that is interpolated with the proxy output, yielding an aligned prediction without proxy fine-tuning or per-token API outputs. To improve robustness under domain shift, we extend $k$NNProxy into a mixture of proxies (MoP) that routes each input to a domain-specific datastore for domain-consistent retrieval. Extensive experiments demonstrate strong detection performance of our method.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-02T13:11:06Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kahim Wong</name>
+    </author>
+    <author>
+      <name>Kemou Li</name>
+    </author>
+    <author>
+      <name>Haiwei Wu</name>
+    </author>
+    <author>
+      <name>Jiantao Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.27949v1</id>
+    <title>EnsemJudge: Enhancing Reliability in Chinese LLM-Generated Text Detection through Diverse Model Ensembles</title>
+    <updated>2026-03-30T01:50:46Z</updated>
+    <link href="https://arxiv.org/abs/2603.27949v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.27949v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) are widely applied across various domains due to their powerful text generation capabilities. While LLM-generated texts often resemble human-written ones, their misuse can lead to significant societal risks. Detecting such texts is an essential technique for mitigating LLM misuse, and many detection methods have shown promising results across different datasets. However, real-world scenarios often involve out-of-domain inputs or adversarial samples, which can affect the performance of detection methods to varying degrees. Furthermore, most existing research has focused on English texts, with limited work addressing Chinese text detection. In this study, we propose EnsemJudge, a robust framework for detecting Chinese LLM-generated text by incorporating tailored strategies and ensemble voting mechanisms. We trained and evaluated our system on a carefully constructed Chinese dataset provided by NLPCC2025 Shared Task 1. Our approach outperformed all baseline methods and achieved first place in the task, demonstrating its effectiveness and reliability in Chinese LLM-generated text detection. Our code is available at https://github.com/johnsonwangzs/MGT-Mini.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-30T01:50:46Z</published>
+    <arxiv:comment>Accepted by NLPCC 2025 Shared Tasks</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhuoshang Wang</name>
+    </author>
+    <author>
+      <name>Yubing Ren</name>
+    </author>
+    <author>
+      <name>Guoyu Zhao</name>
+    </author>
+    <author>
+      <name>Xiaowei Zhu</name>
+    </author>
+    <author>
+      <name>Hao Li</name>
+    </author>
+    <author>
+      <name>Yanan Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.19768v1</id>
+    <title>Saying More Than They Know: A Framework for Quantifying Epistemic-Rhetorical Miscalibration in Large Language Models</title>
+    <updated>2026-03-27T05:33:10Z</updated>
+    <link href="https://arxiv.org/abs/2604.19768v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.19768v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) exhibit systematic miscalibration with rhetorical intensity not proportionate to epistemic grounding. This study tests this hypothesis and proposes a framework for quantifying this decoupling by designing a triadic epistemic-rhetorical marker (ERM) taxonomy. The taxonomy is operationalized through composite metrics of form-meaning divergence (FMD), genuine-to-performed epistemic ratio (GPR), and rhetorical device distribution entropy (RDDE). Applied to 225 argumentative texts spanning approximately 0.6 Million tokens across human expert, human non-expert, and LLM-generated sub-corpora, the framework identifies a consistent, model-agnostic LLM epistemic signature. LLM-generated texts produce tricolon at nearly twice the expert rate ($Δ= 0.95$), while human authors produce erotema at more than twice the LLM rate. Performed hesitancy markers appear at twice the human density in LLM output. FMD is significantly elevated in LLM texts relative to both human groups ($p &lt; 0.001, Δ= 0.68$), and rhetorical devices are distributed significantly more uniformly across LLM documents. The findings are consistent with theoretical intuitions derived from Gricean pragmatics, Relevance Theory, and Brandomian inferentialism. The annotation pipeline is fully automatable, making it deployable as a lightweight screening tool for epistemic miscalibration in AI-generated content and as a theoretically motivated feature set for LLM-generated text detection pipelines.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-27T05:33:10Z</published>
+    <arxiv:comment>19 pages, 7 figures, Paper Under Review by the Elsevier Journal Assessing Writing</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Asim D. Bakhshi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.01240v1</id>
+    <title>Minimizing Mismatch Risk: A Prototype-Based Routing Framework for Zero-shot LLM-generated Text Detection</title>
+    <updated>2026-02-01T14:02:51Z</updated>
+    <link href="https://arxiv.org/abs/2602.01240v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.01240v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Zero-shot methods detect LLM-generated text by computing statistical signatures using a surrogate model. Existing approaches typically employ a fixed surrogate for all inputs regardless of the unknown source. We systematically examine this design and find that detection performance varies substantially depending on surrogate-source alignment. We observe that while no single surrogate achieves optimal performance universally, a well-matched surrogate typically exists within a diverse pool for any given input. This finding transforms robust detection into a routing problem: selecting the most appropriate surrogate for each input. We propose DetectRouter, a prototype-based framework that learns text-detector affinity through two-stage training. The first stage constructs discriminative prototypes from white-box models; the second generalizes to black-box sources by aligning geometric distances with observed detection scores. Experiments on EvoBench and MAGE benchmarks demonstrate consistent improvements across multiple detection criteria and model families.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-01T14:02:51Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ke Sun</name>
+    </author>
+    <author>
+      <name>Guangsheng Bao</name>
+    </author>
+    <author>
+      <name>Han Cui</name>
+    </author>
+    <author>
+      <name>Yue Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.13226v1</id>
+    <title>Variation is the Key: A Variation-Based Framework for LLM-Generated Text Detection</title>
+    <updated>2026-01-27T05:48:39Z</updated>
+    <link href="https://arxiv.org/abs/2602.13226v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.13226v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting text generated by large language models (LLMs) is crucial but challenging. Existing detectors depend on impractical assumptions, such as white-box settings, or solely rely on text-level features, leading to imprecise detection ability. In this paper, we propose a simple but effective and practical LLM-generated text detection method, VaryBalance. The core of VaryBalance is that, compared to LLM-generated texts, there is a greater difference between human texts and their rewritten version via LLMs. Leveraging this observation, VaryBalance quantifies this through mean standard deviation and distinguishes human texts and LLM-generated texts. Comprehensive experiments demonstrated that VaryBalance outperforms the state-of-the-art detectors, i.e., Binoculars, by up to 34.3\% in terms of AUROC, and maintains robustness against multiple generating models and languages.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-27T05:48:39Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Xuecong Li</name>
+    </author>
+    <author>
+      <name>Xiaohong Li</name>
+    </author>
+    <author>
+      <name>Qiang Hu</name>
+    </author>
+    <author>
+      <name>Yao Zhang</name>
+    </author>
+    <author>
+      <name>Junjie Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.12608v1</id>
+    <title>StyleDecipher: Robust and Explainable Detection of LLM-Generated Texts with Stylistic Analysis</title>
+    <updated>2025-10-14T15:07:27Z</updated>
+    <link href="https://arxiv.org/abs/2510.12608v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.12608v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the increasing integration of large language models (LLMs) into open-domain writing, detecting machine-generated text has become a critical task for ensuring content authenticity and trust. Existing approaches rely on statistical discrepancies or model-specific heuristics to distinguish between LLM-generated and human-written text. However, these methods struggle in real-world scenarios due to limited generalization, vulnerability to paraphrasing, and lack of explainability, particularly when facing stylistic diversity or hybrid human-AI authorship. In this work, we propose StyleDecipher, a robust and explainable detection framework that revisits LLM-generated text detection using combined feature extractors to quantify stylistic differences. By jointly modeling discrete stylistic indicators and continuous stylistic representations derived from semantic embeddings, StyleDecipher captures distinctive style-level divergences between human and LLM outputs within a unified representation space. This framework enables accurate, explainable, and domain-agnostic detection without requiring access to model internals or labeled segments. Extensive experiments across five diverse domains, including news, code, essays, reviews, and academic abstracts, demonstrate that StyleDecipher consistently achieves state-of-the-art in-domain accuracy. Moreover, in cross-domain evaluations, it surpasses existing baselines by up to 36.30%, while maintaining robustness against adversarial perturbations and mixed human-AI content. Further qualitative and quantitative analysis confirms that stylistic signals provide explainable evidence for distinguishing machine-generated text. Our source code can be accessed at https://github.com/SiyuanLi00/StyleDecipher.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-14T15:07:27Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Siyuan Li</name>
+    </author>
+    <author>
+      <name>Aodu Wulianghai</name>
+    </author>
+    <author>
+      <name>Xi Lin</name>
+    </author>
+    <author>
+      <name>Guangyan Li</name>
+    </author>
+    <author>
+      <name>Xiang Chen</name>
+    </author>
+    <author>
+      <name>Jun Wu</name>
+    </author>
+    <author>
+      <name>Jianhua Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.03502v2</id>
+    <title>ALHD: A Large-Scale and Multigenre Benchmark Dataset for Arabic LLM-Generated Text Detection</title>
+    <updated>2025-10-21T20:12:50Z</updated>
+    <link href="https://arxiv.org/abs/2510.03502v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.03502v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce ALHD, the first large-scale comprehensive Arabic dataset explicitly designed to distinguish between human- and LLM-generated texts. ALHD spans three genres (news, social media, reviews), covering both MSA and dialectal Arabic, and contains over 400K balanced samples generated by three leading LLMs and originated from multiple human sources, which enables studying generalizability in Arabic LLM-genearted text detection. We provide rigorous preprocessing, rich annotations, and standardized balanced splits to support reproducibility. In addition, we present, analyze and discuss benchmark experiments using our new dataset, in turn identifying gaps and proposing future research directions. Benchmarking across traditional classifiers, BERT-based models, and LLMs (zero-shot and few-shot) demonstrates that fine-tuned BERT models achieve competitive performance, outperforming LLM-based models. Results are however not always consistent, as we observe challenges when generalizing across genres; indeed, models struggle to generalize when they need to deal with unseen patterns in cross-genre settings, and these challenges are particularly prominent when dealing with news articles, where LLM-generated texts resemble human texts in style, which opens up avenues for future research. ALHD establishes a foundation for research related to Arabic LLM-detection and mitigating risks of misinformation, academic dishonesty, and cyber threats.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-03T20:27:45Z</published>
+    <arxiv:comment>47 pages, 15 figures. Dataset available at Zenodo: https://doi.org/10.5281/zenodo.17249602 Codebase available at GitHub: https://github.com/alikhairallah/ALHD-Benchmarking</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ali Khairallah</name>
+    </author>
+    <author>
+      <name>Arkaitz Zubiaga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.25154v1</id>
+    <title>Who's Your Judge? On the Detectability of LLM-Generated Judgments</title>
+    <updated>2025-09-29T17:54:57Z</updated>
+    <link href="https://arxiv.org/abs/2509.25154v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.25154v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Model (LLM)-based judgments leverage powerful LLMs to efficiently evaluate candidate content and provide judgment scores. However, the inherent biases and vulnerabilities of LLM-generated judgments raise concerns, underscoring the urgent need for distinguishing them in sensitive scenarios like academic peer reviewing. In this work, we propose and formalize the task of judgment detection and systematically investigate the detectability of LLM-generated judgments. Unlike LLM-generated text detection, judgment detection relies solely on judgment scores and candidates, reflecting real-world scenarios where textual feedback is often unavailable in the detection process. Our preliminary analysis shows that existing LLM-generated text detection methods perform poorly given their incapability to capture the interaction between judgment scores and candidate content -- an aspect crucial for effective judgment detection. Inspired by this, we introduce \textit{J-Detector}, a lightweight and transparent neural detector augmented with explicitly extracted linguistic and LLM-enhanced features to link LLM judges' biases with candidates' properties for accurate detection. Experiments across diverse datasets demonstrate the effectiveness of \textit{J-Detector} and show how its interpretability enables quantifying biases in LLM judges. Finally, we analyze key factors affecting the detectability of LLM-generated judgments and validate the practical utility of judgment detection in real-world scenarios.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-29T17:54:57Z</published>
+    <arxiv:comment>Under review</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Dawei Li</name>
+    </author>
+    <author>
+      <name>Zhen Tan</name>
+    </author>
+    <author>
+      <name>Chengshuai Zhao</name>
+    </author>
+    <author>
+      <name>Bohan Jiang</name>
+    </author>
+    <author>
+      <name>Baixiang Huang</name>
+    </author>
+    <author>
+      <name>Pingchuan Ma</name>
+    </author>
+    <author>
+      <name>Abdullah Alnaibari</name>
+    </author>
+    <author>
+      <name>Kai Shu</name>
+    </author>
+    <author>
+      <name>Huan Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.11343v3</id>
+    <title>SpecDetect: Simple, Fast, and Training-Free Detection of LLM-Generated Text via Spectral Analysis</title>
+    <updated>2026-01-12T07:11:14Z</updated>
+    <link href="https://arxiv.org/abs/2508.11343v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.11343v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The proliferation of high-quality text from Large Language Models (LLMs) demands reliable and efficient detection methods. While existing training-free approaches show promise, they often rely on surface-level statistics and overlook fundamental signal properties of the text generation process. In this work, we reframe detection as a signal processing problem, introducing a novel paradigm that analyzes the sequence of token log-probabilities in the frequency domain. By systematically analyzing the signal's spectral properties using the global Discrete Fourier Transform (DFT) and the local Short-Time Fourier Transform (STFT), we find that human-written text consistently exhibits significantly higher spectral energy. This higher energy reflects the larger-amplitude fluctuations inherent in human writing compared to the suppressed dynamics of LLM-generated text. Based on this key insight, we construct SpecDetect, a detector built on a single, robust feature from the global DFT: DFT total energy. We also propose an enhanced version, SpecDetect++, which incorporates a sampling discrepancy mechanism to further boost robustness. Extensive experiments show that our approach outperforms the state-of-the-art model while running in nearly half the time. Our work introduces a new, efficient, and interpretable pathway for LLM-generated text detection, showing that classical signal processing techniques offer a surprisingly powerful solution to this modern challenge.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-15T09:13:42Z</published>
+    <arxiv:comment>AAAI'26 Oral</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Haitong Luo</name>
+    </author>
+    <author>
+      <name>Weiyao Zhang</name>
+    </author>
+    <author>
+      <name>Suhang Wang</name>
+    </author>
+    <author>
+      <name>Wenji Zou</name>
+    </author>
+    <author>
+      <name>Chungang Lin</name>
+    </author>
+    <author>
+      <name>Xuying Meng</name>
+    </author>
+    <author>
+      <name>Yujun Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.06913v1</id>
+    <title>Model-Agnostic Sentiment Distribution Stability Analysis for Robust LLM-Generated Texts Detection</title>
+    <updated>2025-08-09T09:55:47Z</updated>
+    <link href="https://arxiv.org/abs/2508.06913v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.06913v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid advancement of large language models (LLMs) has resulted in increasingly sophisticated AI-generated content, posing significant challenges in distinguishing LLM-generated text from human-written language. Existing detection methods, primarily based on lexical heuristics or fine-tuned classifiers, often suffer from limited generalizability and are vulnerable to paraphrasing, adversarial perturbations, and cross-domain shifts. In this work, we propose SentiDetect, a model-agnostic framework for detecting LLM-generated text by analyzing the divergence in sentiment distribution stability. Our method is motivated by the empirical observation that LLM outputs tend to exhibit emotionally consistent patterns, whereas human-written texts display greater emotional variability. To capture this phenomenon, we define two complementary metrics: sentiment distribution consistency and sentiment distribution preservation, which quantify stability under sentiment-altering and semantic-preserving transformations. We evaluate SentiDetect on five diverse datasets and a range of advanced LLMs,including Gemini-1.5-Pro, Claude-3, GPT-4-0613, and LLaMa-3.3. Experimental results demonstrate its superiority over state-of-the-art baselines, with over 16% and 11% F1 score improvements on Gemini-1.5-Pro and GPT-4-0613, respectively. Moreover, SentiDetect also shows greater robustness to paraphrasing, adversarial attacks, and text length variations, outperforming existing detectors in challenging scenarios.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-09T09:55:47Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Siyuan Li</name>
+    </author>
+    <author>
+      <name>Xi Lin</name>
+    </author>
+    <author>
+      <name>Guangyan Li</name>
+    </author>
+    <author>
+      <name>Zehao Liu</name>
+    </author>
+    <author>
+      <name>Aodu Wulianghai</name>
+    </author>
+    <author>
+      <name>Li Ding</name>
+    </author>
+    <author>
+      <name>Jun Wu</name>
+    </author>
+    <author>
+      <name>Jianhua Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.15286v1</id>
+    <title>Beyond Easy Wins: A Text Hardness-Aware Benchmark for LLM-generated Text Detection</title>
+    <updated>2025-07-21T06:37:27Z</updated>
+    <link href="https://arxiv.org/abs/2507.15286v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.15286v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a novel evaluation paradigm for AI text detectors that prioritizes real-world and equitable assessment. Current approaches predominantly report conventional metrics like AUROC, overlooking that even modest false positive rates constitute a critical impediment to practical deployment of detection systems. Furthermore, real-world deployment necessitates predetermined threshold configuration, making detector stability (i.e. the maintenance of consistent performance across diverse domains and adversarial scenarios), a critical factor. These aspects have been largely ignored in previous research and benchmarks. Our benchmark, SHIELD, addresses these limitations by integrating both reliability and stability factors into a unified evaluation metric designed for practical assessment. Furthermore, we develop a post-hoc, model-agnostic humanification framework that modifies AI text to more closely resemble human authorship, incorporating a controllable hardness parameter. This hardness-aware approach effectively challenges current SOTA zero-shot detection methods in maintaining both reliability and stability. (Data and code: https://github.com/navid-aub/SHIELD-Benchmark)</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-21T06:37:27Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Navid Ayoobi</name>
+    </author>
+    <author>
+      <name>Sadat Shahriar</name>
+    </author>
+    <author>
+      <name>Arjun Mukherjee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.15683v1</id>
+    <title>PhantomHunter: Detecting Unseen Privately-Tuned LLM-Generated Text via Family-Aware Learning</title>
+    <updated>2025-06-18T17:59:58Z</updated>
+    <link href="https://arxiv.org/abs/2506.15683v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.15683v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the popularity of large language models (LLMs), undesirable societal problems like misinformation production and academic misconduct have been more severe, making LLM-generated text detection now of unprecedented importance. Although existing methods have made remarkable progress, a new challenge posed by text from privately tuned LLMs remains underexplored. Users could easily possess private LLMs by fine-tuning an open-source one with private corpora, resulting in a significant performance drop of existing detectors in practice. To address this issue, we propose PhantomHunter, an LLM-generated text detector specialized for detecting text from unseen, privately-tuned LLMs. Its family-aware learning framework captures family-level traits shared across the base models and their derivatives, instead of memorizing individual characteristics. Experiments on data from LLaMA, Gemma, and Mistral families show its superiority over 7 baselines and 3 industrial services, with F1 scores of over 96%.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-18T17:59:58Z</published>
+    <arxiv:comment>17 pages, 3 figures, 6 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yuhui Shi</name>
+    </author>
+    <author>
+      <name>Yehan Yang</name>
+    </author>
+    <author>
+      <name>Qiang Sheng</name>
+    </author>
+    <author>
+      <name>Hao Mi</name>
+    </author>
+    <author>
+      <name>Beizhe Hu</name>
+    </author>
+    <author>
+      <name>Chaoxi Xu</name>
+    </author>
+    <author>
+      <name>Juan Cao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.06705v1</id>
+    <title>DivScore: Zero-Shot Detection of LLM-Generated Text in Specialized Domains</title>
+    <updated>2025-06-07T08:03:35Z</updated>
+    <link href="https://arxiv.org/abs/2506.06705v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.06705v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting LLM-generated text in specialized and high-stakes domains like medicine and law is crucial for combating misinformation and ensuring authenticity. However, current zero-shot detectors, while effective on general text, often fail when applied to specialized content due to domain shift. We provide a theoretical analysis showing this failure is fundamentally linked to the KL divergence between human, detector, and source text distributions. To address this, we propose DivScore, a zero-shot detection framework using normalized entropy-based scoring and domain knowledge distillation to robustly identify LLM-generated text in specialized domains. We also release a domain-specific benchmark for LLM-generated text detection in the medical and legal domains. Experiments on our benchmark show that DivScore consistently outperforms state-of-the-art detectors, with 14.4% higher AUROC and 64.0% higher recall (0.1% false positive rate threshold). In adversarial settings, DivScore demonstrates superior robustness than other baselines, achieving on average 22.8% advantage in AUROC and 29.5% in recall. Code and data are publicly available.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-07T08:03:35Z</published>
+    <arxiv:comment>Zhihui Chen and Kai He contributed equally to this work, Mengling Feng is the corresponding author</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhihui Chen</name>
+    </author>
+    <author>
+      <name>Kai He</name>
+    </author>
+    <author>
+      <name>Yucheng Huang</name>
+    </author>
+    <author>
+      <name>Yunxiao Zhu</name>
+    </author>
+    <author>
+      <name>Mengling Feng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.02873v1</id>
+    <title>Short-PHD: Detecting Short LLM-generated Text with Topological Data Analysis After Off-topic Content Insertion</title>
+    <updated>2025-04-01T21:26:49Z</updated>
+    <link href="https://arxiv.org/abs/2504.02873v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.02873v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The malicious usage of large language models (LLMs) has motivated the detection of LLM-generated texts. Previous work in topological data analysis shows that the persistent homology dimension (PHD) of text embeddings can serve as a more robust and promising score than other zero-shot methods. However, effectively detecting short LLM-generated texts remains a challenge. This paper presents Short-PHD, a zero-shot LLM-generated text detection method tailored for short texts. Short-PHD stabilizes the estimation of the previous PHD method for short texts by inserting off-topic content before the given input text and identifies LLM-generated text based on an established detection threshold. Experimental results on both public and generated datasets demonstrate that Short-PHD outperforms existing zero-shot methods in short LLM-generated text detection. Implementation codes are available online.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-01T21:26:49Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Dongjun Wei</name>
+    </author>
+    <author>
+      <name>Minjia Mao</name>
+    </author>
+    <author>
+      <name>Xiao Fang</name>
+    </author>
+    <author>
+      <name>Michael Chau</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.00032v5</id>
+    <title>KatFishNet: Detecting LLM-Generated Korean Text through Linguistic Feature Analysis</title>
+    <updated>2025-09-19T04:46:10Z</updated>
+    <link href="https://arxiv.org/abs/2503.00032v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.00032v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid advancement of large language models (LLMs) increases the difficulty of distinguishing between human-written and LLM-generated text. Detecting LLM-generated text is crucial for upholding academic integrity, preventing plagiarism, protecting copyrights, and ensuring ethical research practices. Most prior studies on detecting LLM-generated text focus primarily on English text. However, languages with distinct morphological and syntactic characteristics require specialized detection approaches. Their unique structures and usage patterns can hinder the direct application of methods primarily designed for English. Among such languages, we focus on Korean, which has relatively flexible spacing rules, a rich morphological system, and less frequent comma usage compared to English. We introduce KatFish, the first benchmark dataset for detecting LLM-generated Korean text. The dataset consists of text written by humans and generated by four LLMs across three genres.
+  By examining spacing patterns, part-of-speech diversity, and comma usage, we illuminate the linguistic differences between human-written and LLM-generated Korean text. Building on these observations, we propose KatFishNet, a detection method specifically designed for the Korean language. KatFishNet achieves an average of 19.78% higher AUROC compared to the best-performing existing detection method. Our code and data are available at https://github.com/Shinwoo-Park/detecting_llm_generated_korean_text_through_linguistic_analysis.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-25T00:59:27Z</published>
+    <arxiv:comment>ACL 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shinwoo Park</name>
+    </author>
+    <author>
+      <name>Shubin Kim</name>
+    </author>
+    <author>
+      <name>Do-Kyung Kim</name>
+    </author>
+    <author>
+      <name>Yo-Sub Han</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.11506v2</id>
+    <title>Glimpse: Enabling White-Box Methods to Use Proprietary Models for Zero-Shot LLM-Generated Text Detection</title>
+    <updated>2025-02-19T07:37:55Z</updated>
+    <link href="https://arxiv.org/abs/2412.11506v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.11506v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Advanced large language models (LLMs) can generate text almost indistinguishable from human-written text, highlighting the importance of LLM-generated text detection. However, current zero-shot techniques face challenges as white-box methods are restricted to use weaker open-source LLMs, and black-box methods are limited by partial observation from stronger proprietary LLMs. It seems impossible to enable white-box methods to use proprietary models because API-level access to the models neither provides full predictive distributions nor inner embeddings. To traverse the divide, we propose **Glimpse**, a probability distribution estimation approach, predicting the full distributions from partial observations. Despite the simplicity of Glimpse, we successfully extend white-box methods like Entropy, Rank, Log-Rank, and Fast-DetectGPT to latest proprietary models. Experiments show that Glimpse with Fast-DetectGPT and GPT-3.5 achieves an average AUROC of about 0.95 in five latest source models, improving the score by 51% relative to the remaining space of the open source baseline. It demonstrates that the latest LLMs can effectively detect their own outputs, suggesting that advanced LLMs may be the best shield against themselves. We release our code and data at https://github.com/baoguangsheng/glimpse.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-16T07:28:36Z</published>
+    <arxiv:comment>ICLR 2025 camera version (10 pages, 9 figures, 9 tables)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Guangsheng Bao</name>
+    </author>
+    <author>
+      <name>Yanbin Zhao</name>
+    </author>
+    <author>
+      <name>Juncai He</name>
+    </author>
+    <author>
+      <name>Yue Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.06248v1</id>
+    <title>Robust Detection of LLM-Generated Text: A Comparative Analysis</title>
+    <updated>2024-11-09T18:27:15Z</updated>
+    <link href="https://arxiv.org/abs/2411.06248v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.06248v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The ability of large language models to generate complex texts allows them to be widely integrated into many aspects of life, and their output can quickly fill all network resources. As the impact of LLMs grows, it becomes increasingly important to develop powerful detectors for the generated text. This detector is essential to prevent the potential misuse of these technologies and to protect areas such as social media from the negative effects of false content generated by LLMS. The main goal of LLM-generated text detection is to determine whether text is generated by an LLM, which is a basic binary classification task. In our work, we mainly use three different classification methods based on open source datasets: traditional machine learning techniques such as logistic regression, k-means clustering, Gaussian Naive Bayes, support vector machines, and methods based on converters such as BERT, and finally algorithms that use LLMs to detect LLM-generated text. We focus on model generalization, potential adversarial attacks, and accuracy of model evaluation. Finally, the possible research direction in the future is proposed, and the current experimental results are summarized.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-09T18:27:15Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yongye Su</name>
+    </author>
+    <author>
+      <name>Yuqing Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.03806v1</id>
+    <title>Understanding the Effects of Human-written Paraphrases in LLM-generated Text Detection</title>
+    <updated>2024-11-06T10:06:21Z</updated>
+    <link href="https://arxiv.org/abs/2411.03806v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.03806v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Natural Language Generation has been rapidly developing with the advent of large language models (LLMs). While their usage has sparked significant attention from the general public, it is important for readers to be aware when a piece of text is LLM-generated. This has brought about the need for building models that enable automated LLM-generated text detection, with the aim of mitigating potential negative outcomes of such content. Existing LLM-generated detectors show competitive performances in telling apart LLM-generated and human-written text, but this performance is likely to deteriorate when paraphrased texts are considered. In this study, we devise a new data collection strategy to collect Human &amp; LLM Paraphrase Collection (HLPC), a first-of-its-kind dataset that incorporates human-written texts and paraphrases, as well as LLM-generated texts and paraphrases. With the aim of understanding the effects of human-written paraphrases on the performance of state-of-the-art LLM-generated text detectors OpenAI RoBERTa and watermark detectors, we perform classification experiments that incorporate human-written paraphrases, watermarked and non-watermarked LLM-generated documents from GPT and OPT, and LLM-generated paraphrases from DIPPER and BART. The results show that the inclusion of human-written paraphrases has a significant impact of LLM-generated detector performance, promoting TPR@1%FPR with a possible trade-off of AUROC and accuracy.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-06T10:06:21Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hiu Ting Lau</name>
+    </author>
+    <author>
+      <name>Arkaitz Zubiaga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.23746v3</id>
+    <title>DetectRL: Benchmarking LLM-Generated Text Detection in Real-World Scenarios</title>
+    <updated>2025-03-12T10:08:22Z</updated>
+    <link href="https://arxiv.org/abs/2410.23746v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.23746v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting text generated by large language models (LLMs) is of great recent interest. With zero-shot methods like DetectGPT, detection capabilities have reached impressive levels. However, the reliability of existing detectors in real-world applications remains underexplored. In this study, we present a new benchmark, DetectRL, highlighting that even state-of-the-art (SOTA) detection techniques still underperformed in this task. We collected human-written datasets from domains where LLMs are particularly prone to misuse. Using popular LLMs, we generated data that better aligns with real-world applications. Unlike previous studies, we employed heuristic rules to create adversarial LLM-generated text, simulating various prompts usages, human revisions like word substitutions, and writing noises like spelling mistakes. Our development of DetectRL reveals the strengths and limitations of current SOTA detectors. More importantly, we analyzed the potential impact of writing styles, model types, attack methods, the text lengths, and real-world human writing factors on different types of detectors. We believe DetectRL could serve as an effective benchmark for assessing detectors in real-world scenarios, evolving with advanced attack methods, thus providing more stressful evaluation to drive the development of more efficient detectors. Data and code are publicly available at: https://github.com/NLP2CT/DetectRL.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-31T09:01:25Z</published>
+    <arxiv:comment>Accepted to NeurIPS 2024 Datasets and Benchmarks Track (Camera-Ready)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Junchao Wu</name>
+    </author>
+    <author>
+      <name>Runzhe Zhan</name>
+    </author>
+    <author>
+      <name>Derek F. Wong</name>
+    </author>
+    <author>
+      <name>Shu Yang</name>
+    </author>
+    <author>
+      <name>Xinyi Yang</name>
+    </author>
+    <author>
+      <name>Yulin Yuan</name>
+    </author>
+    <author>
+      <name>Lidia S. Chao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.14259v2</id>
+    <title>Beyond Binary: Towards Fine-Grained LLM-Generated Text Detection via Role Recognition and Involvement Measurement</title>
+    <updated>2025-02-06T06:19:10Z</updated>
+    <link href="https://arxiv.org/abs/2410.14259v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.14259v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid development of large language models (LLMs), like ChatGPT, has resulted in the widespread presence of LLM-generated content on social media platforms, raising concerns about misinformation, data biases, and privacy violations, which can undermine trust in online discourse. While detecting LLM-generated content is crucial for mitigating these risks, current methods often focus on binary classification, failing to address the complexities of real-world scenarios like human-LLM collaboration. To move beyond binary classification and address these challenges, we propose a new paradigm for detecting LLM-generated content. This approach introduces two novel tasks: LLM Role Recognition (LLM-RR), a multi-class classification task that identifies specific roles of LLM in content generation, and LLM Influence Measurement (LLM-IM), a regression task that quantifies the extent of LLM involvement in content creation. To support these tasks, we propose LLMDetect, a benchmark designed to evaluate detectors' performance on these new tasks. LLMDetect includes the Hybrid News Detection Corpus (HNDC) for training detectors, as well as DetectEval, a comprehensive evaluation suite that considers five distinct cross-context variations and two multi-intensity variations within the same LLM role. This allows for a thorough assessment of detectors' generalization and robustness across diverse contexts. Our empirical validation of 10 baseline detection methods demonstrates that fine-tuned PLM-based models consistently outperform others on both tasks, while advanced LLMs face challenges in accurately detecting their own generated content. Our experimental results and analysis offer insights for developing more effective detection models for LLM-generated content. This research enhances the understanding of LLM-generated content and establishes a foundation for more nuanced detection methodologies.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-18T08:14:10Z</published>
+    <arxiv:comment>Social Media, Large Language Models, LLM-generated Text Detection, AI-assisted News Detection; Accepted by WWW2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Proceedings of the ACM Web Conference 2025 (WWW '25), April 28-May 2, 2025, Sydney, NSW, Australia</arxiv:journal_ref>
+    <author>
+      <name>Zihao Cheng</name>
+    </author>
+    <author>
+      <name>Li Zhou</name>
+    </author>
+    <author>
+      <name>Feng Jiang</name>
+    </author>
+    <author>
+      <name>Benyou Wang</name>
+    </author>
+    <author>
+      <name>Haizhou Li</name>
+    </author>
+    <arxiv:doi>10.1145/3696410.3714770</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3696410.3714770" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.06072v1</id>
+    <title>Training-free LLM-generated Text Detection by Mining Token Probability Sequences</title>
+    <updated>2024-10-08T14:23:45Z</updated>
+    <link href="https://arxiv.org/abs/2410.06072v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.06072v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have demonstrated remarkable capabilities in generating high-quality texts across diverse domains. However, the potential misuse of LLMs has raised significant concerns, underscoring the urgent need for reliable detection of LLM-generated texts. Conventional training-based detectors often struggle with generalization, particularly in cross-domain and cross-model scenarios. In contrast, training-free methods, which focus on inherent discrepancies through carefully designed statistical features, offer improved generalization and interpretability. Despite this, existing training-free detection methods typically rely on global text sequence statistics, neglecting the modeling of local discriminative features, thereby limiting their detection efficacy. In this work, we introduce a novel training-free detector, termed \textbf{Lastde} that synergizes local and global statistics for enhanced detection. For the first time, we introduce time series analysis to LLM-generated text detection, capturing the temporal dynamics of token probability sequences. By integrating these local statistics with global ones, our detector reveals significant disparities between human and LLM-generated texts. We also propose an efficient alternative, \textbf{Lastde++} to enable real-time detection. Extensive experiments on six datasets involving cross-domain, cross-model, and cross-lingual detection scenarios, under both white-box and black-box settings, demonstrated that our method consistently achieves state-of-the-art performance. Furthermore, our approach exhibits greater robustness against paraphrasing attacks compared to existing baseline methods.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-08T14:23:45Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yihuai Xu</name>
+    </author>
+    <author>
+      <name>Yongwei Wang</name>
+    </author>
+    <author>
+      <name>Yifei Bi</name>
+    </author>
+    <author>
+      <name>Huangsen Cao</name>
+    </author>
+    <author>
+      <name>Zhouhan Lin</name>
+    </author>
+    <author>
+      <name>Yu Zhao</name>
+    </author>
+    <author>
+      <name>Fei Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.08946v3</id>
+    <title>Authorship Attribution in the Era of LLMs: Problems, Methodologies, and Challenges</title>
+    <updated>2026-05-26T01:00:46Z</updated>
+    <link href="https://arxiv.org/abs/2408.08946v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.08946v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate attribution of authorship is crucial for maintaining the integrity of digital content, improving forensic investigations, and mitigating the risks of misinformation and plagiarism. Addressing the imperative need for proper authorship attribution is essential to uphold the credibility and accountability of authentic authorship. The rapid advancements of Large Language Models (LLMs) have blurred the lines between human and machine authorship, posing significant challenges for traditional methods. We present a comprehensive literature review that examines the latest research on authorship attribution in the era of LLMs. This survey systematically explores the landscape of this field by categorizing four representative problems: (1) Human-written Text Attribution; (2) LLM-generated Text Detection; (3) LLM-generated Text Attribution; and (4) Human-LLM Co-authored Text Attribution. We also discuss the challenges related to ensuring the generalization and explainability of authorship attribution methods. Generalization requires the ability to generalize across various domains, while explainability emphasizes providing transparent and understandable insights into the decisions made by these models. By evaluating the strengths and limitations of existing methods and benchmarks, we identify key open problems and future research directions in this field. This literature review serves as a roadmap for researchers and practitioners interested in understanding the state of the art in this rapidly evolving field.</summary>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-16T17:58:49Z</published>
+    <arxiv:comment>ACM SIGKDD Exploration. 12 pages. Additional resources, including a regularly updated list of related papers, and LLM-generated text detectors, are available at https://llm-authorship.github.io</arxiv:comment>
+    <arxiv:primary_category term="cs.CY"/>
+    <author>
+      <name>Baixiang Huang</name>
+    </author>
+    <author>
+      <name>Canyu Chen</name>
+    </author>
+    <author>
+      <name>Kai Shu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.04237v2</id>
+    <title>Learning to Rewrite: Generalized LLM-Generated Text Detection</title>
+    <updated>2025-02-15T04:11:44Z</updated>
+    <link href="https://arxiv.org/abs/2408.04237v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.04237v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) present significant risks when used to generate non-factual content and spread disinformation at scale. Detecting such LLM-generated content is crucial, yet current detectors often struggle to generalize in open-world contexts. We introduce Learning2Rewrite, a novel framework for detecting AI-generated text with exceptional generalization to unseen domains. Our method leverages the insight that LLMs inherently modify AI-generated content less than human-written text when tasked with rewriting. By training LLMs to minimize alterations on AI-generated inputs, we amplify this disparity, yielding a more distinguishable and generalizable edit distance across diverse text distributions. Extensive experiments on data from 21 independent domains and four major LLMs (GPT-3.5, GPT-4, Gemini, and Llama-3) demonstrate that our detector outperforms state-of-the-art detection methods by up to 23.04% in AUROC for in-distribution tests, 37.26% for out-of-distribution tests, and 48.66% under adversarial attacks. Our unique training objective ensures better generalizability compared to directly training for classification, when leveraging the same amount of parameters. Our findings suggest that reinforcing LLMs' inherent rewriting tendencies offers a robust and scalable solution for detecting AI-generated text.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-08T05:53:39Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ran Li</name>
+    </author>
+    <author>
+      <name>Wei Hao</name>
+    </author>
+    <author>
+      <name>Weiliang Zhao</name>
+    </author>
+    <author>
+      <name>Junfeng Yang</name>
+    </author>
+    <author>
+      <name>Chengzhi Mao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.18259v2</id>
+    <title>Detecting Machine-Generated Texts: Not Just "AI vs Humans" and Explainability is Complicated</title>
+    <updated>2025-06-24T15:45:05Z</updated>
+    <link href="https://arxiv.org/abs/2406.18259v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.18259v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As LLMs rapidly advance, increasing concerns arise regarding risks about actual authorship of texts we see online and in real world. The task of distinguishing LLM-authored texts is complicated by the nuanced and overlapping behaviors of both machines and humans. In this paper, we challenge the current practice of considering LLM-generated text detection a binary classification task of differentiating human from AI. Instead, we introduce a novel ternary text classification scheme, adding an "undecided" category for texts that could be attributed to either source, and we show that this new category is crucial to understand how to make the detection result more explainable to lay users. This research shifts the paradigm from merely classifying to explaining machine-generated texts, emphasizing need for detectors to provide clear and understandable explanations to users. Our study involves creating four new datasets comprised of texts from various LLMs and human authors. Based on new datasets, we performed binary classification tests to ascertain the most effective SOTA detection methods and identified SOTA LLMs capable of producing harder-to-detect texts. We constructed a new dataset of texts generated by two top-performing LLMs and human authors, and asked three human annotators to produce ternary labels with explanation notes. This dataset was used to investigate how three top-performing SOTA detectors behave in new ternary classification context. Our results highlight why "undecided" category is much needed from the viewpoint of explainability. Additionally, we conducted an analysis of explainability of the three best-performing detectors and the explanation notes of the human annotators, revealing insights about the complexity of explainable detection of machine-generated texts. Finally, we propose guidelines for developing future detection systems with improved explanatory power.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-26T11:11:47Z</published>
+    <arxiv:comment>19 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jiazhou Ji</name>
+    </author>
+    <author>
+      <name>Ruizhe Li</name>
+    </author>
+    <author>
+      <name>Shujun Li</name>
+    </author>
+    <author>
+      <name>Jie Guo</name>
+    </author>
+    <author>
+      <name>Weidong Qiu</name>
+    </author>
+    <author>
+      <name>Zheng Huang</name>
+    </author>
+    <author>
+      <name>Chiyu Chen</name>
+    </author>
+    <author>
+      <name>Xiaoyu Jiang</name>
+    </author>
+    <author>
+      <name>Xinru Lu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.04286v2</id>
+    <title>Who Wrote This? The Key to Zero-Shot LLM-Generated Text Detection Is GECScore</title>
+    <updated>2025-03-01T11:19:12Z</updated>
+    <link href="https://arxiv.org/abs/2405.04286v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.04286v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The efficacy of detectors for texts generated by large language models (LLMs) substantially depends on the availability of large-scale training data. However, white-box zero-shot detectors, which require no such data, are limited by the accessibility of the source model of the LLM-generated text. In this paper, we propose a simple yet effective black-box zero-shot detection approach based on the observation that, from the perspective of LLMs, human-written texts typically contain more grammatical errors than LLM-generated texts. This approach involves calculating the Grammar Error Correction Score (GECScore) for the given text to differentiate between human-written and LLM-generated text. Experimental results show that our method outperforms current state-of-the-art (SOTA) zero-shot and supervised methods, achieving an average AUROC of 98.62% across XSum and Writing Prompts dataset. Additionally, our approach demonstrates strong reliability in the wild, exhibiting robust generalization and resistance to paraphrasing attacks. Data and code are available at: https://github.com/NLP2CT/GECScore.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-07T12:57:01Z</published>
+    <arxiv:comment>COLING 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Junchao Wu</name>
+    </author>
+    <author>
+      <name>Runzhe Zhan</name>
+    </author>
+    <author>
+      <name>Derek F. Wong</name>
+    </author>
+    <author>
+      <name>Shu Yang</name>
+    </author>
+    <author>
+      <name>Xuebo Liu</name>
+    </author>
+    <author>
+      <name>Lidia S. Chao</name>
+    </author>
+    <author>
+      <name>Min Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.13335v1</id>
+    <title>Adaptive Ensembles of Fine-Tuned Transformers for LLM-Generated Text Detection</title>
+    <updated>2024-03-20T06:38:13Z</updated>
+    <link href="https://arxiv.org/abs/2403.13335v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.13335v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have reached human-like proficiency in generating diverse textual content, underscoring the necessity for effective fake text detection to avoid potential risks such as fake news in social media. Previous research has mostly tested single models on in-distribution datasets, limiting our understanding of how these models perform on different types of data for LLM-generated text detection task. We researched this by testing five specialized transformer-based models on both in-distribution and out-of-distribution datasets to better assess their performance and generalizability. Our results revealed that single transformer-based classifiers achieved decent performance on in-distribution dataset but limited generalization ability on out-of-distribution dataset. To improve it, we combined the individual classifiers models using adaptive ensemble algorithms, which improved the average accuracy significantly from 91.8% to 99.2% on an in-distribution test set and from 62.9% to 72.5% on an out-of-distribution test set. The results indicate the effectiveness, good generalization ability, and great potential of adaptive ensemble algorithms in LLM-generated text detection.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-20T06:38:13Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zhixin Lai</name>
+    </author>
+    <author>
+      <name>Xuesheng Zhang</name>
+    </author>
+    <author>
+      <name>Suiyao Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.08369v4</id>
+    <title>How You Prompt Matters! Even Task-Oriented Constraints in Instructions Affect LLM-Generated Text Detection</title>
+    <updated>2024-10-01T01:24:05Z</updated>
+    <link href="https://arxiv.org/abs/2311.08369v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.08369v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>To combat the misuse of Large Language Models (LLMs), many recent studies have presented LLM-generated-text detectors with promising performance. When users instruct LLMs to generate texts, the instruction can include different constraints depending on the user's need. However, most recent studies do not cover such diverse instruction patterns when creating datasets for LLM detection. In this paper, we reveal that even task-oriented constraints -- constraints that would naturally be included in an instruction and are not related to detection-evasion -- cause existing powerful detectors to have a large variance in detection performance. We focus on student essay writing as a realistic domain and manually create task-oriented constraints based on several factors for essay quality. Our experiments show that the standard deviation (SD) of current detector performance on texts generated by an instruction with such a constraint is significantly larger (up to an SD of 14.4 F1-score) than that by generating texts multiple times or paraphrasing the instruction. We also observe an overall trend where the constraints can make LLM detection more challenging than without them. Finally, our analysis indicates that the high instruction-following ability of LLMs fosters the large impact of such constraints on detection performance.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-14T18:32:52Z</published>
+    <arxiv:comment>EMNLP 2024 Findings camera ready. Dataset available at https://github.com/ryuryukke/HowYouPromptMatters</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ryuto Koike</name>
+    </author>
+    <author>
+      <name>Masahiro Kaneko</name>
+    </author>
+    <author>
+      <name>Naoaki Okazaki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.14724v3</id>
+    <title>A Survey on LLM-Generated Text Detection: Necessity, Methods, and Future Directions</title>
+    <updated>2024-04-19T09:12:32Z</updated>
+    <link href="https://arxiv.org/abs/2310.14724v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.14724v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The powerful ability to understand, follow, and generate complex language emerging from large language models (LLMs) makes LLM-generated text flood many areas of our daily lives at an incredible speed and is widely accepted by humans. As LLMs continue to expand, there is an imperative need to develop detectors that can detect LLM-generated text. This is crucial to mitigate potential misuse of LLMs and safeguard realms like artistic expression and social networks from harmful influence of LLM-generated content. The LLM-generated text detection aims to discern if a piece of text was produced by an LLM, which is essentially a binary classification task. The detector techniques have witnessed notable advancements recently, propelled by innovations in watermarking techniques, statistics-based detectors, neural-base detectors, and human-assisted methods. In this survey, we collate recent research breakthroughs in this area and underscore the pressing need to bolster detector research. We also delve into prevalent datasets, elucidating their limitations and developmental requirements. Furthermore, we analyze various LLM-generated text detection paradigms, shedding light on challenges like out-of-distribution problems, potential attacks, real-world data issues and the lack of effective evaluation framework. Conclusively, we highlight interesting directions for future research in LLM-generated text detection to advance the implementation of responsible artificial intelligence (AI). Our aim with this survey is to provide a clear and comprehensive introduction for newcomers while also offering seasoned researchers a valuable update in the field of LLM-generated text detection. The useful resources are publicly available at: https://github.com/NLP2CT/LLM-generated-Text-Detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-23T09:01:13Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Junchao Wu</name>
+    </author>
+    <author>
+      <name>Shu Yang</name>
+    </author>
+    <author>
+      <name>Runzhe Zhan</name>
+    </author>
+    <author>
+      <name>Yulin Yuan</name>
+    </author>
+    <author>
+      <name>Derek F. Wong</name>
+    </author>
+    <author>
+      <name>Lidia S. Chao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.19713v2</id>
+    <title>Red Teaming Language Model Detectors with Language Models</title>
+    <updated>2023-10-19T05:56:52Z</updated>
+    <link href="https://arxiv.org/abs/2305.19713v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.19713v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The prevalence and strong capability of large language models (LLMs) present significant safety and ethical risks if exploited by malicious users. To prevent the potentially deceptive usage of LLMs, recent works have proposed algorithms to detect LLM-generated text and protect LLMs. In this paper, we investigate the robustness and reliability of these LLM detectors under adversarial attacks. We study two types of attack strategies: 1) replacing certain words in an LLM's output with their synonyms given the context; 2) automatically searching for an instructional prompt to alter the writing style of the generation. In both strategies, we leverage an auxiliary LLM to generate the word replacements or the instructional prompt. Different from previous works, we consider a challenging setting where the auxiliary LLM can also be protected by a detector. Experiments reveal that our attacks effectively compromise the performance of all detectors in the study with plausible generations, underscoring the urgent need to improve the robustness of LLM-generated text detection systems.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-31T10:08:37Z</published>
+    <arxiv:comment>Preprint. Accepted by TACL</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhouxing Shi</name>
+    </author>
+    <author>
+      <name>Yihan Wang</name>
+    </author>
+    <author>
+      <name>Fan Yin</name>
+    </author>
+    <author>
+      <name>Xiangning Chen</name>
+    </author>
+    <author>
+      <name>Kai-Wei Chang</name>
+    </author>
+    <author>
+      <name>Cho-Jui Hsieh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.12519v3</id>
+    <title>DPIC: Decoupling Prompt and Intrinsic Characteristics for LLM Generated Text Detection</title>
+    <updated>2024-06-12T07:37:35Z</updated>
+    <link href="https://arxiv.org/abs/2305.12519v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.12519v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have the potential to generate texts that pose risks of misuse, such as plagiarism, planting fake reviews on e-commerce platforms, or creating inflammatory false tweets. Consequently, detecting whether a text is generated by LLMs has become increasingly important. Existing high-quality detection methods usually require access to the interior of the model to extract the intrinsic characteristics. However, since we do not have access to the interior of the black-box model, we must resort to surrogate models, which impacts detection quality. In order to achieve high-quality detection of black-box models, we would like to extract deep intrinsic characteristics of the black-box model generated texts. We view the generation process as a coupled process of prompt and intrinsic characteristics of the generative model. Based on this insight, we propose to decouple prompt and intrinsic characteristics (DPIC) for LLM-generated text detection method. Specifically, given a candidate text, DPIC employs an auxiliary LLM to reconstruct the prompt corresponding to the candidate text, then uses the prompt to regenerate text by the auxiliary LLM, which makes the candidate text and the regenerated text align with their prompts, respectively. Then, the similarity between the candidate text and the regenerated text is used as a detection feature, thus eliminating the prompt in the detection process, which allows the detector to focus on the intrinsic characteristics of the generative model. Compared to the baselines, DPIC has achieved an average improvement of 6.76\% and 2.91\% in detecting texts from different domains generated by GPT4 and Claude3, respectively.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-21T17:26:16Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Xiao Yu</name>
+    </author>
+    <author>
+      <name>Yuang Qi</name>
+    </author>
+    <author>
+      <name>Kejiang Chen</name>
+    </author>
+    <author>
+      <name>Guoqiang Chen</name>
+    </author>
+    <author>
+      <name>Xi Yang</name>
+    </author>
+    <author>
+      <name>Pengyuan Zhu</name>
+    </author>
+    <author>
+      <name>Xiuwei Shang</name>
+    </author>
+    <author>
+      <name>Weiming Zhang</name>
+    </author>
+    <author>
+      <name>Nenghai Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.07205v3</id>
+    <title>The Science of Detecting LLM-Generated Texts</title>
+    <updated>2023-06-02T19:24:17Z</updated>
+    <link href="https://arxiv.org/abs/2303.07205v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.07205v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The emergence of large language models (LLMs) has resulted in the production of LLM-generated texts that is highly sophisticated and almost indistinguishable from texts written by humans. However, this has also sparked concerns about the potential misuse of such texts, such as spreading misinformation and causing disruptions in the education system. Although many detection approaches have been proposed, a comprehensive understanding of the achievements and challenges is still lacking. This survey aims to provide an overview of existing LLM-generated text detection techniques and enhance the control and regulation of language generation models. Furthermore, we emphasize crucial considerations for future research, including the development of comprehensive evaluation metrics and the threat posed by open-source LLMs, to drive progress in the area of LLM-generated text detection.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-04T04:49:17Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ruixiang Tang</name>
+    </author>
+    <author>
+      <name>Yu-Neng Chuang</name>
+    </author>
+    <author>
+      <name>Xia Hu</name>
+    </author>
+  </entry>
+</feed>

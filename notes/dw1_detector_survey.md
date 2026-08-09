@@ -1,313 +1,298 @@
-# DW1 accuracy-first survey of recent LLM-text detectors
+# DW1 accuracy-first survey of newest LLM-text detectors
 
-Research update: 2026-08-08, America/Los_Angeles. This update supersedes the
-2026-08-07 WaveDetect-first recommendation. It changes research artifacts only;
-no DW1 implementation or configuration was changed.
+Research update: 2026-08-08, America/Los_Angeles. This correction supersedes the
+2026-08-07 conclusion and the already-sent incomplete summary. It changes only
+the owned research artifacts; no DW1 implementation or configuration was changed.
 
 ## Answer
 
-No 2025–2026 detector is yet demonstrated to be a drop-in replacement for DW1
-Binoculars under all of the requested conditions. The strongest recent paper
-results either lack a released detector state, use supervised in-distribution
-training, use incomparable data or lengths, or have not reproduced Binoculars-level
-accuracy on DW1. High reported numbers without those qualifications are not
-treated as deployment accuracy.
+MELD, released in May 2026, is the strongest new scientific lead and should have
+been in the earlier survey. Its paper reports dramatically better like-for-like
+test-set numbers than Binoculars, and its current public checkpoint is small,
+fast, and reproducible on the two NVIDIA A6000 GPUs. Those facts correct the old
+claim that the bounded search found no such recent high-accuracy release.
 
-The evidence screen is substantially stronger than the old WaveDetect survey,
-but it does not yield an improved qualifying shortlist:
+They do **not** yet justify replacing DW1 Binoculars. The paper-era MELD checkpoint
+and current runnable v5 checkpoint are materially different models, and the v5
+card explicitly says their scores are incomparable. The paper-era companion code
+is no longer anonymously available. On the available length-eligible DW1 screen,
+v5 AUROC was 0.9553, below stored Binoculars at 0.9779 and FastDetectGPT at
+0.9690. Its shipped nominal one-percent-FPR threshold produced 8.60 percent FPR
+on disjoint local human rows. Local recalibration yielded promising tail recall,
+but this convenience corpus and historical comparators are not a frozen
+like-for-like evaluation. The artifact-version and comparability gap remains an
+explicit blocker. [N9, M7]
 
-1. **IRM is the only recent, fully executable, in-scope public control.** The
-   NeurIPS 2025 paper's Llama-3.2-1B pair beats same-pair Binoculars on DetectRL
-   multi-domain, multi-model, and multi-attack AUROC: 97.97 versus 92.48, 97.24
-   versus 92.08, and 97.19 versus 93.04. It is slightly worse on human-writing
-   AUROC, 94.48 versus 94.63. Those exact Meta checkpoints are license-gated. The
-   strongest anonymously downloadable family from the paper, Qwen2-0.5B, ran
-   locally at 0.230 seconds per document, batch 8 and 2,048 tokens, using 30,384
-   MiB per card. Its fixed 1,000-row orientation-free AUROC was 0.9436, below
-   stored Binoculars at 0.9595 and FastDetectGPT at 0.9536. It is therefore a
-   control, not an improved recommendation. [N2, M4]
-2. **SV-Detect is reconstruction-only evidence.** Its paper reports near-perfect
-   DetectRL results after training on matched source/domain/attack families. A
-   local optimized FP16 feature reconstruction fit easily and was fast, but the
-   authors did not release trained steering directions or logistic-regression
-   state. The published accuracy is not runnable as shipped, and the adapted cost
-   screen is not end-to-end detector throughput. [N3, M5]
-3. **LAPD has the strongest matched zero-shot paper result but is excluded.** Its
-   average AUROC is 92.37 versus 89.72 for same-pair Binoculars, and its local
-   adapted score cost was within 0.53 percent of same-process Binoculars. However,
-   LAPD standardizes with 10,000 categorical auxiliary samples, and its own paper
-   groups it with methods that perturb or generate auxiliary sequences. Under the
-   strict no-multi-perturbation constraint, it cannot be advanced without an
-   explicit exception. [N1, M6]
+The corrected disposition is:
 
-WaveDetect is also not a recommendation: its local AUROC was 0.8906 on the same
-convenience screen. Speed alone does not answer the corrected accuracy-first
-request. [M2]
+1. **Keep DW1 Binoculars.** No replacement has passed every fixed accuracy,
+   low-false-positive, method, artifact, two-A6000 memory, and near-Binoculars
+   speed gate on one frozen like-for-like evaluation.
+2. **Make MELD the first candidate after provenance is resolved.** V5 passes the
+   bounded memory and speed screen but not the accuracy/comparability gate. Its
+   paper-era accuracy may not be attributed to v5. [N9, M7]
+3. **Retain DACTYL/Vanguard as a released supervised watchlist item.** Its PAN
+   result and public ModernBERT checkpoint are credible, but it lacks a matching
+   Binoculars/FastDetectGPT row, low-FPR transfer evidence, and the fixed A6000
+   runtime basis. [N12]
+4. **Retain IRM as the runnable recent zero-shot control and SV-Detect as
+   reconstruction-only evidence.** Their previously accepted evidence remains
+   unchanged. [N2, N3, M4, M5]
+5. **Keep LAPD, Exons-Detect, GTCL, and Triospect excluded.** Their attractive
+   numbers cannot override the fixed multi-perturbation, regeneration, retrieval,
+   and rewriting exclusions. [N1, N8, N11, M6]
 
-## Fixed deployment screen
+This is a bounded, source-mapped conclusion—not a universal claim that no other
+paper exists. The exact query exports and a disposition for every plausible
+high-accuracy result are preserved in
+[coverage_dispositions.md](dw1_detector_survey_sources/coverage_dispositions.md).
+
+## Fixed deployment and comparison screen
 
 The governing comparator is DW1's operational Binoculars: dynamic Falcon-7B and
 Falcon-7B-Instruct checkpoints, one per NVIDIA RTX A6000, concurrent forwards,
-batch 8, and a 2,048-token maximum. Its controlled 2026-08-07 result was 7.733
-seconds per batch, 0.967 seconds per document, and 35,095 MiB peak allocated on
-each card. The cached checkpoint revisions were `0ad33730b9d0911d6586670a661f04adaaf2c850`
-and `40d43a5d6ac55026c5a471d908c9d3bf6623dbb1`; the result file records the
-software stack and timing boundary. Candidate timing is accepted only with a
-traceable same-run comparison or a conservative local screen at this batch and
-length. [C3, M1]
+batch 8, and a 2,048-token maximum. Its controlled result is 7.7325 seconds per
+batch, 0.9666 seconds per document, and 35,095 MiB peak allocated on each card.
+The cached revisions are `0ad33730b9d0911d6586670a661f04adaaf2c850` and
+`40d43a5d6ac55026c5a471d908c9d3bf6623dbb1`. Candidate timing is accepted only
+with the same scoring boundary and an explicit batch/length/hardware basis. [C3,
+M1]
+
+The canonical FastDetectGPT paper reports 233 seconds for five 500-document XSum
+sets on one A100, excluding initialization. Dividing gives an inferred 0.0932
+seconds per document, but the paper does not report batch size and uses different
+models, hardware, data, and length. It is a scientific comparator, not a direct
+DW1 speed threshold. Stored FastDetectGPT accuracy scores are used only on
+identical local rows and are labeled historical. [C4, M7]
 
 RAG, retrieval, nearest-neighbor lookup, target-text rewriting, regeneration, and
-multi-perturbation pipelines remain excluded. LAPD draws 10,000 independent token
-alternatives from already-computed categorical logits, but does not decode them
-into text and does not re-forward or rescore auxiliary passages. The paper marks
-this family as using perturbed or generated auxiliary sequences. The conservative
-decision is to apply the human's strict constraint and exclude LAPD. Its accuracy
-and timing evidence is retained only to show why it would otherwise have been the
-leading candidate. [N1]
+multi-perturbation pipelines remain excluded. Reported “accuracy” is never
+silently substituted for AUROC, F1, or TPR at a selected FPR. Cross-paper numbers
+are not ranked unless they share data, models, and protocol. Paper accuracy never
+transfers merely because a different checkpoint fits the hardware.
 
-Evidence labels are deliberate: **sourced** means a primary manuscript or
-official artifact; **measured** means this machine; **inferred** means a bounded
-operational judgment. Every evidence ID resolves in
-[source_cards.md](dw1_detector_survey_sources/source_cards.md). Exact local
-outputs sit beside the harnesses.
+Evidence labels are deliberate: **sourced** means a primary paper or official
+artifact; **measured** means this machine; **inferred** means a bounded operational
+judgment. Every bracketed ID resolves in
+[source_cards.md](dw1_detector_survey_sources/source_cards.md). Raw outputs and
+environment manifests sit beside the harnesses.
 
-## Accuracy claims normalized
+## MELD: strongest lead, unresolved blocker
 
-| Candidate | Strongest reported comparison | Material mismatch or failure | Result here |
-| --- | --- | --- | --- |
-| LAPD | Matched Llama-2 pair, five benchmark columns: 92.37 average AUROC versus 89.72 Binoculars | Average hides a 0.09-point RAID loss; paper data are not DW1; 10,000 auxiliary categorical samples violate the conservative no-multi-perturbation reading | Excluded by method |
-| IRM | Matched Llama-3.2-1B family on DetectRL: 97.97/97.24/97.19 AUROC versus 92.48/92.08/93.04 Binoculars | The paper's 91.77 “average” mixes AUROC and F1 and is not itself AUROC; exact model pair is gated; public Qwen local AUROC trails Binoculars | Runnable control, not a demonstrated replacement |
-| SV-Detect | In-domain DetectRL AUROCs from 99.83 to 100 in the reported source/domain/attack settings | Supervised on corresponding source/domain/attack-family data, sometimes with 10,192 examples per class; no trained detector state; local timing is an optimized reconstruction | Reconstruction-only evidence |
-| EchoPrompt | Llama-3-8B proxy across DetectRL, RealDet, and RAID: 95.56 AUROC versus 90.07 Binoculars | Manuscript only; no code/checkpoint; V100, 1,024-token cap, unspecified batch; reported 0.254 seconds versus 0.157 for Binoculars lacks a complete runtime basis | Watchlist, claimed accuracy rejected as unreproduced |
-| Steer-to-Detect | Same A100-80GB mixed test: 98.90 AUROC versus 87.70 Binoculars; 0.30 versus 0.50 seconds | Trained on 512 mixed pairs; average text 267 tokens and 95 percent below 435; batch 1; 39 GB at short length; no code/checkpoint | Watchlist; 2,048-token A6000 fit unproved |
-| RepreGuard | Same A100-80GB test: Phi-2 96.10 and Llama-3.1-8B 94.80 AUROC versus 81.90 Binoculars | Trained on 512 Claude pairs; tests four older generators; maximum 256 tokens; no trained directions/checkpoint | Older fallback, superseded by SV-Detect |
-| Uncertainty++ | Up to 93.24 average AUROC on its GPT-J black-box set and 94.79 on a newer-generator set | No like-for-like Binoculars row; length and batch are incomplete in the efficiency report | Not evidence of Binoculars parity |
+### Paper-era accuracy
 
-The table compares only like-for-like rows within each paper. Numbers across rows
-must not be ranked against each other because datasets, generation models,
-domains, text lengths, contamination risks, training regimes, metrics, and
-hardware differ. In particular, supervised random or matched-family splits can
-produce very high AUROC without proving unseen-generator or unseen-domain
-performance.
+[MELD](https://arxiv.org/abs/2605.06903) is a supervised Ettin-400M encoder trained
+with generator-family, attack, and domain auxiliary objectives; only its main
+detector path is used at inference. On the public RAID leaderboard, the paper
+reports AUROC, TPR at five-percent FPR, and TPR at one-percent FPR of
+99.82/99.78/99.24 over attacks and 99.85/99.76/99.40 on clean text. The clean
+Binoculars row is 84.40/78.98/69.54. MELD trains on 1.85 million RAID rows, so
+this is a matching test set but not an equal training regime. [N9]
 
-AUROC is retained because it is the most consistently reported threshold-free
-metric; it is not classification accuracy. F1, raw accuracy, TPR at 1 percent
-false-positive rate, and TPR at 0.01 percent false-positive rate are not
-interchangeable. No paper threshold is transferred to DW1.
+On the paper's held-out pools, MELD AUROC is 99.7/99.1/78.0/100.0/98.5/99.99
+across HC3, MAGE, M4GT, Ghostbuster, DetectRL, and MELD-eval. The matching
+Binoculars row is 79.4/60.7/57.3/75.4/64.8/45.2; FastDetectGPT is
+99.1/57.1/65.9/92.6/73.0/70.5. On MELD-eval, overall TPR at one-percent FPR is
+99.9 MELD, 95.5 ModernBERT-Detect, 17.0 FastDetectGPT, and 0.6 Binoculars. Those
+four generators are held out, but the pool reuses RAID-style English domains,
+human seeds, and attacks, and each detector receives a pool-specific threshold.
+This is strong controlled evidence, not universal domain transfer or a fixed
+deployment threshold. [N9]
 
-Contamination remains unresolved rather than assumed away. LAPD and IRM reuse
-public benchmarks and do not provide an independent audit of overlap with proxy
-pretraining or generator tuning. SV-Detect, Steer-to-Detect, and RepreGuard train
-on related corpus or generator families, so their high in-distribution rows are
-especially vulnerable to split and source cues. EchoPrompt supplies only the
-manuscript evaluation. None of those facts proves contamination occurred; each is
-an evidence gap that prevents treating the reported number as DW1 accuracy.
+### Paper-era versus current official state
 
-## Excluded accuracy benchmark: LAPD
+The complete paper-era Hugging Face revision
+`51f3ac2d4ce8de9f6f3a1eba9ca4276b077bb808` is public, ungated, MIT-licensed,
+FP32, and about 1.58 GB. Its card describes a 396-million-parameter model, a
+2,048-token window, and a main-head inference path, but requires companion code
+at an official anonymous endpoint. That endpoint now returns HTTP 401 with
+`{"error":"not_connected"}`; it was recorded and not bypassed. Reconstructing an
+unpublished implementation would not be an independent reproduction. [N9]
 
-### Sourced result
+The paper and paper-era card also disagree on 6.60 versus 6.82 million training
+rows and 1.85 versus 1.91 million RAID rows. More importantly, the paper calls
+the main head an MLP, while current v5 uses token-style coordinates, human
+anchors, generator-family prototypes, and top-fraction aggregation. V5 release
+commit `9b6379cdf62961a443d972fd27ff705ea9a07dd3` says it replaces all earlier
+checkpoints. The latest immutable revision
+`453acf594d48f8c55c3a38bde396f9178516d817` says plainly that earlier revisions
+held different models and their scores are not comparable. [N9]
 
-[LAPD](https://arxiv.org/abs/2604.16923), released in April 2026, contrasts a base
-model with its aligned counterpart and information-weights the per-token
-preference discrepancy. The official repository was inspected at commit
-`1988eb68b70205d471c1924b6bbf1e199452662d`. Its matched Table 13 gives:
+Consequently, the paper-era state is preserved but not guessed into execution;
+the current state is executed but never used to validate the paper tables.
 
-| Benchmark | Binoculars AUROC | LAPD AUROC |
+### Measured v5 feasibility
+
+The exact self-contained v5 architecture and weights were run in FP32 under
+Python 3.13, torch 2.9.1+cu126, and transformers 4.57.3. It has 394,833,461
+parameters. At exactly 2,048 tokens over five repetitions:
+
+| Mode | Median batch seconds | Seconds/document | Peak allocated MiB |
+| --- | ---: | ---: | ---: |
+| One GPU, batch 1 | 0.163666 | 0.163666 | 1,661.94 |
+| One GPU, batch 8 | 1.200715 | 0.150089 | 2,682.95 |
+| Two replicas, concurrent 4+4 | 0.626530 | 0.078316 | 2,107.07 / 2,098.52 |
+
+The two-card batch latency is 0.0810 of the fixed 7.7325-second DW1 Binoculars
+batch. Both timing blocks begin with device-resident token tensors and end with
+CPU scores; model load, tokenization, and transfer are excluded. V5 therefore
+comfortably passes the bounded two-A6000 memory and plausible near-Binoculars
+speed screens. Its 0.0783-second measurement resembles the paper-derived
+0.0932-second FastDetectGPT arithmetic estimate, but hardware, batch, length,
+models, and data differ, so neither is declared faster. [M7, C4]
+
+### Measured v5 accuracy and threshold transfer
+
+The prior seed-42 500-human/500-generated continuity screen includes 291 texts
+under v5's stated 100-word minimum. MELD AUROC is 0.9132, versus stored
+Binoculars 0.9595 and FastDetectGPT 0.9536. It is retained for traceability, not
+used as the main result. [M7]
+
+The length-eligible screen uses all 4,907 available texts of at least 100 words.
+One thousand human texts selected by a fixed seed form calibration only; the
+disjoint evaluation contains 2,315 human and 1,592 generated texts:
+
+| Method on identical evaluation rows | AUROC | Evaluation FPR/TPR at locally calibrated 1% FPR |
 | --- | ---: | ---: |
-| M4 | 87.27 | 88.02 |
-| DetectRL multi-LLM | 93.11 | 97.17 |
-| DetectRL multi-domain | 88.33 | 96.11 |
-| RAID | 85.30 | 85.21 |
-| RealDet | 94.56 | 95.32 |
-| Average | 89.72 | 92.37 |
+| MELD v5 raw score | 0.955271 | 0.00821 / 0.90201 |
+| Stored DW1 Binoculars, sign-normalized | 0.977899 | 0.01166 / 0.66080 |
+| Stored DW1 FastDetectGPT | 0.968952 | 0.01037 / 0.75503 |
 
-All rows use the Llama-2-7B base/instruct pair, so the average improvement is a
-real method comparison on those data. It is not a universal win: RAID is slightly
-worse. Main experiments cap input at 1,024 tokens and use two RTX 3090 24 GB
-cards. At batch 1 over 300 instances, the paper reports 0.5792 seconds per LAPD
-text and 0.6549 for Binoculars. [N1]
+The locally selected MELD threshold has promising tail TPR, but v5 does not match
+the stored comparators' overall AUROC. More seriously, v5's shipped nominal
+one-percent threshold gives 9.0-percent FPR on calibration humans and 8.60 percent
+on evaluation humans. Its nominal five-percent threshold gives 24.1 and 23.46
+percent. Thresholds therefore do not transfer to this corpus. [M7]
 
-### Measured feasibility
+The corpus is available rather than frozen and stratified, its generated examples
+are not a new held-out current-generator pool, and comparator values were not
+recomputed in the v5 process. These limits prevent either a positive or a final
+negative deployment verdict. The defensible result is: fast and promising,
+mandatory for the next evaluation, but blocked now.
 
-The local harness used DW1's two dynamic Falcon checkpoints, eight fixed documents
-of exactly 2,048 tokens, one warm-up, and three runs. It executes the released
-10,000-sample statistic after the same concurrent model forwards as Binoculars.
-Median LAPD time was 7.7641 seconds per batch, or 0.9705 per document, versus
-7.7234 and 0.9654 for the preceding same-process comparator block. Both peaked at
-35,095 MiB on each A6000. The official cache-building path reuses base logits
-when the base is also the sampling model, while the release's separate multi-GPU
-runner forwards that model redundantly. The harness uses the cache-path behavior and is therefore
-a transparent executable adaptation, not an unchanged CLI timing. [N1, M6]
+## Other recent high-accuracy lanes
 
-### Decision boundary
+### Released watchlist: DACTYL/Vanguard
 
-The bounded cost screen supports near-Binoculars feasibility, but it is only three
-repetitions and uses an adapted cache path. More importantly, the 10,000 auxiliary
-categorical samples trigger the strict method exclusion. The timing checkpoints
-also differ in precision and family from the paper's strongest Llama pair, so
-dynamic-Falcon cost does not transfer paper AUROC. The repository has no declared
-license. LAPD is not advanced or recommended.
+The PAN 2026 DACTYL system reports 0.993 AUROC and a 0.974 mean over AUROC, F1,
+C@1, Brier score, and F0.5u; the latter is a composite, not accuracy. Its public
+MIT-licensed ModernBERT checkpoint card reports mean AUROC 0.9475 and macro F1
+0.8493 across listed out-of-distribution sets. The release is meaningful, but no
+same-row Binoculars/FastDetectGPT result, low-FPR threshold transfer, 2,048-token
+batch memory, or A6000 timing is available. It remains a watchlist item, not a
+replacement. [N12]
 
-## Reconstruction-only evidence: SV-Detect
+### Runnable control: IRM
 
-### Sourced result
+IRM's best Llama-3.2-1B paper pair beats same-pair Binoculars on DetectRL
+multi-domain, multi-model, and multi-attack AUROC: 97.97 versus 92.48, 97.24
+versus 92.08, and 97.19 versus 93.04. It is slightly worse on human-writing
+AUROC, 94.48 versus 94.63. Those Meta checkpoints require license acceptance and
+were not accessed. [N2]
 
-[SV-Detect](https://arxiv.org/abs/2606.07313), released in June 2026, runs a frozen
-GPT-Neo-2.7B once, mean-pools each hidden layer, compares those vectors with
-learned steering directions, and applies logistic regression. The official
-[repository](https://github.com/Atmyre/SV-Detect) was inspected at commit
-`a25469ba6a1fa2adcf644338db6fef712511da66`. Its DetectRL in-domain table reports
-AUROCs between 99.83 and 100 across the selected multi-domain, multi-LLM, and
-multi-attack settings. Those are trained tests, not zero-shot comparisons:
-training uses the corresponding setting and can reach 10,192 examples per class.
-Cross-source results are reported separately, without a like-for-like Binoculars
-row. [N3]
+The strongest anonymous paper-listed family, Qwen2-0.5B, measured 1.834 seconds
+per batch and 30,384 MiB per card at batch 8 and 2,048 tokens. Its fixed same-row
+AUROC was 0.9436, below stored Binoculars 0.9595 and FastDetectGPT 0.9536. IRM
+therefore remains a runnable control, not a demonstrated improvement. [M4]
 
-On one A100 40 GB, float16, 512 tokens, the paper reports 25.71 milliseconds at
-batch 1, 74.3 texts per second at batch 16, and 8,951 MB peak. That establishes a
-small model path, but not DW1 length or comparator parity. [N3]
+### Reconstruction only: SV-Detect
 
-### Measured feasibility
+SV-Detect reports 99.83–100 AUROC after training within corresponding
+source/domain/attack settings. The public repository contains extraction and
+training code but no trained steering directions or logistic-regression state.
+An optimized FP16 feature reconstruction measured 1.248 seconds per batch at
+2,048 tokens and under 8,849 MiB per card, but deterministic dummy directions
+make its scores accuracy-free. That is cost reconstruction, not a released
+end-to-end detector. [N3, M5]
 
-The public GPT-Neo-2.7B revision was reconstructed at 2,048 tokens. One-card batch
-1 measured 0.304 seconds and 6,114 MiB peak. Two-card data parallel batch 8
-measured 1.248 seconds per batch, 0.156 per document, and under 8,849 MiB per
-card. Unlike the release's one-text-at-a-time FP32 activation extraction to CPU,
-the local harness uses FP16, batches four documents per card, and projects inside
-GPU hooks. It is an optimized mathematical feature-cost adaptation, not the exact
-released path or end-to-end detector throughput. Deterministic dummy directions
-were required because the repository ships neither trained steering directions
-nor logistic-regression state; the resulting scores have no accuracy meaning.
-[M5]
+### Method-excluded high numbers
 
-### Decision boundary
+LAPD's same-pair five-benchmark average is 92.37 AUROC versus 89.72 Binoculars,
+and its adapted score cost was 1.0053 times the same-process Binoculars batch.
+It remains excluded because standardization draws 10,000 categorical auxiliary
+samples, which triggers the human's strict no-multi-perturbation boundary. [N1,
+M6]
 
-SV-Detect has a large reconstructed cost margin and the highest recent reported
-numbers, but no runnable released detector. It is not a qualifying candidate. A
-future reconstruction would require separately partitioned labels with
-generator/date/domain holdouts; random or matched-family validation would repeat
-the paper-comparability problem.
+Exons-Detect reports 92.14 average AUROC versus same-table Binoculars 86.08 and
+FastDetectGPT 85.07. Its essential “ideal AI sequence” mutation-repair term
+constructs a replacement token sequence; removing it drops average AUROC to
+87.76. It is excluded as regeneration. Its official cleaned repository also
+omits the end-to-end construction and detector state. [N11]
 
-## Runnable in-scope control: IRM
+GTCL uses k-nearest-neighbor classification over retained embeddings at
+inference and is excluded as retrieval. Triospect generates summaries and
+simplifications and aggregates multiple views; it is excluded as rewriting,
+regeneration, and multi-view inference. Their evidence is preserved. [N8]
 
-### Sourced result
+### Calibration and unreleased lanes
 
-[IRM's official NeurIPS 2025 paper](https://proceedings.neurips.cc/paper_files/paper/2025/hash/f50258b34f1c5080e43281e05050034e-Abstract-Conference.html)
-scores instruction-model sequence log-likelihood minus base-model sequence
-log-likelihood. The official supplemental archive contains runnable code. Its
-matched Llama-3.2-1B DetectRL rows show clear AUROC gains over Binoculars for
-multi-domain, multi-LLM, and multi-attack data, while its human-writing row is
-0.15 points worse. The paper's single 91.77 aggregate combines AUROC and F1
-columns, so it is not reported here as AUROC. Experiments use two RTX 4090 24 GB
-cards. [N2]
+The ICLR 2026 Markov-informed layer is public code and improves within-paper
+Binoculars average AUROC from 94.85 to 94.91 on Essay, 86.99 to 91.41 on Reuters,
+and 73.17 to 75.49 on DetectRL. It learns a separate supervised state from labeled
+generator/dataset text, ships no trained state, and has no whole-path 2,048-token
+A6000 comparison. It is retained as calibration research, not a detector
+replacement. [N10]
 
-### Measured feasibility and accuracy screen
+EchoPrompt reports 95.56 average AUROC versus 90.07 Binoculars with a Llama-3-8B
+proxy; Steer-to-Detect reports 98.90 versus 87.70 and 0.30 versus 0.50 seconds on
+one short-text A100 test. Neither released implementation or trained state was
+found in the bounded public search. Their length, batch, and hardware evidence
+does not prove the fixed A6000 screen. Both remain unreproduced watchlist claims.
+[N4, N5]
 
-The Llama checkpoints required authenticated license acceptance, which was not
-bypassed. The anonymously downloadable Qwen2-0.5B base/instruct pair is explicitly
-evaluated in the paper: 90.14, 89.43, and 90.47 AUROC on its multi-domain,
-multi-LLM, and multi-attack tasks. At float32, batch 8 and 2,048 tokens, the pair
-measured 1.834 seconds per batch, 0.229 per document, and 30,384 MiB peak on each
-A6000. [N2, M4]
+## Normalized decision table
 
-On a fixed local screen of 500 human and 500 generated rows, IRM reached 0.9436
-orientation-free AUROC. Stored scores on the same rows were 0.9595 for Binoculars
-and 0.9536 for FastDetectGPT. Stored comparators may differ in software and
-truncation, and the sample is not stratified, so this is triage—not a calibrated
-accuracy verdict. It is nonetheless sufficient to reject a claim that the public
-Qwen variant has already beaten Binoculars on DW1. The base and instruction
-tokenizers were loaded separately and matched on all selected texts; the trial,
-selection-manifest, and selected-text hashes are preserved with the result. [M4]
+| Candidate | Best relevant evidence | Decisive mismatch | Disposition |
+| --- | --- | --- | --- |
+| MELD | Paper RAID clean 99.85 AUROC and 99.40 TPR at 1% FPR vs Binoculars 84.40/69.54; current v5 is released and fast | Paper/current states explicitly incomparable; v5 AUROC trails stored comparators; shipped thresholds fail local transfer | First blocker for a future frozen evaluation; not recommended |
+| DACTYL/Vanguard | Released ModernBERT; PAN AUROC 0.993 | Supervised challenge result; no matched Binoculars, low-FPR, length, memory, or speed row | Released watchlist |
+| IRM | Best paper pair beats matched Binoculars on three DetectRL AUROCs | Best pair gated; anonymous public pair trails stored Binoculars locally | Runnable control |
+| SV-Detect | 99.83–100 matched-family reported AUROC | No trained detector state; supervised setting; local run is reconstruction only | Reconstruction evidence |
+| LAPD | 92.37 average vs same-pair Binoculars 89.72; measured near-identical cost | 10,000 auxiliary categorical samples | Excluded by method |
+| Exons-Detect | 92.14 average vs same-table Binoculars 86.08 | Essential generated ideal-sequence stage; incomplete cleaned release | Excluded by method |
+| Markov calibration | Improves Binoculars on three within-paper datasets | Per-dataset supervised state not shipped; no whole-path fixed screen | Calibration research |
+| EchoPrompt / Steer-to-Detect | Strong same-paper reported comparisons | No public implementation or state; incomplete deployment basis | Unreleased watchlist |
 
-## Unreleased high-accuracy watchlist
+AUROC is threshold-free ranking quality, not classification accuracy. F1, raw
+accuracy, TPR at one-percent FPR, TPR at 0.01-percent FPR, and composite challenge
+scores are not interchangeable. The table preserves like-for-like comparisons
+within each source and does not rank numbers across different rows.
 
-**EchoPrompt**, dated 6 August 2026, prepends a fixed assistant context before
-base/instruct likelihood scoring. It reports 95.56 average AUROC versus 90.07 for
-Binoculars with a Llama-3-8B proxy across DetectRL, RealDet, and RAID. Its figure
-reports 0.254 seconds per text versus 0.157 for Binoculars, but the timing proxy,
-batch, and complete hardware basis are not given; experiments otherwise mention
-a V100 32 GB and a 1,024-token cap. No official code or checkpoint was found.
-The prompt is not target rewriting, but the method remains unreproducible. [N4]
+## Coverage, preservation, and uncertainty
 
-**Steer-to-Detect**, dated May 2026, reports the strongest direct accuracy/runtime
-row: 98.90 AUROC and 0.30 seconds versus Binoculars at 87.70 and 0.50 on the same
-A100 80 GB mixed test. It is supervised on 512 mixed pairs. Text averages 267
-tokens, 95 percent is shorter than 435, batch is 1, and peak inference allocation
-is 39 GB. No official implementation or trained state was found. A 39 GB short-text
-batch-1 result cannot establish batch-8, 2,048-token A6000 fit. [N5]
+The frozen evidence includes three raw date-sorted arXiv query exports, a targeted
+Markov export, 119 deduplicated 2025–2026 dispositions, and one anonymous public
+Google Scholar first-page result export. A prior Scholar attempt returned a robot
+challenge and was not bypassed; the fresh narrow request returned HTTP 200. The
+general web-search connector returned HTTP 404, so direct anonymous primary
+endpoints were used. No PB, authenticated state, browser profile, persistent
+session, cookie reuse, robot bypass, or human-owned tmux session was used.
 
-Neither claim is called reproducible accuracy. Release and exact A6000 evidence
-would be required before promotion.
+All new papers, immutable MELD snapshots, official MRF/Exons archives, public API
+metadata, raw HTTP evidence, and queries live in the discoverable external
+collection documented by
+[paper_artifacts.md](dw1_detector_survey_sources/paper_artifacts.md). Its full
+integrity ledger is preserved. The repository keeps the MELD benchmark source,
+raw successful and failed stdout/stderr, score-level CSV, package/interpreter/GPU
+manifests, and exact model-file hashes.
 
-## Other recent methods screened
+Local timings remain bounded feasibility checks, not sustained production load.
+CUDA peak allocation is not total process memory. Existing comparison scores come
+from a convenience corpus and can differ in software/truncation. Paper benchmark
+reuse, supervised training, and unknown pretraining overlap remain contamination
+risks rather than assumed facts. These limitations are why MELD remains a blocker
+instead of being promoted from attractive numbers.
 
-- RepreGuard is a credible TACL 2025 predecessor, but its high same-run result is
-  trained on 512 Claude pairs, tested on four older generators, capped at 256
-  tokens, and not shipped with learned detector state. [N6]
-- Uncertainty and Uncertainty++ have official MIT-licensed code and strong 2026
-  results, but no same-benchmark Binoculars comparison and incomplete efficiency
-  length/batch reporting. They cannot establish the requested parity. [N7]
-- DeBERTa-Sentinel reports 99.53 ROC-AUC on one GLC random split, but releases no
-  checkpoint and provides no credible cross-generator or cross-domain parity
-  evidence. DWT-Fusion similarly has no released detector and weaker reported
-  M4/MAGE results. Multi-Level Contextual Detection releases only supplementary
-  material. GPTZero is commercial rather than a reproducible released method.
-  [N8]
-- DivScore is specialized-domain work with a domain-distillation pipeline rather
-  than a general DW1 replacement. PhantomHunter requires several probability
-  extractors and supplies neither a detector checkpoint nor useful speed evidence.
-  Late-stage stability methods do not supply a like-for-like Binoculars result.
-  [N8]
+## Future gate
 
-## Method exclusions
+Do not replace Binoculars yet. Resolve which runnable state produced the MELD
+paper tables, then freeze a new stratified evaluation with current generators and
+attacks, separate human calibration, and per-generator, domain, language, date,
+and length-band results. Recompute MELD, Binoculars, and FastDetectGPT in the same
+software process and timing boundary.
 
-GTCL uses k-nearest-neighbor classification over retained embeddings at inference
-and is excluded as retrieval. Triospect creates summaries, simplifications, and
-multiple derived views and is excluded as rewriting/regeneration and a
-multi-view pipeline. LAPD is excluded under the strict multi-perturbation boundary
-because it uses 10,000 auxiliary categorical samples. DetectGPT, DetectNPR,
-DNA-GPT, RAIDAR, TOCSIN, DetectAnyLLM
-Reference Clustering, and other RAG/retrieval/rewrite/multi-perturbation families
-remain excluded before accuracy ranking. Their high numbers cannot override the
-deployment constraint. [N8, X2]
-
-## Disposition and future gate
-
-Do not replace Binoculars, and do not present a recent detector shortlist as
-qualified. IRM is the reproducible zero-shot control; its public variant trailed
-the stored local Binoculars score in the bounded screen. SV-Detect is only a
-possible supervised reconstruction if that future scope and label budget are
-explicitly approved. LAPD stays excluded unless the human explicitly permits its 10,000
-auxiliary categorical samples. EchoPrompt and Steer-to-Detect need released
-artifacts before any A6000 accuracy claim can be reproduced.
-
-Any future candidate must be evaluated on a frozen, stratified DW1 set, with
-per-generator, per-domain, per-language, per-date, and length-band results. It must
-include current generators and attacks, select low-false-positive thresholds only
-on separate human calibration data, and preserve Binoculars as a same-run
-comparator.
-
-A method advances beyond pilot only if it matches or improves Binoculars AUROC
-and the chosen low-false-positive operating point on the same held-out rows,
-while retaining the measured A6000 speed boundary. Paper averages alone are not
-an acceptance criterion.
-
-## Coverage and uncertainty
-
-The update prioritized 19 public 2025–2026 manuscripts and eight official
-repositories. Primary PDFs, hashes, revisions, and artifact gaps are preserved in
-[paper_artifacts.md](dw1_detector_survey_sources/paper_artifacts.md); discovery
-and robot-gate handling are in
-[search_log.md](dw1_detector_survey_sources/search_log.md).
-
-Google Scholar returned an HTTP 403 robot challenge and OpenReview challenged the
-IRM page. Neither was bypassed. The official NeurIPS proceedings, public arXiv
-API/PDFs, GitHub, and public Hugging Face APIs were used instead. Therefore this
-is a bounded primary-source study, not a claim of exhaustive Scholar coverage.
-
-Local timings are narrow feasibility screens: one machine, one software state,
-one warm-up, three repetitions, and no sustained worker contention. CUDA peak
-allocation is not total process memory. The IRM local AUROC uses a convenience
-corpus, not a production test. LAPD and SV-Detect local runs establish adapted
-cost only. These limitations support the plain conclusion: no qualifying recent
-method has demonstrated every requirement at once.
+A candidate advances only if it matches or improves Binoculars AUROC and the
+chosen low-false-positive operating point on identical held-out rows, keeps the
+two-A6000 2,048-token batch-8 fit, and remains plausibly near the fixed Binoculars
+latency without entering an excluded method family. Until then, MELD is the
+mandatory next experiment—not a deployable conclusion.

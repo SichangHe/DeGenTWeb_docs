@@ -8,9 +8,9 @@ hardware estimation. `I` marks an inference. Quotes are short searchable anchors
 the adjacent locator holds the full context. Paper-reported results are not treated
 as independent replications.
 
-The primary PDFs are retained in the established external paper collection. Full
-filenames and hashes are in `paper_artifacts.md`. Repository commits and search
-routes are in `search_log.md`.
+The primary PDFs and official snapshots are retained at the discoverable path
+documented in `paper_artifacts.md`, with a complete SHA-256 ledger. Repository
+commits and search routes are in `search_log.md`.
 
 ## 2026-08-08 accuracy-first follow-up
 
@@ -194,6 +194,163 @@ routes are in `search_log.md`.
   over retained representations. Triospect generates summaries and simplified
   versions and aggregates multiple views. They violate retrieval or
   rewrite/regeneration constraints before ranking.
+
+### N9 — MELD paper and two incompatible official artifact eras
+
+- Official sources: [arXiv 2605.06903](https://arxiv.org/abs/2605.06903), the
+  [paper-era Hugging Face revision](https://huggingface.co/anon-review-meld-2026/meld/tree/51f3ac2d4ce8de9f6f3a1eba9ca4276b077bb808),
+  and the [current v5 revision](https://huggingface.co/anon-review-meld-2026/meld/tree/453acf594d48f8c55c3a38bde396f9178516d817).
+- Preserved evidence: primary PDF; both complete immutable, anonymously
+  downloadable, MIT-licensed Hugging Face snapshots; the official commit history;
+  and the paper-era companion endpoint's anonymous HTTP 401 response. Exact files
+  and hashes are in `paper_artifacts.md` and the external collection ledger.
+- Sourced RAID comparison: the paper's public-leaderboard Table 1 gives MELD
+  AUROC/TPR-at-5-percent-FPR/TPR-at-1-percent-FPR of 99.82/99.78/99.24 over all
+  attacks and 99.85/99.76/99.40 on clean text. The clean Binoculars row is
+  84.40/78.98/69.54. MELD's training mixture includes 1.85 million RAID rows,
+  so this is a same-test comparison, not an equal-training-regime comparison.
+- Sourced held-out comparison: Table 3 reports MELD AUROC of 99.7, 99.1, 78.0,
+  100.0, 98.5, and 99.99 on HC3, MAGE, M4GT, Ghostbuster, DetectRL, and
+  MELD-eval. The same rows are 79.4/60.7/57.3/75.4/64.8/45.2 for Binoculars and
+  99.1/57.1/65.9/92.6/73.0/70.5 for Fast-DetectGPT. These are paper
+  re-evaluations, not this study's measurements.
+- Sourced low-FPR comparison: Table 4 gives overall MELD-eval TPR at one-percent
+  FPR of 99.9, versus 95.5 for ModernBERT-Detect, 17.0 for Fast-DetectGPT, and
+  0.6 for Binoculars. All are zero-shot with respect to four selected generators,
+  but the pool reuses RAID-style English domains, human seeds, and attacks; each
+  detector receives a pool-specific threshold. The paper explicitly denies that
+  this demonstrates a single transferable deployment threshold.
+- Paper architecture and cost boundary: the manuscript describes a 396-million-
+  parameter Ettin encoder, one MLP main head, and discarded auxiliary heads;
+  2,048-token training and overlapping 2,048-token evaluation chunks; and
+  training on three H200 GPUs. It supplies no inference latency, batch-8 A6000
+  memory, or end-to-end comparison with DW1 Binoculars.
+- Paper-era artifact: revision
+  `51f3ac2d4ce8de9f6f3a1eba9ca4276b077bb808` ships a 1,584,091,048-byte FP32
+  weight file and describes 396 million parameters. Its model card requires the
+  linked companion code. That endpoint returned HTTP 401 with
+  `{"error":"not_connected"}` anonymously on 2026-08-08. Guessing the missing
+  implementation would not be a faithful reproduction.
+- Reconciliation gap: the paper says 6.60 million training rows and 1.85 million
+  RAID rows, while the paper-era model card says 6.82 million and 1.91 million.
+  The manuscript calls the main head an MLP; the current v5 state instead uses a
+  token-style projection, human anchors, family prototypes, and top-fraction
+  aggregation. The artifact history therefore reflects materially different
+  states, not documentation drift that can safely be merged.
+- Current artifact: v5 release commit
+  `9b6379cdf62961a443d972fd27ff705ea9a07dd3` says it “replaces all earlier
+  checkpoints”; subsequent commits culminate in immutable revision
+  `453acf594d48f8c55c3a38bde396f9178516d817`. Its card says earlier revisions
+  held different models and “scores are not comparable across them.” It is a
+  self-contained 394,833,461-parameter FP32 detector that reads the first 2,048
+  tokens and warns against inputs under 100 words. The shipped raw-score
+  thresholds are 1.915662 at nominal one-percent FPR and -0.468027 at nominal
+  five-percent FPR.
+- Decision: the paper establishes that MELD is the most important recent
+  scientific lead, and the current artifact is runnable, but v5 measurements
+  cannot validate paper-era accuracy. Until the paper/checkpoint mapping and a
+  frozen like-for-like accuracy evaluation are resolved, MELD is an explicit
+  blocker rather than a recommendation.
+
+### N10 — ICLR 2026 Markov-informed calibration
+
+- Official sources: [ICLR 2026 paper, arXiv 2602.08031](https://arxiv.org/abs/2602.08031)
+  and [official repository at commit](https://github.com/tmlr-group/MRF_Calibration/tree/a21add14e162943907c1af01ddbd299db8b7faf8).
+- Sourced method: a supervised two-by-two Markov random-field layer calibrates
+  token-level detector scores. The paper trains its weights on labeled text from
+  a named generator and dataset, then tests other generators. It is a plug-in,
+  not a new standalone detector.
+- Sourced Binoculars rows: average AUROC changes from 94.85 to 94.91 on Essay,
+  86.99 to 91.41 on Reuters, and 73.17 to 75.49 on DetectRL. These within-paper
+  gains do not make Binoculars uniformly competitive with the strongest current
+  detector rows.
+- Artifact and cost boundary: the public source trains and saves a state per
+  dataset; no trained state is shipped. The paper calls the sparse calibration
+  overhead negligible, but does not give a 2,048-token two-A6000 whole-detector
+  comparison with DW1 Binoculars. Its experiments use GPT-2-family proxies and
+  1,024-token inputs.
+- Decision: retained as a released calibration method, not a qualifying detector.
+  A new supervised calibration state and a same-run base-detector benchmark would
+  be required.
+
+### N11 — Exons-Detect
+
+- Official sources: [arXiv 2603.24981](https://arxiv.org/abs/2603.24981) and
+  [official repository at commit](https://github.com/Xiaoweizhu57/Exons-Detect/tree/239862c0a9bb580b7cf883b5efdfab1570bb0e8f).
+- Sourced matched comparison: Table 1 reports Exons-Detect AUROC of
+  92.43/90.67/90.46/94.98 on M4, DetectRL multi-LLM, DetectRL multi-domain, and
+  RealDet, averaging 92.14. Same-table Binoculars is
+  90.00/83.21/77.45/93.64, averaging 86.08; Fast-DetectGPT averages 85.07.
+- Method exclusion: the final score incorporates an “ideal AI sequence” built by
+  choosing maximum-probability tokens under the proxy. The paper calls this the
+  mutation-repair mechanism. Removing that term drops average AUROC from 92.14
+  to 87.76. Constructing and scoring a generated replacement sequence is an
+  essential regeneration stage, so the method is excluded before ranking.
+- Artifact and cost boundary: the paper caps inputs at 1,024 tokens, uses one
+  A100 80 GB in FP32, and reports sub-0.8-second latency around 300 tokens. The
+  public repository is a cleaned scoring-math release; its README says its tests
+  do not perform end-to-end model downloads, and it ships neither the paper's
+  mutation-repair construction nor detector states or thresholds. It cannot
+  reproduce the paper accuracy anonymously as released.
+- Decision: high like-for-like paper accuracy is retained, but the method is
+  excluded as regeneration and is not an A6000 accuracy or speed candidate.
+
+### N12 — DACTYL/Vanguard released watchlist
+
+- Official sources: [PAN 2026 notebook, arXiv 2607.17382](https://arxiv.org/abs/2607.17382),
+  [Vanguard ModernBERT-large artifact](https://huggingface.co/ShantanuT01/vanguard-ai-text-detector/tree/82306100e5a8f1d31e495579d740ac7ff6f62336),
+  and [Gradient DeBERTa artifact](https://huggingface.co/ShantanuT01/gradient-ai-text-detector/tree/c2e282cedc8d4ef8dd30d1cc1098d297b26ce258).
+- Sourced accuracy: the paper's MCGrad-calibrated ModernBERT ranks second on PAN
+  2026 with AUROC 0.993 and a 0.974 mean over five unlike metrics. Its released
+  ModernBERT model card reports 0.9475 mean AUROC and 0.8493 macro F1 across its
+  listed out-of-distribution sets. The composite 0.974 is not classification
+  accuracy and cannot be compared numerically with DW1 AUROC.
+- Artifact and deployment boundary: both official checkpoints are public and
+  MIT-licensed; the ModernBERT weight is about 1.58 GB. Neither the paper nor
+  card supplies a same-row Binoculars or FastDetectGPT comparison, low-FPR
+  transfer result, 2,048-token batch-8 memory, or A6000 timing.
+- Decision: retained as a genuinely released 2026 supervised watchlist item. It
+  needs a frozen DW1 accuracy and operating-point run before feasibility testing
+  can support promotion.
+
+### M7 — Local MELD v5 feasibility and bounded accuracy screen
+
+- Durable raw evidence: [benchmark_meld_stdout.txt](benchmark_meld_stdout.txt),
+  [benchmark_meld_stderr.txt](benchmark_meld_stderr.txt),
+  [score-level CSV](benchmark_meld_scores.csv), environment manifests, model-file
+  hashes, and [benchmark source](benchmark_meld.py). The initial Python 3.14
+  incompatibility is retained separately; the successful isolated Python 3.13
+  environment is fully listed.
+- Measured architecture: exact current revision
+  `453acf594d48f8c55c3a38bde396f9178516d817`, 394,833,461 parameters, FP32,
+  transformers 4.57.3, torch 2.9.1+cu126, and two 49,140 MiB RTX A6000 cards.
+- Measured 2,048-token cost over five repetitions: one-GPU batch 8 was 1.200715
+  seconds per batch, 0.150089 per document, and 2,682.95 MiB peak allocated.
+  Two concurrent replicas, four documents per GPU, were 0.626530 seconds per
+  batch, 0.078316 per document, and 2,107.07/2,098.52 MiB peak allocated. That
+  two-card batch latency is 0.0810 of M1's fixed 7.732507-second DW1 Binoculars
+  batch. Model load, tokenization, and input transfer are excluded from both
+  timing boundaries.
+- Direct historical screen: on the same seed-42 500-human/500-generated rows used
+  for prior controls, MELD AUROC was 0.913200, versus stored Binoculars 0.959486
+  and FastDetectGPT 0.953620. The sample includes 291 texts under the v5 card's
+  100-word minimum and is retained for continuity, not as the main screen.
+- Length-eligible screen: 4,907 available texts have at least 100 words. A fixed
+  seed selects 1,000 human calibration texts; the disjoint evaluation has 2,315
+  human and 1,592 generated texts. Evaluation AUROC is 0.955271 MELD, 0.977899
+  stored Binoculars, and 0.968952 stored FastDetectGPT. At a locally calibrated
+  one-percent human FPR, evaluation FPR/TPR is 0.00821/0.90201 for MELD,
+  0.01166/0.66080 for Binoculars, and 0.01037/0.75503 for FastDetectGPT.
+- Threshold-transfer failure: v5's shipped nominal one-percent threshold produces
+  9.0-percent FPR on calibration human text and 8.60-percent FPR on evaluation
+  human text. Its nominal five-percent threshold produces 24.1 and 23.46 percent.
+  Locally selecting a threshold is therefore essential on this convenience
+  corpus.
+- Boundary: the corpus is available rather than stratified, generated rows are
+  not a new held-out current-generator pool, and comparator scores are historical
+  rather than new same-process forwards. The locally calibrated tail TPR is
+  promising, but the lower AUROC, non-transferring shipped thresholds, and
+  paper-era/v5 mismatch block a recommendation.
 
 ### M4 — Local IRM screen
 
