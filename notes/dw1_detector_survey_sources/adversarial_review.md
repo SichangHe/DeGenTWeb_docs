@@ -267,3 +267,223 @@ the candidate bindings; those bookkeeping changes do not alter reviewed
 scientific or email content.
 
 Final verdict: **PASS — no P1, P2, or P3 findings.**
+
+## Review 6 — FAIL
+
+- reviewer identity: `/root/composite_semantic_adversarial_review`, a fresh
+  distinct read-only reviewer
+- timestamp recorded after receipt: `2026-08-08T21:48:53-07:00`
+- scope: the fully staged generalized composite repair; exact result ledgers and
+  checker; composite source cards; Task 3 primary evidence; benchmark source,
+  model files, execution records, and replay path; external collection;
+  previously accepted constraints, conclusion, and unsent correction
+- reviewed then-current candidate-ledger SHA-256:
+  `90e9e65ca199f0bfd5cb21abf87f1b7be1cfe2e8c8792c77c58c1c89a9940b22`
+
+### Findings
+
+1. **P1 — generalized hidden-result omissions still passed.** Only Task 3 and
+   Counter Turing had immutable required result IDs; the other 80 rows were
+   protected only by mutable counts. The reviewer removed
+   `2605.15518:mdeberta-classifier`, changed its expected count from two to one,
+   and proved that `validate_composites` still passed. Every expanded source
+   needed an exact result-ID set and this mutation needed a regression control.
+2. **P1 — external evidence was not frozen or fully manifest-bound.** The ledger
+   had 246 entries but omitted live `papers/2505.24523.pdf` and
+   `papers/canonical_detectllm_2306.05540.pdf`; the former was a required
+   composite parent. The collection root, `papers/`, the added PDF, and the
+   manifest were writable.
+3. **P1 — two primary-paper identities were wrong.** The two FastDetectGPT child
+   rows cited unrelated arXiv 2305.16783 instead of 2310.05130. DetectLLM result
+   URLs used correct 2306.05540, but inherited artifact names identified
+   unrelated 2306.05594 bytes as DetectLLM.
+4. **P1 — the benchmark was not replayable from preserved paths.** The harness
+   expected `detectrlx_xlm`, `desklib`, and `modernbert` below a transient model
+   root, while the collection stored only long revision-bearing directories and
+   documented no deterministic mapping.
+5. **P2 — source-card labels were not bound.** Any nonempty string, including
+   `does-not-exist`, passed because no parent-to-card mapping was validated.
+6. **P2 — Task 3 comparability was compressed.** E1 needed explicit present or
+   absent text length, generators/domains, training and calibration details, and
+   the split distinction that Leidos v1.0.3 leads non-adversarial results while
+   v1.0.2 leads adversarial results.
+
+### Verified by reviewer 6
+
+- the then-current candidate ledger validated from `docs/notes/`;
+- the score verifier passed all 20 metric and operating-point checks;
+- the staged diff had no whitespace errors; and
+- the email mechanical subject/body equality passed and delivery remained
+  **NOT SENT**.
+
+### Resolutions
+
+- Finding 1: `coverage_expected_result_ids.tsv` independently enumerates all 96
+  exact parent/result pairs and is immutably bound by a checker-constant SHA-256.
+  Every one of the 19 expanded parents must match its exact set. A regression now
+  deletes mDeBERTa and lowers the mutable count; it fails as required.
+- Finding 2: the external manifest now covers 248 files, including both missing
+  PDFs, at SHA-256
+  `65275647408127937e27e2869ba6b6e0e3872ee83bfe8bd03d040ec6380f4967`.
+  All entries pass and a permission audit finds zero writable files or
+  directories.
+- Finding 3: both FastDetectGPT rows cite 2310.05130. Correct DetectLLM
+  2306.05540 is retained under its own filename and hash; the two inherited
+  2306.05594 files remain only for ledger continuity and are explicitly marked
+  unrelated and excluded from evidence.
+- Finding 4: `prepare_composite_model_layout.sh` verifies all 25 exact model
+  files, refuses an existing target, and creates the three deterministic links.
+  Its successful layout replay and the full benchmark replay command are
+  durable.
+- Finding 5: a hard-coded map binds every expanded parent to exactly one E-card;
+  the `does-not-exist` mutation is a regression failure.
+- Finding 6: E1 now records the common RAID generator/domain/length/calibration
+  boundary and per-system training, length, artifact, and timing evidence or
+  absence. The two Leidos split winners are explicit.
+
+Reviewer 6 final verdict: **FAIL** until these defects are repaired, the candidate
+and external ledgers are refreshed, and a different fresh reviewer passes. This
+FAIL remains preserved and is not rewritten as a PASS.
+
+## Review 7 — FAIL
+
+- reviewer identity: `/root/composite_semantic_fresh_review`, a different fresh
+  read-only reviewer
+- timestamp recorded after receipt: `2026-08-08T22:22:55-07:00`
+- scope: the fully staged generalized composite repair, its exact 96-result
+  inventory and checker, all no-qualifier composite classes, source cards,
+  accepted constraints, and unsent correction
+
+### Finding
+
+1. **P1 — the composite selection rule still hid named high-score results.**
+   Cross-dataset evaluation `2604.16607` was classified as having zero
+   qualifying children because all means were below 0.90, even though Table 2
+   names twelve variants with a best-dataset AUROC from 0.92 to 1.00, including
+   Binoculars, three FastDetectGPT proxies, two Zippy variants, four BiScope
+   variants, and two DeTeCtive variants. Personalization benchmark `2510.12476`
+   likewise had zero children even though Table 2 reports six named methods at
+   0.9312–0.9899 AUROC on Cohere or ChatGPT aggregates. The aggregate-only
+   exception contradicted the stated rule and recreated the semantic blind spot
+   before the exact-ID checker: that checker was sound only for parents already
+   selected for expansion.
+
+### Required resolution
+
+Expand every named high cell into an individual source-mapped disposition, or
+give a result-specific false-positive reason; remove the aggregate-only escape
+hatch; bind the new exact IDs; add a regression for reclassifying a known
+high-cell parent as a no-qualifier; refresh all generated/integrity artifacts;
+and obtain another fresh review.
+
+### Resolution
+
+The rule now treats every named detector/submission version with a reported
+evaluation/test metric at or above 0.90 on any aggregate, dataset, generator,
+domain, prompt group, language, or fixed-threshold slice as qualifying discovery
+evidence. It preserves the weak mean/overall/cross-slice result in that same row
+instead of suppressing the child. In addition to the reviewer-named 18 rows,
+the renewed audit expands five high-cell attack-study detectors, 39 English and
+multilingual shared-task submission states, and one high-validation/system-source
+state. A final cross-source consistency pass also expands training/precision and
+author-role bias rows; the independent inventory now binds all 180 exact IDs,
+and a negative
+control reclassifies `2604.16607` as a no-qualifier while deleting its children;
+that mutation must fail.
+
+That 180-row state was not treated as final. A closing table-by-table pass over
+all 33 sources found 61 more qualifying configurations, including additional
+Task 3 versions and controls, high length/attack/domain/language slices, older
+score baselines, and author-role-bias fitted models. The exact inventory now
+binds 241 result IDs from 26 expanded parents; the other seven parents retain
+source-specific inspected-scope reasons. LuxVeri, MOSAIC, GLTR, HC3, DetectGPT,
+Neighborhood, ReCaLL, DC-PDD, and LLM-Deviation primary evidence is preserved.
+The source check also rejected two provisional identifiers that resolved to
+unrelated algebraic-geometry and radar papers before the external collection was
+refrozen at 274 manifest entries.
+
+Reviewer 7 final verdict: **FAIL** until these defects are repaired and a
+different fresh reviewer passes. This FAIL remains preserved and is not
+rewritten as a PASS.
+
+## Review 8 — FAIL
+
+- reviewer identity: `/root/final_semantic_coverage_adversarial_review`, a new
+  read-only reviewer
+- timestamp recorded after receipt: `2026-08-08T23:31:40-07:00`
+- scope: the staged 241-result repair, all 33 composite sources, exact ledgers,
+  actual E-card evidence, prior scientific/integrity constraints, and frozen
+  correction
+
+### Findings
+
+1. **P1 — the required filename was absent from the correction subject.** The
+   human and mechanical subjects said `Correction: newest DW1 detector evidence`
+   instead of containing the required literal `dw1_detector_survey.md`.
+2. **P2 — the E-card check bound only a TSV label.** The checker compared each
+   result's `source_card` string to a hard-coded label but never read
+   `coverage_composite_dispositions.md`. Deleting or misassociating the actual
+   card evidence could therefore pass.
+
+### Verified by reviewer 8
+
+- both the 66-entry candidate ledger and 274-entry external ledger validated;
+- the audit deterministically regenerated 119 publication rows, 33 composite
+  reviews, and 241 embedded results;
+- independent sampling of all seven no-qualifier PDFs and Task 3 Tables 4–5
+  supported the documented 20-result Task 3 set; and
+- no file was edited and no correction was sent.
+
+### Resolutions
+
+- The human-readable and mechanical subjects now say
+  `Correction: dw1_detector_survey.md evidence`; the body and NOT-SENT gate are
+  unchanged.
+- Every expanded Markdown heading now contains a machine-readable marker with
+  its E-card label, parent, and exact result IDs. The audit parses and SHA-256-
+  binds that file, requires its 26 cards and 241 IDs to match both ledgers, and
+  rejects absent-card, wrong-parent, wrong-result-set, and wrong-label mutations.
+  The audit now passes eleven regression and negative controls.
+
+Reviewer 8 final verdict: **FAIL** until these repairs are refrozen and a
+different fresh reviewer passes. This FAIL remains preserved and is not
+rewritten as a PASS.
+
+## Review 9 — PASS
+
+- reviewer identity: `/root/final_card_bound_semantic_review`, a different
+  fresh read-only reviewer
+- timestamp recorded after receipt: `2026-08-08T23:44:08-07:00`
+- scope: the fully staged 241-result repair, all 33 composite sources, the
+  actual Markdown E-card bindings and eleven controls, the correction subject,
+  every accepted scientific/integrity constraint, and the no-send gate
+
+### Independent verification
+
+- The exact audit replay was byte-identical: 119 publications, 33 composite
+  sources, 241 child results, and eleven passing regression/negative controls.
+  The checker reads and SHA-256-binds the actual Markdown E-card file, parses
+  its parent and exact result-ID markers, and rejects removed, mis-parented,
+  wrong-set, and wrong-label cards.
+- The reviewer independently checked the 20 Task 3 rows, eight Counter Turing
+  rows, all seven no-qualifier source scopes, the exact inventory, primary-paper
+  mappings, and the FastDetectGPT/DetectLLM identities. No hidden qualifying
+  system or unsupported primary mapping produced a P1 or P2 finding.
+- The 66-entry candidate ledger and 274-entry external ledger validated. The
+  external collection had no missing, extra, or writable path; every staged
+  path was owned and its index bytes matched the working bytes.
+- The accepted MELD reconciliation, two-A6000 evidence, three-model benchmark
+  and replay mapping, metric checks, public-only boundary, feasibility/speed
+  constraints, bounded conclusion, and review chain remained intact.
+- The subject is exactly `Correction: dw1_detector_survey.md evidence`; its
+  human and mechanical subject/body copies and bound hashes agree. The draft
+  remains **NOT SENT**.
+
+The reviewer noted only an optional P3 wording nit: E1's phrase “eight
+qualifying results” could be read ambiguously beside its broader 20-result
+inventory, but the surrounding text defines the two scopes and the accounting
+is exact. No change was required.
+
+Reviewer 9 final verdict: **PASS — no P1/P2 findings**. This is an internal
+review verdict only, not the required new one-shot evaluator verdict and not
+delivery authorization. The reviewer made no edits and sent nothing.

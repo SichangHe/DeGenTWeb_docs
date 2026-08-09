@@ -339,7 +339,7 @@ NEULIF inside a mixed catch-all. The three raw exact-phrase exports were not
 refetched or edited. A new row-level audit treats their frozen title and abstract
 text as the discovery surface and the arXiv identifier as the unique mapping key.
 
-The exact project-neutral command was:
+The initial row-level project's exact command was:
 
 ```text
 uv run --isolated --no-project --python 3.13 python audit_coverage.py \
@@ -438,8 +438,149 @@ repository-metadata, and commit-metadata hashes are in the external manifest;
 primary and archive anchors are repeated in source card N15 and
 `paper_artifacts.md`.
 
-The explicit export table now has 68 identifiers and the targeted carry-forward
-table has three. A mechanical filename audit found a retained primary PDF for all
-71. The external ledger now covers 150 files and has SHA-256
+At that review stage, the explicit export table had 68 identifiers and the
+targeted carry-forward table had three. A mechanical filename audit found a
+retained primary PDF for all 71. That historical external ledger covered 150
+files and had SHA-256
 `1b92b652294562b6f1abbad3064c2c0f2b0fa2c49ff23e30b3937d5e9cdba67c`;
-all entries verified before the collection was restored to read-only.
+all entries verified before that candidate was restored to read-only.
+
+## Generalized composite-source repair: 2026-08-08
+
+The next evaluator showed that publication-level semantic flags still allowed an
+overview or benchmark disposition to hide named high-score systems. The three
+raw Atom exports remained unchanged. The generalized command is:
+
+```text
+uv run --isolated --no-project --python 3.13 python audit_coverage.py \
+  --map coverage_row_dispositions.tsv \
+  --composite-sources coverage_composite_sources.tsv \
+  --embedded-results coverage_embedded_results.tsv \
+  --expected-results coverage_expected_result_ids.tsv \
+  --source-cards coverage_composite_dispositions.md \
+  --output coverage_semantic_audit.tsv \
+  --embedded-output coverage_embedded_result_audit.tsv \
+  --report coverage_semantic_audit_report.txt \
+  --environment coverage_semantic_audit_environment.txt
+```
+
+The unchanged exports contain 204 raw entries and 119 unique 2025–2026
+publications. The row layer has 106 semantic flags, 69 explicit dispositions, and
+50 allowlisted non-candidate classes. Title and publication-class rules select 33
+composite sources. At that repair stage, 24 expanded to 180 named qualifying
+system/version results and nine retained table/section-specific no-qualifier or
+parent-only reasons. Eleven regression and negative controls pass, including removal of the
+whole Task 3 review, removal of only CNLP-NITS, a missing non-anchor child with a
+lowered mutable count, reclassification of a known high-cell parent as a
+no-qualifier, an invalid source-card label, removal of a real E-card, wrong
+parent/result bindings in a real E-card, an analogous count mismatch, and weak
+and complete negative-source controls. The hand-reviewed exact-result inventory is
+SHA-256-bound by the checker, so deleting an inventory row is not an accepted
+way to make a source disappear.
+
+The audit also parses the machine-readable marker under every E-card heading in
+`coverage_composite_dispositions.md`. The Markdown file is checker-hash-bound;
+each marker must bind its label and parent to exactly the same result-ID set as
+the independent inventory and result ledger. A label-only string cannot stand
+in for missing or misassociated source-card evidence.
+
+A fresh adversarial reviewer found that the earlier aggregate-only rule still
+hid Table 2 variants in arXiv 2604.16607 and 2510.12476. Removing that escape
+hatch added their 18 named systems, then a full reread added five qualifying
+attack-study detector states, 39 Task 1 English/multilingual submission states,
+and the Unibuc system paper's high validation/source result. A final consistency
+pass adds two Urdu training/precision crossings plus five public and fourteen
+study-fitted systems from the author-role bias source. Each new row binds
+the high slice to its weak mean, personalized, adversarial, or official aggregate
+result. Twelve ACL Task 1 primary papers and official NeurIPS BiScope/DeTeCtive
+PDFs were downloaded anonymously and preserved; overview-stated manuscript
+absence remains explicit for teams without a primary paper.
+
+A closing table-by-table pass applied the same rule without source-specific
+exceptions. It added 61 configurations that the preceding repair still hid:
+additional Task 3 versions and controls, high length/attack/domain/language
+slices, older score baselines, the author-role-bias study's fitted classifiers
+and ensembles, and its mdok comparison. The final inventory therefore contains
+241 exact result IDs from 26 expanded sources; seven sources remain
+no-qualifier only after their inspected tables and non-candidate high values are
+stated explicitly. Each isolated high cell retains its weaker mean, overall,
+other-class, or official aggregate in the same row. The checker binds the exact
+241-ID set rather than trusting per-parent counts.
+
+### Task 3 and primary-system resolution
+
+The Task 3 overview was downloaded anonymously from arXiv 2501.08913. Its four
+primary system papers were downloaded from the public ACL Anthology endpoints
+`2025.genaidetect-1.38`, `.39`, `.40`, and `.42`. Tables 4–5 and the bibliography
+were inspected together; four Leidos versions, Pangram, USTC-BUPT, ALERT, and
+CNLP-NITS now have separate result rows. The Pangram paper describes preprocessing
+before tokenization but does not specify whether deployed inference transforms
+the target, so its closed-state gap—not a guessed method exclusion—governs its
+disposition. CNLP's attack-conditioned target normalization/rewrite is an
+inference-stage exclusion.
+
+`coverage_primary_search_log.md` preserves the exact anonymous public OpenAlex,
+DBLP, and GitHub commands and result summaries for USTC-BUPT and the three
+Counter Turing systems without cited primary papers. The returned JSON is in the
+external collection. A DBLP HTTP 500 for Llama_Mamba is explicitly not counted as
+negative evidence. No Scholar challenge or authenticated source was used.
+
+A post-freeze primary-source identity check found two narrow preservation errors
+before commit. Composite parent 2505.24523 lacked its PDF; the exact public arXiv
+PDF was added. Two embedded FastDetectGPT rows pointed to unrelated arXiv
+2305.16783 and now cite the correct 2310.05130 primary paper. DetectLLM rows
+already cited correct arXiv 2306.05540, but two inherited external filenames used
+unrelated 2306.05594. The correct 2306.05540 PDF was added and the unrelated bytes
+were retained only for ledger continuity, explicitly disclaimed in
+`paper_artifacts.md`. These checks used anonymous arXiv API/PDF endpoints and did
+not alter the accepted detector conclusions.
+
+### Public composite-detector states and execution
+
+Anonymous Hugging Face metadata and files fixed three complete revisions:
+
+- `WUJUNCHAO/DetectRL-X-XLM-RoBERTa-Detector-All` at
+  `76649a0257a812a81cf36b5de9cc5f2430aeaa7f`;
+- `desklib/ai-text-detector-v1.01` at
+  `5fdea974cd4287c61674951ec78803aa274e2fb7`; and
+- `GeorgeDrayson/modernbert-ai-detection` at
+  `08f218f1d05791ad99c26ede421f69c781a50360`.
+
+Paper-linked official GitHub repositories were resolved through anonymous API
+metadata and archived at exact commits for DetectRL-X, Desklib, C-ReD, ALHD,
+model collapse, and ELFEN. Their identities and hashes are in
+`paper_artifacts.md`; source is never substituted for a missing trained state.
+
+The successful screen command was:
+
+```text
+cd /ssd1/sichangheagent/dw1/docs
+/tmp/dw1-meld-venv/bin/python \
+  notes/dw1_detector_survey_sources/benchmark_composite_detectors.py \
+  --model-root /tmp/dw1-rev3-models \
+  --scores-out /tmp/benchmark_composite_detectors_scores.csv
+```
+
+Raw stdout/stderr and the exact 8,022-row CSV are retained. The first attempt
+completed DetectRL-X and Desklib but failed when ModernBERT's public
+`reference_compile=true` optimization encountered a two-replica FX/Dynamo error
+under Transformers 4.57.3. The successful run disables only that in-memory
+optimization flag; weights, tokenizer, forward mathematics, and score semantics
+remain unchanged. Both attempts are preserved. A separate verifier reconstructs
+the seeded splits and recomputes all AUROCs and operating points from the score
+CSV. Ruff, basedpyright, model-file checks, packages, interpreter, and GPU details
+are durable beside the harness.
+
+### Final external freeze
+
+The final expanded external collection contains 274 files other than its ledger.
+The post-review additions are the missing composite parent 2505.24523, the
+correctly identified DetectLLM 2306.05540 PDF, twelve Task 1 primary system
+papers, official BiScope and DeTeCtive PDFs, nine closing-pass primary PDFs,
+and the immutable DC-PDD archive plus metadata; the README correction is
+included within the same manifest. Its `MANIFEST.sha256` has SHA-256
+`6aeb1d786e1c91eb6c7e3f0723d129a6a562586c57024227c7082bbbdf5f4529`.
+All 274 entries verified, and a permission audit found zero writable collection
+files or directories. The collection contains only public anonymous evidence;
+no PB, human, authenticated, persistent browser/session, robot-bypass, or
+human-owned tmux state was accessed.

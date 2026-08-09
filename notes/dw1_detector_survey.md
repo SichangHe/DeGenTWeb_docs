@@ -41,6 +41,22 @@ Three linked source repositories are preserved, but each omits a checkpoint.
 None supplies matched low-FPR and timing evidence or changes the conclusion.
 [N15]
 
+A generalized second-level audit then found that publication-level dispositions
+could still hide systems inside overviews, benchmarks, comparative studies, and
+shared-task reports. A fresh adversarial pass then caught the same failure one
+level deeper: weak means and official aggregates had suppressed named
+per-dataset, generator, domain, prompt, and language cells as high as 1.00. The
+final audit reviews 33 composite publications and maps 241 qualifying named
+system/version results individually. The repaired Task 3 card
+separates four Leidos versions, Pangram, USTC-BUPT, ALERT, and CNLP-NITS and
+preserves four primary system papers plus USTC-BUPT's explicit primary-paper
+absence. Three complete public checkpoints surfaced by this repair were screened.
+DetectRL-X X-Rob and ModernBERT trail badly; Desklib v1.01 reaches 0.9751 AUROC
+and 0.8964 TPR at a locally calibrated one-percent FPR, versus stored Binoculars
+at 0.9779 and 0.6608. Desklib is fast and promising at the selected tail, but its
+overall AUROC remains 0.0028 below the incumbent on a convenience corpus with
+historical comparators. It is a runnable follow-up, not a replacement. [N17, M8]
+
 The corrected disposition is:
 
 1. **Keep DW1 Binoculars.** No replacement has passed every fixed accuracy,
@@ -49,21 +65,27 @@ The corrected disposition is:
 2. **Make MELD the first candidate after provenance is resolved.** V5 passes the
    bounded memory and speed screen but not the accuracy/comparability gate. Its
    paper-era accuracy may not be attributed to v5. [N9, M7]
-3. **Retain DACTYL/Vanguard as a released supervised watchlist item.** Its PAN
+3. **Retain Desklib v1.01 as a runnable follow-up.** It fits and is fast on two
+   A6000s, with strong locally calibrated tail recall, but narrowly misses the
+   incumbent AUROC and uses a shorter 768-token path on non-frozen local data.
+   [E9, M8]
+4. **Retain DACTYL/Vanguard as a released supervised watchlist item.** Its PAN
    result and public ModernBERT checkpoint are credible, but it lacks a matching
    Binoculars/FastDetectGPT row, low-FPR transfer evidence, and the fixed A6000
    runtime basis. [N12]
-4. **Reject LM²otifs and NEULIF individually.** Their headline values deserve
+5. **Reject LM²otifs and NEULIF individually.** Their headline values deserve
    preservation, but method, generalization, artifact, low-FPR, two-A6000, and
    timing evidence do not satisfy the fixed screen. [N13, N14]
-5. **Reject the seven other promoted high-claim systems individually.** Their
-   primary papers and three linked source releases are preserved, but narrow
-   task/test boundaries, missing trained state, low-FPR evidence, and timing
-   prevent promotion. [N15]
-6. **Retain IRM as the runnable recent zero-shot control and SV-Detect as
+6. **Keep all composite-source children individually visible.** The 241 result
+   rows include the earlier seven promotions and every qualifying Task 3,
+   Counter Turing, benchmark, comparison, and shared-task result, including high
+   narrow slices paired with their weak overall results. Missing state, scope,
+   method, accuracy, or comparability blocks each non-control result except
+   Desklib's follow-up status. [N15, N17, E1–E26]
+7. **Retain IRM as the runnable recent zero-shot control and SV-Detect as
    reconstruction-only evidence.** Their previously accepted evidence remains
    unchanged. [N2, N3, M4, M5]
-7. **Keep LAPD, Exons-Detect, GTCL, and Triospect excluded.** Their attractive
+8. **Keep LAPD, Exons-Detect, GTCL, and Triospect excluded.** Their attractive
    numbers cannot override the fixed multi-perturbation, regeneration, retrieval,
    and rewriting exclusions. [N1, N8, N11, M6]
 
@@ -197,6 +219,51 @@ mandatory for the next evaluation, but blocked now.
 
 ## Other recent high-accuracy lanes
 
+### Composite overviews, benchmarks, and public states
+
+The generalized semantic audit treats 33 publications as composite sources in
+addition to mapping all 119 export rows. Twenty-six sources contain 241
+qualifying named results. Every child has a metric scope, primary source or
+bounded absence sentinel, artifact status, and explicit disposition; the other
+seven sources have a source-specific inspected scope and no-qualifier reason.
+The machine audit binds an independent exact 241-ID inventory
+and fails on a missing
+child even when its mutable count is lowered, wrong parent or E-card, generic
+catch-all, or missing evidence field. Its eleven regression controls include the
+exact predecessor Task 3 omission, the generalized missing-result mutation, and
+reclassification of a known high-cell parent as a no-qualifier, plus deletion
+or misbinding of a real E-card. [N17]
+
+Task 3 reports TPR at five-percent FPR on non-adversarial/adversarial RAID-derived
+tests. The four Leidos rows are 99.4/97.2, 99.3/97.7, 99.2/97.6, and 99.1/95.7
+percent: v1.0.3 leads the non-adversarial split, while v1.0.2 ties Pangram's
+adversarial lead. Pangram is 99.3/97.7; USTC-BUPT 98.1/92.7; ALERT 91.8/82.6;
+and CNLP 90.5/41.6. These are matched known-generator/domain results with
+per-domain threshold searches, not DW1's frozen transferable calibration.
+Leidos, Pangram, ALERT, and CNLP primary papers are preserved.
+USTC-BUPT has no separate paper or state after bounded public exact-team searches.
+None exposes a frozen qualifying detector state. CNLP's attack-conditioned target
+normalization/rewrite violates the method boundary; Pangram does not specify
+whether its reported preprocessing transforms deployed inference targets, so it
+is not misclassified as an inference rewrite. [E1]
+
+The only scientifically meaningful new execution involved three complete public
+checkpoints:
+
+| State and released limit | Evaluation AUROC | Evaluation FPR/TPR at locally calibrated 1% FPR | Two-A6000 batch seconds | Decision |
+| --- | ---: | ---: | ---: | --- |
+| DetectRL-X X-Rob, 512 | 0.953253 | 0.00907 / 0.27136 | 0.028899 | Runnable, accuracy rejected |
+| Desklib v1.01, 768 | 0.975080 | 0.00907 / 0.89636 | 0.285271 | Runnable follow-up; not a replacement |
+| ModernBERT, 2,048 | 0.833729 | 0.01037 / 0.00628 | 0.300674 | Runnable, accuracy rejected |
+| Stored Binoculars, historical comparator | 0.977899 | 0.01166 / 0.66080 | 7.732507 | Incumbent |
+| Stored FastDetectGPT, historical comparator | 0.968952 | 0.01037 / 0.75503 | not rerun | Control |
+
+All candidates fit comfortably on two A6000s and are plausibly near-Binoculars
+speed. Their release limits differ, however, and the accuracy corpus is neither a
+new frozen current-generator evaluation nor a same-process comparator run.
+Desklib's strong calibrated tail recall warrants follow-up, but it does not pass
+the fixed match-or-improve-over-Binoculars AUROC gate. [M8]
+
 ### Released watchlist: DACTYL/Vanguard
 
 The PAN 2026 DACTYL system reports 0.993 AUROC and a 0.974 mean over AUROC, F1,
@@ -305,10 +372,13 @@ does not prove the fixed A6000 screen. Both remain unreproduced watchlist claims
 | Candidate | Best relevant evidence | Decisive mismatch | Disposition |
 | --- | --- | --- | --- |
 | MELD | Paper RAID clean 99.85 AUROC and 99.40 TPR at 1% FPR vs Binoculars 84.40/69.54; current v5 is released and fast | Paper/current states explicitly incomparable; v5 AUROC trails stored comparators; shipped thresholds fail local transfer | First blocker for a future frozen evaluation; not recommended |
+| Desklib v1.01 | Public state; local 0.9751 AUROC and 0.8964 TPR at locally calibrated 1% FPR; 0.2853-second two-card batch | AUROC narrowly trails stored Binoculars 0.9779; 768-token RAID-trained path; convenience corpus and historical comparator | Runnable follow-up; not recommended |
+| DetectRL-X X-Rob | Public state; 0.0289-second two-card batch | Local 0.9533 AUROC and only 0.2714 TPR at calibrated 1% FPR | Accuracy rejected |
+| Model-collapse ModernBERT | Public state; 2,048-token 0.3007-second two-card batch | Local 0.8337 AUROC and 0.0063 TPR at calibrated 1% FPR | Accuracy rejected |
 | DACTYL/Vanguard | Released ModernBERT; PAN AUROC 0.993 | Supervised challenge result; no matched Binoculars, low-FPR, length, memory, or speed row | Released watchlist |
 | LM²otifs | In-domain 0.98 accuracy/1.00 AUC vs same-table Binoculars 0.97/0.99 | Cross-domain 0.79 vs 0.95; nearest-neighbor fallback; no state or comparable cost | Excluded/rejected |
 | NEULIF | In-domain CNN 97% accuracy and 0.9951 ROC-AUC; reported 25 MB | One under-specified corpus split; no matched comparator, state, low-FPR, or reproducible timing | Unreleased in-domain claim |
-| Seven promoted high-claim systems | Up to 1.0 shared-task F1; three public source repositories | Narrow or tiny tests; no trained checkpoint, fixed low-FPR comparison, or reproducible timing | Individually retained/rejected |
+| 241 composite-source results | Up to 1.0 on reported F1, accuracy, precision, TPR, or AUROC slices; exact source/artifact disposition per named system/version | Narrow, shifted, language-specific, closed, missing-state, excluded-method, or weaker mean/overall result except Desklib follow-up | Individually accounted; no hidden promotion |
 | IRM | Best paper pair beats matched Binoculars on three DetectRL AUROCs | Best pair gated; anonymous public pair trails stored Binoculars locally | Runnable control |
 | SV-Detect | 99.83–100 matched-family reported AUROC | No trained detector state; supervised setting; local run is reconstruction only | Reconstruction evidence |
 | LAPD | 92.37 average vs same-pair Binoculars 89.72; measured near-identical cost | 10,000 auxiliary categorical samples | Excluded by method |
@@ -324,23 +394,25 @@ within each source and does not rank numbers across different rows.
 ## Coverage, preservation, and uncertainty
 
 The frozen evidence includes three raw date-sorted arXiv query exports, a targeted
-Markov export, 119 deduplicated 2025–2026 row mappings, a generated semantic audit,
-and anonymous public Google Scholar first-page evidence. The audit mechanically
-flagged 106 titles/abstracts for performance language or metrics; every flag has
-an individual disposition or documented false-positive reason. A prior Scholar
-attempt returned a robot challenge and was not bypassed; fresh narrow requests
-returned HTTP 200. The general web-search connector returned HTTP 404, so direct
-anonymous primary endpoints were used. No PB, authenticated state, browser
-profile, persistent session, cookie reuse, robot bypass, or human-owned tmux
-session was used.
+Markov export, 119 deduplicated 2025–2026 publication mappings, a generated
+semantic audit, 33 composite-source reviews, 241 generated child-result audit
+rows, and anonymous public Google Scholar first-page evidence. The first layer
+mechanically flagged 106 titles/abstracts for performance language or metrics;
+every flag has an explicit disposition or documented false-positive reason. The
+second layer rejects missing named results and generic composite-source reasons.
+A prior Scholar attempt returned a robot challenge and was not bypassed; fresh
+narrow requests returned HTTP 200. The general web-search connector returned HTTP
+404, so direct anonymous primary endpoints were used. No PB, authenticated state,
+browser profile, persistent session, cookie reuse, robot bypass, or human-owned
+tmux session was used.
 
-All new papers, immutable MELD snapshots, official MRF/Exons archives, public API
-metadata, raw HTTP evidence, and queries live in the discoverable external
-collection documented by
+All new papers, immutable MELD and composite-detector snapshots, official source
+archives, public API metadata, raw HTTP evidence, and queries live in the
+discoverable external collection documented by
 [paper_artifacts.md](dw1_detector_survey_sources/paper_artifacts.md). Its full
-integrity ledger is preserved. The repository keeps the MELD benchmark source,
-raw successful and failed stdout/stderr, score-level CSV, package/interpreter/GPU
-manifests, and exact model-file hashes.
+integrity ledger is preserved. The repository keeps both benchmark sources, raw
+successful and failed stdout/stderr, score-level CSVs, independent verifiers,
+package/interpreter/GPU manifests, and exact model-file hashes.
 
 Local timings remain bounded feasibility checks, not sustained production load.
 CUDA peak allocation is not total process memory. Existing comparison scores come
@@ -354,11 +426,12 @@ instead of being promoted from attractive numbers.
 Do not replace Binoculars yet. Resolve which runnable state produced the MELD
 paper tables, then freeze a new stratified evaluation with current generators and
 attacks, separate human calibration, and per-generator, domain, language, date,
-and length-band results. Recompute MELD, Binoculars, and FastDetectGPT in the same
-software process and timing boundary.
+and length-band results. Recompute MELD, Desklib, Binoculars, and FastDetectGPT in
+the same software process and timing boundary.
 
 A candidate advances only if it matches or improves Binoculars AUROC and the
 chosen low-false-positive operating point on identical held-out rows, keeps the
 two-A6000 2,048-token batch-8 fit, and remains plausibly near the fixed Binoculars
 latency without entering an excluded method family. Until then, MELD is the
-mandatory next experiment—not a deployable conclusion.
+mandatory provenance blocker and Desklib is the strongest newly measured
+secondary follow-up—not a deployable conclusion.

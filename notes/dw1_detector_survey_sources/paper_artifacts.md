@@ -156,10 +156,10 @@ this exact, discoverable path:
 
 `/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08`
 
-Its `README.md` documents scope and provenance. Its 150-entry
+Its `README.md` documents scope and provenance. Its 274-entry
 `MANIFEST.sha256` has SHA-256
-`1b92b652294562b6f1abbad3064c2c0f2b0fa2c49ff23e30b3937d5e9cdba67c`;
-`sha256sum --check MANIFEST.sha256` passed for all 150 retained files on
+`6aeb1d786e1c91eb6c7e3f0723d129a6a562586c57024227c7082bbbdf5f4529`;
+`sha256sum --check MANIFEST.sha256` passed for all 274 retained files on
 2026-08-08. The ledger covers every collection file other than itself. This
 repository separately preserves raw benchmark execution and environment files,
 which are frozen by `candidate_manifest.md`.
@@ -304,8 +304,134 @@ and comparative-framework commit
 The archives contain scripts or notebooks but no trained checkpoint.
 
 A mechanical audit of every arXiv URL in the current explicit and targeted
-tables found 71 distinct identifiers and no missing filename match. This is a
+tables found 72 distinct identifiers and no missing filename match. This is a
 preservation claim for the bounded tables, not universal literature completeness.
+
+### Generalized composite-source repair artifacts
+
+The second-level repair preserves the primary publication for every frozen
+composite source and the primary system papers linked by the qualifying embedded
+results. The evaluator-named Task 3 evidence is:
+
+- overview arXiv 2501.08913: `papers/2501.08913.pdf`, SHA-256
+  `7ff2de1560787f5859f7a3bbac20a104bb30a51f0843299a945757685e6db4af`;
+- CNLP-NITS: `papers/2025.genaidetect-1.38.pdf`, SHA-256
+  `353b54f5b72f5fcb8dfe9b4e290ac482764d25c31b1a89368f2aca2f5369e03a`;
+- Leidos: `papers/2025.genaidetect-1.39.pdf`, SHA-256
+  `9f25944491038204c8799cd691bacb192b342a75b7665779f43908e0e4bd53fc`;
+- Pangram: `papers/2025.genaidetect-1.40.pdf`, SHA-256
+  `7d95eeb40f45b2d04ca3916a7ee5c2f57c552435ec3bfdc567f0ec22ea43a3a4`;
+  and
+- ALERT: `papers/2025.genaidetect-1.42.pdf`, SHA-256
+  `2fedcda2c27feee5d7783ba9990c1b7dae6b4a8d0867ff5090c9564e343e8988`.
+
+The composite-source preservation check also found and repaired one missing
+parent artifact: stress-testing study arXiv 2505.24523 is now
+`papers/2505.24523.pdf`, SHA-256
+`df45d28d948a73f60a96c950319182e081caaf576d1877273a7d137c5f137dcd`.
+All 33 composite parent identifiers now have exact identifier-named PDFs.
+
+The final high-cell repair preserves twelve additional official GenAI Detection
+Task 1 system PDFs:
+
+- DCBU `.12`, `95cda0383ee16064e3e7649d430f96a32221f8136eadc1d34759d9847f608f0a`;
+- L3i++ `.13`, `92783e5ca3eaaa300e55457f553e8b5899cfa84c9dc75e34b23d9a97c35c2d2f`;
+- TechExperts `.14`, `edeeaa028ecc75822f56d039323f34c4b309e0f0a35dca95654264352bbad0ee`;
+- SzegedAI `.15`, `a3b6456fcabf8f8102ed2f8a5d01a28e13e077d81a199044f520fb73c6b0f8f4`;
+- Unibuc/tmarchitan `.16`, `c6d2a37d79c94ba542bafa28b72c11c2fbaf957984be1f9208835efb2cb32c64`;
+- Fraunhofer SIT `.17`, `dd1fef4db9d76ea99b9f2bc9bdea5deca5933cd0156b3c86cafd953ad1c02c51`;
+- Nota AI `.19`, `fe6be11305ae40319dafb1e9f6b1a6a346badaf6cfb0c3c843f1b58b32d9fd4e`;
+- LuxVeri `.21`, `bddb24dbf9b409d548a24a8f264059efe64e6411a57304f3515988e84dc3e98a`;
+- Grape `.22`, `ee31f90a61c7a819fde07a0876b47eeca240c99bd98f58b51b065ad9c7d0d929`;
+- AAIG `.23`, `e7466f93cc6ad97ff7c9b8975ce3da6e594cd93c2bf24a2e71d95bd482bae4de`;
+- TurQUaz `.24`, `293602ebab69a8b3d3240779c6dca005b03d18b1e3dde9f10fa1145c0bab76c6`;
+  and
+- Advacheck `.26`, `79fb1d867369edc24b7cb6e38c11fe864b68ac2e647dc7911402f33dcd77dec0`.
+
+The official NeurIPS 2024 primary PDFs for BiScope and DeTeCtive are
+`papers/canonical_biscope_neurips2024.pdf`, SHA-256
+`d49f3988b4c020b17e19edbe29e1b5fea15826b0c3f49ad008d3482462daca85`,
+and `papers/canonical_detective_neurips2024.pdf`, SHA-256
+`692bef86c0f98649b02a292e1f2656a711a48812b72991eaff4bb71d8ec8f94f`.
+All downloads came from anonymous public ACL Anthology or NeurIPS endpoints.
+The Task 1 overview explicitly states that unnamed-description teams submitted
+no manuscript or short description; those result rows preserve that exact
+primary-absence boundary rather than claiming a universal search absence.
+
+The closing cross-source pass preserves these additional public primary PDFs:
+
+- Task 3 LuxVeri `2025.genaidetect-1.41`,
+  `5566070a268e5d8c0259b84bc8d74ca070058b25f102828111022a14e152323d`;
+- Task 3 MOSAIC `2025.genaidetect-1.44`,
+  `6a38fdec8cfd36086cee64c4adc76f389cff783702efd110d98806bd3f2ba0c9`;
+- GLTR `P19-3019`,
+  `a808b16b86d96866f16fb8635055a84d8fb3b629f6644197f720f75a20dd88fd`;
+- HC3 arXiv `2301.07597`,
+  `84a92c9aea84e7bdb42c619db778c40cf12530d0df1c009e35fffededab67b28`;
+- DetectGPT arXiv `2301.11305`,
+  `d2077e8597fd303059ddcc2cd59177b981f62209af53ba05ad3ebfa4c0341791`;
+- Neighborhood membership attack `2023.findings-acl.719`,
+  `b51b4b1a03641e27f2ac92c32c7ee7342f8e125a24dc461365dea30aec11cd3a`;
+- ReCaLL `2024.emnlp-main.493`,
+  `8beb1bfab84f3f8f6a2f198abf4866078997baacaafaa4fc1fffe1a5e9444f9b`;
+- DC-PDD arXiv `2409.14781`,
+  `188d58a9b666f3dc9a7cb82df3796d918e1253e453a7d15e2bf38038d2ddff10`;
+  and
+- LLM-Deviation/MFD Research Square revision 1,
+  `e8a35934f79aa6dd750583e469e9df2a8513d4ac451fc09ec20b91d88f94c0b1`.
+
+The official DC-PDD source is frozen at commit
+`5d4220850da9a2c6ee1026029b2814b72a4dd581`; its archive SHA-256 is
+`0939903c2fe1deddd9877228c14244e3939b6a4eec7c172f3c19c4ff79d15af9`.
+Repository and commit metadata hashes are respectively
+`ff48611e47de86dea17bf037172bb76ffa3d9cafb63bd11495a14feae359de34`
+and `1c8a0928547d2cba1cee61777be49bea86816e812ba214d5f707bc07532ca56f`.
+The source requires a model-tokenized external C4 frequency reference; it is not
+treated as a frozen cross-model calibration state.
+
+Two provisional identifier matches were rejected before the collection freeze:
+arXiv `2307.03819` is an algebraic-geometry paper, while `2405.05131` concerns
+radar detection. Neither unrelated PDF is retained or used as evidence.
+
+No USTC-BUPT primary paper is silently invented. The overview bibliography and
+bounded exact-team/system public OpenAlex, DBLP, and GitHub responses are
+retained under `snapshots/metadata/`. The same bounded primary-absence evidence
+is retained for the Counter Turing Tesla, Llama_Mamba, and NLP_great systems.
+The Counter Turing Dakiet primary paper is `papers/2502.00375.pdf`, SHA-256
+`28258e2a662886fdbee4f4cd7e64dc92ee5382b63b3a27a09629445df155a9f2`.
+
+The newly explicit linguistic-feature SVM paper is
+`papers/2606.04177.pdf`, SHA-256
+`454f87ecc87ad9c329018dd64c9a1b66bd35c9e13a8656ce9f833c17563e523a`.
+Its linked ELFEN feature-source archive is preserved at commit
+`f404576157e15b403d893e7a1fadd7539c7caea3`, archive SHA-256
+`aeaf58b228a6aaaf42584906bcce0a51a089cc4b5b8de40877ba8a5ca9f8cfe5`.
+
+Complete anonymous model snapshots selected for the bounded screen are:
+
+- DetectRL-X XLM-RoBERTa revision
+  `76649a0257a812a81cf36b5de9cc5f2430aeaa7f`, 1,112,205,008-byte weight,
+  SHA-256 `c43079dafc0d33f815b6a1ba594a94cb67c58aa470061e322c00c4038e14fb88`;
+- Desklib revision `5fdea974cd4287c61674951ec78803aa274e2fb7`,
+  1,736,100,972-byte weight, SHA-256
+  `c024a1704c65f5a4bffeda58745c58fc0ed67d6ca07b158b068a257238815265`;
+  and
+- ModernBERT revision `08f218f1d05791ad99c26ede421f69c781a50360`,
+  598,439,784-byte weight, SHA-256
+  `880d16944505698bf8366a0c888161fc155902ec8f0ce68744401e04a5ff6e20`.
+
+Relevant official source archives and their SHA-256 values are: DetectRL-X
+`f291775fc1f78d00e52ebbf390d5a1445e05f0af`,
+`527245046deb234f567c6cd3eb9c21876fc7a01d0e395353d9be31837543f34d`;
+Desklib `d141cecd7a1ff77f21e4ef0a3fed8ac90a159ee4`,
+`b8fe1721c185393e026eac897ee34f6779d3b7c18eeae7de5bed87aedafc31d2`;
+C-ReD `b90072cd218b6ebdbd1d1478ce6e439677f18192`,
+`c5d82a0df67817be01c87176cbbfc1a42b520c31bdb4a3e17c7ddc8a8676da43`;
+ALHD `f7b8450fe0ffbafb3d580e5791b2e010b76a83a5`,
+`3db1ae2aa9e932f6714802fe314f5f0f88d84893b5f6a749271f381adf6532fd`;
+and model collapse `feb8511479a2e2dc868e1caf3f63cb99f1fcc746`,
+`5a309144b9f84eef8054fb389694b3b1c02327ec4abede90e8e26739029e16fd`.
+Repository source is not treated as a trained detector state.
 
 ### Raw coverage and Scholar evidence
 
@@ -336,6 +462,8 @@ accepted comparator evidence. In particular:
   `ac5915c5b2bd275da288e439cb2047213a09e59e94ec451faf8e027bd709f404`;
 - arXiv FastDetectGPT, `canonical_fastdetectgpt_2310.05130.pdf`, SHA-256
   `4cb2f768f8b815cdce2bf2ceba61722d015cd6b7644ca147177270f5e6a42415`;
+- arXiv DetectLLM, `canonical_detectllm_2306.05540.pdf`, SHA-256
+  `8236109913f1e9bbb3c8fa6f8df998cedb8a9f39eb494a9380c4153a9c028466`;
 - ICLR Lastde, `canonical_lastde_2410.06072.pdf`, SHA-256
   `b775fb10c5dfae152552107b5b283a85cf175195191c47932c3fec39702a1cdb`;
 - AAAI SpecDetect, `canonical_specdetect_aaai2026.pdf`, SHA-256
@@ -357,3 +485,10 @@ accepted comparator evidence. In particular:
 Alternative official venue/arXiv renderings are also retained when their bytes
 differ. The manifest records those differences rather than pretending that two
 official PDFs with different metadata are byte-identical.
+
+Two inherited files named `canonical_detectllm_2306.05594.pdf` and
+`canonical_detectllm_2306.05594v1.pdf` are not DetectLLM: arXiv 2306.05594 is an
+unrelated space-environment paper. They remain byte-preserved only to avoid
+silently deleting accepted ledger history and are explicitly excluded from the
+evidence. The correct DetectLLM identifier is 2306.05540; both its arXiv PDF and
+official EMNLP rendering are retained.

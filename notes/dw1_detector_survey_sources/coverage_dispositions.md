@@ -45,6 +45,7 @@ to `source_cards.md` and `paper_artifacts.md`.
 | 2026-06-30 | [Triospect, 2606.31074](https://arxiv.org/abs/2606.31074) | Exclude: it generates summaries and simplifications and aggregates multiple transformed views, violating rewrite/regeneration and multi-view constraints. [N8] |
 | 2026-06-22 | [WaveDetect, 2606.23336](https://arxiv.org/abs/2606.23336) | Retain/reject: the released checkpoint is fast, but measured same-row AUROC 0.8906 trails Binoculars 0.9595. [M2] |
 | 2026-06-05 | [SV-Detect, 2606.07313](https://arxiv.org/abs/2606.07313) | Retain reconstruction only: near-perfect matched-family rows are supervised and the release omits trained steering directions and classifier state. [N3, M5] |
+| 2026-06-02 | [Linguistic-feature SVM, 2606.04177](https://arxiv.org/abs/2606.04177) | Retain/reject: AUROC is 0.968 in-domain and 0.907–0.945 on held-out settings, but macro F1 ranges from 0.588 to 0.827 and no fitted state, fixed-FPR result, or comparable timing is public. [N16] |
 | 2026-06-01 | [Uncertainty++, 2606.02158](https://arxiv.org/abs/2606.02158) | Retain/reject: public code and strong AUROC exist, but no like-for-like Binoculars row or complete length/batch speed basis establishes parity. [N7] |
 | 2026-05-29 | [Distribution-free rewrite calibration, 2606.00402](https://arxiv.org/abs/2606.00402) | Exclude: it expressly converts rewrite-based detectors, outside the fixed no-rewriting boundary. |
 | 2026-05-27 | [Show, Don't TELL, 2605.27921](https://arxiv.org/abs/2605.27921) | Retain/reject: supervised explanation-generating detector reports 0.927 AUROC, below the requested accuracy lead and without the fixed speed evidence. |
@@ -97,7 +98,7 @@ to `source_cards.md` and `paper_artifacts.md`.
 | 2025-05-15 | [Multifaceted Defactify detector, 2505.11550](https://arxiv.org/abs/2505.11550) | Retain/reject: 0.994 F1 is fifth place on one binary task; the multi-encoder system has no public trained state, cross-distribution, low-FPR, or speed basis. [N15] |
 | 2025-05-08 | [Multiscaled Conformal Prediction, 2505.05084](https://arxiv.org/abs/2505.05084) | Retain calibration watchlist: controls FPR on RealDet calibration, but does not ship a DW1 calibration state or establish a whole-detector A6000 comparison. |
 | 2025-04-22 | [Dynamic perturbations, 2504.21019](https://arxiv.org/abs/2504.21019) | Exclude: target-text dynamic perturbations violate the fixed multi-perturbation constraint. |
-| 2025-04-15 | [OpenTuringBench/OTBDetector, 2504.11369](https://arxiv.org/abs/2504.11369) | Retain/reject: outperforming-most language on its new benchmark exposes no qualifying threshold metric, frozen detector state, or fixed comparator deployment row. |
+| 2025-04-15 | [OpenTuringBench/OTBDetector, 2504.11369](https://arxiv.org/abs/2504.11369) | Retain/reject: seven systems exceed 0.90 F1 on both designated unseen-model columns, but their individual rows expose no new frozen state with a broad low-FPR and fixed deployment comparison. [E16] |
 | 2025-04-01 | [Short-PHD, 2504.02873](https://arxiv.org/abs/2504.02873) | Exclude: the detector inserts off-topic content into the target, violating the no-rewriting/perturbation gate. |
 | 2025-03-28 | [SKDU/Defactify, 2503.22338](https://arxiv.org/abs/2503.22338) | Retain/reject: the allowed NELA-XGBoost branch reports 0.9945 Task-A F1, but public feature code ships no trained state and no cross-distribution, low-FPR, Binoculars, or timing comparison. [N15] |
 | 2025-02-24 | [Sarang/Defactify, 2502.16857](https://arxiv.org/abs/2502.16857) | Retain/reject: perfect Task-A F1 comes from one shared-task split and a DeBERTa ensemble, without a public trained state, cross-distribution, low-FPR, or fixed deployment result. [N15] |
@@ -118,7 +119,38 @@ not members of the 119-row exact-phrase union:
 | 2026-05-22 | [Hidden Human-Like Nature, 2605.23190](https://arxiv.org/abs/2605.23190) | Retain/reject: targeted citation-following evidence lacks a released, frozen detector state and a complete same-run A6000/Binoculars basis. [N8] |
 | 2026-05-13 | [Steer-to-Detect, 2605.12890](https://arxiv.org/abs/2605.12890) | Retain unreleased watchlist: paper reports 98.90 AUROC versus Binoculars 87.70 on one short-text A100 test, but no public state and no 2,048-token batch-8 A6000 fit. [N5] |
 
-## Accounting for the other export rows
+## Composite-source result expansion
+
+Publication-level accounting is not sufficient for an overview, benchmark,
+comparative study, evaluation, or shared-task paper. The generalized audit marks
+33 such frozen export rows. Twenty-six contain 241 qualifying named system/version
+results; every result now has its own metric scope, primary source or bounded
+absence sentinel, artifact status, and explicit disposition in
+`coverage_embedded_results.tsv`. The other seven composite sources record the exact
+tables or sections inspected and a source-specific no-qualifier
+reason in `coverage_composite_sources.tsv`. Full evidence cards are in
+`coverage_composite_dispositions.md` [N17].
+
+The Task 3 overview at arXiv 2501.08913 is no longer a benchmark catch-all.
+Twenty rows separate every qualifying submitted version and official baseline.
+Primary system PDFs are preserved for Leidos, Pangram, ALERT, CNLP, LuxVeri,
+and MOSAIC. USTC-BUPT's rows document the bounded absence of a separate primary
+paper or public state. Pangram is retained/rejected as closed because its
+preprocessing section does not specify the deployed inference path; CNLP remains
+excluded because its inference pipeline rewrites or normalizes the target. The Counter Turing
+overview likewise expands all eight qualifying Task-A systems, including three
+explicit primary-paper absences. [E1, E2]
+
+Three complete public states exposed by composite sources received the same
+bounded screen. DetectRL-X X-Rob measured 0.9533 evaluation AUROC and 0.2714 TPR
+at a locally calibrated one-percent FPR. ModernBERT measured 0.8337 and 0.0063.
+Desklib measured 0.9751 and 0.8964, versus stored Binoculars 0.9779 and 0.6608;
+its overall AUROC remains 0.0028 lower. All three easily fit two A6000s and are
+much faster than the fixed Binoculars batch, but no state passes every accuracy
+and comparability gate. Desklib remains a runnable follow-up, not a replacement.
+[E3, E9, E18, M8]
+
+## Accounting for every export row
 
 The former catch-all buckets are superseded. `coverage_row_dispositions.tsv`
 contains exactly one reviewed source-mapped row for each of the 119 deduplicated
@@ -130,20 +162,31 @@ metrics, or explicit percentages of at least 90.
 The generated `coverage_semantic_audit.tsv` preserves the title, contributing
 exports, every matched text fragment, mapping kind, allowlisted class definition,
 resolution, reason, and primary arXiv URL for every row. The frozen run found 106
-semantic flags. All 68 plausible or method-excluded results have explicit
-individual dispositions; the other 51 rows have mechanically allowlisted
-non-candidate classes and specific reasons. Every flag in those 51 rows is
-resolved as a documented false positive, such as a metric belonging to a task
-overview, a source-plagiarism task, an attack, a dataset baseline, or a non-English
-detector. Unknown, wrong-kind, and catch-all codes fail validation; no
-identifier-only group remains.
+semantic flags. All 69 plausible or method-excluded publication rows have
+explicit dispositions; the other 50 rows have mechanically allowlisted
+non-candidate classes and specific reasons. Every flag in those 50 rows is
+resolved as a documented false positive, such as a metric belonging to a
+source-plagiarism task, an attack, a dataset-only contribution, or a
+special-language task outside the fixed deployment scope.
+
+The second audit layer validates all 33 composite reviews and all 241 embedded
+results: 26 sources expand and seven have result-specific no-qualifier reasons.
+It rejects a missing child, wrong parent, count mismatch, absent primary
+source/absence sentinel, absent artifact status, unknown disposition, or generic
+no-qualifier explanation. Eleven regression and negative controls include the
+predecessor Task 3 omission, a one-child CNLP omission, and removal or parent/
+result misbinding of a real Markdown E-card. Unknown, wrong-kind,
+and catch-all codes fail validation at both levels; no identifier-only or
+publication-only group remains.
 
 `coverage_semantic_audit_report.txt` preserves the exact project-neutral command,
 input/output hashes, raw and deduplicated counts, mapping counts, and PASS.
+`coverage_embedded_result_audit.tsv` preserves the generated child mapping.
 `coverage_semantic_audit_environment.txt` preserves the Python and platform
 environment; `coverage_semantic_audit_design.md` fixes the control flow and
-failure conditions. The raw Atom exports remain the canonical result data, while
-the reviewed mapping and generated audit make its semantic accounting testable.
+failure conditions. The raw Atom exports remain the canonical publication data,
+while the reviewed mappings and generated audits make both levels of semantic
+accounting testable.
 
 ## Public Google Scholar check
 

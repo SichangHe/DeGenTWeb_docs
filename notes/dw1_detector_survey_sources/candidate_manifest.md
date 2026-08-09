@@ -2,14 +2,11 @@
 
 Candidate date: 2026-08-08, America/Los_Angeles.
 
-Candidate state: **FRESH ADVERSARIAL PASS — AWAITING ONE-SHOT EVALUATOR**.
-Review 3's earlier PASS is historical: the next evaluator showed that it did not
-test catch-all semantics, and review 4 correctly rejected the first semantic
-repair. Review 5 independently passed the fully frozen repair. This internal
-review is not an evaluator PASS; no email delivery or lifecycle closure is
-authorized.
+Candidate state: **FROZEN FOR DISTINCT ADVERSARIAL REVIEW — AWAITING A NEW
+ONE-SHOT EVALUATOR**. No internal review authorizes delivery. The corrective
+email remains **NOT SENT**.
 
-## Scope and baseline
+## Scope and accepted chain
 
 The owned candidate consists only of:
 
@@ -17,36 +14,36 @@ The owned candidate consists only of:
 - `../dw1_detector_survey_email.md`; and
 - every file in this `dw1_detector_survey_sources/` directory.
 
-The documentation baseline is commit
-`f749a13a3529365bcb3d09d8ed72d2cdc7e08d76`. No DW1 implementation or
-configuration file is in the candidate. A later parent-repository commit may
-change only the `docs` gitlink to the pushed documentation commit.
+The starting documentation commit is
+`45191cb40963a137192795cba0dc7d10ada2f598`, the pushed rev2 semantic repair.
+The accepted survey chain is preserved in Git: original survey
+`d5fb118`, accuracy-first renewal `fe98a1c`, evaluator repair `f749a13`, and rev2
+semantic repair `45191cb`. No DW1 implementation or configuration file is in the
+candidate. A later parent-repository commit may change only the `docs` gitlink to
+the pushed documentation commit.
 
 ## Repository content binding
 
-`candidate_files.sha256` covers the two top-level documents and 43 source/evidence
-files, 45 files total. It deliberately excludes itself and this explanatory
-manifest; the final Git commit binds those two files. Its current SHA-256 is:
+`candidate_files.sha256` covers the two top-level documents and 64 source/evidence
+files, 66 files total. It excludes itself and this explanatory manifest; the
+final Git commit binds those two files. Its current frozen SHA-256 is:
 
-`2a265891dde4520857085019f44f5560fddee0a2d16b5f6308616e35b05ac0cf`
+`4bb11271b477f0c9d66752b2b2b895dda0ddf8309c798e59988d374e03e58136`
 
-The ledger includes `adversarial_review.md`, every raw MELD stdout/stderr file,
-the 8,022-row score CSV, interpreter/package/GPU manifests, model hashes, raw Atom
-exports, Scholar TSV, row mapping, semantic-audit source/design/output/report/
-environment, coverage dispositions, and mechanical email subject/body. Ledger
-paths are relative to `docs/notes/`; the exact command, before commit and after
-checkout of the final commit, is:
+The ledger includes the complete earlier MELD, benchmark, integrity, coverage,
+and review evidence plus this repair's composite source/result mappings,
+generated audits, primary-search record, public-checkpoint benchmark source,
+both raw attempts, 8,022-row CSV, independent verifier, static checks, execution
+environment, and model hashes. From `docs/notes/`, the exact check is:
 
 ```text
-cd /ssd1/sichangheagent/dw1/docs/notes
 sha256sum --check dw1_detector_survey_sources/candidate_files.sha256
 ```
 
-Files normally ignored by broad `*.txt`, `*.csv`, or `*.tsv` rules are explicitly
-force-added. A staged-path comparison must show no candidate file absent from the
-Git index. The raw score CSV uses CRLF bytes emitted by Python's CSV writer; it
-was inserted in the index with Git content filters disabled so the committed blob
-retains the exact recorded SHA-256 instead of silently normalizing line endings.
+Broad `*.txt`, `*.csv`, and `*.tsv` ignore rules apply in this repository. Every
+owned ignored evidence file must therefore be force-added, and a staged-path
+comparison must prove that every ledger path is present in the index. Raw CSV
+bytes are bound by the ledger and must not be silently normalized.
 
 ## External public evidence binding
 
@@ -54,104 +51,126 @@ Canonical path:
 
 `/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08`
 
-The external `MANIFEST.sha256` covers 150 files and has SHA-256:
+The external `MANIFEST.sha256` covers 274 files and has SHA-256:
 
-`1b92b652294562b6f1abbad3064c2c0f2b0fa2c49ff23e30b3937d5e9cdba67c`
+`6aeb1d786e1c91eb6c7e3f0723d129a6a562586c57024227c7082bbbdf5f4529`
 
-`sha256sum --check MANIFEST.sha256` passed for all 150 files. The collection holds
-the newly decisive PDFs, complete paper-era and current MELD snapshots, official
-MRF and Exons source archives, public metadata, raw queries, and relevant HTTP
-evidence. It also holds a primary PDF filename match for every one of the 71
-distinct arXiv IDs linked in the explicit-disposition and targeted carry-forward
-tables, plus immutable source archives for all three newly promoted papers that
-link public repositories. DP-MGTD is explicitly preserved at public revision 1
-because the frozen revision-2 PDF returned 404. No authenticated or persistent
-browser/session state was used.
-
-## Benchmark anchors
-
-- Current MELD revision:
-  `453acf594d48f8c55c3a38bde396f9178516d817`.
-- Paper-era preserved, not executed:
-  `51f3ac2d4ce8de9f6f3a1eba9ca4276b077bb808`.
-- Score CSV SHA-256:
-  `7a37e7b7df84ab19fe915dfca5e07be7bb95ff3b44ad105cb0a5af1e1a924d63`.
-- Score rows: 8,022 plus header.
-- Independent CSV recomputation: direct and length-eligible AUROCs, calibration
-  split counts, one/five-percent operating points, and shipped-threshold transfer
-  rates all match `benchmark_meld_stdout.txt`.
-- Static checks: the exact Python 3.13 target and isolated interpreter are recorded
-  in `benchmark_meld_checks.txt`; ruff and basedpyright pass in that stated
-  environment.
+`sha256sum --check MANIFEST.sha256` passed for all 274 entries. No file or
+directory in the collection is writable. It preserves the earlier 150-file
+collection, every composite parent PDF, Task 3 overview and six primary system
+papers, Counter Turing primary papers, bounded primary-absence responses,
+official source archives, and three complete immutable public checkpoint
+snapshots. The collection contains only anonymous public evidence. No PB,
+credential, authenticated endpoint, persistent browser/session state, cookie
+reuse, robot-challenge bypass, or human-owned tmux session was used.
 
 ## Coverage anchors
 
-The three raw exact-phrase exports contain 93, 40, and 71 rows and are each sorted
-by submitted date descending. Deduplicating 2025–2026 identifiers yields 119.
-`coverage_row_dispositions.tsv` maps each exactly once. The independent script
-flags 106 rows for semantic performance triggers and requires either an
-individual candidate disposition or documented false-positive reason. Its
-kind-specific code-to-definition allowlists reject unknown, wrong-kind, and
-catch-all codes. The generated audit has 68 explicit dispositions, 51
-non-candidate classes, and PASS. EchoPrompt, Steer-to-Detect, and Hidden
-Human-Like Nature are targeted carry-forwards, not silently counted in the 119.
+The three immutable exact-phrase exports still contain 204 raw rows and 119
+unique 2025–2026 publications. `coverage_row_dispositions.tsv` maps each exactly
+once. The generated row audit flags 106 titles/abstracts, resolves 69 explicit
+dispositions and 50 mechanically allowlisted non-candidate classes, and returns
+PASS.
 
-The Google Scholar artifact is exactly one anonymous public first page and is not
-called exhaustive. The historical robot challenge and fresh HTTP 200 observation
-are both preserved; neither involved a bypass.
+A second level selects 33 overview, benchmark, shared-task, evaluation,
+comparative, survey, dataset, or training-study composite sources from frozen
+title/class rules. All 33 have exact inspected scopes. Twenty-six expand to 241
+individual named system/version rows; the other seven have source-specific
+no-qualifier reasons. Every child binds a parent, metric and scope,
+primary source or bounded-absence sentinel, artifact status, disposition, and
+source card. The checker requires an independent, SHA-256-bound exact inventory
+of all 241 result IDs and binds every expanded parent to its E-card. Task 3 and
+Counter Turing retain separate hard-coded anchor sets. It also parses and hash-
+binds the machine marker under every real E-card heading to the same parent and
+exact result-ID set. Eleven regression/negative controls pass, including
+deletion of a non-anchor row plus a lowered mutable count, removal of a real
+E-card, and wrong label, parent, or result-ID card bindings. The current audit
+hashes and command are in `coverage_semantic_audit_report.txt`.
 
-## Frozen corrective email and no-send state
+The Task 3 primary evidence separately resolves 20 qualifying submitted versions
+and baselines, including Leidos, Pangram, USTC-BUPT, ALERT, CNLP-NITS, LuxVeri,
+MOSAIC, Binoculars, GLTR, and OpenAI RoBERTa-large. USTC-BUPT has an explicit
+bounded absence rather than an invented primary paper. Pangram is not method-
+excluded from a training-data preprocessing description; CNLP is excluded for
+inference-stage target normalization/rewrite.
+
+## Benchmark anchors
+
+The accepted MELD evidence and exact paper-era/current incompatibility are
+unchanged. Current v5 remains a provenance blocker: measured evaluation AUROC
+0.955271 trails stored Binoculars 0.977899, and shipped thresholds do not
+transfer, despite the strong two-A6000 feasibility result.
+
+The generalized repair executes only three complete public states:
+
+- DetectRL-X revision `76649a0257a812a81cf36b5de9cc5f2430aeaa7f`:
+  evaluation AUROC 0.953253, calibrated-one-percent-FPR evaluation TPR 0.271357,
+  and 0.028899-second two-card batch;
+- Desklib revision `5fdea974cd4287c61674951ec78803aa274e2fb7`:
+  evaluation AUROC 0.975080, calibrated-one-percent-FPR evaluation TPR 0.896357,
+  and 0.285271-second two-card batch; and
+- ModernBERT revision `08f218f1d05791ad99c26ede421f69c781a50360`:
+  evaluation AUROC 0.833729, calibrated-one-percent-FPR evaluation TPR 0.006281,
+  and 0.300674-second two-card batch.
+
+The score CSV has 8,022 data rows and SHA-256
+`c635d2b98583f9f9bcf3917f7ecb18469185550ab66d46ff60021a977195e786`.
+`verify_composite_scores.py` independently reconstructs both seeded splits and
+all five methods' AUROCs and operating points. Ruff and basedpyright pass. The
+first ModernBERT compilation-optimization failure is preserved; the successful
+run changes only `reference_compile`, not weights or mathematical scoring. The
+non-destructive layout helper verifies 25 model files and deterministically maps
+the three revision-bearing external snapshots to the harness keys; the replay
+command and successful layout check are preserved.
+
+None of the three replaces Binoculars. Desklib is the only new runnable follow-up:
+its local tail recall is strong, but its AUROC is 0.002819 lower, it uses a
+768-token RAID-trained path, and this is a convenience corpus with historical
+comparators rather than a frozen like-for-like evaluation.
+
+## Frozen correction and no-send state
 
 - Human-readable email SHA-256:
-  `a8b0d6e75483c7ede1733cc13f3c46ddb92c762bb78eac420c0c953c0ae8b5ca`.
+  `5b8ec279d73fb5da5100719c53678b4d2965652bd7f95db516a3c217425d6021`.
 - Mechanical subject SHA-256:
-  `653b384e8e7218093a9d70386ebc745553c633ae2f02f7e502f15b431d7800b7`.
+  `73540e80f5dafef3f3cb5168ad75475f755efade636b7135ea21ccaa4fc9abad`.
 - Mechanical body SHA-256:
-  `4604b9e408796d3e3c4d106ca8c1b7d742a18e0f9530643634ff00d90171a5dc`.
+  `a7d276ccd281f50ed68d581824612a08f829442ec2a5b5c908c2275882d9bcb5`.
 
 The mechanical copies exactly equal the subject and body of the human-readable
 draft. Status is **NOT SENT**. `delivery_plan.md` forbids delivery unless a new
-one-shot evaluator passes this exact pushed candidate and the manager then
-authorizes the exact frozen subject/body. An internal reviewer PASS is not an
-evaluator PASS.
+one-shot evaluator passes the exact pushed candidate and the manager then
+authorizes this exact frozen subject/body pair. An internal reviewer PASS is not
+an evaluator PASS.
 
 ## Independent review chain
 
-`adversarial_review.md` preserves five distinct reviewer identities, exact
-scopes, verified facts, findings, resolutions, and unmodified final verdicts.
-Review 1 caused this manifest, explicit force-addition, durable review record,
-and explicit static-check environment. Review 2 found 13 disposition-table
-papers missing from the external collection; all 13 PDFs are now preserved,
-raising the verified external ledger from 92 to 105 files.
+`adversarial_review.md` preserves nine distinct reviewer verdicts verbatim.
+Reviews 1, 2, 4, 6, 7, and 8 remain FAIL records with their resolved findings;
+reviews 3 and 5 are historical PASS records for predecessor candidate states.
+The dw1eval4 verdict proves that review 5 did not test publication-internal
+semantic coverage and therefore does not pass this repair. Review 6 found the
+mutable-count blind spot, unbound card labels, missing manifest entries, primary-
+paper identity errors, undocumented model layout, and compressed Task 3
+comparability; each repair is preserved.
+Review 8 found the missing filename in the subject and a label-only E-card
+check. Review 9, a different fresh reviewer, independently replayed the repaired
+119-publication/33-source/241-result audit and all eleven controls, challenged
+the Task 3 and Counter Turing expansions and all seven no-qualifier scopes,
+verified the actual E-card bindings, both integrity ledgers, benchmark evidence,
+bounded conclusion, exact correction, and no-send gate, and returned **PASS —
+no P1/P2 findings**. That internal PASS does not substitute for the required new
+one-shot evaluator and does not authorize delivery.
 
-Review 3 inspected the fully staged repaired candidate and candidate ledger
-SHA-256
-`5bd694aa5fdfd7b7dc984412aeb15222199b7c6f97ded9038c25d0a50ee75eb8`
-against recency, primary-artifact preservation, MELD provenance/comparability,
-accuracy, exclusions, two-A6000 memory, near-Binoculars speed, conclusion, and
-email gating. It returned **PASS** with no P1, P2, or P3 findings. Its verbatim
-verdict was then appended to the review artifact, necessarily changing that one
-entry and the final candidate-ledger hash shown above; no reviewed scientific or
-email content changed.
+## Required final verification
 
-Review 4 inspected candidate-ledger SHA-256
-`8e69fac73a24574f53424b4b13767970840335012ba88ef135c7ec38ba5ad580`
-and external-ledger SHA-256
-`f9b21e7a27383af474cc2b65a8fcdf8c33ca767e0d1d59ccddea41dd131e15b2`.
-It returned **FAIL** because six high-scoring shared-task systems lacked
-individual dispositions, arbitrary catch-all codes passed validation, and the
-candidate-ledger command lacked its required working directory. Those findings
-are durably preserved and resolved; a broader check additionally promoted
-`2603.18750`.
+Before commit and after checkout of the final commit:
 
-Review 5, by the distinct reviewer `/root/semantic_repair_fresh_review`, inspected
-candidate-ledger SHA-256
-`cafc887f4811141bb067c33444813a65f466d64f413c84867cb1e44294c18839`
-and the 150-entry external ledger. It replayed the row-level semantic audit and
-its negative controls, checked the broader trigger surface, independently
-challenged LM²otifs, NEULIF, and all seven later promotions, and rechecked every
-previously accepted constraint, the bounded conclusion, exact correction, and
-no-send gate. It returned **PASS — no P1, P2, or P3 findings**. Appending that
-verdict changes only the durable review entry and its final candidate-ledger
-binding; it does not change reviewed scientific or email content. Candidate
-state remains pending a new one-shot evaluator and manager authorization.
+1. replay the semantic audit and its eleven controls;
+2. replay the independent score verifier and static checks;
+3. verify all 66 repository-ledger entries and 274 external-ledger entries;
+4. prove the human email equals the mechanical subject/body and remains unsent;
+5. prove every candidate-ledger path is staged and no unowned path is staged;
+6. commit and push only owned documentation artifacts; and
+7. verify the remote documentation commit and, if needed, update only the parent
+   `docs` gitlink from an isolated clean worktree.

@@ -1,0 +1,9 @@
+command=notes/dw1_detector_survey_sources/prepare_composite_model_layout.sh /ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08 /tmp/dw1-layout.Wr83Bq/models
+model_file_ledger=benchmark_composite_detector_model_files.sha256
+model_file_checks=25
+model_file_check_result=PASS
+detectrlx_xlm=/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08/snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f
+desklib=/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08/snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7
+modernbert=/ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08/snapshots/modernbert-ai-detection-08f218f1d05791ad99c26ede421f69c781a50360
+shell_syntax_check=PASS
+result=PASS

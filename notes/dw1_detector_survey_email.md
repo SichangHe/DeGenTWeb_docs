@@ -1,4 +1,4 @@
-Subject: Correction: newest DW1 detector evidence
+Subject: Correction: dw1_detector_survey.md evidence
 
 Beginning of memo.
 
@@ -54,8 +54,28 @@ point three percent accuracy on a sixty-text test. The three public source
 releases do not include trained checkpoints, and none reports a matched
 low-false-positive and speed comparison. They do not change the recommendation.
 
+A broader audit then found that overview, benchmark, and shared-task papers still
+hid named systems. A final adversarial check also found that low overall scores
+were masking high per-dataset, generator, domain, prompt, and language results.
+The repair now accounts separately for two hundred forty-one qualifying
+system versions, always recording the weak mean or overall result beside an
+isolated high score. These include four Leidos variants, Pangram, USTC-BUPT,
+ALERT, and CNLP-NITS from one shared-task overview. Each result has a primary
+system source or a documented bounded absence, plus its own artifact and method
+disposition.
+
+Three complete public checkpoints warranted direct testing. DetectRL-X and
+ModernBERT were fast but substantially less accurate than the stored controls.
+Desklib was also fast. Its area-under-curve score was zero point nine seven five,
+just below Binoculars at zero point nine seven eight. At a locally calibrated
+one-percent false-positive rate, Desklib detected about eighty-nine point six
+percent of generated texts, versus about sixty-six point one percent for stored
+Binoculars. That tail result is promising, but the corpus was not frozen, the
+comparators were historical, and Desklib used a shorter input limit. It is a
+runnable follow-up, not a replacement recommendation.
+
 For now, keep Binoculars. Before reconsidering MELD, resolve the checkpoint used
-for the paper and run MELD, Binoculars, and FastDetectGPT together on one frozen,
-stratified, current-generator test with separate human calibration.
+for the paper and run MELD, Desklib, Binoculars, and FastDetectGPT together on one
+frozen, stratified, current-generator test with separate human calibration.
 
 End of memo.

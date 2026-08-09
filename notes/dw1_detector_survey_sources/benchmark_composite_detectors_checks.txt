@@ -1,0 +1,41 @@
++ ruff format --check notes/dw1_detector_survey_sources/benchmark_composite_detectors.py notes/dw1_detector_survey_sources/verify_composite_scores.py
+2 files already formatted
++ ruff check notes/dw1_detector_survey_sources/benchmark_composite_detectors.py notes/dw1_detector_survey_sources/verify_composite_scores.py
+All checks passed!
++ basedpyright --pythonversion 3.13 notes/dw1_detector_survey_sources/benchmark_composite_detectors.py notes/dw1_detector_survey_sources/verify_composite_scores.py
+0 errors, 0 warnings, 0 notes
++ /tmp/dw1-meld-venv/bin/python notes/dw1_detector_survey_sources/verify_composite_scores.py notes/dw1_detector_survey_sources/benchmark_composite_detectors_scores.csv
+{'csv_sha256': 'c635d2b98583f9f9bcf3917f7ecb18469185550ab66d46ff60021a977195e786', 'rows': 8022, 'direct_rows': 1000, 'calibration_human': 1000, 'evaluation_human': 2315, 'evaluation_generated': 1592, 'auc_and_operating_point_checks': 20, 'result': 'PASS'}
++ sha256sum notes/dw1_detector_survey_sources/benchmark_composite_detectors_stdout.txt notes/dw1_detector_survey_sources/benchmark_composite_detectors_stderr.txt notes/dw1_detector_survey_sources/benchmark_composite_detectors_scores.csv notes/dw1_detector_survey_sources/benchmark_composite_detectors_attempt1_stdout.txt notes/dw1_detector_survey_sources/benchmark_composite_detectors_attempt1_stderr.txt
+a82ab5cb709e427de2715909a1393ca6fea2f5f998f532557227e24c620e1c69  notes/dw1_detector_survey_sources/benchmark_composite_detectors_stdout.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  notes/dw1_detector_survey_sources/benchmark_composite_detectors_stderr.txt
+c635d2b98583f9f9bcf3917f7ecb18469185550ab66d46ff60021a977195e786  notes/dw1_detector_survey_sources/benchmark_composite_detectors_scores.csv
+8b1eb783ebca535ca076f494472e31517938e3b19f2ba0eb2d65bacc8c2b8fa6  notes/dw1_detector_survey_sources/benchmark_composite_detectors_attempt1_stdout.txt
+299123fe2706e949df5b3695bc34b609fd7166c9ab53a49d1332c3c14dce721a  notes/dw1_detector_survey_sources/benchmark_composite_detectors_attempt1_stderr.txt
++ cd /ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08
++ sha256sum --check /ssd1/sichangheagent/dw1/docs/notes/dw1_detector_survey_sources/benchmark_composite_detector_model_files.sha256
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/README.md: OK
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/added_tokens.json: OK
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/config.json: OK
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/hf_api.json: OK
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/model.safetensors: OK
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/special_tokens_map.json: OK
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/spm.model: OK
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/tokenizer.json: OK
+snapshots/desklib-ai-text-detector-5fdea974cd4287c61674951ec78803aa274e2fb7/tokenizer_config.json: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/README.md: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/config.json: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/hf_api.json: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/model.safetensors: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/sentencepiece.bpe.model: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/special_tokens_map.json: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/tokenizer_config.json: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/trainer_state.json: OK
+snapshots/detectrlx-xlm-76649a0257a812a81cf36b5de9cc5f2430aeaa7f/training_args.bin: OK
+snapshots/modernbert-ai-detection-08f218f1d05791ad99c26ede421f69c781a50360/README.md: OK
+snapshots/modernbert-ai-detection-08f218f1d05791ad99c26ede421f69c781a50360/config.json: OK
+snapshots/modernbert-ai-detection-08f218f1d05791ad99c26ede421f69c781a50360/hf_api.json: OK
+snapshots/modernbert-ai-detection-08f218f1d05791ad99c26ede421f69c781a50360/model.safetensors: OK
+snapshots/modernbert-ai-detection-08f218f1d05791ad99c26ede421f69c781a50360/special_tokens_map.json: OK
+snapshots/modernbert-ai-detection-08f218f1d05791ad99c26ede421f69c781a50360/tokenizer.json: OK
+snapshots/modernbert-ai-detection-08f218f1d05791ad99c26ede421f69c781a50360/tokenizer_config.json: OK

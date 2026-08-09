@@ -1,1 +1,1 @@
-Correction: newest DW1 detector evidence
+Correction: dw1_detector_survey.md evidence

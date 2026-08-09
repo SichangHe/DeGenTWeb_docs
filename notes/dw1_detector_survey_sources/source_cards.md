@@ -8,6 +8,10 @@ hardware estimation. `I` marks an inference. Quotes are short searchable anchors
 the adjacent locator holds the full context. Paper-reported results are not treated
 as independent replications.
 
+Bracketed `E1` through `E19` references are document identifiers for the embedded-
+result cards in `coverage_composite_dispositions.md`; they are not evidence-label
+prefixes. Each such card distinguishes sourced claims from M8 measurements.
+
 The primary PDFs and official snapshots are retained at the discoverable path
 documented in `paper_artifacts.md`, with a complete SHA-256 ledger. Repository
 commits and search routes are in `search_log.md`.
@@ -478,6 +482,108 @@ the other four papers expose none, and rebuilding supervised systems would test
 new states rather than the reported result. The missing fixed-state and timing
 boundaries also prevent a near-Binoculars speed claim. All seven are retained as
 high claims and individually rejected, leaving the recommendation unchanged.
+
+### N16 — Linguistic-feature SVM, arXiv 2606.04177
+
+- Official sources: [primary paper](https://arxiv.org/abs/2606.04177), PDF
+  SHA-256 `454f87ecc87ad9c329018dd64c9a1b66bd35c9e13a8656ce9f833c17563e523a`,
+  and the paper-linked [ELFEN feature repository](https://github.com/mmmaurer/elfen/tree/f404576157e15b403d893e7a1fadd7539c7caea3).
+- Sourced mechanism and data: a class-weighted linear SVM consumes 284
+  interpretable linguistic features over MAGE data from 27 generators in seven
+  model families, ten original text domains, and four held-out GPT-4 domains.
+  This is one parent detector rather than a benchmark inventory of independent
+  proposed systems.
+- Sourced metrics: Table 2 reports SVM AUROC of 0.987 for separate in-domain
+  text/model-pair classifiers, 0.968 for one mixed in-domain classifier, 0.907
+  on new text domains and GPT-4, and 0.945 for held-out text/model-domain pairs.
+  The accompanying macro F1 values are 0.788, 0.827, 0.808, and 0.588. High
+  threshold-free discrimination therefore coexists with unstable classification
+  quality under the hardest shift.
+- Artifact and deployment boundary: ELFEN is public feature-extraction source,
+  but no fitted SVM, exact frozen feature state, calibration artifact, fixed-FPR
+  result, document-length/timing protocol, or trained detector checkpoint is
+  released. A local retraining would create a new state, so no A6000 screen was
+  scientifically meaningful.
+- Decision: individually retain/reject. The cross-domain rows merit preservation,
+  but they do not establish a reproducible general detector, transferable
+  low-FPR threshold, or near-Binoculars deployment result.
+
+### N17 — Generalized composite-source semantic repair
+
+- Durable source maps:
+  [composite-source ledger](coverage_composite_sources.tsv),
+  [result-level ledger](coverage_embedded_results.tsv),
+  [independent exact-result inventory](coverage_expected_result_ids.tsv),
+  [generated result audit](coverage_embedded_result_audit.tsv), and
+  [embedded source cards](coverage_composite_dispositions.md).
+- Sourced accounting: all 119 frozen export publications retain exactly one row
+  disposition. In addition, 33 overview, benchmark, comparative, evaluation, or
+  shared-task sources receive a second-level semantic inspection. Twenty-six
+  sources expand to 241 qualifying named system/version results; the other seven
+  record the inspected scope and a source-specific no-qualifier reason.
+- Exact-ID control: an independently maintained 241-row inventory is bound by a
+  checker-constant SHA-256 and must exactly match the actual child-ID set for
+  every expanded source. The checker separately hard-codes the 20 Task 3 and
+  eight Counter Turing identities as anchors. Missing a parent review, child,
+  primary-source/absence field, artifact status, or explicit disposition is a
+  hard failure, as is binding a child to the wrong E-card. The checker also
+  parses and hash-binds the parent and exact result IDs from every real Markdown
+  E-card marker.
+- Generalized control: composite selection uses allowlisted source classes and
+  publication-title semantics rather than a manually chosen identifier count.
+  The audit validates exact child identities, counts, parents, and cards.
+  Regression tests prove that the predecessor Task 3 omission, a missing CNLP
+  row, deletion of the non-anchor mDeBERTa row plus a lowered declared count, a
+  nonexistent source-card label, removal or parent/result misbinding of a parsed
+  Markdown E-card, a synthetic count mismatch, reclassification of a known
+  high-cell parent as no-qualifier, and a generic no-qualifier reason fail.
+  Complete source-specific negative controls pass.
+- Frozen result: 204 raw export rows deduplicate to 119 publications; 106 have
+  title/abstract performance triggers, 69 have explicit parent dispositions, 50
+  have mechanically allowlisted non-candidate classes, 33 require composite
+  review, and 241 child results are individually dispositioned. All eleven
+  regression/negative controls pass.
+- Interpretation: a publication-row mapping is necessary but no longer
+  sufficient. The child ledger prevents plausible high-score systems from being
+  hidden by “benchmark,” “overview,” “shared task,” or an analogous catch-all.
+
+### M8 — Public states surfaced by composite sources
+
+- Durable evidence: [benchmark source](benchmark_composite_detectors.py),
+  [design](benchmark_composite_detectors_design.md), successful and failed raw
+  stdout/stderr, 8,022-row [score CSV](benchmark_composite_detectors_scores.csv),
+  [independent verifier](verify_composite_scores.py),
+  [deterministic model layout](prepare_composite_model_layout.sh), layout check,
+  interpreter, packages, GPUs, and exact model-file hashes. The layout maps the
+  three short harness keys to revision-bearing external snapshot directories
+  only after all 25 model files pass. The score CSV SHA-256 is
+  `c635d2b98583f9f9bcf3917f7ecb18469185550ab66d46ff60021a977195e786`.
+- Shared accuracy boundary: all three public states and stored comparators use
+  the same 1,000 human calibration rows and disjoint 2,315-human/1,592-generated
+  evaluation rows of at least 100 words. Stored comparators are historical, not
+  recomputed in the candidate processes. Candidate released length limits differ
+  and are explicit.
+- DetectRL-X X-Rob at 512 tokens: evaluation AUROC 0.953253 and evaluation
+  FPR/TPR 0.00907/0.27136 at a locally calibrated one-percent FPR. Its two-card
+  four-plus-four median is 0.028899 seconds per batch with
+  1,145.09/1,135.89 MiB peak allocated. It is extremely fast but trails stored
+  Binoculars 0.977899 and FastDetectGPT 0.968952 in AUROC and tail recall.
+- Desklib v1.01 at 768 tokens: evaluation AUROC 0.975080 and evaluation FPR/TPR
+  0.00907/0.89636 at a locally calibrated one-percent FPR. Its two-card median is
+  0.285271 seconds per batch with 2,767.81/2,758.58 MiB peak. It exceeds both
+  stored comparators' local tail TPR but falls 0.002819 below Binoculars AUROC.
+  RAID-aligned training, the convenience corpus, historical comparators, and
+  shorter limit block replacement; it remains a runnable follow-up.
+- ModernBERT at 2,048 tokens: evaluation AUROC 0.833729 and evaluation FPR/TPR
+  0.01037/0.00628. Its two-card median is 0.300674 seconds per batch with
+  977.07/967.42 MiB peak. It passes feasibility and fails discrimination.
+- Execution note: the public ModernBERT config's compilation optimization failed
+  with concurrent replicas under Transformers 4.57.3. The successful run disables
+  only `reference_compile`; model weights, tokenizer, mathematical forward, and
+  raw score semantics are unchanged. Both attempts are preserved.
+- Decision: none matches or improves the incumbent across the fixed ranking and
+  selected low-FPR requirements. Desklib is the only new public state from this
+  repair that warrants a frozen follow-up; it is not a recommendation.
 
 ### M7 — Local MELD v5 feasibility and bounded accuracy screen
 
