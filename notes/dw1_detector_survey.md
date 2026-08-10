@@ -99,10 +99,18 @@ for six FastDetectGPT/Binoculars scorer configurations, and only 623 of 987
 accounts had a direct candidate target. The corrected scanner carries explicit
 metric context across the document and resolves 4,812 independently extracted
 content candidates plus 119 hash-bound source summaries. A separate 987-row
-account-witness ledger then binds every account to its own PDF identity, metric,
-configuration, locator, and extracted-text hash, including structured rank,
-column, Roman-table, vertical-group, and figure joins. The witness ledger cannot
-seed or suppress the independent unknown-row queue; both checks are required.
+account-witness ledger then binds every account to its own source identity,
+metric, configuration, locator, and extracted-text hash, including structured
+rank, column, Roman-table, vertical-group, and figure joins. The current-v5 MELD
+state instead binds the preserved immutable-v5 benchmark artifact, keeping it
+separate from the paper-era row. The final ownership repair replaces all 225
+proximity-only `same_window` witnesses and all 95 generic table-configuration
+witnesses with 320 exact source-owned row/column/state joins; a paired fine-tuned
+DeBERTa row brings the immutable ownership ledger to 321 entries. TF-IDF,
+zero-shot and fine-tuned DeBERTa, base and MCGrad ModernBERT, and every other
+predecessor row now own distinct source cells or ordered prose/figure values.
+The witness ledger cannot seed or suppress the independent unknown-row queue;
+both checks are required.
 For arXiv 2607.03680, exact column joins now bind the two Table 4
 `Vanilla + extra` states to 91.5% Unseen Domain accuracy and 88.2% Unseen
 Domain+Generator accuracy, and the three Table 11 pooled states to held-out
@@ -302,7 +310,7 @@ from all 119 PDFs, plus one content-hash-bound scope summary per paper, before
 requiring one explicit account, carry-forward, duplicate, or content-specific
 non-candidate decision for every candidate. It then regenerates exactly one
 source-derived witness for every account without using those bindings to seed
-the raw candidate queue. Fifty full-text controls reject ordinary-title,
+the raw candidate queue. Fifty-nine full-text controls reject ordinary-title,
 non-anchor, non-English, and narrow-domain omissions even when a mutable count
 is lowered; detach table content or a PDF/text hash; restore the false Leidos
 mechanism; delete a fitted baseline or collapse a separately trained state while
@@ -317,11 +325,20 @@ below-threshold, or vertical-group joins; they also require source-independent
 Unicode-F1 discovery and direct binding of the three recovered architecture
 rows, derive the external README's 4,812-plus-119 total from the frozen queue,
 and reject Anchor-row or neighboring-column substitutions for the five
-distribution-shift accounts. They additionally require every supplied witness
-to equal a fresh canonical PDF derivation, bind PAN12 recall to its declared
-Table 1 column, and prevent GCN, GAT, Graph Transformer, or GPS from inheriting
-Longformer's Table 2 values. Together with eleven composite controls, all
-sixty-one pass. [N18]
+distribution-shift accounts. They additionally bind all 321 reviewed
+predecessor replacements to an immutable source/row/column/state inventory,
+reject removal of an ownership row, reject restoration of a heuristic witness,
+and exercise wrong-row, wrong-column, and wrong-training-state substitutions.
+The exhaustive ownership pass also removed model-size numerals, axis ticks,
+uncertainties, feature-ablation decreases, and neighboring model rows that had
+been mistaken for account-owned scores. In particular, LAPD's Llama2-7B state,
+the three DetectAnyLLM scoring models, the two J-Detector feature ablations, the
+public Qwen2-0.5B IRM pair, base Binoculars and ImBD, DetectGPT, and three DivEye
+backbones now bind their own source state and result cell. The J-Detector values
+remain explicitly labeled as decreases rather than absolute F1 scores.
+PAN12 recall remains bound to its declared Table 1 column, and GCN, GAT, Graph
+Transformer, or GPS cannot inherit Longformer's Table 2 values. Together with
+eleven composite controls, all seventy pass. [N18]
 
 Task 3 reports TPR at five-percent FPR on non-adversarial/adversarial RAID-derived
 tests. The four Leidos rows are 99.4/97.2, 99.3/97.7, 99.2/97.6, and 99.1/95.7
@@ -496,10 +513,11 @@ second layer rejects missing named results and generic composite-source reasons.
 The final layer removes title/class selection entirely, rehashes every preserved
 PDF and extracted text, requires a scope summary for every source, and requires
 every expected account to resolve exactly once with a source-derived witness.
-Sixty-one regression and negative controls cover selected composites,
+Sixty-six regression and negative controls cover selected composites,
 ordinary-title primary papers, Roman-numbered tables, figure legends, former
 zero-yield sources, Unicode metric labels, exact metric-column ownership,
-mechanical external-README counts, and structured per-account joins.
+mechanical external-README counts, structured per-account joins, and immutable
+replacement of every proximity-only predecessor witness.
 A prior Scholar attempt returned a robot challenge and was not bypassed; fresh
 narrow requests returned HTTP 200. The general web-search connector returned HTTP
 404, so direct anonymous primary endpoints were used. No PB, authenticated state,

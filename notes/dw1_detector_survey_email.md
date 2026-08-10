@@ -89,8 +89,12 @@ An independent full-document extraction now resolves four thousand eight hundred
 twelve PDF-derived result candidates with an explicit account or content-specific
 reason. It also records one hash-bound scope summary for each of the one hundred
 nineteen papers. A separate account-witness ledger binds every one of the nine
-hundred eighty-seven accounts to its own paper identity, metric, configuration,
-locator, and text hash, including structured rank, column, and figure joins.
+hundred eighty-seven accounts to its own source identity, metric, configuration,
+locator, and text hash, including structured rank, column, and figure joins. It
+replaces all three hundred twenty proximity-only or generic predecessor
+witnesses with exact row, column, figure, or fitted-state ownership; the public
+MELD version five row binds its preserved benchmark artifact instead of the
+paper-era result.
 For the distribution-shift paper, the repaired Table four joins bind the two
 Vanilla plus extra states to 91.5 and 88.2 percent accuracy. The repaired Table
 eleven joins bind the three held-out IntelLabs pooled states to 0.968, 0.970,
@@ -98,6 +102,13 @@ and 0.997 AUROC. The unrelated Anchor result no longer certifies them.
 The extractor now normalizes mathematical Unicode metric labels, so three F one
 architectures that had appeared only through a curated fallback are direct table
 rows with their reported values.
+The final source-ownership check also corrected borrowed or misread cells in the
+LAPD, J-Detector, DetectAnyLLM, IRM, Markov, READER, and DivEye papers. Model-size
+numerals, axis ticks, uncertainty values, neighboring model rows, and feature-
+ablation decreases no longer stand in for detector scores. The J-Detector
+annotations remain recorded as decreases, and the public IRM state is correctly
+identified as Qwen2 rather than Qwen2.5. These corrections do not promote a
+candidate or change the recommendation.
 This last check caught six
 FastDetectGPT and Binoculars scorer configurations whose table put its AUROC
 definition in a later appendix. The extraction first exposed the PAWN paper's separately reported RADAR fine-tuned

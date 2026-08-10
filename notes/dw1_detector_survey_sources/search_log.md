@@ -724,16 +724,30 @@ uv run --isolated --no-project --python 3.13 python \
   --output coverage_table_candidates.tsv \
   --accounts coverage_fulltext_expected_accounts.tsv \
   --match-output coverage_table_discovery.tsv \
-  --witness-output coverage_account_witnesses.tsv
+  --witness-output /tmp/dw1_predecessor_witnesses.tsv
+
+uv run --isolated --no-project --python 3.13 python \
+  witness_ownership.py \
+  --sources coverage_fulltext_sources.tsv \
+  --paper-root /ssd1/sichangheagent/dw1_detector_survey_public_artifacts/2026-08-08 \
+  --accounts coverage_fulltext_expected_accounts.tsv \
+  --table-candidates coverage_table_candidates.tsv \
+  --table-discovery coverage_table_discovery.tsv \
+  --predecessor-ownership coverage_predecessor_witness_ownership.tsv \
+  --output coverage_account_witnesses.tsv
 ```
 
 The raw-candidate SHA-256 is
 `08a293da9a3e6acc46b3f606939655a1c72b2494b10b7b9399ebe2073ddae2c1`;
 the match-ledger SHA-256 is
 `71d5274ba80c82b143a71c624459c53d873494b3eb4a75ef968a0ffcbae76fe5`.
-The 987-row witness-ledger SHA-256 is recorded in the final candidate manifest.
-The semantic audit regenerates all three byte-for-byte and rejects an unresolved,
-removed, mutated, or mis-targeted resolution or witness. Fifty full-text controls include
+The 987-row witness-ledger and 321-row predecessor-ownership-ledger SHA-256
+values are recorded in the final candidate manifest. The second command
+re-derives all 987 predecessor witnesses, proves the exact 225 `same_window` and
+95 generic configuration rows, and replaces all 320 with exact source-owned
+joins; a fine-tuned DeBERTa companion makes the reviewed ledger 321 rows. The
+semantic audit regenerates the final witness output byte-for-byte and rejects an
+unresolved, removed, mutated, or mis-targeted resolution or witness. Fifty-nine full-text controls include
 the content-discovered fitted baseline, four separately trained states,
 READER method inheritance, four direct resolution-ledger mutations, and four
 source-form mutations covering scope summaries, Roman captions, figure legends,
@@ -747,7 +761,20 @@ total and reject the unrelated Anchor/Table 2 metric or a neighboring Table 4
 or Table 11 column as evidence for any of the five repaired distribution-shift
 accounts. They also reject a neighboring PAN12 metric, a Longformer-to-GCN
 column substitution, and replacement of the complete GCN row by Longformer's
-row. With the eleven composite controls, all 61 pass.
+row. Six final mutations reject removal of an ownership row, restoration of a
+heuristic witness, wrong-row and wrong-column substitutions, and
+zero-shot/fine-tuned DeBERTa or base/MCGrad training-state swaps. Three further
+controls swap the two J-Detector ablations, swap DetectAnyLLM scorer rows, and
+select DetectGPT's uncertainty instead of its AUROC. The 321-row source audit
+also corrected LAPD's model-size numeral, three neighboring DetectAnyLLM rows,
+the two J-Detector decrease annotations, the public Qwen2-0.5B IRM label, base
+Binoculars and ImBD rows, three DivEye backbones, and DetectGPT's AUROC cell.
+Every wrong-column donor is now mechanically selected from a distinct result
+cell in the same row; wrong-row and wrong-state donors bind a different exact
+source result rather than a rank, year, model-size numeral, axis tick, or
+uncertainty. Fifty-nine full-text controls now pass. The content
+mutations bypass the immutable-ledger digest gate while retaining exact source
+validation. With the eleven composite controls, all 70 pass.
 The audit was run by the exact recorded
 `uv run --isolated --no-project --python 3.13` command; its environment record
 now reports CPython 3.13.11 rather than bytes produced by a different interpreter.

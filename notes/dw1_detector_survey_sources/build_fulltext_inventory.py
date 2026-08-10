@@ -160,7 +160,7 @@ react-256shot|REACT 256-shot
 """),
     "2604.21223": _pairs("""
 llama32-pair|IRM Llama-3.2 model pair
-qwen25-pair|IRM Qwen2.5 model pair
+qwen25-pair|IRM Qwen2-0.5B model pair
 reward-model-deberta|OpenAssistant RM-DeBERTa-v3-large-v2 comparator
 """),
     "2606.00016": _pairs("""
@@ -949,7 +949,7 @@ EVIDENCE: dict[str, str] = {
     "2605.16107": "Tables II-III and transfer/attack figures; each -M or -Mult state has at least one AUROC or TPR@1%FPR >=0.90, with sharply varying averages",
     "2605.06903": "paper result tables, official checkpoint history, preserved two-A6000 v5 screen, and Appendix Table 9; paper-era, public-v5, and the three same-data baseline retrains are deliberately separate",
     "2605.02374": "main Table 1 and OOD Table 4; every REACT shot-size state exceeds 0.90 accuracy in-domain, while OOD HC3 averages are about 0.86-0.87",
-    "2604.21223": "paper model-pair tables, Appendix Table 8, and frozen IRM screen; both pair families and the RM-DeBERTa comparator have a paper AUROC >=0.90 slice, while the best downloadable IRM pair measured 0.9436 versus Binoculars 0.9595",
+    "2604.21223": "paper model-pair tables, Appendix Table 8, and frozen IRM screen; the Llama-3.2 and public Qwen2-0.5B pairs and the RM-DeBERTa comparator have a paper AUROC >=0.90 slice, while the public Qwen pair measured 0.9436 versus Binoculars 0.9595",
     "2606.00016": "Tables 1-4 and attack/external Tables 5-9; every named architecture/arrangement and the released SuperAnnotate RoBERTa comparator exceed 0.90 F1 or AUC on at least one cell, with weaker unified/transfer results",
     "2604.02008": "Tables III-V; every aligned/routed detector has AUROC or F1 >=0.90 on a Mix8/DetectRL cell and uses retained proxy/reference material",
     "2602.08031": "Table 2 and Appendix Tables 18-24; each unmodified baseline and corresponding -M detector is separately reported and crosses 0.90 AUROC on a dataset/generator cell, with variable transfer and low-FPR behavior",
@@ -965,7 +965,7 @@ EVIDENCE: dict[str, str] = {
     "2509.22147": "binary Tables 3-4; every listed feature/learner or implicit transformer has accuracy/F1 >=0.90; segmentation and multiclass tables are excluded tasks",
     "2509.18880": "Tables 1-4, 6, and 13; each listed backbone/boosted state or fitted e5-small-lora, Desklib, and SuperAnnotate comparator reaches AUROC, accuracy, or a reported attack-slice percentage >=0.90 somewhere; boosted Binoculars stays below 0.90 and is not an account",
     "2510.02319": "Tables IV-VII; seven base fine-tunes, adversarial ModernBERT, and PIFE all have AUC >0.90; only PIFE remains strong on most semantic attacks",
-    "2509.14268": "main DDL/reference-clustering tables and scoring-model ablation; each named proxy configuration has a qualifying high cell",
+    "2509.14268": "main DDL/reference-clustering tables and scoring-model ablation; the three fitted proxy states are retained individually, but their own Table 5 AUROC values are 0.8570, 0.7694, and 0.8367 rather than neighboring high baseline cells",
     "2509.02499": "main MoSEs-lr/MoSEs-xg tables; all six learner/base-detector pairings cross 0.90 and depend on the stylistics reference repository",
     "2509.00623": "Table 1: RoBERTa news/academic accuracy-F1 99.99/99.99 and 100/100; TF-IDF+SVM 97.90/97.91 and 99.85/99.85; Candace 99.75/99.75 and 99.95/99.95",
     "2508.13768": "Tables 3, 7, 14; both RoBERTa backbone states exceed 0.90 F1 on a generator/domain cell, with weaker scientific-writing/OOD rows",
@@ -1011,7 +1011,7 @@ EVIDENCE.update(
         "2510.16549": "Table VI; every named real-plus-synthetic trained backbone has precision, recall, or F1 >=0.90 on at least one real/synthetic peer-review test cell",
         "2510.12608": "Tables 2-3; the three comparison detectors and each named StyleDecipher representation cross 0.90 on a domain accuracy/F1 cell, with weaker transfer",
         "2510.00890": "Table 2; full Sci-SpanDet and all six component ablations report AUROC 0.9008-0.9263 on the span-level scientific-text task",
-        "2509.25154": "Table 1 and Figure 4; four SLM states, three J-Detector learners, and two feature-removal states reach F1 or AUROC >=0.90 on a judgment dataset/group-size slice",
+        "2509.25154": "Table 1 and Figure 4; four SLM states and three J-Detector learners reach F1 or AUROC >=0.90, while the two named feature-removal states are retained with their exact 2.7- and 5.3-point F1 decreases at group size 16",
         "2509.15550": "main and appendix tables; every listed baseline, Revise-Detect comparator, repair order, and DNA-DetectLLM model pair has AUC/accuracy >=0.90 on a dataset/generator cell",
         "2509.00731": "Tables 2-4; RoBERTa/BERT/FastText development metrics exceed 0.90, Qwen LoRA ranks 4/8/16 score 0.9431/0.9376/0.9594 accuracy, and DeepSeek ranks 4/8/16 qualify by 0.9079 accuracy, 0.9008 AI F1, and 0.9293 accuracy",
         "2508.18715": "Tables 1-2 and 5; Random Forest/MLP, all six attribution-budget states, and all three utterance PLM states exceed 0.90 macro F1 on a dialogue dataset/task slice",
@@ -1141,6 +1141,12 @@ NO_ACCOUNT_REASONS: dict[str, str] = {
 # Result-specific evidence is required where one paper's configurations differ in
 # metric boundary, mechanism, artifact status, or method-gate disposition.
 RESULT_EVIDENCE: dict[str, str] = {
+    "2604.21223:qwen25-pair": "Table 5 reports the public Qwen2-0.5B IRM pair at 90.14, 89.43, and 90.47 AUROC on the three detection task families; the stable account slug predates correction of the model-family label.",
+    "2509.14268:qwen2-0.5b": "Table 5 reports the Qwen2-0.5B scoring state at 0.8570 AUROC; it is a named fitted state, not the neighboring Likelihood row's 0.9370 cell.",
+    "2509.14268:gpt-neo-2.7b": "Table 5 reports the GPT-Neo-2.7B scoring state at 0.7694 AUROC; it is a named fitted state, not the neighboring Entropy row's 0.9158 cell.",
+    "2509.14268:gpt-j-6b": "Table 5 reports the GPT-J-6B scoring state at 0.8367 AUROC; it is a named fitted state, not the neighboring RoBERTa-Large row's 0.8909 cell.",
+    "2509.25154:jdetector-no-llm": "Table 1 and Figure 4; the two named feature-removal states are retained beside the >=0.90 J-Detector learner results, with exact 2.7- and 5.3-point F1 decreases at group size 16 rather than absolute F1 cells. Figure 4 annotates the state without LLM-enhanced features with the 2.7-point decrease.",
+    "2509.25154:jdetector-no-linguistic": "Table 1 and Figure 4; the two named feature-removal states are retained beside the >=0.90 J-Detector learner results, with exact 2.7- and 5.3-point F1 decreases at group size 16 rather than absolute F1 cells. Figure 4 and its prose assign the state without linguistic features the 5.3-point decrease.",
     "2608.03859:pan12-ngram": "Table 1 reports the PAN12-style n-gram overlap baseline at 0.9602 recall and 0.9041 F1; its separately reported precision is 0.8545.",
     "2607.14905:gcn": "Table 2 reports the GCN argmax/complete-graph row at macro F1 0.68 on the LLM-OWL-AE-II original-text column; the paper's explicit robustness/generalisation claim applies to the GNN family, while this architecture-owned cell is below 0.90.",
     "2607.14905:gat": "Table 2 reports the GAT argmax/complete-graph row at macro F1 0.75 on the LLM-OWL-AE-II original-text column; the paper's explicit robustness/generalisation claim applies to the GNN family, while this architecture-owned cell is below 0.90.",

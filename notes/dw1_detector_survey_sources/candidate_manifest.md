@@ -17,34 +17,36 @@ The owned candidate consists only of:
 - every file in this `dw1_detector_survey_sources/` directory.
 
 The direct predecessor documentation commit is
-`c4246ad56aaf90461584de5b6afd0ae7c8104b44`, the pushed rev6 successor repair
-evaluated by dw1eval8.
+`9a1b52ae76e20baeb54f0ea242108445e31cfb6f`, the pushed metric-ownership
+successor evaluated by dw1eval10.
 The accepted survey chain is preserved in Git: original survey `d5fb118`,
 accuracy-first renewal `fe98a1c`, evaluator repair `f749a13`, rev2 semantic
 repair `45191cb`, rev3 composite/E-card repair `1d2fc389`, rev4 full-text repair
-`15acd6c`, eval6 successor `c9968e7`, and rev6 semantic-coverage repair
-`c4246ad`. No DW1
+`15acd6c`, eval6 successor `c9968e7`, rev6 semantic-coverage repair `c4246ad`,
+and metric-ownership predecessor `9a1b52a`. No DW1
 implementation or configuration file is in the candidate. A later parent-
 repository commit may change only the `docs` gitlink to the pushed documentation
 commit.
 
 ## Repository content binding
 
-`candidate_files.sha256` covers 76 stable scientific, audit, benchmark,
+`candidate_files.sha256` covers 78 stable scientific, audit, benchmark,
 delivery, and evidence files. To avoid recursive or post-review invalidation it
 excludes exactly four control artifacts: itself, this manifest,
 `review_subject_files.sha256`, and `adversarial_review.md`. The final Git commit
 binds all four exclusions. The separate review-subject ledger directly hashes
-all 76 stable scientific, audit, benchmark, evidence, and exact-email files plus
+all 78 stable scientific, audit, benchmark, evidence, and exact-email files plus
 the external README and manifest. It deliberately excludes both metadata
 ledgers, this manifest, itself, and the review record, avoiding recursive or
 obsolete indirect bindings; the final Git commit binds those control artifacts,
 and the direct subject hashes remain reconstructable after the verdict is
-appended. The candidate-ledger and review-subject-ledger SHA-256 values are:
+appended. The frozen owned live scope is therefore exactly 82 files: 78 stable
+subjects plus the four declared controls. The candidate-ledger and review-
+subject-ledger SHA-256 values are:
 
-`8217d71a51c9ed8430b006edc852e67c46435aa53403d5c92601331621b2e32a`
+`9999c82723f088584a14a70a95bd9a7f17f283e614d44df3e6d8cca137123399`
 
-`1093ad9665835c6f546d4154fca9f99e13c0d320d43f26360ff1adead4608152`
+`3d6b6efb0c9452ca0fb8c7a08375b8c64d510eb44cb5296f05fe39e77e48a8c9`
 
 The ledger includes the complete earlier MELD, benchmark, integrity, coverage,
 and review evidence plus this repair's composite source/result mappings,
@@ -147,12 +149,25 @@ Unicode metric glyphs and spaced F1 labels; all three arXiv 2505.11550 Table 2
 architectures now have direct raw candidates and witnesses. The five
 distribution-shift shared-row states now bind their own Table 4 or Table 11
 metric columns, while an audit-derived equation binds the external README to
-4,812 result candidates plus 119 summaries. Fifty full-text controls join
-the eleven accepted controls; all sixty-one pass. The exact
+4,812 result candidates plus 119 summaries. The final ownership layer re-derives
+the exact 225 proximity-only and 95 generic configuration predecessor witnesses,
+then replaces every one with a distinct source identity, result row, numeric
+column, and method/training state. Its immutable 321-row ledger includes a
+fine-tuned DeBERTa companion and keeps the current MELD v5 benchmark artifact
+separate from the paper-era row. The exhaustive pass rejects model-size
+numerals, years, uncertainties, axis ticks, and neighboring model rows as
+account-owned results, and mechanically derives every wrong-column donor from a
+different result cell. Fifty-nine full-text controls join the eleven accepted
+controls; all seventy pass. The final 987-row witness ledger has
+SHA-256
+`27f62d0ea4e9fe575b9cbadbd8302ff1b69882b9cd3f3bf01bcd2ba632d191fc`;
+the 321-row predecessor-ownership ledger has SHA-256
+`79726def908f6e0992b68648253d4c92b36809affda5959d913f8bb0d8c89a54`.
+The exact
 commands, inputs, output hashes, Poppler extraction version, and generated
 987-row audit
 are preserved.
-The three audit/inventory programs and the two composite benchmark/verifier
+The four audit/inventory/ownership programs and the two composite benchmark/verifier
 programs pass Ruff 0.14.9 format and lint checks. The two composite
 benchmark/verifier programs also pass the separately recorded basedpyright
 1.36.0 check under the Python 3.13 target; no basedpyright-clean claim is made
@@ -200,11 +215,11 @@ comparators rather than a frozen like-for-like evaluation.
 ## Frozen correction and no-send state
 
 - Human-readable email SHA-256:
-  `82f31c0318dbc1d1f89edf78b18a094b3ff37abaff85b573580a978ea71b2e1a`.
+  `a53171b78cf85a6b4713f25ac65cf41d10040d32e8cd323f3768cc0ec0c04566`.
 - Mechanical subject SHA-256:
   `73540e80f5dafef3f3cb5168ad75475f755efade636b7135ea21ccaa4fc9abad`.
 - Mechanical body SHA-256:
-  `97cee6b3cdef877bf22b0334425853eb3d4e85213921122d93c83922f03915a0`.
+  `5d5a5b8a1d1d7e6b3c20ed7ea4a97e51e8791a65b4d78398675cd4ce72745a82`.
 
 The mechanical copies exactly equal the subject and body of the human-readable
 draft. Status is **NOT SENT**. `delivery_plan.md` forbids delivery unless a new
@@ -214,7 +229,7 @@ an evaluator PASS.
 
 ## Independent review chain
 
-`adversarial_review.md` preserves twenty-one predecessor reviewer/evaluator verdicts.
+`adversarial_review.md` preserves twenty-six predecessor reviewer/evaluator verdicts.
 Reviews 1, 2, 4, 6, 7, and 8 remain FAIL records with their resolved findings;
 reviews 3 and 5 are historical PASS records for predecessor candidate states.
 The dw1eval4 verdict proves that review 5 did not test publication-internal
@@ -302,12 +317,36 @@ repairs and found only one stale capitalized `58` in the survey evidence note;
 that note now says the mechanically derived 61, its ledgers are refreshed, and
 Review 23 remains a non-authorizing FAIL.
 
+Review 24 is the distinct internal PASS over the metric-ownership predecessor.
+The fresh dw1eval10 Review 25 then proved that all 225 `same_window` and 95
+generic `table_configuration_join` records still relied on proximity or generic
+configuration matching rather than exact source-owned result cells. Its
+counterexamples reassigned fine-tuned DeBERTa evidence to TF-IDF and zero-shot
+DeBERTa and base ModernBERT evidence to MCGrad. Review 25 remains a durable,
+non-authorizing FAIL with verdict SHA-256
+`09d22acbf56e4acbf57c94b568fdca5191e62514d90393bad573ac6dbd05c642`.
+This successor re-derives the predecessor set, replaces every affected record,
+and validates wrong-row, wrong-column, and bilateral training-state mutations
+against source semantics with the immutable-digest shortcut disabled.
+
+Review 26 is the distinct read-only FAIL over the first successor. It proved
+that the LAPD Llama2-7B account selected the model-size numeral, the two
+J-Detector ablations treated an axis tick or decrease as an absolute score, and
+a rekeyed T-Detect wrong-row mutation passed after moving the prior value into
+the donor fields. The exhaustive successor checks every one of the 321 rows,
+corrects those cells plus the DetectAnyLLM, IRM, DetectGPT, base
+Binoculars/ImBD, and DivEye cases, rejects non-result numerals, and derives each
+wrong-column donor from a different result cell. Review 26 remains a durable,
+non-authorizing FAIL.
+
 The new distinct final reviewer must independently challenge all 119 source
 summaries, the 4,812 result candidates, the 29 evaluator-confirmed accounts,
 the six off-page-metric accounts, all 987 source-derived witnesses, Roman-table,
 rank-join, column, vertical-group, and Figure 4 provenance, predecessor zero-yield sources,
-the three Unicode-F1 Table 2 rows, the exact Python 3.13 replay, clean owned path
-set, all 61 controls, and the unsent correction. It must directly record this final
+the three Unicode-F1 Table 2 rows, all 321 exact predecessor-ownership records,
+the zero-shot/fine-tuned DeBERTa and base/MCGrad ModernBERT distinctions, the
+exact Python 3.13 replay, clean owned path set, all 70 controls, and the unsent
+correction. It must directly record this final
 `candidate_manifest.md` SHA-256 in addition to every hash in
 `review_subject_files.sha256`. Its successor verdict will be appended without
 changing any reviewed subject byte.
@@ -316,10 +355,10 @@ changing any reviewed subject byte.
 
 Before commit and after checkout of the final commit:
 
-1. replay the semantic audit and its sixty-one controls under the recorded
+1. replay the semantic audit and its seventy controls under the recorded
    Python 3.13 command;
 2. replay the independent score verifier and static checks;
-3. verify all 76 repository-ledger entries and 288 external-ledger entries;
+3. verify all 78 repository-ledger entries and 288 external-ledger entries;
 4. prove the human email equals the mechanical subject/body and remains unsent;
 5. prove every candidate-ledger path is staged and no unowned path is staged;
 6. commit and push only owned documentation artifacts; and

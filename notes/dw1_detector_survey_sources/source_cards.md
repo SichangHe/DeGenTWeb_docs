@@ -639,8 +639,10 @@ high claims and individually rejected, leaving the recommendation unchanged.
   absent artifacts, method exclusions, and missing comparable deployment
   timing. None changes the recommendation.
 - Generalized account-witness correction: the 987-row witness ledger gives
-  every account one same-parent PDF binding rather than accepting a target ID in
-  an unrelated candidate row. In the shared-task paper arXiv 2501.11012, each
+  every account one source-owned binding rather than accepting a target ID in
+  an unrelated candidate row. The current MELD v5 state binds its preserved
+  immutable benchmark output and remains separate from the paper-era result. In
+  the shared-task paper arXiv 2501.11012, each
   team now uses a structured track/rank join from the exact Table 4 or 6 team
   row to the exact Table 8-11 metric row; Unibuc-NLP's 94.1% English result is
   no longer co-bound to AdvacheckEnglish's 83.07 leaderboard row. Dedicated
@@ -651,6 +653,15 @@ high claims and individually rejected, leaving the recommendation unchanged.
   submission at 0.78, both LuxVeri ensembles, and the selected English and
   multilingual GLTR systems—remain visible as nonqualifying named states rather
   than being promoted or silently dropped.
+- Exhaustive predecessor-ownership correction: the bound 321-row ownership
+  ledger identifies all 225 former `same_window` and 95 generic table-
+  configuration witnesses, plus a fine-tuned DeBERTa companion, and replaces
+  them with distinct source identity/result-row/numeric-column/training-state
+  joins. It directly fixes TF-IDF's 93.6 Figure 4 curve, zero-shot DeBERTa's
+  100.00 recall, fine-tuned DeBERTa's 0.976 F1, base ModernBERT's 0.9329 BEEMO
+  F1, and MCGrad ModernBERT's 0.9337 BEEMO F1. Exact source/header/span hashes
+  and per-row negative donors prevent a neighboring metric, unrelated row, or
+  paired fitted state from certifying an account.
 - Parent-exclusion correction: arXiv 2509.15550 now gives BiScope, Entropy,
   Likelihood, LogRank, DetectGPT, FastDetectGPT, Binoculars, and Lastde++ their
   own mechanisms and table evidence. DetectGPT is multi-perturbation-excluded;
@@ -707,7 +718,7 @@ high claims and individually rejected, leaving the recommendation unchanged.
   accounts. After independent extraction, a 987-row source-derived witness
   ledger binds every account's identity, metric/configuration, locator, join
   semantics, and text hash; those bindings cannot seed or suppress the raw
-  queue. Fifty full-text controls cover the
+  queue. Fifty-nine full-text controls cover the
   ordinary-title selection fixture,
   Candace deletion with a lowered count, non-anchor PAWN deletion with a lowered
   count, deletion of a non-English Qwen LoRA state with a lowered count, content
@@ -732,8 +743,20 @@ high claims and individually rejected, leaving the recommendation unchanged.
   derived external README total, and the generic table-configuration identity
   line. Three additional controls require the canonical PAN12 recall column and
   reject both a Longformer-column substitution and a complete Longformer-row
-  substitution for the GCN account. Together with the eleven accepted
-  composite controls, all sixty-one pass.
+  substitution for the GCN account. Six ownership controls additionally reject
+  a missing ownership row, a restored heuristic witness, wrong-row and
+  wrong-column substitutions, zero-shot/fine-tuned DeBERTa or base/MCGrad
+  training-state swaps, J-Detector ablation-state swaps, DetectAnyLLM
+  scorer-row swaps, and selection of DetectGPT uncertainty instead of AUROC.
+  Together with the eleven accepted composite controls, all seventy pass.
+- Exhaustive ownership correction: each of the 321 reviewed rows now binds a
+  source identity, exact result row or figure claim, numeric column, and
+  method/training state. The audit rejects model-size numerals, years,
+  uncertainties, axis ticks, and non-result donor cells. It corrected LAPD's
+  Llama2-7B row to 99.42 rather than the “7B” numeral; DetectAnyLLM's Qwen2,
+  GPT-Neo, and GPT-J rows to 0.8570, 0.7694, and 0.8367; the public IRM state to
+  Qwen2-0.5B at 90.14; and J-Detector's 2.7- and 5.3-point annotations to
+  decreases rather than absolute F1 scores. None changes the deployment screen.
 - Decision: the recovered configurations are individually visible but do not
   alter the accuracy-first conclusion. They are validation-only, narrow,
   shifted, unreleased, excluded-method, weaker on official/transfer evidence, or

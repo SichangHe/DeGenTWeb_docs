@@ -1109,3 +1109,117 @@ edit, stage, commit, external-artifact change, email, or delivery attempt. This
 internal PASS completes the required adversarial review but does not authorize
 email delivery; the fresh one-shot evaluator and manager gate in
 `delivery_plan.md` remains binding.
+
+## Review 25 — FAIL (fresh one-shot evaluator, dw1eval10)
+
+The fresh evaluator inspected documentation commit
+`9a1b52ae76e20baeb54f0ea242108445e31cfb6f`, independently replayed the frozen
+119-source audit and 61 controls, verified both repository ledgers and the
+288-file external collection, and preserved every accepted scientific,
+benchmark, integrity, public-access, and NOT-SENT finding. Its durable verdict
+is `/ssd1/sichangheagent/dw1eval10/evaluation.md`, SHA-256
+`09d22acbf56e4acbf57c94b568fdca5191e62514d90393bad573ac6dbd05c642`.
+
+The decisive P2 was a generalized source-ownership failure in the predecessor
+witness layer. All 225 `same_window` and 95 generic
+`table_configuration_join` records were proximity or configuration joins that
+did not prove that the named account owned the selected result row, numeric
+column, and training state. The evaluator demonstrated concrete leakage from
+fine-tuned DeBERTa into TF-IDF and zero-shot DeBERTa accounts and from base
+ModernBERT into the MCGrad state. It specifically required exact Figure 4,
+Table 4, Table 8, and Table 9 ownership and negative substitutions for a wrong
+row, wrong result column, and wrong training state. The evaluator found no
+independent P1. Its basedpyright and Poppler observations remained nonblocking
+P3s.
+
+Review 25 final verdict: **FAIL**. Review 24 therefore does not pass this repair
+or authorize delivery. This successor preserves the complete prior chain and
+replaces every affected predecessor witness with a source-owned account,
+identity row, result row or figure, exact metric column, and method/training
+state binding. A distinct read-only reviewer must independently challenge the
+fully frozen successor before commit; neither that internal review nor this
+repair authorizes email delivery.
+
+## Review 26 — FAIL (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval10_final_ownership_review26`
+- timestamp recorded after receipt: `2026-08-09T23:17:52-07:00`
+- reviewed staged index tree: `509badabe9b678e786152706d57539ee38472da3`
+- reviewed candidate-manifest SHA-256:
+  `ad7ffe9bbc2cbc6e5f0569772f221c9dc9b4f2970bb4ec9a22c4c23ee1575850`
+- 78-file candidate-ledger SHA-256:
+  `f839a54cbd75f7224725a0c8451bd69908b6c298f8a063335fee93de05783713`
+- 80-entry review-subject-ledger SHA-256:
+  `c4b8b4e11df9012932cb5534ec9e84136d65cd8951d19e22b99630b7b616a914`
+- 288-entry external-manifest SHA-256:
+  `e9ae35623cb3b808368cc9729d001bc33940b71148814199402c9d2b4149dd97`
+
+The reviewer independently replayed the 119-source CPython 3.13.11 audit and
+all 67 then-current controls, checked the 82-path owned scope, external
+collection, benchmark, exact correction bytes, and **NOT SENT** gate, and found
+no independent P1. It confirmed that the named TF-IDF, zero-shot/fine-tuned
+DeBERTa, and base/MCGrad ModernBERT repairs were correctly represented.
+
+The decisive P2 was that the generalized ownership repair still accepted
+non-result numbers and cross-model cells. The LAPD Llama2-7B account selected
+the “7B” model-size numeral instead of its Table 6 result. The two J-Detector
+ablations treated a 95 axis tick and a 5.3-point feature-ablation decrease as
+absolute F1 results. The validator also accepted a T-Detect mutation that moved
+the metric to an unrelated 3.9-percent row after the mutation moved the old
+metric into the negative-donor fields. Broader inspection then confirmed a
+GPT-J account borrowing RoBERTa-Large's row. Thus a checksum, account label, and
+negative-value inequality did not prove semantic row ownership.
+
+The successor re-audits all 321 ownership records. It rejects model-name
+numerals, years, uncertainty cells, axis ticks, ranks, and sample counts;
+requires exact result-row/column/state bindings; and derives every
+wrong-column donor from a distinct result cell in the same source row. It also
+corrects the LAPD, J-Detector, DetectAnyLLM, IRM, DetectGPT, base
+Binoculars/ImBD, and DivEye counterexamples and requires each negative control
+to fail for the intended semantic reason.
+
+Review 26 final verdict: **FAIL**. It authorizes no delivery, email, lifecycle
+closure, or commit. A different reviewer must inspect the final frozen repair.
+
+## Review 27 — PASS (distinct final read-only reviewer)
+
+- reviewer identity: `/root/eval10_final_ownership_review27`
+- timestamp recorded after receipt: `2026-08-10T00:08:07-07:00`
+- reviewed staged index tree: `9caf13f0b8035a25266a36682abb014e34a7ead2`
+- reviewed candidate-manifest SHA-256:
+  `65d74bb8453057b0ea54fb648357c0277bb6dbb384bcd12de9a60fd34b1fbc80`
+- 78-file candidate-ledger SHA-256:
+  `9999c82723f088584a14a70a95bd9a7f17f283e614d44df3e6d8cca137123399`
+- 80-entry review-subject-ledger SHA-256:
+  `3d6b6efb0c9452ca0fb8c7a08375b8c64d510eb44cb5296f05fe39e77e48a8c9`
+- 288-entry external-manifest SHA-256:
+  `e9ae35623cb3b808368cc9729d001bc33940b71148814199402c9d2b4149dd97`
+
+The reviewer reconstructed the staged index in isolation. Its independent
+CPython 3.13 replay reproduced the generated bytes and passed with 119 sources,
+987 accounts and witnesses, 724 primary-result dispositions, 4,812 result
+candidates plus 119 source summaries, all 321 ownership replacements, and all
+70 controls. The ownership generator independently reproduced the exact
+987-row final witness ledger.
+
+A separate re-extraction of all 75 evidence sources used by the ownership
+repair checked every one of the 321 rows. It found zero source-hash, page/line,
+account/state, numeric-column, raw-candidate, or donor failures. The 298
+wrong-column donors were distinct, deterministically derived result cells; the
+remaining 23 state/row donors were valid. Direct checks confirmed TF-IDF,
+zero-shot and fine-tuned DeBERTa, base and MCGrad ModernBERT, LAPD, both
+J-Detector ablations, T-Detect, all three DetectAnyLLM states, IRM, DetectGPT,
+base Binoculars and ImBD, all three DivEye states, and NEULIF.
+
+The 78-file candidate ledger, 80-entry review-subject ledger, exact 82-file
+owned live/index scope, absence of ignored bytecode, 288-file read-only external
+collection, score verifier, model-layout verifier, conclusion, exact correction
+subject/body, and **NOT SENT** gate all passed. Formatting and lint passed. The
+only P3 was that a generic isolated Python environment lacks `sklearn`; the
+recorded frozen Python 3.13 benchmark environment runs the verifier successfully.
+
+Review 27 final verdict: **PASS — no P1/P2 findings**. The reviewer made no
+edit, stage, commit, push, external-artifact change, email, or delivery attempt.
+This internal PASS completes the required adversarial review but does not
+authorize email delivery; the fresh evaluator and manager gate in
+`delivery_plan.md` remains binding.

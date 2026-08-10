@@ -16,6 +16,7 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 
 import discover_table_accounts as table_discovery
+import witness_ownership
 
 ATOM_NS = "{http://www.w3.org/2005/Atom}"
 EXPORT_NAMES = (
@@ -154,13 +155,13 @@ FULLTEXT_SOURCES_SHA256 = (
     "6fc7b4e8e4b9d83e2d31c8dbb40362ac26f3fcc4a71d4f9805b2cae9afc4fa66"
 )
 FULLTEXT_ACCOUNTS_SHA256 = (
-    "503ccd075788f8d4f4758930771e05c2fd809b707133761fed0233615b55ab20"
+    "804a5da2fc2e203cc13e55541befbf9bbfbf3ca7b40f9561827e709399344af8"
 )
 FULLTEXT_ACCOUNT_MAP_SHA256 = (
     "62d99d534249c0b7ec2a22e152239284de9de8cb45fdd49745fd138a29c9b947"
 )
 PRIMARY_RESULTS_SHA256 = (
-    "b88165269ed282c010d202e046e3d402814ccb0e39237616a33c24e4d15a1018"
+    "8c5f60a7d9dfd3410ff7c1d4a2871ba780a02602225100b690f39515467171ef"
 )
 TABLE_CANDIDATES_SHA256 = (
     "08a293da9a3e6acc46b3f606939655a1c72b2494b10b7b9399ebe2073ddae2c1"
@@ -169,7 +170,10 @@ TABLE_DISCOVERY_SHA256 = (
     "71d5274ba80c82b143a71c624459c53d873494b3eb4a75ef968a0ffcbae76fe5"
 )
 ACCOUNT_WITNESSES_SHA256 = (
-    "f3b4caf7fd1cf0d67b8a309fc1f1cb7b24060b1985eb46295edf17e337d1538a"
+    "27f62d0ea4e9fe575b9cbadbd8302ff1b69882b9cd3f3bf01bcd2ba632d191fc"
+)
+PREDECESSOR_OWNERSHIP_SHA256 = (
+    "79726def908f6e0992b68648253d4c92b36809affda5959d913f8bb0d8c89a54"
 )
 FULLTEXT_ACCOUNT_SET_SHA256 = (
     "3a2f45d49a5909e3e13cfd92876eca8656c5a03b478d250f77a1876c35b35cd4"
@@ -1316,12 +1320,15 @@ def validate_table_discovery(
     candidates_path: Path,
     discovery_path: Path,
     witnesses_path: Path,
+    predecessor_ownership_path: Path,
     paper_root: Path,
 ) -> tuple[
     list[table_discovery.Source],
     list[table_discovery.Candidate],
     list[table_discovery.Resolution],
     list[table_discovery.AccountWitness],
+    list[table_discovery.AccountWitness],
+    list[witness_ownership.Ownership],
     dict[str, str],
 ]:
     """Replay PDF-table discovery independently of the curated generator."""
@@ -1331,6 +1338,8 @@ def validate_table_discovery(
         raise ValueError("table-discovery snapshot hash mismatch")
     if sha256(witnesses_path) != ACCOUNT_WITNESSES_SHA256:
         raise ValueError("account-witness snapshot hash mismatch")
+    if sha256(predecessor_ownership_path) != PREDECESSOR_OWNERSHIP_SHA256:
+        raise ValueError("predecessor-ownership snapshot hash mismatch")
     sources = table_discovery.load_sources(fulltext_sources_path)
     source_texts = table_discovery.extract_source_texts(sources, paper_root)
     candidates = table_discovery.discover_all(
@@ -1349,30 +1358,44 @@ def validate_table_discovery(
         encoding="utf-8"
     ):
         raise ValueError("table-discovery account matches do not reproduce")
-    witnesses = table_discovery.build_account_witnesses(
-        sources,
-        paper_root,
-        accounts,
-        candidates,
-        resolutions,
-        source_texts=source_texts,
+    witnesses, predecessor_witnesses, ownership_rows, reproduced_texts = (
+        witness_ownership.build_owned_account_witnesses(
+            sources,
+            paper_root,
+            accounts,
+            candidates,
+            resolutions,
+            predecessor_ownership_path,
+            source_texts=source_texts,
+        )
     )
+    if reproduced_texts != source_texts:
+        raise ValueError("ownership replay changed extracted source texts")
     stored_witnesses = table_discovery.load_witnesses(witnesses_path)
-    table_discovery.validate_account_witnesses(
+    witness_ownership.validate_owned_witnesses(
         stored_witnesses,
+        predecessor_witnesses,
+        ownership_rows,
         sources,
-        paper_root,
         accounts,
         candidates,
-        resolutions,
-        source_texts=source_texts,
+        source_texts,
+        predecessor_ownership_path.parent,
     )
     if witnesses != stored_witnesses or (
         table_discovery.serialize_witnesses(witnesses)
         != witnesses_path.read_text(encoding="utf-8")
     ):
         raise ValueError("account-witness ledger does not reproduce from PDFs")
-    return sources, candidates, resolutions, witnesses, source_texts
+    return (
+        sources,
+        candidates,
+        resolutions,
+        witnesses,
+        predecessor_witnesses,
+        ownership_rows,
+        source_texts,
+    )
 
 
 def validate_fulltext(
@@ -1585,11 +1608,20 @@ def run_regression_tests(
 ) -> int:
     tests = 0
 
-    def expect_failure(operation: Callable[[], object], label: str) -> None:
+    def expect_failure(
+        operation: Callable[[], object],
+        label: str,
+        expected_reason: str = "",
+    ) -> None:
         nonlocal tests
         try:
             operation()
-        except ValueError:
+        except ValueError as error:
+            if expected_reason and expected_reason not in str(error):
+                raise ValueError(
+                    f"composite negative control failed for the wrong reason: "
+                    f"{label}: {error}"
+                ) from error
             tests += 1
             return
         raise ValueError(f"negative control unexpectedly passed: {label}")
@@ -1825,6 +1857,9 @@ def run_fulltext_regression_tests(
     table_candidates: list[table_discovery.Candidate],
     table_resolutions: list[table_discovery.Resolution],
     account_witnesses: list[table_discovery.AccountWitness],
+    predecessor_witnesses: list[table_discovery.AccountWitness],
+    ownership_rows: list[witness_ownership.Ownership],
+    ownership_root: Path,
     table_source_texts: dict[str, str],
 ) -> int:
     tests = 0
@@ -1839,11 +1874,20 @@ def run_fulltext_regression_tests(
         for item in accounts
     ]
 
-    def expect_failure(operation: Callable[[], object], label: str) -> None:
+    def expect_failure(
+        operation: Callable[[], object],
+        label: str,
+        expected_reason: str = "",
+    ) -> None:
         nonlocal tests
         try:
             operation()
-        except ValueError:
+        except ValueError as error:
+            if expected_reason and expected_reason not in str(error):
+                raise ValueError(
+                    f"full-text negative control failed for the wrong reason: "
+                    f"{label}: {error}"
+                ) from error
             tests += 1
             return
         raise ValueError(f"full-text negative control unexpectedly passed: {label}")
@@ -1851,15 +1895,113 @@ def run_fulltext_regression_tests(
     def validate_witness_mutation(
         mutated: list[table_discovery.AccountWitness],
     ) -> None:
-        table_discovery.validate_account_witnesses(
+        witness_ownership.validate_owned_witnesses(
             mutated,
+            predecessor_witnesses,
+            ownership_rows,
             table_sources,
-            paper_root,
             table_accounts,
             table_candidates,
-            table_resolutions,
-            source_texts=table_source_texts,
+            table_source_texts,
+            ownership_root,
         )
+
+    def validate_ownership_set_mutation(
+        mutated: list[witness_ownership.Ownership],
+    ) -> None:
+        witness_ownership.validate_owned_witnesses(
+            account_witnesses,
+            predecessor_witnesses,
+            mutated,
+            table_sources,
+            table_accounts,
+            table_candidates,
+            table_source_texts,
+            ownership_root,
+        )
+
+    def validate_ownership_semantic_mutation(
+        mutated: list[witness_ownership.Ownership],
+    ) -> None:
+        witness_ownership.validate_ownership_sources(
+            mutated,
+            table_sources,
+            table_accounts,
+            table_candidates,
+            table_source_texts,
+            ownership_root,
+            check_immutable_digests=False,
+        )
+
+    def mutated_ownership(
+        account_id: str,
+        **changes: object,
+    ) -> list[witness_ownership.Ownership]:
+        indexes = [
+            index
+            for index, item in enumerate(ownership_rows)
+            if item.account_id == account_id
+        ]
+        if len(indexes) != 1:
+            raise ValueError(f"ownership control fixture missing: {account_id}")
+        index = indexes[0]
+        mutated = list(ownership_rows)
+        mutated[index] = replace(ownership_rows[index], **changes)
+        return mutated
+
+    evidence_fields = (
+        "successor_join_kind",
+        "evidence_kind",
+        "source_identity_label",
+        "identity_page",
+        "identity_line",
+        "identity_locator",
+        "identity_text",
+        "metric_page",
+        "metric_line",
+        "metric_locator",
+        "metric_text",
+        "metric_name",
+        "metric_column",
+        "metric_column_index",
+        "evaluation_scope",
+        "metric_value",
+        "raw_candidate_id",
+        "evidence_source_kind",
+        "evidence_source_path",
+        "source_text_sha256",
+        "evidence_span_sha256",
+        "header_page",
+        "header_line",
+        "header_locator",
+        "header_text",
+        "header_sha256",
+        "negative_kind",
+        "negative_page",
+        "negative_line",
+        "negative_locator",
+        "negative_text",
+        "negative_value",
+        "negative_reason",
+    )
+
+    def swapped_ownership_evidence(
+        first_id: str,
+        second_id: str,
+    ) -> list[witness_ownership.Ownership]:
+        by_id = {item.account_id: item for item in ownership_rows}
+        first = by_id[first_id]
+        second = by_id[second_id]
+        changes = {
+            first_id: {field: getattr(second, field) for field in evidence_fields},
+            second_id: {field: getattr(first, field) for field in evidence_fields},
+        }
+        return [
+            replace(item, **changes[item.account_id])
+            if item.account_id in changes
+            else item
+            for item in ownership_rows
+        ]
 
     def mutated_witnesses(
         account_id: str,
@@ -1941,6 +2083,121 @@ Novel Architecture           0.951     0.201
     expect_failure(
         lambda: validate_witness_mutation(account_witnesses[:-1]),
         "one source-derived account witness removed",
+    )
+    expect_failure(
+        lambda: validate_ownership_set_mutation(ownership_rows[:-1]),
+        "one exact predecessor-ownership row removed",
+    )
+    tfidf_predecessor = next(
+        item
+        for item in predecessor_witnesses
+        if item.account_id == "2608.01046:tfidf-logreg"
+    )
+    tfidf_index = next(
+        index
+        for index, item in enumerate(account_witnesses)
+        if item.account_id == tfidf_predecessor.account_id
+    )
+    restored_heuristic_witnesses = list(account_witnesses)
+    restored_heuristic_witnesses[tfidf_index] = tfidf_predecessor
+    expect_failure(
+        lambda: validate_witness_mutation(restored_heuristic_witnesses),
+        "deprecated same-window predecessor restored over an exact source-owned join",
+    )
+    expect_failure(
+        lambda: validate_ownership_semantic_mutation(
+            mutated_ownership(
+                "2511.21744:cnn",
+                metric_column_index=2,
+                metric_value="95",
+            )
+        ),
+        "CNN ownership redirected to Random Forest's neighboring metric column",
+        "required source-owned row/column/state changed",
+    )
+    tdetect = next(
+        item for item in ownership_rows if item.account_id == "2507.23577:tdetect"
+    )
+    tdetect_records = table_discovery._page_records(
+        table_source_texts[tdetect.parent_id]
+    )
+    tdetect_wrong_span = witness_ownership._span(
+        tdetect_records, tdetect.identity_line, tdetect.negative_line
+    )
+    expect_failure(
+        lambda: validate_ownership_semantic_mutation(
+            mutated_ownership(
+                tdetect.account_id,
+                metric_page=tdetect.negative_page,
+                metric_line=tdetect.negative_line,
+                metric_locator=tdetect.negative_locator,
+                metric_text=tdetect.negative_text,
+                metric_value=tdetect.negative_value,
+                raw_candidate_id="",
+                evidence_span_sha256=hashlib.sha256(
+                    tdetect_wrong_span.encode()
+                ).hexdigest(),
+                negative_page=tdetect.metric_page,
+                negative_line=tdetect.metric_line,
+                negative_locator=tdetect.metric_locator,
+                negative_text=tdetect.metric_text,
+                negative_value=tdetect.metric_value,
+            )
+        ),
+        "T-Detect ownership redirected to a different numeric source row",
+        "required source-owned row/column/state changed",
+    )
+    expect_failure(
+        lambda: validate_ownership_semantic_mutation(
+            swapped_ownership_evidence(
+                "2608.01046:deberta-zeroshot",
+                "2608.01046:deberta-finetuned",
+            )
+        ),
+        "zero-shot and fine-tuned DeBERTa training-state evidence swapped",
+        "required source-owned row/column/state changed",
+    )
+    expect_failure(
+        lambda: validate_ownership_semantic_mutation(
+            swapped_ownership_evidence(
+                "2607.17382:modernbert-large",
+                "2607.17382:modernbert-large-mcgrad",
+            )
+        ),
+        "base ModernBERT ownership redirected to the MCGrad training state",
+        "required source-owned row/column/state changed",
+    )
+    expect_failure(
+        lambda: validate_ownership_semantic_mutation(
+            swapped_ownership_evidence(
+                "2509.25154:jdetector-no-llm",
+                "2509.25154:jdetector-no-linguistic",
+            )
+        ),
+        "J-Detector feature-ablation training states swapped",
+        "required source-owned row/column/state changed",
+    )
+    expect_failure(
+        lambda: validate_ownership_semantic_mutation(
+            swapped_ownership_evidence(
+                "2509.14268:qwen2-0.5b",
+                "2509.14268:gpt-neo-2.7b",
+            )
+        ),
+        "DetectAnyLLM scoring-model rows swapped",
+        "required source-owned row/column/state changed",
+    )
+    expect_failure(
+        lambda: validate_ownership_semantic_mutation(
+            mutated_ownership(
+                "2602.08031:detectgpt",
+                metric_column_index=6,
+                metric_value="0.66",
+                negative_value="92.84",
+            )
+        ),
+        "DetectGPT AUROC redirected to its neighboring uncertainty",
+        "ownership selected an uncertainty, not a result",
     )
     expect_failure(
         lambda: validate_witness_mutation(
@@ -3006,6 +3263,7 @@ def write_report(
     table_candidates_path: Path,
     table_discovery_path: Path,
     account_witnesses_path: Path,
+    predecessor_ownership_path: Path,
     paper_root: Path,
     audit_path: Path,
     embedded_audit_path: Path,
@@ -3049,6 +3307,7 @@ def write_report(
         "--table-candidates coverage_table_candidates.tsv "
         "--table-discovery coverage_table_discovery.tsv "
         "--account-witnesses coverage_account_witnesses.tsv "
+        "--predecessor-ownership coverage_predecessor_witness_ownership.tsv "
         f"--paper-root {paper_root} "
         "--output coverage_semantic_audit.tsv "
         "--embedded-output coverage_embedded_result_audit.tsv "
@@ -3075,6 +3334,7 @@ def write_report(
         f"source_scope_summaries={source_summaries}",
         f"independent_discovery_rows={discovery_rows}",
         f"source_derived_account_witnesses={len(account_witnesses)}",
+        f"exact_predecessor_ownership_rows={witness_ownership.EXPECTED_OWNERSHIP_ROWS}",
         "account_witness_kinds="
         + ",".join(
             f"{kind}:{sum(item.join_kind == kind for item in account_witnesses)}"
@@ -3102,6 +3362,8 @@ def write_report(
             f"sha256 {table_candidates_path.name}={sha256(table_candidates_path)}",
             f"sha256 {table_discovery_path.name}={sha256(table_discovery_path)}",
             f"sha256 {account_witnesses_path.name}={sha256(account_witnesses_path)}",
+            f"sha256 {predecessor_ownership_path.name}="
+            f"{sha256(predecessor_ownership_path)}",
             f"sha256 {audit_path.name}={sha256(audit_path)}",
             f"sha256 {embedded_audit_path.name}={sha256(embedded_audit_path)}",
             f"sha256 {fulltext_audit_path.name}={sha256(fulltext_audit_path)}",
@@ -3129,6 +3391,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--table-candidates", type=Path)
     parser.add_argument("--table-discovery", type=Path)
     parser.add_argument("--account-witnesses", type=Path)
+    parser.add_argument("--predecessor-ownership", type=Path)
     parser.add_argument("--paper-root", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--embedded-output", type=Path)
@@ -3169,6 +3432,7 @@ def main() -> int:
         args.table_candidates,
         args.table_discovery,
         args.account_witnesses,
+        args.predecessor_ownership,
         args.paper_root,
         args.output,
         args.embedded_output,
@@ -3182,6 +3446,7 @@ def main() -> int:
             "--source-cards, --fulltext-sources, --fulltext-accounts, "
             "--account-map, --primary-results, --paper-root, --output, "
             "--table-candidates, --table-discovery, --account-witnesses, "
+            "--predecessor-ownership, "
             "--embedded-output, --fulltext-output, --report, and --environment "
             "are required"
         )
@@ -3198,6 +3463,7 @@ def main() -> int:
         table_candidates_path,
         table_discovery_path,
         account_witnesses_path,
+        predecessor_ownership_path,
         paper_root,
         output_path,
         embedded_output_path,
@@ -3223,6 +3489,8 @@ def main() -> int:
         table_candidates,
         table_resolutions,
         account_witnesses,
+        predecessor_witnesses,
+        ownership_rows,
         table_source_texts,
     ) = validate_table_discovery(
         fulltext_sources_path,
@@ -3230,6 +3498,7 @@ def main() -> int:
         table_candidates_path,
         table_discovery_path,
         account_witnesses_path,
+        predecessor_ownership_path,
         paper_root,
     )
     validate_external_readme_discovery_counts(
@@ -3264,6 +3533,9 @@ def main() -> int:
         table_candidates,
         table_resolutions,
         account_witnesses,
+        predecessor_witnesses,
+        ownership_rows,
+        predecessor_ownership_path.parent,
         table_source_texts,
     )
     write_audit(
@@ -3302,6 +3574,7 @@ def main() -> int:
         table_candidates_path,
         table_discovery_path,
         account_witnesses_path,
+        predecessor_ownership_path,
         paper_root,
         output_path,
         embedded_output_path,
