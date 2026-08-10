@@ -190,6 +190,12 @@ net accounts and none passes the complete deployment screen. Mathematical
 Unicode metric labels are normalized before extraction; arXiv 2505.11550's
 three Table 2 architectures therefore have direct row candidates and witnesses
 rather than inventory-only fallback evidence. [N18]
+For arXiv 2607.03680, Table 4 now binds `Vanilla + extra` separately to 91.5%
+Unseen Domain and 88.2% Unseen Domain+Generator accuracy; Table 11 binds the
+three held-out IntelLabs pooled configurations to 0.968/0.970/0.997 AUROC.
+Structured controls reject the unrelated Anchor/Table 2 metric and neighboring
+column substitutions. The external README total is also derived from the frozen
+4,812 candidates plus 119 summaries rather than copied by hand. [N18]
 
 A fresh full-corpus mutation review then found that the first primary list still
 left some inspected non-candidate papers at zero. The exact repair adds all nine
@@ -257,7 +263,7 @@ accounts, independent of title or parent class. It requires the immutable exact
 account set, one disposition target per account, all 119 PDF and text hashes,
 one source-scope record per PDF, and one same-parent source-derived witness per
 account, with content-derived anchors for evaluator counterexamples and
-no-account decisions. Together the two result-level layers run fifty-one
+no-account decisions. Together the two result-level layers run sixty-one
 regression and negative controls; no
 identifier-only or publication-only group remains.
 

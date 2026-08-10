@@ -85,6 +85,15 @@
   states. The ledger is generated from PDF content after raw discovery, never
   used to seed or suppress the raw candidate queue, and is replayed and
   validated byte-for-byte.
+- Shared-row metric ownership is explicit rather than proximity-based. A
+  reusable table-column join re-parses the ordered PDF header and row, then
+  binds the exact metric, dataset/domain/split column, value, raw candidate,
+  locator, and extracted-text hash. For arXiv 2607.03680 this protects the two
+  Table 4 `Vanilla + extra` states (91.5 and 88.2) and the three Table 11
+  held-out IntelLabs pooled states (0.968, 0.970, and 0.997).
+- The external README carries a machine-checkable equation. The audit derives
+  its 4,812 result candidates, 119 summaries, and 4,931 total rows from the
+  replayed candidate ledger and rejects any disagreement.
 
 ## Validation flow
 
@@ -139,7 +148,7 @@
 
 ## Controls and failure conditions
 
-The eleven accepted composite controls remain unchanged. Forty full-text controls
+The eleven accepted composite controls remain unchanged. Fifty full-text controls
 add an ordinary-title positive fixture and reject: deleting Candace while
 lowering its mutable count; deleting a non-anchor PAWN ensemble while lowering
 its count; deleting a non-English Qwen LoRA state while lowering its count;
@@ -167,8 +176,15 @@ below-threshold state classification. The DMAP control separately detaches its
 Table 1 scorer accounts from the off-page AUROC definition. Two source-independent
 fixtures require mathematical-Unicode F1 row discovery while retaining the
 metric-context guard, and a witness mutation detaches one such account from its
-raw Table 2 candidate. Together with the eleven composite controls, all 51
-controls must pass.
+raw Table 2 candidate. Seven additional controls reject a stale external README
+total, an Anchor/Table 2 substitution, four neighboring-column substitutions
+across Tables 4 and 11, and detachment of a generic table-configuration join
+from its identity line. Three final ownership controls reject substitution of
+PAN12's F1 for its declared recall witness, substitution of a Longformer column
+for GCN's architecture-owned cell, and replacement of GCN's complete row by
+Longformer's row. Every supplied witness must also equal a fresh canonical
+derivation from the bound PDF, candidates, and resolutions. Together with the
+eleven composite controls, all 61 controls must pass.
 
 The run fails on any missing, duplicate, unknown, incomplete, mis-parented,
 mis-targeted, count-mismatched, hash-mismatched, unpreserved, or unmapped source,

@@ -1141,12 +1141,22 @@ NO_ACCOUNT_REASONS: dict[str, str] = {
 # Result-specific evidence is required where one paper's configurations differ in
 # metric boundary, mechanism, artifact status, or method-gate disposition.
 RESULT_EVIDENCE: dict[str, str] = {
+    "2608.03859:pan12-ngram": "Table 1 reports the PAN12-style n-gram overlap baseline at 0.9602 recall and 0.9041 F1; its separately reported precision is 0.8545.",
+    "2607.14905:gcn": "Table 2 reports the GCN argmax/complete-graph row at macro F1 0.68 on the LLM-OWL-AE-II original-text column; the paper's explicit robustness/generalisation claim applies to the GNN family, while this architecture-owned cell is below 0.90.",
+    "2607.14905:gat": "Table 2 reports the GAT argmax/complete-graph row at macro F1 0.75 on the LLM-OWL-AE-II original-text column; the paper's explicit robustness/generalisation claim applies to the GNN family, while this architecture-owned cell is below 0.90.",
+    "2607.14905:graph-transformer": "Table 2 reports the Graph Transformer argmax/complete-graph row at macro F1 0.78 on the LLM-OWL-AE-II original-text column; the paper separately says Graph Transformer performs better across most configurations, while this architecture-owned cell is below 0.90.",
+    "2607.14905:gps": "Table 2 reports the GPS argmax/complete-graph row at macro F1 0.78 on the LLM-OWL-AE-II original-text column; the paper's explicit robustness/generalisation claim applies to the GNN family, while this architecture-owned cell is below 0.90.",
     "2501.03940:radar-ft": "Table 4 reproduces the RADAR-FT comparator at AUROC 0.99 in-domain, 0.97 out-of-domain, and 0.98 overall; these are prior-work comparison values rather than a PAWN artifact.",
     "2501.03940:m4-roberta-base": "Table 9 reports the authors' RoBERTa-base baseline after five training epochs on M4: mean out-of-domain AUROC 0.970, with individual domain cells as high as 1.000.",
     "2607.03680:vanilla-intellabs-base": "Table 5 reports the separately trained IntelLabs/base Vanilla state at 1.000 AUROC on its IntelLabs diagonal; several cross-corpus cells are much weaker.",
     "2607.03680:vanilla-mage-large": "Table 5 reports the separately trained MAGE/large Vanilla state at 0.982 AUROC on its MAGE diagonal; cross-corpus cells vary substantially.",
     "2607.03680:vanilla-faid-base": "Table 5 reports the separately trained FAID/base Vanilla state at 0.997 AUROC on its FAID diagonal; cross-corpus cells vary substantially.",
     "2607.03680:vanilla-mirage-large": "Table 5 reports the separately trained MIRAGE/large Vanilla state at 0.976 AUROC on its MIRAGE diagonal; cross-corpus cells vary substantially.",
+    "2607.03680:vanilla-faid-extra-domain": "Table 4 reports the separately fitted Vanilla + extra configuration at 91.5% accuracy on the Unseen Domain split; its Unseen Domain+Generator result is 88.2%.",
+    "2607.03680:vanilla-faid-extra-domain-generator": "Table 4 reports the separately fitted Vanilla + extra configuration at 88.2% accuracy on the Unseen Domain+Generator split; this is the paired fitted state whose Unseen Domain result is 91.5%.",
+    "2607.03680:pooled-four-way": "Table 11 reports the four-way mixed pooled detector at 0.968 AUROC on the held-out IntelLabs test set; the other held-out benchmarks are materially weaker.",
+    "2607.03680:pooled-stratified-base": "Table 11 reports the stratified pooled RoBERTa-base detector at 0.970 AUROC on the held-out IntelLabs test set; the other held-out benchmarks are materially weaker.",
+    "2607.03680:pooled-stratified-large": "Table 11 reports the stratified pooled RoBERTa-large detector at 0.997 AUROC on the held-out IntelLabs test set; the other held-out benchmarks are materially weaker.",
     "2605.25281:imbd-read": "Table 2 reports ImBD trained on READ at 0.920 AUROC on the per-domain Gemma-2-9B slice but only 0.728 under one global threshold; per-domain and global thresholds are test-label oracle settings.",
     "2605.25281:imbd-target-adapted": "Table 14 reports target-adapted ImBD* at 0.929 mean AUROC across GPT-4o domains, with individual domain cells up to 0.980; adaptation uses labeled outputs from the same target generator in other domains.",
     "2605.06903:roberta-chatgpt-meld": "Appendix Table 9 reports the RoBERTa-ChatGPT same-data retrain at 99.93% MELD-eval AUROC and 99.85% Ghostbuster AUROC, but only 73.96% on M4GT.",
@@ -1239,6 +1249,19 @@ RESULT_EVIDENCE: dict[str, str] = {
     "2509.15550:dna-llama3": "Figure 6 evaluates the Llama-3 DNA-DetectLLM observer/reference pair; the text says all four pairs beat the baselines and the best plotted pair reaches 92.4% and 90.7% AUROC on the plotted tasks.",
     "2504.21019:uniform": "Table 2: training-time uniform-noise DP-Net reaches 96.88% accuracy on Wikipedia/ChatGPT but averages 85.48% over seven unseen domains.",
     "2504.21019:gaussian": "Table 2: training-time Gaussian-noise DP-Net reaches 96.04% accuracy on Wikipedia/ChatGPT but averages 86.10% over seven unseen domains.",
+}
+
+RESULT_LOCATOR: dict[str, str] = {
+    "2608.03859:pan12-ngram": "Table 1, PAN12-style n-gram overlap row, Recall column",
+    "2607.14905:gcn": "Table 2, GCN argmax/none row, LLM-OWL-AE-II Orig. macro-F1 column",
+    "2607.14905:gat": "Table 2, GAT argmax/none row, LLM-OWL-AE-II Orig. macro-F1 column",
+    "2607.14905:graph-transformer": "Table 2, Graph Transformer argmax/none row, LLM-OWL-AE-II Orig. macro-F1 column",
+    "2607.14905:gps": "Table 2, GPS argmax/none row, LLM-OWL-AE-II Orig. macro-F1 column",
+    "2607.03680:vanilla-faid-extra-domain": "Table 4, Vanilla + extra row, Unseen Domain accuracy column",
+    "2607.03680:vanilla-faid-extra-domain-generator": "Table 4, Vanilla + extra row, Unseen Domain+Generator accuracy column",
+    "2607.03680:pooled-four-way": "Table 11, held-out IntelLabs row, 4-way Mixed AUROC column",
+    "2607.03680:pooled-stratified-base": "Table 11, held-out IntelLabs row, Strat base AUROC column",
+    "2607.03680:pooled-stratified-large": "Table 11, held-out IntelLabs row, Strat large AUROC column",
 }
 
 RESULT_EVIDENCE.update(
@@ -2390,6 +2413,7 @@ def build(external_root: Path) -> tuple[int, int, int]:
     }
     override_ids = (
         RESULT_EVIDENCE.keys()
+        | RESULT_LOCATOR.keys()
         | RESULT_MECHANISM.keys()
         | RESULT_OUTCOME.keys()
         | RESULT_CODE.keys()
@@ -2458,7 +2482,10 @@ def build(external_root: Path) -> tuple[int, int, int]:
                         result_id,
                         system,
                         "primary_result",
-                        "Primary PDF full text and all main/appendix result tables",
+                        RESULT_LOCATOR.get(
+                            result_id,
+                            "Primary PDF full text and all main/appendix result tables",
+                        ),
                         RESULT_EVIDENCE.get(result_id, EVIDENCE[parent_id]),
                         result_id,
                     )

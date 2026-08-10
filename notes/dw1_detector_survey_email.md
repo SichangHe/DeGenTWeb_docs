@@ -91,6 +91,10 @@ reason. It also records one hash-bound scope summary for each of the one hundred
 nineteen papers. A separate account-witness ledger binds every one of the nine
 hundred eighty-seven accounts to its own paper identity, metric, configuration,
 locator, and text hash, including structured rank, column, and figure joins.
+For the distribution-shift paper, the repaired Table four joins bind the two
+Vanilla plus extra states to 91.5 and 88.2 percent accuracy. The repaired Table
+eleven joins bind the three held-out IntelLabs pooled states to 0.968, 0.970,
+and 0.997 AUROC. The unrelated Anchor result no longer certifies them.
 The extractor now normalizes mathematical Unicode metric labels, so three F one
 architectures that had appeared only through a curated fallback are direct table
 rows with their reported values.

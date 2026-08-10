@@ -158,7 +158,7 @@ this exact, discoverable path:
 
 Its `README.md` documents scope and provenance. Its 288-entry
 `MANIFEST.sha256` has SHA-256
-`59d702dfb9ff1a8bebc1563bacc4b37f63dd02828d88068eed8712144e43474f`;
+`e9ae35623cb3b808368cc9729d001bc33940b71148814199402c9d2b4149dd97`;
 `sha256sum --check MANIFEST.sha256` passed for all 288 retained files on
 2026-08-09. The ledger covers every collection file other than itself. This
 repository separately preserves raw benchmark execution and environment files,

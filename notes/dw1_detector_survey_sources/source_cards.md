@@ -606,6 +606,11 @@ high claims and individually rejected, leaving the recommendation unchanged.
   ArXiv 2607.03680 now separates the IntelLabs/base, MAGE/large, FAID/base, and
   MIRAGE/large Vanilla states; their same-training-corpus diagonals are
   1.000/0.982/0.997/0.976, but cross-corpus and low-FPR transfer are weaker.
+  Its Table 4 `Vanilla + extra` row is split by exact accuracy column: 91.5%
+  for Unseen Domain and 88.2% for Unseen Domain+Generator. Its Table 11
+  IntelLabs row separately binds 4-way Mixed, Strat base, and Strat large to
+  AUROC 0.968, 0.970, and 0.997. The Table 2 Anchor value 92.1 is not evidence
+  for any of those five states.
   READER arXiv 2605.25281 now separates ImBD trained on READ from target-adapted
   ImBD*. The former's 0.920 per-domain result uses an infeasible test-label
   oracle threshold, while the latter's 0.929 GPT-4o mean requires labeled
@@ -702,7 +707,7 @@ high claims and individually rejected, leaving the recommendation unchanged.
   accounts. After independent extraction, a 987-row source-derived witness
   ledger binds every account's identity, metric/configuration, locator, join
   semantics, and text hash; those bindings cannot seed or suppress the raw
-  queue. Forty full-text controls cover the
+  queue. Fifty full-text controls cover the
   ordinary-title selection fixture,
   Candace deletion with a lowered count, non-anchor PAWN deletion with a lowered
   count, deletion of a non-English Qwen LoRA state with a lowered count, content
@@ -722,8 +727,13 @@ high claims and individually rejected, leaving the recommendation unchanged.
   1 scorer accounts from their Appendix K AUROC definition. Mathematical
   Unicode metric labels are normalized before discovery, directly recovering
   all three arXiv 2505.11550 Table 2 architecture rows. Two source-independent
-  fixtures and one witness mutation protect that path. Together with the eleven
-  accepted composite controls, all fifty-one pass.
+  fixtures and one witness mutation protect that path. Seven further controls
+  enforce exact Table 4/Table 11 metric-column ownership, the mechanically
+  derived external README total, and the generic table-configuration identity
+  line. Three additional controls require the canonical PAN12 recall column and
+  reject both a Longformer-column substitution and a complete Longformer-row
+  substitution for the GCN account. Together with the eleven accepted
+  composite controls, all sixty-one pass.
 - Decision: the recovered configurations are individually visible but do not
   alter the accuracy-first conclusion. They are validation-only, narrow,
   shifted, unreleased, excluded-method, weaker on official/transfer evidence, or

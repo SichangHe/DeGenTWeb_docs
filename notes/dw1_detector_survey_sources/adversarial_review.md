@@ -959,3 +959,153 @@ Review 20 final verdict: **PASS — no P1/P2 findings**. The reviewer made no ed
 and sent nothing. This internal PASS completes the required adversarial review
 but does not authorize email delivery; the one-shot evaluator and manager gate
 in `delivery_plan.md` remains binding.
+
+## Review 21 — FAIL (fresh one-shot evaluator, dw1eval8)
+
+- evaluator workspace: `/ssd1/sichangheagent/dw1eval8`
+- evaluation SHA-256:
+  `bcbcd8254d81ae795c72b9dd5e235aa02b77da2014194e5223be94c4e11e6076`
+- frozen next-evaluator prompt SHA-256:
+  `b590f3acc96008444d21ffb0efa483b9c5511d209c15e325e459df311886370a`
+- evaluated documentation commit:
+  `c4246ad56aaf90461584de5b6afd0ae7c8104b44`
+
+The evaluator preserved all accepted scientific, coverage, benchmark,
+integrity, environment, scope, conclusion, and no-send repairs, but found two
+remaining P2 defects. The manifest-bound external README advertised 6,029
+result candidates even though exact replay derived 4,812 result candidates plus
+119 summaries, or 4,931 rows. Five arXiv 2607.03680 account witnesses also used
+the unrelated Table 2 Anchor value 92.1 instead of their own Table 4 or Table 11
+row and column: the two `Vanilla + extra` states at 91.5 and 88.2, and the three
+held-out IntelLabs pooled states at 0.968, 0.970, and 0.997. Review 20 had not
+challenged either contradiction, so it could not pass the evaluated candidate.
+
+Review 21 final verdict: **FAIL**. It authorizes no delivery, email, lifecycle
+closure, or repair outside the recorded successor scope. The evaluator changed
+no candidate byte and sent nothing.
+
+## Review 22 — FAIL (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval8_final_metric_review22`
+- timestamp recorded after receipt: `2026-08-09T17:19:17-07:00`
+- reviewed candidate-manifest SHA-256:
+  `0f8bc08dd84569be55106be2e3d6acd9ee8fcbd2c36fe3691eaf452c08b1262a`
+- 76-file candidate-ledger SHA-256:
+  `e3970f319151166d95f59d3fd9a56b14708341b86fd698671ae611aec13496a3`
+- 78-entry review-subject-ledger SHA-256:
+  `161b2fabb90fcfb2a7857dc0080ed48919b94834ede18b7913bd677236acd6fc`
+- 288-entry external-manifest SHA-256:
+  `e9ae35623cb3b808368cc9729d001bc33940b71148814199402c9d2b4149dd97`
+- reviewed staged index tree before this review record was appended:
+  `55cd82d7542e10415cec08925d87efdb95bf12e1`
+
+The reviewer independently reproduced the CPython 3.13.11 inventory,
+discovery, audit, and all 58 then-current controls byte-for-byte: 119 sources,
+987 accounts, 724 primary-result rows, and 4,812 result candidates plus 119
+summaries. It confirmed the corrected external README equation, the five exact
+arXiv 2607.03680 Table 4/Table 11 values, both repository ledgers, the 288-file
+read-only external collection, and the exact **NOT SENT** correction.
+
+The decisive P2 was a generalized non-direct witness ownership defect. The GCN,
+GAT, Graph Transformer, and GPS accounts under arXiv 2607.14905 all cited the
+Longformer Table 2 candidate and its 0.97 value, rather than an
+architecture-owned row and column. The validator also accepted a rekeyed GCN
+value changed from 0.97 to Longformer's neighboring 0.96 and a PAN12 recall
+witness changed from 0.9602 to the neighboring 0.9041 F1 cell. Thus proximity,
+locator, and digest checks did not prove semantic column ownership.
+
+The repair gives the four graph architectures exact Table 2 row/configuration
+and column witnesses, gives PAN12 an exact Table 1 recall-column witness,
+requires their raw claim/result candidates to target the corresponding account,
+and compares every supplied witness with a fresh canonical PDF derivation.
+Three new negative controls preserve the reviewer's wrong-column and complete
+wrong-row substitutions. The reviewer's nonblocking P3 also prompted removal
+of the overbroad basedpyright-clean claim for the expanded audit scripts; the
+recorded benchmark/verifier claim remains unchanged.
+
+Review 22 final verdict: **FAIL**. It authorizes no delivery, email, lifecycle
+closure, or commit. The reviewer made no edit and sent nothing.
+
+## Review 23 — FAIL (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval8_final_metric_review23`
+- timestamp recorded after receipt: `2026-08-09T17:42:44-07:00`
+- reviewed candidate-manifest SHA-256:
+  `82b75042c59903c54451a225879b8c9cf8a67d28f473efb34c5e2aeaaaa335ce`
+- 76-file candidate-ledger SHA-256:
+  `677d1053973806f310223790dd43763781f2a0295899dca5d9dd6abb025b91b1`
+- 78-entry review-subject-ledger SHA-256:
+  `c571f85db0b6915640d2c3db5fa56af47dcf653c872e9870b30a941740a214e7`
+- 288-entry external-manifest SHA-256:
+  `e9ae35623cb3b808368cc9729d001bc33940b71148814199402c9d2b4149dd97`
+- reviewed staged index tree:
+  `861dff7a775c87658e02608d25ceb1b8bdc81282`
+
+The reviewer reconstructed the staged index and reproduced the complete build,
+discovery, and audit byte-for-byte under CPython 3.13.11: 119 sources, 987
+witnesses, 4,812 result candidates plus 119 summaries, and 61 controls. Direct
+PDF inspection confirmed the five arXiv 2607.03680 Table 4/Table 11 cells, all
+four arXiv 2607.14905 architecture-owned Table 2 cells, and PAN12's 0.9602
+Recall column. Both repository ledgers, the 288-file read-only external path
+set, scope, benchmark, exact-email, and no-send checks otherwise passed. No
+other P1/P2 was found.
+
+The sole P2 was stale survey prose: the evidence note still said 58 controls
+although the generated audit, design, and manifest correctly reported 61. The
+survey now says 61, and both direct ledgers were regenerated. The reviewer also
+recorded a nonblocking P3: basedpyright with the successful benchmark Python
+environment reports zero errors but 76 warnings, whereas the preserved raw
+check used the separately recorded `--pythonversion 3.13` command and reported
+zero warnings. The final manifest therefore continues to limit the clean
+basedpyright claim to that exact recorded benchmark/verifier check and makes no
+such claim for the audit scripts.
+
+Review 23 final verdict: **FAIL**. It authorizes no delivery, email, lifecycle
+closure, or commit. The reviewer made no edit and sent nothing.
+
+## Review 24 — PASS (distinct read-only reviewer)
+
+- reviewer identity: `/root/eval8_final_metric_review24`
+- timestamp recorded after receipt: `2026-08-09T17:58:33-07:00`
+- reviewed candidate-manifest SHA-256:
+  `4fdacaabac3c3dd28fdd99d0a16b12f2f00f4bbd97a3b7d055471fa228c923b9`
+- 76-file candidate-ledger SHA-256:
+  `8217d71a51c9ed8430b006edc852e67c46435aa53403d5c92601331621b2e32a`
+- 78-entry review-subject-ledger SHA-256:
+  `1093ad9665835c6f546d4154fca9f99e13c0d320d43f26360ff1adead4608152`
+- 288-entry external-manifest SHA-256:
+  `e9ae35623cb3b808368cc9729d001bc33940b71148814199402c9d2b4149dd97`
+- external README SHA-256:
+  `314cb6da006c60b790ebbaee49c18ddab59e9bddcc83adf3bf4326d572bc49ac`
+- reviewed staged index tree before this review record was appended:
+  `0881839b96502cc157e1c48be27e17057a1960d0`
+
+The reviewer independently reconstructed the frozen index and reproduced the
+complete CPython 3.13 build, discovery, witness generation, and audit
+byte-for-byte: 119 sources, 987 accounts and source-derived witnesses, 724
+primary-result rows, 4,812 content candidates plus 119 source summaries, and
+all 61 controls. Both repository ledgers verified. The external manifest
+matched the exact 288-file read-only path set, and no ignored, untracked,
+bytecode, unstaged owned, or unowned staged file was present.
+
+Direct inspection of the bound PDFs confirmed the exact arXiv 2607.03680 Table
+4 values 91.5 and 88.2 and Table 11 values 0.968, 0.970, and 0.997; the unrelated
+Anchor 92.1 row cannot satisfy them. It also confirmed the four arXiv 2607.14905
+architecture-owned Table 2 values 0.68, 0.75, 0.78, and 0.78 and the arXiv
+2608.03859 PAN12 recall value 0.9602 rather than its neighboring 0.9041 F1
+cell. Canonical regeneration and the wrong-value, column, complete-row,
+candidate, locator, and identity controls proved exact metric ownership.
+
+The reviewer additionally confirmed the mechanically derived external README
+equation, `4,812 + 119 = 4,931`; the absence of stale control totals in the
+final subject artifacts; the accepted scientific, benchmark, integrity,
+environment, and delivery constraints; the exact correction subject/body; and
+the binding **NOT SENT** gate. Its only observation was a nonblocking P3 that
+the manifest correctly limits its clean basedpyright statement to the exact
+recorded benchmark/verifier command.
+
+Review 24 final verdict: **PASS — no P1/P2 findings**. The reviewer made no
+edit, stage, commit, external-artifact change, email, or delivery attempt. This
+internal PASS completes the required adversarial review but does not authorize
+email delivery; the fresh one-shot evaluator and manager gate in
+`delivery_plan.md` remains binding.

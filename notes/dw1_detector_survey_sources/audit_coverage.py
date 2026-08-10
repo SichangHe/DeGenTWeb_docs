@@ -154,22 +154,22 @@ FULLTEXT_SOURCES_SHA256 = (
     "6fc7b4e8e4b9d83e2d31c8dbb40362ac26f3fcc4a71d4f9805b2cae9afc4fa66"
 )
 FULLTEXT_ACCOUNTS_SHA256 = (
-    "7d73b0888b478b8b0579b59d8859eb14f1932ff077b7f56f56dec4b955ce43c1"
+    "503ccd075788f8d4f4758930771e05c2fd809b707133761fed0233615b55ab20"
 )
 FULLTEXT_ACCOUNT_MAP_SHA256 = (
     "62d99d534249c0b7ec2a22e152239284de9de8cb45fdd49745fd138a29c9b947"
 )
 PRIMARY_RESULTS_SHA256 = (
-    "992595dae98f3c61a6280f5978f55bbdf7f4cdbe9a3b49f7b66626f657db1e9a"
+    "b88165269ed282c010d202e046e3d402814ccb0e39237616a33c24e4d15a1018"
 )
 TABLE_CANDIDATES_SHA256 = (
     "08a293da9a3e6acc46b3f606939655a1c72b2494b10b7b9399ebe2073ddae2c1"
 )
 TABLE_DISCOVERY_SHA256 = (
-    "5ca1b4c7f82d395cedbd02379e168101a669cad54cf39a11f7269de2d5875686"
+    "71d5274ba80c82b143a71c624459c53d873494b3eb4a75ef968a0ffcbae76fe5"
 )
 ACCOUNT_WITNESSES_SHA256 = (
-    "88c960ac7f8804550f751f9e37269e01f055a776d9a7af8aa041c281bdc697fc"
+    "f3b4caf7fd1cf0d67b8a309fc1f1cb7b24060b1985eb46295edf17e337d1538a"
 )
 FULLTEXT_ACCOUNT_SET_SHA256 = (
     "3a2f45d49a5909e3e13cfd92876eca8656c5a03b478d250f77a1876c35b35cd4"
@@ -180,6 +180,13 @@ SOURCE_CARD_HEADING_PATTERN = re.compile(
 SOURCE_CARD_MARKER_PATTERN = re.compile(
     r"^<!-- coverage-card (?P<label>E\d+) parent=(?P<parent>\d{4}\.\d{5}) "
     r"results=(?P<results>[^ ]+) -->$"
+)
+EXTERNAL_README_DISCOVERY_PATTERN = re.compile(
+    r"Mechanically derived discovery total:\s*"
+    r"(?P<results>[\d,]+) result\s+candidates\s*\+\s*"
+    r"(?P<summaries>[\d,]+) source\s+summaries\s*=\s*"
+    r"(?P<rows>[\d,]+) discovery\s+rows\.",
+    re.IGNORECASE,
 )
 ANCHOR_RESULT_IDS = {
     "2501.08913": {
@@ -1271,6 +1278,38 @@ def _read_fulltext_artifact(
     )
 
 
+def derive_discovery_counts(
+    candidates: list[table_discovery.Candidate],
+) -> tuple[int, int, int]:
+    result_candidates = sum(
+        item.trigger != "source_scope_summary" for item in candidates
+    )
+    source_summaries = sum(
+        item.trigger == "source_scope_summary" for item in candidates
+    )
+    return result_candidates, source_summaries, len(candidates)
+
+
+def validate_external_readme_discovery_counts(
+    readme_text: str,
+    candidates: list[table_discovery.Candidate],
+) -> tuple[int, int, int]:
+    """Bind the external README's advertised total to the replayed raw queue."""
+    match = EXTERNAL_README_DISCOVERY_PATTERN.search(readme_text)
+    if match is None:
+        raise ValueError("external README lacks a machine-checkable discovery total")
+    recorded = tuple(
+        int(match.group(field).replace(",", ""))
+        for field in ("results", "summaries", "rows")
+    )
+    derived = derive_discovery_counts(candidates)
+    if recorded != derived or derived[0] + derived[1] != derived[2]:
+        raise ValueError(
+            "external README discovery total does not match the replayed raw queue"
+        )
+    return derived
+
+
 def validate_table_discovery(
     fulltext_sources_path: Path,
     fulltext_accounts_path: Path,
@@ -1886,6 +1925,19 @@ Novel Architecture           0.951     0.201
         "mathematical-Unicode F1 account detached from its raw table row",
     )
 
+    external_readme = (paper_root / "README.md").read_text(encoding="utf-8")
+    stale_readme = external_readme.replace(
+        "4,812 result candidates", "6,029 result candidates", 1
+    )
+    if stale_readme == external_readme:
+        raise ValueError("external README discovery-count control fixture is missing")
+    expect_failure(
+        lambda: validate_external_readme_discovery_counts(
+            stale_readme, table_candidates
+        ),
+        "manifest-bound external README advertises a stale discovery total",
+    )
+
     expect_failure(
         lambda: validate_witness_mutation(account_witnesses[:-1]),
         "one source-derived account witness removed",
@@ -1926,6 +1978,141 @@ Novel Architecture           0.951     0.201
             )
         ),
         "REACT shot column join redirected to another fitted state",
+    )
+
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2608.03859:pan12-ngram",
+                metric_value="0.9041",
+            )
+        ),
+        "PAN12 recall witness redirected to the neighboring F1 column",
+    )
+
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2607.14905:gcn",
+                metric_value="0.96",
+            )
+        ),
+        "GCN architecture witness redirected to a Longformer column",
+    )
+
+    longformer_candidate = next(
+        item
+        for item in table_candidates
+        if item.candidate_id == "2607.14905:201cd2cd557561cb"
+    )
+    longformer_row = table_discovery._candidate_exact_row(
+        longformer_candidate, table_source_texts["2607.14905"]
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2607.14905:gcn",
+                join_key=(
+                    "table=2;row=Longformer;metric=macro F1;column=Orig.;"
+                    "column_position=5;value=0.96;"
+                    f"claim_candidate={longformer_candidate.candidate_id}"
+                ),
+                identity_page=longformer_candidate.page,
+                identity_line=longformer_candidate.line,
+                identity_locator=longformer_candidate.table_locator,
+                identity_text=longformer_row,
+                metric_page=longformer_candidate.page,
+                metric_line=longformer_candidate.line,
+                metric_locator=longformer_candidate.table_locator,
+                metric_text=longformer_row,
+                metric_value="0.96",
+                raw_candidate_id=longformer_candidate.candidate_id,
+            )
+        ),
+        "GCN architecture witness replaced by Longformer's complete row",
+    )
+
+    anchor_candidate = next(
+        item
+        for item in table_candidates
+        if item.parent_id == "2607.03680"
+        and item.row_label == "Anchor"
+        and "table2" in table_discovery._locator_tokens(item.table_locator)
+    )
+    anchor_row = table_discovery._candidate_exact_row(
+        anchor_candidate, table_source_texts["2607.03680"]
+    )
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2607.03680:vanilla-faid-extra-domain",
+                join_key=(
+                    "table=2;row=Anchor;metric=TPR;column=Qwen-2.5 1.0% FPR;"
+                    "column_position=15;value=92.1"
+                ),
+                metric_page=anchor_candidate.page,
+                metric_line=anchor_candidate.line,
+                metric_locator=anchor_candidate.table_locator,
+                metric_text=anchor_row,
+                metric_value="92.1",
+                raw_candidate_id=anchor_candidate.candidate_id,
+            )
+        ),
+        "Table 4 fitted state redirected to Anchor's unrelated Table 2 metric",
+    )
+
+    wrong_table_columns = (
+        (
+            "2607.03680:vanilla-faid-extra-domain-generator",
+            "table=4;row=Vanilla + extra;metric=accuracy;column=Unseen Domain;"
+            "column_position=2;value=91.5",
+            "91.5",
+            "Table 4 fitted state redirected to its neighboring domain column",
+        ),
+        (
+            "2607.03680:pooled-four-way",
+            "table=11;row=IntelLabs;metric=AUROC;column=Strat large;"
+            "column_position=3;value=0.997",
+            "0.997",
+            "Table 11 four-way state redirected to the stratified-large column",
+        ),
+        (
+            "2607.03680:pooled-stratified-base",
+            "table=11;row=IntelLabs;metric=AUROC;column=4-way Mixed;"
+            "column_position=1;value=0.968",
+            "0.968",
+            "Table 11 base state redirected to the four-way column",
+        ),
+        (
+            "2607.03680:pooled-stratified-large",
+            "table=11;row=IntelLabs;metric=AUROC;column=Strat base;"
+            "column_position=2;value=0.970",
+            "0.970",
+            "Table 11 large state redirected to the stratified-base column",
+        ),
+    )
+    for account_id, join_key, metric_value, label in wrong_table_columns:
+        expect_failure(
+            lambda account_id=account_id,
+            join_key=join_key,
+            metric_value=metric_value: validate_witness_mutation(
+                mutated_witnesses(
+                    account_id,
+                    join_key=join_key,
+                    metric_value=metric_value,
+                )
+            ),
+            label,
+        )
+
+    expect_failure(
+        lambda: validate_witness_mutation(
+            mutated_witnesses(
+                "2608.03859:rrf-scdg",
+                join_key="locator=table1;identity_line=424",
+            )
+        ),
+        "generic table-configuration join detached from its identity line",
     )
     expect_failure(
         lambda: validate_witness_mutation(
@@ -2845,6 +3032,9 @@ def write_report(
     n_composite_required = sum(
         is_composite_source(row, mappings[row.arxiv_id]) for row in rows
     )
+    result_candidates, source_summaries, discovery_rows = derive_discovery_counts(
+        table_candidates
+    )
     command = (
         "uv run --isolated --no-project --python 3.13 python audit_coverage.py "
         "--map coverage_row_dispositions.tsv "
@@ -2881,6 +3071,9 @@ def write_report(
         f"fulltext_account_rows={len(accounts)}",
         f"primary_result_rows={len(primary_results)}",
         f"independent_table_candidates={len(table_candidates)}",
+        f"independent_result_candidates={result_candidates}",
+        f"source_scope_summaries={source_summaries}",
+        f"independent_discovery_rows={discovery_rows}",
         f"source_derived_account_witnesses={len(account_witnesses)}",
         "account_witness_kinds="
         + ",".join(
@@ -2913,6 +3106,7 @@ def write_report(
             f"sha256 {embedded_audit_path.name}={sha256(embedded_audit_path)}",
             f"sha256 {fulltext_audit_path.name}={sha256(fulltext_audit_path)}",
             f"sha256 {environment_path.name}={sha256(environment_path)}",
+            f"sha256 external_README.md={sha256(paper_root / 'README.md')}",
             "result=PASS",
         )
     )
@@ -3037,6 +3231,10 @@ def main() -> int:
         table_discovery_path,
         account_witnesses_path,
         paper_root,
+    )
+    validate_external_readme_discovery_counts(
+        (paper_root / "README.md").read_text(encoding="utf-8"),
+        table_candidates,
     )
     artifacts = validate_fulltext(
         rows,

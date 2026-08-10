@@ -103,6 +103,11 @@ account-witness ledger then binds every account to its own PDF identity, metric,
 configuration, locator, and extracted-text hash, including structured rank,
 column, Roman-table, vertical-group, and figure joins. The witness ledger cannot
 seed or suppress the independent unknown-row queue; both checks are required.
+For arXiv 2607.03680, exact column joins now bind the two Table 4
+`Vanilla + extra` states to 91.5% Unseen Domain accuracy and 88.2% Unseen
+Domain+Generator accuracy, and the three Table 11 pooled states to held-out
+IntelLabs AUROCs 0.968, 0.970, and 0.997. The unrelated Table 2 Anchor value
+cannot satisfy any of those five accounts.
 Mathematical Unicode metric labels are normalized before discovery, so Table 2
 of arXiv 2505.11550 now yields direct rows for its 0.949, 0.994, and 0.974 F1
 architectures instead of relying on the curated witness fallback.
@@ -297,7 +302,7 @@ from all 119 PDFs, plus one content-hash-bound scope summary per paper, before
 requiring one explicit account, carry-forward, duplicate, or content-specific
 non-candidate decision for every candidate. It then regenerates exactly one
 source-derived witness for every account without using those bindings to seed
-the raw candidate queue. Forty full-text controls reject ordinary-title,
+the raw candidate queue. Fifty full-text controls reject ordinary-title,
 non-anchor, non-English, and narrow-domain omissions even when a mutable count
 is lowered; detach table content or a PDF/text hash; restore the false Leidos
 mechanism; delete a fitted baseline or collapse a separately trained state while
@@ -310,7 +315,13 @@ an off-page metric definition; remove any account witness; or mutate the
 identity/metric sides of shared-task, column, figure, visual-plot,
 below-threshold, or vertical-group joins; they also require source-independent
 Unicode-F1 discovery and direct binding of the three recovered architecture
-rows. [N18]
+rows, derive the external README's 4,812-plus-119 total from the frozen queue,
+and reject Anchor-row or neighboring-column substitutions for the five
+distribution-shift accounts. They additionally require every supplied witness
+to equal a fresh canonical PDF derivation, bind PAN12 recall to its declared
+Table 1 column, and prevent GCN, GAT, Graph Transformer, or GPS from inheriting
+Longformer's Table 2 values. Together with eleven composite controls, all
+sixty-one pass. [N18]
 
 Task 3 reports TPR at five-percent FPR on non-adversarial/adversarial RAID-derived
 tests. The four Leidos rows are 99.4/97.2, 99.3/97.7, 99.2/97.6, and 99.1/95.7
@@ -485,9 +496,10 @@ second layer rejects missing named results and generic composite-source reasons.
 The final layer removes title/class selection entirely, rehashes every preserved
 PDF and extracted text, requires a scope summary for every source, and requires
 every expected account to resolve exactly once with a source-derived witness.
-Fifty-one regression and negative controls cover selected composites,
+Sixty-one regression and negative controls cover selected composites,
 ordinary-title primary papers, Roman-numbered tables, figure legends, former
-zero-yield sources, Unicode metric labels, and structured per-account joins.
+zero-yield sources, Unicode metric labels, exact metric-column ownership,
+mechanical external-README counts, and structured per-account joins.
 A prior Scholar attempt returned a robot challenge and was not bypassed; fresh
 narrow requests returned HTTP 200. The general web-search connector returned HTTP
 404, so direct anonymous primary endpoints were used. No PB, authenticated state,

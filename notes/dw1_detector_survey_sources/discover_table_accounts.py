@@ -408,6 +408,153 @@ TABLE_COLUMN_ACCOUNTS = {
     ),
 }
 
+# These configurations share a printed row but own distinct result columns.  The
+# tuple is (table token, row label, metric, ordered result columns, zero-based
+# result-column index, expected value).  Witness generation re-parses the bound
+# PDF header and row from scratch; the curated account inventory supplies only
+# the identity to be checked, never a substitute metric.
+TABLE_METRIC_COLUMN_ACCOUNTS: dict[
+    str, tuple[str, str, str, tuple[str, ...], int, str]
+] = {
+    "2608.03859:pan12-ngram": (
+        "table1",
+        "PAN12-style n-gram overlap",
+        "recall",
+        ("Prec.", "Rec.", "F1", "FPR", "BAcc.", "MCC", "AUROC", "AP"),
+        1,
+        "0.9602",
+    ),
+    "2607.03680:vanilla-faid-extra-domain": (
+        "table4",
+        "Vanilla + extra",
+        "accuracy",
+        (
+            "FAIDSet (in-dom)",
+            "Unseen Domain",
+            "Unseen Generator",
+            "Unseen Domain+Generator",
+        ),
+        1,
+        "91.5",
+    ),
+    "2607.03680:vanilla-faid-extra-domain-generator": (
+        "table4",
+        "Vanilla + extra",
+        "accuracy",
+        (
+            "FAIDSet (in-dom)",
+            "Unseen Domain",
+            "Unseen Generator",
+            "Unseen Domain+Generator",
+        ),
+        3,
+        "88.2",
+    ),
+    "2607.03680:pooled-four-way": (
+        "table11",
+        "IntelLabs",
+        "AUROC",
+        ("4-way Mixed", "Strat base", "Strat large", "Best Single"),
+        0,
+        "0.968",
+    ),
+    "2607.03680:pooled-stratified-base": (
+        "table11",
+        "IntelLabs",
+        "AUROC",
+        ("4-way Mixed", "Strat base", "Strat large", "Best Single"),
+        1,
+        "0.970",
+    ),
+    "2607.03680:pooled-stratified-large": (
+        "table11",
+        "IntelLabs",
+        "AUROC",
+        ("4-way Mixed", "Strat base", "Strat large", "Best Single"),
+        2,
+        "0.997",
+    ),
+}
+
+
+# These named architectures qualify through the paper's explicit robustness and
+# generalisation claim, while their architecture-owned Table 2 cells are below
+# 0.90.  Each witness must therefore join the common claim candidate to one
+# literal architecture/configuration row and one declared result column; a
+# nearby Longformer cell is never an admissible substitute.
+TABLE_CONFIGURATION_CLAIM_ACCOUNTS: dict[
+    str, tuple[str, str, str, tuple[str, ...], int, str]
+] = {
+    "2607.14905:gcn": (
+        "table2",
+        "GCN argmax none",
+        "macro F1",
+        (
+            "Orig.",
+            "Paraphr.",
+            "BT-FR",
+            "BT-TR",
+            "Orig.",
+            "Paraphr.",
+            "BT-FR",
+            "BT-TR",
+        ),
+        4,
+        "0.68",
+    ),
+    "2607.14905:gat": (
+        "table2",
+        "GAT argmax none",
+        "macro F1",
+        (
+            "Orig.",
+            "Paraphr.",
+            "BT-FR",
+            "BT-TR",
+            "Orig.",
+            "Paraphr.",
+            "BT-FR",
+            "BT-TR",
+        ),
+        4,
+        "0.75",
+    ),
+    "2607.14905:graph-transformer": (
+        "table2",
+        "Graph Transformer argmax none",
+        "macro F1",
+        (
+            "Orig.",
+            "Paraphr.",
+            "BT-FR",
+            "BT-TR",
+            "Orig.",
+            "Paraphr.",
+            "BT-FR",
+            "BT-TR",
+        ),
+        4,
+        "0.78",
+    ),
+    "2607.14905:gps": (
+        "table2",
+        "GPS argmax none",
+        "macro F1",
+        (
+            "Orig.",
+            "Paraphr.",
+            "BT-FR",
+            "BT-TR",
+            "Orig.",
+            "Paraphr.",
+            "BT-FR",
+            "BT-TR",
+        ),
+        4,
+        "0.78",
+    ),
+}
+
 WEAK_STATE_ACCOUNTS = {
     "2607.22026:window-std": (
         "window_std",
@@ -546,6 +693,23 @@ ACCOUNT_IDENTITY_ALIASES.update(
 LOCAL_RULES: tuple[
     tuple[str, re.Pattern[str], re.Pattern[str], tuple[str, ...]], ...
 ] = (
+    (
+        "2608.03859",
+        re.compile(r"^PAN12-style n-gram overlap", re.I),
+        re.compile(r"Table 1", re.I),
+        ("2608.03859:pan12-ngram",),
+    ),
+    (
+        "2607.14905",
+        re.compile(r"^baseline\. In the S AME", re.I),
+        re.compile(r"Table 3", re.I),
+        (
+            "2607.14905:gcn",
+            "2607.14905:gat",
+            "2607.14905:graph-transformer",
+            "2607.14905:gps",
+        ),
+    ),
     (
         "2505.11550",
         re.compile(r"^Full Architecture$", re.I),
@@ -2266,13 +2430,6 @@ LOCAL_FALSE_RULES += (
         re.compile(r"Table (?:5|7|13|14)", re.I),
         "table_heading_or_prose",
         "This is transfer/adaptation prose or an ensemble-table header; exact Vanilla, FOMAML, pooled, and ensemble states are separately bound.",
-    ),
-    (
-        "2607.14905",
-        re.compile(r"^baseline\. In the S AME", re.I),
-        re.compile(r"Table 3", re.I),
-        "table_heading_or_prose",
-        "This is same-version evaluation prose referring to the existing Longformer baseline, not a new graph architecture.",
     ),
     (
         "2608.01046",
@@ -4582,6 +4739,210 @@ def _same_window_witness(
     return None if best is None else best[1]
 
 
+def _ordered_header_matches(header: str, columns: tuple[str, ...]) -> bool:
+    """Require each declared result column to occur once in source order."""
+    searchable_header = normalized(header)
+    offset = 0
+    for column in columns:
+        token = normalized(column)
+        index = searchable_header.find(token, offset)
+        if index < 0:
+            return False
+        offset = index + len(token)
+    return True
+
+
+def _table_result_cells(row_text: str, row_label: str) -> tuple[str | None, ...]:
+    """Parse ordered means/dashes from one compact result row."""
+    match = re.match(
+        rf"^{re.escape(row_label)}(?:\s+|$)(?P<cells>.*)$",
+        row_text,
+        re.IGNORECASE,
+    )
+    if match is None:
+        return ()
+    cells: list[str | None] = []
+    for cell in re.finditer(
+        r"—|(?<![\d.])(?P<mean>\d+(?:\.\d+)?)"
+        r"(?:\s*±\s*\d+(?:\.\d+)?)?(?:[†‡*])?",
+        match.group("cells"),
+    ):
+        cells.append(cell.group("mean"))
+    return tuple(cells)
+
+
+def _table_metric_column_witness(
+    account: Account,
+    text: str,
+    candidates: list[Candidate],
+    resolutions: list[Resolution],
+    source_text_sha256: str,
+) -> AccountWitness:
+    """Bind a shared table row to the exact metric column owned by an account."""
+    specification = TABLE_METRIC_COLUMN_ACCOUNTS.get(account.account_id)
+    if specification is None:
+        raise ValueError(f"unknown table-metric account: {account.account_id}")
+    table_token, row_label, metric, columns, column_index, expected_value = (
+        specification
+    )
+    resolution_by_id = {item.candidate.candidate_id: item for item in resolutions}
+    matches: list[tuple[Candidate, int, int, str, str]] = []
+    for page, absolute_line, index, line, lines in _page_records(text):
+        row_text = compact(line)
+        if not row_text or not identity_normalized(row_text).startswith(
+            identity_normalized(row_label)
+        ):
+            continue
+        cells = _table_result_cells(row_text, row_label)
+        if len(cells) != len(columns) or cells[column_index] != expected_value:
+            continue
+        header_rows = [
+            (header_index, compact(header_line))
+            for header_index, header_line in enumerate(lines[:index])
+            if _ordered_header_matches(compact(header_line), columns)
+        ]
+        if not header_rows:
+            continue
+        header_index, header_text = max(header_rows)
+        if index - header_index > 12:
+            continue
+        row_candidates = [
+            candidate
+            for candidate in candidates
+            if candidate.page == page
+            and candidate.line == absolute_line
+            and table_token in _locator_tokens(candidate.table_locator)
+            and normalized(row_text) in normalized(candidate.context)
+            and (
+                (resolution := resolution_by_id.get(candidate.candidate_id)) is not None
+            )
+            and resolution.resolution_kind == "account_evidence"
+            and account.account_id in resolution.target_account_ids
+        ]
+        for candidate in row_candidates:
+            matches.append((candidate, page, absolute_line, header_text, row_text))
+    if len(matches) != 1:
+        raise ValueError(
+            f"table-metric account must resolve to one exact PDF row: "
+            f"{account.account_id} ({len(matches)} found)"
+        )
+    candidate, page, absolute_line, header_text, row_text = matches[0]
+    table_number = table_token.removeprefix("table")
+    column = columns[column_index]
+    join_key = (
+        f"table={table_number};row={row_label};metric={metric};column={column};"
+        f"column_position={column_index + 1};value={expected_value}"
+    )
+    metric_locator = (
+        f"{candidate.table_locator} | metric={metric}; column={column}; "
+        f"header={header_text}"
+    )
+    return _new_witness(
+        account,
+        "table_metric_column_join",
+        join_key,
+        page,
+        absolute_line,
+        candidate.table_locator,
+        row_text,
+        page,
+        absolute_line,
+        metric_locator,
+        f"{header_text} || {row_text}",
+        expected_value,
+        candidate.candidate_id,
+        source_text_sha256,
+    )
+
+
+def _table_configuration_claim_witness(
+    account: Account,
+    text: str,
+    candidates: list[Candidate],
+    resolutions: list[Resolution],
+    source_text_sha256: str,
+) -> AccountWitness:
+    """Join a shared performance claim to one account-owned table cell."""
+    specification = TABLE_CONFIGURATION_CLAIM_ACCOUNTS.get(account.account_id)
+    if specification is None:
+        raise ValueError(f"unknown table-claim account: {account.account_id}")
+    table_token, row_label, metric, columns, column_index, expected_value = (
+        specification
+    )
+    row_matches: list[tuple[int, int, int, list[str], str, str]] = []
+    for page, absolute_line, index, line, lines in _page_records(text):
+        row_text = compact(line)
+        if not identity_normalized(row_text).startswith(identity_normalized(row_label)):
+            continue
+        cells = _table_result_cells(row_text, row_label)
+        if len(cells) != len(columns) or cells[column_index] != expected_value:
+            continue
+        header_rows = [
+            (header_index, compact(header_line))
+            for header_index, header_line in enumerate(lines[:index])
+            if _ordered_header_matches(compact(header_line), columns)
+        ]
+        if not header_rows:
+            continue
+        header_index, header_text = max(header_rows)
+        if index - header_index > 24:
+            continue
+        locator = _locator(lines, index, "", "")
+        if table_token not in _locator_tokens(locator):
+            continue
+        row_matches.append((page, absolute_line, index, lines, header_text, row_text))
+    if len(row_matches) != 1:
+        raise ValueError(
+            f"table-claim account must resolve to one exact PDF row: "
+            f"{account.account_id} ({len(row_matches)} found)"
+        )
+
+    support = [
+        item
+        for item in resolutions
+        if item.candidate in candidates
+        and item.resolution_kind == "account_evidence"
+        and account.account_id in item.target_account_ids
+        and item.candidate.parent_id == account.parent_id
+        and item.candidate.trigger != "source_scope_summary"
+    ]
+    if len(support) != 1:
+        raise ValueError(
+            f"table-claim account must have one account-owned claim candidate: "
+            f"{account.account_id} ({len(support)} found)"
+        )
+    claim = support[0].candidate
+    page, absolute_line, index, lines, header_text, row_text = row_matches[0]
+    table_number = table_token.removeprefix("table")
+    column = columns[column_index]
+    join_key = (
+        f"table={table_number};row={row_label};metric={metric};column={column};"
+        f"column_position={column_index + 1};value={expected_value};"
+        f"claim_candidate={claim.candidate_id}"
+    )
+    row_locator = _locator(lines, index, "", "")
+    metric_locator = (
+        f"{row_locator} | metric={metric}; column={column}; header={header_text}; "
+        f"claim={claim.table_locator}"
+    )
+    return _new_witness(
+        account,
+        "table_configuration_claim_join",
+        join_key,
+        page,
+        absolute_line,
+        row_locator,
+        row_text,
+        page,
+        absolute_line,
+        metric_locator,
+        f"{header_text} || {row_text}",
+        expected_value,
+        claim.candidate_id,
+        source_text_sha256,
+    )
+
+
 def _table_join_witness(
     account: Account,
     text: str,
@@ -5382,6 +5743,7 @@ def build_account_witnesses(
     resolutions: list[Resolution],
     *,
     source_texts: dict[str, str] | None = None,
+    run_validation: bool = True,
 ) -> list[AccountWitness]:
     source_by_parent = {item.parent_id: item for item in sources}
     candidates_by_parent: dict[str, list[Candidate]] = {}
@@ -5406,7 +5768,23 @@ def build_account_witnesses(
         text = texts[account.parent_id]
         source_hash = hashlib.sha256(text.encode()).hexdigest()
         parent_candidates = candidates_by_parent.get(account.parent_id, [])
-        if account.account_id in REACT_SHOT_ACCOUNTS:
+        if account.account_id in TABLE_METRIC_COLUMN_ACCOUNTS:
+            witness = _table_metric_column_witness(
+                account,
+                text,
+                parent_candidates,
+                resolutions,
+                source_hash,
+            )
+        elif account.account_id in TABLE_CONFIGURATION_CLAIM_ACCOUNTS:
+            witness = _table_configuration_claim_witness(
+                account,
+                text,
+                parent_candidates,
+                resolutions,
+                source_hash,
+            )
+        elif account.account_id in REACT_SHOT_ACCOUNTS:
             witness = _react_shot_witness(account, text, parent_candidates, source_hash)
         elif account.account_id in SHARED_TASK_RANKS:
             witness = _shared_task_rank_witness(
@@ -5517,15 +5895,16 @@ def build_account_witnesses(
         raise ValueError(
             "accounts lack source-derived witnesses: " + ",".join(missing_witnesses)
         )
-    validate_account_witnesses(
-        witnesses,
-        sources,
-        paper_root,
-        accounts,
-        candidates,
-        resolutions,
-        source_texts=texts,
-    )
+    if run_validation:
+        validate_account_witnesses(
+            witnesses,
+            sources,
+            paper_root,
+            accounts,
+            candidates,
+            resolutions,
+            source_texts=texts,
+        )
     return witnesses
 
 
@@ -5539,6 +5918,9 @@ def extract_source_texts(sources: list[Source], paper_root: Path) -> dict[str, s
 def file_sha256(path: Path) -> str:
     with path.open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+_CANONICAL_WITNESS_CACHE: dict[tuple[object, ...], tuple[AccountWitness, ...]] = {}
 
 
 def _same_number(left: str, right: str) -> bool:
@@ -5593,10 +5975,45 @@ def validate_account_witnesses(
     candidate_by_id = {item.candidate_id: item for item in candidates}
     resolution_by_id = {item.candidate.candidate_id: item for item in resolutions}
     sibling_counts = _sibling_token_counts(accounts)
+    canonical_key = (
+        tuple(accounts),
+        tuple(candidates),
+        tuple(resolutions),
+        tuple(sorted(source_hashes.items())),
+    )
+    canonical_witnesses = _CANONICAL_WITNESS_CACHE.get(canonical_key)
+    if canonical_witnesses is None:
+        canonical_witnesses = tuple(
+            build_account_witnesses(
+                sources,
+                paper_root,
+                accounts,
+                candidates,
+                resolutions,
+                source_texts=dict(texts),
+                run_validation=False,
+            )
+        )
+        _CANONICAL_WITNESS_CACHE[canonical_key] = canonical_witnesses
+    if tuple(witnesses) != canonical_witnesses:
+        supplied_by_id = {item.account_id: item for item in witnesses}
+        mismatch = next(
+            (
+                item.account_id
+                for item in canonical_witnesses
+                if supplied_by_id.get(item.account_id) != item
+            ),
+            "unknown",
+        )
+        raise ValueError(
+            f"account witness differs from canonical PDF derivation: {mismatch}"
+        )
     allowed_kinds = {
         "direct_candidate",
         "same_window",
         "table_configuration_join",
+        "table_configuration_claim_join",
+        "table_metric_column_join",
         "column_configuration_join",
         "same_line_text",
         "same_line_error_rate",
@@ -5630,6 +6047,58 @@ def validate_account_witnesses(
                 raise ValueError(
                     f"account witness {label} page absent: {witness.account_id}"
                 )
+
+        if witness.join_kind == "table_metric_column_join":
+            parent_candidates = [
+                item
+                for item in candidates
+                if item.parent_id == witness.parent_id
+                and item.trigger != "source_scope_summary"
+            ]
+            expected_witness = _table_metric_column_witness(
+                account,
+                texts[witness.parent_id],
+                parent_candidates,
+                resolutions,
+                source_hashes[witness.parent_id],
+            )
+            resolution = resolution_by_id.get(witness.raw_candidate_id)
+            if (
+                witness != expected_witness
+                or resolution is None
+                or resolution.resolution_kind != "account_evidence"
+                or witness.account_id not in resolution.target_account_ids
+            ):
+                raise ValueError(
+                    f"table-metric column witness detached: {witness.account_id}"
+                )
+            continue
+
+        if witness.join_kind == "table_configuration_claim_join":
+            parent_candidates = [
+                item
+                for item in candidates
+                if item.parent_id == witness.parent_id
+                and item.trigger != "source_scope_summary"
+            ]
+            expected_witness = _table_configuration_claim_witness(
+                account,
+                texts[witness.parent_id],
+                parent_candidates,
+                resolutions,
+                source_hashes[witness.parent_id],
+            )
+            resolution = resolution_by_id.get(witness.raw_candidate_id)
+            if (
+                witness != expected_witness
+                or resolution is None
+                or resolution.resolution_kind != "account_evidence"
+                or witness.account_id not in resolution.target_account_ids
+            ):
+                raise ValueError(
+                    f"table-claim configuration witness detached: {witness.account_id}"
+                )
+            continue
 
         if witness.join_kind == "direct_candidate":
             candidate = candidate_by_id.get(witness.raw_candidate_id)
@@ -6060,13 +6529,29 @@ def validate_account_witnesses(
             requested = _locator_tokens(
                 f"{account.evidence_locator} {account.qualifying_evidence}"
             )
+            shared_locators = requested & _locator_tokens(witness.metric_locator)
+            join_locator = ",".join(sorted(shared_locators)) or normalized(
+                candidate.table_locator
+            )
             if (
-                abs(witness.identity_page - witness.metric_page) > 2
+                witness.account_id in TABLE_METRIC_COLUMN_ACCOUNTS
+                or witness.account_id in TABLE_CONFIGURATION_CLAIM_ACCOUNTS
+                or abs(witness.identity_page - witness.metric_page) > 2
                 or (
                     requested
                     and not requested & _locator_tokens(witness.metric_locator)
                 )
                 or witness.metric_text != candidate.context
+                or witness.join_key
+                != f"locator={join_locator};identity_line={witness.identity_line}"
+                or normalized(witness.identity_text)
+                not in normalized(page_texts[witness.parent_id][witness.identity_page])
+                or _identity_score(
+                    account,
+                    witness.identity_text,
+                    sibling_counts[witness.parent_id],
+                )
+                == 0
             ):
                 raise ValueError(
                     f"table-configuration witness detached: {witness.account_id}"

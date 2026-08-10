@@ -615,7 +615,7 @@ sha256sum papers/ARXIV_ID.pdf
 No credentials, cookies, persistent browser profile, PB, robot-challenge bypass,
 or human-owned tmux state was used. The resulting collection has 288 manifest
 entries. `MANIFEST.sha256` has SHA-256
-`59d702dfb9ff1a8bebc1563bacc4b37f63dd02828d88068eed8712144e43474f`;
+`e9ae35623cb3b808368cc9729d001bc33940b71148814199402c9d2b4149dd97`;
 all entries and the exact path set verified, and no collection path is writable.
 
 Every primary PDF was extracted with Poppler's `pdftotext -layout -enc UTF-8`.
@@ -730,11 +730,10 @@ uv run --isolated --no-project --python 3.13 python \
 The raw-candidate SHA-256 is
 `08a293da9a3e6acc46b3f606939655a1c72b2494b10b7b9399ebe2073ddae2c1`;
 the match-ledger SHA-256 is
-`5ca1b4c7f82d395cedbd02379e168101a669cad54cf39a11f7269de2d5875686`.
-The 987-row witness-ledger SHA-256 is
-`88c960ac7f8804550f751f9e37269e01f055a776d9a7af8aa041c281bdc697fc`.
+`71d5274ba80c82b143a71c624459c53d873494b3eb4a75ef968a0ffcbae76fe5`.
+The 987-row witness-ledger SHA-256 is recorded in the final candidate manifest.
 The semantic audit regenerates all three byte-for-byte and rejects an unresolved,
-removed, mutated, or mis-targeted resolution or witness. Forty full-text controls include
+removed, mutated, or mis-targeted resolution or witness. Fifty full-text controls include
 the content-discovered fitted baseline, four separately trained states,
 READER method inheritance, four direct resolution-ledger mutations, and four
 source-form mutations covering scope summaries, Roman captions, figure legends,
@@ -742,7 +741,13 @@ and direct evidence under predecessor zero-yield sources, plus mutations of the
 987-witness source, identity, metric, configuration, and join bindings and
 detachment of an off-page metric definition, source-independent Unicode-F1
 discovery with a metric-context guard, and direct candidate binding for the
-recovered architecture row. With the eleven composite controls, all 51 pass.
+recovered architecture row. They additionally derive the external README's
+4,812-result plus 119-summary
+total and reject the unrelated Anchor/Table 2 metric or a neighboring Table 4
+or Table 11 column as evidence for any of the five repaired distribution-shift
+accounts. They also reject a neighboring PAN12 metric, a Longformer-to-GCN
+column substitution, and replacement of the complete GCN row by Longformer's
+row. With the eleven composite controls, all 61 pass.
 The audit was run by the exact recorded
 `uv run --isolated --no-project --python 3.13` command; its environment record
 now reports CPython 3.13.11 rather than bytes produced by a different interpreter.
