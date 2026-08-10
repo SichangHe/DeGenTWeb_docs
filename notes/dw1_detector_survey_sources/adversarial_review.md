@@ -1223,3 +1223,95 @@ edit, stage, commit, push, external-artifact change, email, or delivery attempt.
 This internal PASS completes the required adversarial review but does not
 authorize email delivery; the fresh evaluator and manager gate in
 `delivery_plan.md` remains binding.
+
+## Review 28 — FAIL (fresh dw1eval11 one-shot evaluator)
+
+- evaluator workspace: `/ssd1/sichangheagent/dw1eval11`
+- verdict recorded: `2026-08-10T04:26:53-07:00`
+- evaluated documentation commit:
+  `815e2f7c69151799f2b1b2f48ce5f5a7dd7cee5c`
+- evaluated tree: `0baa83bc5269fe78cb03c2458e5eb8b48b55585a`
+- evaluator-verdict SHA-256:
+  `34768a3aff75af2fdb6099d18edde9f3f93cc7f8891f2014c8a4b7c8fc17a5a7`
+
+The evaluator admitted the frozen candidate, independently reproduced its
+119-source CPython 3.13 audit, all 70 then-current controls, the benchmark
+verifiers, repository and 288-file external integrity, exact corrective-email
+bytes, and **NOT SENT** gate. It found no new P1 and confirmed the accepted
+scientific, MELD, LM2otifs/NEULIF, composite/full-text coverage, public-access,
+two-A6000, conclusion, and delivery-boundary work.
+
+The decisive P2 was a generalized wrong-column-donor defect. The predecessor
+ownership ledger called two PAWN ensemble component counts (`1`, `1`), the
+Exaone model version `3.5`, and Candace/TF-IDF `System 3`/`System 2` identifiers
+different result cells. Their exact source rows instead contain PAWN result
+cells 94.59/93.92/94.26/0.988 and 90.78/96.13/93.45/0.987, Exaone results
+92.08/79.74/72.00/81.27, and eight result metrics after each System identifier.
+Review 27's claimed exhaustive independent donor inspection was therefore
+substantively false even though the owned positive metrics remained correct.
+
+The successor schema freezes, for every one of the 298 wrong-column rows, the
+source-derived semantic result-column start/end indexes, the complete set of
+in-boundary result-cell indexes, and the selected alternate donor index. The
+validator binds that inventory with an immutable digest and excludes
+configuration labels, component counts, system identifiers, model/CUDA
+versions, numeric model-name fragments, slash-delimited IDs, and text-length
+parameters. Nine source-row mutations exercise the five reproduced failures
+and four additional metadata classes. The exact Exaone Table 3 header is also
+restored to extracted line 444 rather than self-labeling the result row.
+
+Review 28 final verdict: **FAIL**. It authorizes no delivery, email, lifecycle
+closure, or commit. A new distinct reviewer must inspect all 298 donor cells
+against their source table/figure/prose semantics rather than merely replaying
+the candidate parser, and must bind the fully frozen successor bytes.
+
+## Review 29 — PASS (distinct final read-only reviewer)
+
+- reviewer identity: `/root/eval11_final_semantic_donor_review29`
+- timestamp recorded after receipt: `2026-08-10T05:06:01-07:00`
+- reviewed staged index tree: `3caba735cec7e45f49a00a4f306248ab8ddd1277`
+- reviewed candidate-manifest SHA-256:
+  `56cb99259395830ca25d4d5cca0343648794677d37e638331870611db7cb0ced`
+- 78-file candidate-ledger SHA-256:
+  `f5b55b1255fa86500c94df75fdf78a48bb284f90949dedc91290051316cb8e04`
+- 80-entry review-subject-ledger SHA-256:
+  `9330c44b9efda81984ec50a467f5ebec39731c4e18fafae02a59d191658e4448`
+- 321-row predecessor-ownership-ledger SHA-256:
+  `8937292b89b527a5ebf8b618240389c633c0f3d7faff435531483b3129eeb112`
+- 987-row final-witness-ledger SHA-256:
+  `5058be16a7f15aa8f5e8c04e57ee80611ebe494ba2da0d8defadfe6f01a33641`
+- 288-entry external-manifest SHA-256:
+  `e9ae35623cb3b808368cc9729d001bc33940b71148814199402c9d2b4149dd97`
+
+The reviewer reconstructed the staged tree in isolation and regenerated the
+three audit TSVs byte-for-byte with the canonical CPython 3.13 command. The run
+passed with 119 full-text sources, 987 accounts and witnesses, 724 primary
+results, 4,812 result candidates plus 119 summaries, 298 semantic wrong-column
+boundaries across 69 parents, and all 79 controls.
+
+Crucially, the reviewer did not accept the candidate parser as proof. It made a
+fresh `pdftotext -layout` extraction, independently implemented the logical-row
+and index check, and source-checked all 298 wrong-column rows across the 69
+bound PDFs. Its manual sweep of all 128 header/row groups found zero source,
+record, index, value, or semantic discrepancies. Every donor is an actual table
+result metric, including FPR, loss, or timing only when that quantity is a
+declared result column; ranks, confidence intervals, uncertainties, model and
+CUDA versions, component/count/token metadata, and identifiers are excluded.
+It directly confirmed PAWN 94.26/93.45, Exaone 79.74 under the exact Table 3
+header, Candace 99.60, and TF-IDF 97.91. It also confirmed that all nine mutated
+metadata values lie outside their frozen semantic index sets.
+
+The 78 stable files, 80 review subjects, exact 82-file owned scope, 288-file
+read-only external collection, 8,022-row score verifier, 25-file model-layout
+verifier, exact correction subject/body/plan, and **NOT SENT** gate all passed.
+The reviewer generated and then removed three local bytecode cache files during
+a static check; a final live/index comparison independently confirmed that no
+cache, untracked, unstaged, ignored, or unowned byte remained.
+
+Review 29 final verdict: **PASS — no P1/P2 findings**. The sole P3 is that the
+validator uses the same conservative “not inside the derived semantic result
+boundary” message for an in-boundary wrong alternate metric; this does not
+weaken rejection or any ownership invariant. The reviewer made no candidate,
+external-evidence, email, delivery, commit, or push change. This internal PASS
+does not authorize email delivery; the fresh one-shot evaluator and manager
+gate in `delivery_plan.md` remains binding.

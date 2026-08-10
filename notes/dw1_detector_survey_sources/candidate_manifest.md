@@ -1,6 +1,6 @@
 # Frozen candidate manifest
 
-Candidate date: 2026-08-09, America/Los_Angeles.
+Candidate date: 2026-08-10, America/Los_Angeles.
 
 Candidate state: **FROZEN FOR DISTINCT FINAL-BYTE ADVERSARIAL REVIEW**. After
 this manifest, the stable ledgers, and the review-subject ledger are created,
@@ -17,13 +17,14 @@ The owned candidate consists only of:
 - every file in this `dw1_detector_survey_sources/` directory.
 
 The direct predecessor documentation commit is
-`9a1b52ae76e20baeb54f0ea242108445e31cfb6f`, the pushed metric-ownership
-successor evaluated by dw1eval10.
+`815e2f7c69151799f2b1b2f48ce5f5a7dd7cee5c`, the pushed metric-ownership
+successor evaluated by dw1eval11.
 The accepted survey chain is preserved in Git: original survey `d5fb118`,
 accuracy-first renewal `fe98a1c`, evaluator repair `f749a13`, rev2 semantic
 repair `45191cb`, rev3 composite/E-card repair `1d2fc389`, rev4 full-text repair
 `15acd6c`, eval6 successor `c9968e7`, rev6 semantic-coverage repair `c4246ad`,
-and metric-ownership predecessor `9a1b52a`. No DW1
+metric-ownership predecessor `9a1b52a`, and exhaustive ownership repair
+`815e2f7`. No DW1
 implementation or configuration file is in the candidate. A later parent-
 repository commit may change only the `docs` gitlink to the pushed documentation
 commit.
@@ -44,9 +45,9 @@ appended. The frozen owned live scope is therefore exactly 82 files: 78 stable
 subjects plus the four declared controls. The candidate-ledger and review-
 subject-ledger SHA-256 values are:
 
-`9999c82723f088584a14a70a95bd9a7f17f283e614d44df3e6d8cca137123399`
+`f5b55b1255fa86500c94df75fdf78a48bb284f90949dedc91290051316cb8e04`
 
-`3d6b6efb0c9452ca0fb8c7a08375b8c64d510eb44cb5296f05fe39e77e48a8c9`
+`9330c44b9efda81984ec50a467f5ebec39731c4e18fafae02a59d191658e4448`
 
 The ledger includes the complete earlier MELD, benchmark, integrity, coverage,
 and review evidence plus this repair's composite source/result mappings,
@@ -156,13 +157,18 @@ column, and method/training state. Its immutable 321-row ledger includes a
 fine-tuned DeBERTa companion and keeps the current MELD v5 benchmark artifact
 separate from the paper-era row. The exhaustive pass rejects model-size
 numerals, years, uncertainties, axis ticks, and neighboring model rows as
-account-owned results, and mechanically derives every wrong-column donor from a
-different result cell. Fifty-nine full-text controls join the eleven accepted
-controls; all seventy pass. The final 987-row witness ledger has
+account-owned results. Each of its 298 wrong-column rows freezes the complete
+source-row semantic result interval and exact result-cell indexes before it
+chooses a different donor metric. The two PAWN component counts, Exaone 3.5,
+and Candace/TF-IDF System 3/System 2 identifiers are outside those intervals;
+nine controls also reject those patterns plus CUDA/model versions, numeric
+model-name fragments, slash-delimited IDs, and text-length parameters.
+Sixty-eight full-text controls join the eleven accepted controls; all
+seventy-nine pass. The final 987-row witness ledger has
 SHA-256
-`27f62d0ea4e9fe575b9cbadbd8302ff1b69882b9cd3f3bf01bcd2ba632d191fc`;
+`5058be16a7f15aa8f5e8c04e57ee80611ebe494ba2da0d8defadfe6f01a33641`;
 the 321-row predecessor-ownership ledger has SHA-256
-`79726def908f6e0992b68648253d4c92b36809affda5959d913f8bb0d8c89a54`.
+`8937292b89b527a5ebf8b618240389c633c0f3d7faff435531483b3129eeb112`.
 The exact
 commands, inputs, output hashes, Poppler extraction version, and generated
 987-row audit
@@ -339,13 +345,24 @@ Binoculars/ImBD, and DivEye cases, rejects non-result numerals, and derives each
 wrong-column donor from a different result cell. Review 26 remains a durable,
 non-authorizing FAIL.
 
+Review 27 is the distinct read-only PASS over commit `815e2f7`; the fresh
+dw1eval11 Review 28 then proved that its asserted all-row donor inspection was
+false. Two PAWN ensemble component counts, Exaone 3.5, and Candace/TF-IDF
+System 3/System 2 identifiers had been certified as result cells. Review 28 is
+a durable, non-authorizing FAIL with verdict SHA-256
+`34768a3aff75af2fdb6099d18edde9f3f93cc7f8891f2014c8a4b7c8fc17a5a7`.
+This successor binds and validates the semantic result interval and exact donor
+index for all 298 wrong-column rows instead of reproducing a numeric-token
+heuristic.
+
 The new distinct final reviewer must independently challenge all 119 source
 summaries, the 4,812 result candidates, the 29 evaluator-confirmed accounts,
 the six off-page-metric accounts, all 987 source-derived witnesses, Roman-table,
 rank-join, column, vertical-group, and Figure 4 provenance, predecessor zero-yield sources,
 the three Unicode-F1 Table 2 rows, all 321 exact predecessor-ownership records,
+all 298 semantic wrong-column boundaries and their actual result-metric donors,
 the zero-shot/fine-tuned DeBERTa and base/MCGrad ModernBERT distinctions, the
-exact Python 3.13 replay, clean owned path set, all 70 controls, and the unsent
+exact Python 3.13 replay, clean owned path set, all 79 controls, and the unsent
 correction. It must directly record this final
 `candidate_manifest.md` SHA-256 in addition to every hash in
 `review_subject_files.sha256`. Its successor verdict will be appended without
@@ -355,7 +372,7 @@ changing any reviewed subject byte.
 
 Before commit and after checkout of the final commit:
 
-1. replay the semantic audit and its seventy controls under the recorded
+1. replay the semantic audit and its seventy-nine controls under the recorded
    Python 3.13 command;
 2. replay the independent score verifier and static checks;
 3. verify all 78 repository-ledger entries and 288 external-ledger entries;

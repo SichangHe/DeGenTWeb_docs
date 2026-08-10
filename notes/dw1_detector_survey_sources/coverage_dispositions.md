@@ -263,7 +263,7 @@ accounts, independent of title or parent class. It requires the immutable exact
 account set, one disposition target per account, all 119 PDF and text hashes,
 one source-scope record per PDF, and one same-parent source-derived witness per
 account, with content-derived anchors for evaluator counterexamples and
-no-account decisions. Together the two result-level layers run seventy
+no-account decisions. Together the two result-level layers run seventy-nine
 regression and negative controls; no
 identifier-only or publication-only group remains.
 

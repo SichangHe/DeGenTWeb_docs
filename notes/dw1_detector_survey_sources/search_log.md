@@ -747,7 +747,7 @@ re-derives all 987 predecessor witnesses, proves the exact 225 `same_window` and
 95 generic configuration rows, and replaces all 320 with exact source-owned
 joins; a fine-tuned DeBERTa companion makes the reviewed ledger 321 rows. The
 semantic audit regenerates the final witness output byte-for-byte and rejects an
-unresolved, removed, mutated, or mis-targeted resolution or witness. Fifty-nine full-text controls include
+unresolved, removed, mutated, or mis-targeted resolution or witness. Sixty-eight full-text controls include
 the content-discovered fitted baseline, four separately trained states,
 READER method inheritance, four direct resolution-ledger mutations, and four
 source-form mutations covering scope summaries, Roman captions, figure legends,
@@ -769,12 +769,17 @@ select DetectGPT's uncertainty instead of its AUROC. The 321-row source audit
 also corrected LAPD's model-size numeral, three neighboring DetectAnyLLM rows,
 the two J-Detector decrease annotations, the public Qwen2-0.5B IRM label, base
 Binoculars and ImBD rows, three DivEye backbones, and DetectGPT's AUROC cell.
-Every wrong-column donor is now mechanically selected from a distinct result
-cell in the same row; wrong-row and wrong-state donors bind a different exact
+Every wrong-column record now freezes its exact source-row semantic result
+interval, all in-boundary result-cell indexes, and the selected alternate
+result-cell index. This changed exactly the two PAWN component-count donors,
+Exaone 3.5, and the Candace/TF-IDF System 3/System 2 identifiers to real
+same-row result metrics. Nine controls also reject those five patterns plus a
+CUDA version, numeric model-name fragment, slash-delimited identifier, and
+text-length parameter. Wrong-row and wrong-state donors bind a different exact
 source result rather than a rank, year, model-size numeral, axis tick, or
-uncertainty. Fifty-nine full-text controls now pass. The content
+uncertainty. Sixty-eight full-text controls now pass. The content
 mutations bypass the immutable-ledger digest gate while retaining exact source
-validation. With the eleven composite controls, all 70 pass.
+validation. With the eleven composite controls, all 79 pass.
 The audit was run by the exact recorded
 `uv run --isolated --no-project --python 3.13` command; its environment record
 now reports CPython 3.13.11 rather than bytes produced by a different interpreter.

@@ -109,6 +109,13 @@ witnesses with 320 exact source-owned row/column/state joins; a paired fine-tune
 DeBERTa row brings the immutable ownership ledger to 321 entries. TF-IDF,
 zero-shot and fine-tuned DeBERTa, base and MCGrad ModernBERT, and every other
 predecessor row now own distinct source cells or ordered prose/figure values.
+All 298 wrong-column records also bind the exact source-row result interval,
+the complete set of numeric result-cell indexes inside that interval, and the
+chosen alternate result-cell index. This excludes configuration numerals before
+the result boundary: the two PAWN ensemble member counts, Exaone 3.5, and the
+Candace/TF-IDF System 3/System 2 identifiers now yield to actual neighboring
+metrics. The same validator rejects CUDA/model versions, numeric substrings in
+model names, slash-delimited IDs, and text-length parameters.
 The witness ledger cannot seed or suppress the independent unknown-row queue;
 both checks are required.
 For arXiv 2607.03680, exact column joins now bind the two Table 4
@@ -310,7 +317,7 @@ from all 119 PDFs, plus one content-hash-bound scope summary per paper, before
 requiring one explicit account, carry-forward, duplicate, or content-specific
 non-candidate decision for every candidate. It then regenerates exactly one
 source-derived witness for every account without using those bindings to seed
-the raw candidate queue. Fifty-nine full-text controls reject ordinary-title,
+the raw candidate queue. Sixty-eight full-text controls reject ordinary-title,
 non-anchor, non-English, and narrow-domain omissions even when a mutable count
 is lowered; detach table content or a PDF/text hash; restore the false Leidos
 mechanism; delete a fitted baseline or collapse a separately trained state while
@@ -338,7 +345,7 @@ backbones now bind their own source state and result cell. The J-Detector values
 remain explicitly labeled as decreases rather than absolute F1 scores.
 PAN12 recall remains bound to its declared Table 1 column, and GCN, GAT, Graph
 Transformer, or GPS cannot inherit Longformer's Table 2 values. Together with
-eleven composite controls, all seventy pass. [N18]
+eleven composite controls, all seventy-nine pass. [N18]
 
 Task 3 reports TPR at five-percent FPR on non-adversarial/adversarial RAID-derived
 tests. The four Leidos rows are 99.4/97.2, 99.3/97.7, 99.2/97.6, and 99.1/95.7

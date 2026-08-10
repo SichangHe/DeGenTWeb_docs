@@ -52,6 +52,10 @@ OWNERSHIP_FIELDS = (
     "source_text_sha256",
     "evidence_span_sha256",
     "negative_kind",
+    "result_column_start_index",
+    "result_column_end_index",
+    "result_column_indices",
+    "negative_column_index",
     "header_page",
     "header_line",
     "header_locator",
@@ -70,6 +74,12 @@ EXPECTED_PREDECESSOR_COUNTS = {
     "table_configuration_join": 95,
     "direct_companion": 1,
 }
+EXPECTED_NEGATIVE_COUNTS = {
+    "wrong_column": 298,
+    "wrong_training_state": 15,
+    "wrong_method_state": 6,
+    "wrong_row": 2,
+}
 EXPECTED_ACCOUNT_SET_SHA256 = (
     "e501508d1cb3aa1dddaaa472673a5ad53276396cf92527cfe8fbf26b9c9eb7eb"
 )
@@ -78,6 +88,9 @@ EXPECTED_PREDECESSOR_BINDING_SHA256 = (
 )
 EXPECTED_CELL_BINDING_SHA256 = (
     "44474a89a16c15a4d1750a362b31bc6daf2c69f39935d0442f33684e2746cc22"
+)
+EXPECTED_DONOR_BINDING_SHA256 = (
+    "2315ffeeb868548c44c9f8ef7b267944fd362fbe6efa553c3ba79a98e9cee9f3"
 )
 TARGET_PREDECESSOR_KINDS = {"same_window", "table_configuration_join"}
 SUCCESSOR_KINDS = {
@@ -92,6 +105,22 @@ NEGATIVE_KINDS = {
     "wrong_training_state",
     "wrong_method_state",
 }
+NUMERIC_METADATA_PREFIX_PATTERN = re.compile(
+    r"(?:\bsystem|\btable|\bfig(?:ure)?|\bversion|\bcuda|\brank|\bepoch|"
+    r"\bseed|\bshots?|\bcomponents?|\bgroup\s+size|\bmax[_ -]?tokens?|"
+    r"\btop[- ]?[kp]|\btext\s+length\s+from)\s*(?:[=:#@]\s*)?$",
+    re.IGNORECASE,
+)
+SPACED_MODEL_VERSION_PATTERN = re.compile(
+    r"(?:\bexaone|\bqwen|\bllama|\bgpt|\bphi|\bmistral|\bfalcon|\bgemma|"
+    r"\bbert|\broberta|\bglm)\s*$",
+    re.IGNORECASE,
+)
+COMPONENT_MODEL_PATTERN = re.compile(
+    r"^\s+(?:gpt\d*|llama\d*|qwen\d*|bert\w*|roberta\w*|mistral\w*|"
+    r"falcon\w*|gemma\w*|phi\w*|exaone\w*)\b",
+    re.IGNORECASE,
+)
 COMPANION_ACCOUNT_ID = "2608.01046:deberta-finetuned"
 LEGACY_PREDECESSOR_ACCOUNT = "2604.21223:qwen25-pair"
 LEGACY_PREDECESSOR_SYSTEM = "IRM Qwen2.5 model pair"
@@ -371,6 +400,10 @@ class Ownership:
     source_text_sha256: str
     evidence_span_sha256: str
     negative_kind: str
+    result_column_start_index: int
+    result_column_end_index: int
+    result_column_indices: str
+    negative_column_index: int
     header_page: int
     header_line: int
     header_locator: str
@@ -420,6 +453,21 @@ def _validate_immutable_digests(rows: list[Ownership]) -> None:
             ),
         )
         != EXPECTED_CELL_BINDING_SHA256
+        or _digest(
+            rows,
+            (
+                "account_id",
+                "negative_kind",
+                "result_column_start_index",
+                "result_column_end_index",
+                "result_column_indices",
+                "negative_column_index",
+                "negative_page",
+                "negative_line",
+                "negative_value",
+            ),
+        )
+        != EXPECTED_DONOR_BINDING_SHA256
     ):
         raise ValueError(
             "ownership ledger immutable account/predecessor/cell set changed"
@@ -438,6 +486,9 @@ def load_ownership(path: Path) -> list[Ownership]:
         "metric_page",
         "metric_line",
         "metric_column_index",
+        "result_column_start_index",
+        "result_column_end_index",
+        "negative_column_index",
         "header_page",
         "header_line",
         "negative_page",
@@ -460,6 +511,11 @@ def load_ownership(path: Path) -> list[Ownership]:
     counts = Counter(row.predecessor_join_kind for row in rows)
     if counts != Counter(EXPECTED_PREDECESSOR_COUNTS):
         raise ValueError(f"ownership predecessor counts changed: {dict(counts)}")
+    negative_counts = Counter(row.negative_kind for row in rows)
+    if negative_counts != Counter(EXPECTED_NEGATIVE_COUNTS):
+        raise ValueError(
+            f"ownership negative-evidence counts changed: {dict(negative_counts)}"
+        )
     _validate_immutable_digests(rows)
     return rows
 
@@ -524,34 +580,67 @@ def _non_result_number(
     before_two = text[match.start() - 2 : match.start() - 1]
     after_two = text[match.end() + 1 : match.end() + 2]
     value = float(match.group().strip().removesuffix("%"))
+    before_text = text[: match.start()]
+    after_text = text[match.end() :]
+    is_small_integer = value.is_integer() and 1 <= abs(value) <= 32
+    is_numeric_metadata = (
+        NUMERIC_METADATA_PREFIX_PATTERN.search(before_text) is not None
+        or (
+            1 < abs(value) < 20
+            and SPACED_MODEL_VERSION_PATTERN.search(before_text) is not None
+        )
+        or (is_small_integer and COMPONENT_MODEL_PATTERN.search(after_text) is not None)
+        or (is_small_integer and before_text.rstrip().endswith(("/", "#")))
+    )
     return (
         (label_end is not None and match.start() < label_end)
         or abs(value) > 100
         or 1900 <= abs(value) <= 2100
-        or before.isalpha()
-        or after.isalpha()
+        or before.isalnum()
+        or after.isalnum()
         or (before == "-" and before_two.isalnum())
         or (after == "-" and after_two.isalnum())
         or before == "±"
         or (reject_uncertainty_group and _inside_uncertainty_group(text, match.start()))
         or (before == "." and before_two.isdigit())
         or (after == "." and after_two.isdigit())
-        or (match.start() == 0 and value.is_integer() and 1 <= abs(value) < 50)
+        or is_numeric_metadata
+        or (not before_text.strip() and value.is_integer() and 1 <= abs(value) < 50)
     )
 
 
-def _expected_wrong_column_donor(row: Ownership) -> str:
+@dataclass(frozen=True)
+class WrongColumnBoundary:
+    start_index: int
+    end_index: int
+    result_indices: tuple[int, ...]
+    donor_index: int
+    donor_value: str
+
+
+def _derive_wrong_column_boundary(row: Ownership) -> WrongColumnBoundary:
     matches = tuple(discovery.NUMBER_PATTERN.finditer(row.metric_text))
     selected_index = row.metric_column_index - 1
-    selected_value = float(row.metric_value)
     label_end = _label_end(row.metric_text, row.source_identity_label)
-    candidates = []
+    if label_end is None:
+        label_end = _label_end(row.metric_text, row.method_state)
+    if not 0 <= selected_index < len(matches) or _non_result_number(
+        row.metric_text, matches[selected_index], label_end
+    ):
+        raise ValueError(f"ownership selected a non-result cell: {row.account_id}")
+    selected_value = float(row.metric_value)
+    result_indices = tuple(
+        index + 1
+        for index, match in enumerate(matches)
+        if not _non_result_number(row.metric_text, match, label_end)
+    )
+    candidates: list[tuple[bool, int, int, str]] = []
     for index, match in enumerate(matches):
         value = match.group().strip().removesuffix("%")
         if (
             index == selected_index
             or discovery._same_number(value, row.metric_value)
-            or _non_result_number(row.metric_text, match, label_end)
+            or index + 1 not in result_indices
         ):
             continue
         same_scale = (abs(float(value)) <= 1) == (abs(selected_value) <= 1)
@@ -560,19 +649,49 @@ def _expected_wrong_column_donor(row: Ownership) -> str:
         raise ValueError(
             f"ownership row lacks a distinct result donor: {row.account_id}"
         )
-    return min(candidates)[-1]
+    _, _, donor_zero_index, donor_value = min(candidates)
+    donor_index = donor_zero_index + 1
+    start_index = min(result_indices)
+    end_index = max(result_indices)
+    return WrongColumnBoundary(
+        start_index,
+        end_index,
+        result_indices,
+        donor_index,
+        donor_value,
+    )
+
+
+def _encoded_indices(indices: tuple[int, ...]) -> str:
+    return ",".join(str(index) for index in indices)
 
 
 def _validate_negative_donor(row: Ownership) -> None:
     if row.negative_kind == "wrong_column":
-        if row.negative_text != row.metric_text or not discovery._same_number(
-            row.negative_value, _expected_wrong_column_donor(row)
+        boundary = _derive_wrong_column_boundary(row)
+        if (
+            row.negative_text != row.metric_text
+            or row.result_column_start_index != boundary.start_index
+            or row.result_column_end_index != boundary.end_index
+            or row.result_column_indices != _encoded_indices(boundary.result_indices)
+            or row.negative_column_index != boundary.donor_index
+            or not discovery._same_number(row.negative_value, boundary.donor_value)
         ):
             raise ValueError(
-                f"ownership wrong-column donor is not the derived result cell: "
+                f"ownership wrong-column donor is not inside the derived semantic "
+                f"result boundary: "
                 f"{row.account_id}"
             )
         return
+    if (
+        row.result_column_start_index
+        or row.result_column_end_index
+        or row.result_column_indices
+        or row.negative_column_index
+    ):
+        raise ValueError(
+            f"non-column ownership row declares a result boundary: {row.account_id}"
+        )
     if not any(
         discovery._same_number(
             match.group().strip().removesuffix("%"), row.negative_value

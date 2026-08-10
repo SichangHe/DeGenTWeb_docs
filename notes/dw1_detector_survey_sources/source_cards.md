@@ -718,7 +718,7 @@ high claims and individually rejected, leaving the recommendation unchanged.
   accounts. After independent extraction, a 987-row source-derived witness
   ledger binds every account's identity, metric/configuration, locator, join
   semantics, and text hash; those bindings cannot seed or suppress the raw
-  queue. Fifty-nine full-text controls cover the
+  queue. Sixty-eight full-text controls cover the
   ordinary-title selection fixture,
   Candace deletion with a lowered count, non-anchor PAWN deletion with a lowered
   count, deletion of a non-English Qwen LoRA state with a lowered count, content
@@ -748,7 +748,12 @@ high claims and individually rejected, leaving the recommendation unchanged.
   wrong-column substitutions, zero-shot/fine-tuned DeBERTa or base/MCGrad
   training-state swaps, J-Detector ablation-state swaps, DetectAnyLLM
   scorer-row swaps, and selection of DetectGPT uncertainty instead of AUROC.
-  Together with the eleven accepted composite controls, all seventy pass.
+  Each of the 298 wrong-column rows now freezes a source-derived semantic
+  result interval and alternate result-cell index. Nine source-row mutations
+  reject the two PAWN component counts, Exaone 3.5, System 3/System 2, a CUDA
+  version, a numeric model-name fragment, a slash-delimited ID, and a
+  text-length parameter as donors. Together with the eleven accepted composite
+  controls, all seventy-nine pass.
 - Exhaustive ownership correction: each of the 321 reviewed rows now binds a
   source identity, exact result row or figure claim, numeric column, and
   method/training state. The audit rejects model-size numerals, years,

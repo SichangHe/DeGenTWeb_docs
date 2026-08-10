@@ -90,7 +90,10 @@
   `table_configuration_join` rows, plus a bilateral fine-tuned DeBERTa companion,
   to distinct evidence sources, identities, result rows, numeric columns,
   method/training states, headers, values, hashes, and explicit wrong-row,
-  wrong-column, or wrong-state donors. The final witness ledger must contain no
+  wrong-column, or wrong-state donors. Each of the 298 wrong-column records
+  additionally freezes the source-derived result-column start/end indexes, the
+  exact in-boundary result-cell indexes, and the alternate donor index. The
+  final witness ledger must contain no
   predecessor heuristic kind. TF-IDF, zero-shot/fine-tuned DeBERTa, base/MCGrad
   ModernBERT, and every other repaired account are source-owned rather than
   proximity-certified. The predecessor-only IRM compatibility alias recreates
@@ -102,7 +105,10 @@
   requires row results to follow their source identity, rejects model-size
   numerals, years, and uncertainty cells, and binds figure/prose claims to their
   stated metric. Every wrong-column donor is independently derived as a
-  different result cell in the same row. Wrong-row and wrong-state donors must
+  different result cell inside the same row's semantic result boundary;
+  configuration labels, component counts, system identifiers, model/CUDA
+  versions, numeric model-name fragments, slash-delimited IDs, and text-length
+  parameters are outside that boundary. Wrong-row and wrong-state donors must
   be source-resident results, not ranks, citations, axis ticks, sample counts,
   uncertainties, or model-name numerals.
 - Shared-row metric ownership is explicit rather than proximity-based. A
@@ -171,7 +177,7 @@
 
 ## Controls and failure conditions
 
-The eleven accepted composite controls remain unchanged. Fifty-nine full-text controls
+The eleven accepted composite controls remain unchanged. Sixty-eight full-text controls
 add an ordinary-title positive fixture and reject: deleting Candace while
 lowering its mutable count; deleting a non-anchor PAWN ensemble while lowering
 its count; deleting a non-English Qwen LoRA state while lowering its count;
@@ -213,8 +219,12 @@ controls exchange the two J-Detector ablation states, exchange two DetectAnyLLM
 scorer rows, and substitute DetectGPT's adjacent uncertainty for its AUROC. The content
 mutations bypass the immutable-ledger digest check while retaining source
 validation, so they must fail on row, column, or training-state ownership rather
-than on a checksum. Every supplied witness must also equal the immutable source-
-owned derivation. Together with the eleven composite controls, all 70 controls
+than on a checksum. Nine source-row mutations then try the two PAWN component
+counts, Exaone 3.5, System 3/System 2 identifiers, CUDA 11.3, BM25's numeric
+name fragment, a slash-delimited identifier, and a text-length parameter as
+wrong-column donors; each must fail specifically at the semantic result
+boundary. Every supplied witness must also equal the immutable source-owned
+derivation. Together with the eleven composite controls, all 79 controls
 must pass.
 
 The run fails on any missing, duplicate, unknown, incomplete, mis-parented,

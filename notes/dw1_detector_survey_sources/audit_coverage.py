@@ -170,10 +170,10 @@ TABLE_DISCOVERY_SHA256 = (
     "71d5274ba80c82b143a71c624459c53d873494b3eb4a75ef968a0ffcbae76fe5"
 )
 ACCOUNT_WITNESSES_SHA256 = (
-    "27f62d0ea4e9fe575b9cbadbd8302ff1b69882b9cd3f3bf01bcd2ba632d191fc"
+    "5058be16a7f15aa8f5e8c04e57ee80611ebe494ba2da0d8defadfe6f01a33641"
 )
 PREDECESSOR_OWNERSHIP_SHA256 = (
-    "79726def908f6e0992b68648253d4c92b36809affda5959d913f8bb0d8c89a54"
+    "8937292b89b527a5ebf8b618240389c633c0f3d7faff435531483b3129eeb112"
 )
 FULLTEXT_ACCOUNT_SET_SHA256 = (
     "3a2f45d49a5909e3e13cfd92876eca8656c5a03b478d250f77a1876c35b35cd4"
@@ -1977,6 +1977,10 @@ def run_fulltext_regression_tests(
         "header_text",
         "header_sha256",
         "negative_kind",
+        "result_column_start_index",
+        "result_column_end_index",
+        "result_column_indices",
+        "negative_column_index",
         "negative_page",
         "negative_line",
         "negative_locator",
@@ -2002,6 +2006,29 @@ def run_fulltext_regression_tests(
             else item
             for item in ownership_rows
         ]
+
+    def metadata_donor_mutation(
+        account_id: str,
+        column_index: int,
+        value: str,
+    ) -> list[witness_ownership.Ownership]:
+        row = next(item for item in ownership_rows if item.account_id == account_id)
+        indices = tuple(
+            sorted(
+                {
+                    *(int(item) for item in row.result_column_indices.split(",")),
+                    column_index,
+                }
+            )
+        )
+        return mutated_ownership(
+            account_id,
+            result_column_start_index=min(indices),
+            result_column_end_index=max(indices),
+            result_column_indices=",".join(str(item) for item in indices),
+            negative_column_index=column_index,
+            negative_value=value,
+        )
 
     def mutated_witnesses(
         account_id: str,
@@ -2197,8 +2224,76 @@ Novel Architecture           0.951     0.201
             )
         ),
         "DetectGPT AUROC redirected to its neighboring uncertainty",
-        "ownership selected an uncertainty, not a result",
+        "ownership selected a non-result cell",
     )
+    non_result_donor_controls = (
+        (
+            "2501.03940:ens-gpt2-llama",
+            1,
+            "1",
+            "PAWN ensemble component count reused as a result-column donor",
+        ),
+        (
+            "2501.03940:ens-gpt2-llama-qwen",
+            1,
+            "1",
+            "PAWN three-model ensemble component count reused as a result-column donor",
+        ),
+        (
+            "2503.00032:exaone-paraphrase",
+            1,
+            "3.5",
+            "Exaone model version reused as a result-column donor",
+        ),
+        (
+            "2509.00623:candace",
+            1,
+            "3",
+            "Candace system identifier reused as a result-column donor",
+        ),
+        (
+            "2509.00623:tfidf-svm",
+            1,
+            "2",
+            "TF-IDF system identifier reused as a result-column donor",
+        ),
+        (
+            "2505.12507:lm2-gpt2-tokenizer",
+            1,
+            "11.3",
+            "CUDA version reused as a result-column donor",
+        ),
+        (
+            "2608.03859:bm25-pair",
+            1,
+            "5",
+            "numeric substring of a model name reused as a result-column donor",
+        ),
+        (
+            "2501.09813:qwen2.5-0.5b",
+            6,
+            "1",
+            "slash-delimited class identifier reused as a result-column donor",
+        ),
+        (
+            "2604.16923:lapd-llama31",
+            2,
+            "20",
+            "text-length parameter reused as a result-column donor",
+        ),
+    )
+    if len(non_result_donor_controls) != 9:
+        raise ValueError("non-result donor-control inventory changed")
+    for account_id, column_index, value, label in non_result_donor_controls:
+        expect_failure(
+            lambda account_id=account_id,
+            column_index=column_index,
+            value=value: validate_ownership_semantic_mutation(
+                metadata_donor_mutation(account_id, column_index, value)
+            ),
+            label,
+            "ownership wrong-column donor is not inside the derived semantic result boundary",
+        )
     expect_failure(
         lambda: validate_witness_mutation(
             mutated_witnesses(
@@ -3279,6 +3374,7 @@ def write_report(
     primary_results: list[EmbeddedResult],
     table_candidates: list[table_discovery.Candidate],
     account_witnesses: list[table_discovery.AccountWitness],
+    ownership_rows: list[witness_ownership.Ownership],
     composite_regression_tests: int,
     fulltext_regression_tests: int,
 ) -> str:
@@ -3335,6 +3431,10 @@ def write_report(
         f"independent_discovery_rows={discovery_rows}",
         f"source_derived_account_witnesses={len(account_witnesses)}",
         f"exact_predecessor_ownership_rows={witness_ownership.EXPECTED_OWNERSHIP_ROWS}",
+        "semantic_wrong_column_boundaries="
+        f"{sum(item.negative_kind == 'wrong_column' for item in ownership_rows)}",
+        "semantic_wrong_column_parent_sources="
+        f"{len({item.parent_id for item in ownership_rows if item.negative_kind == 'wrong_column'})}",
         "account_witness_kinds="
         + ",".join(
             f"{kind}:{sum(item.join_kind == kind for item in account_witnesses)}"
@@ -3590,6 +3690,7 @@ def main() -> int:
         primary_results,
         table_candidates,
         account_witnesses,
+        ownership_rows,
         composite_regression_tests,
         fulltext_regression_tests,
     )
