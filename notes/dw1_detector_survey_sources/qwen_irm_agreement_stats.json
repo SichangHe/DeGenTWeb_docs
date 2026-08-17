@@ -1,0 +1,409 @@
+{
+  "schema_version": 3,
+  "source_path": "docs/notes/dw1_detector_survey_sources/benchmark_composite_detectors_scores.csv",
+  "source_sha256": "c635d2b98583f9f9bcf3917f7ecb18469185550ab66d46ff60021a977195e786",
+  "score_sidecar_path": "data/classify/qwen_irm_agreement/qwen_irm_scores.csv",
+  "score_manifest_path": "data/classify/qwen_irm_agreement/qwen_irm_score_manifest.json",
+  "completion_manifest_path": "data/classify/qwen_irm_agreement/qwen_irm_completion_manifest.json",
+  "run_provenance": {
+    "run_manifest_schema_version": 2,
+    "eligible_text_inputs_sha256": "4acd86ebcea12aceb129b88566318fcb32e62f8cd49350525b57d8edbf790612",
+    "base_model": "Qwen/Qwen2-0.5B",
+    "base_revision": "91d2aff3f957f99e4c74c962f2f408dcc88a18d8",
+    "base_device": "cuda:1",
+    "instruction_model": "Qwen/Qwen2-0.5B-Instruct",
+    "instruction_revision": "c540970f9e29518b1d8f06ab8b24cba66ad77b6d",
+    "instruction_device": "cuda:0",
+    "dtype": "float32",
+    "max_tokens": 2048,
+    "batch_size": 8
+  },
+  "score_semantics": {
+    "orientation": "all three scores are oriented higher = more AI-like",
+    "qwen_irm_primary": "sum_score = instruction sequence log likelihood - base sequence log likelihood (paper Eq. 5); used for threshold, votes, and plots",
+    "qwen_irm_sensitivity": "mean_score = sum_score / token_count; reported separately and not used in detector consensus"
+  },
+  "target_calibration_fpr": 0.01,
+  "threshold_rule": "For n calibration-human scores and alpha=0.01, allow floor(alpha*n) flags, set the threshold to the next descending order statistic, and flag only score > threshold. Ties are conservative.",
+  "sample_sizes": {
+    "calibration_human": 1000,
+    "held_out_human": 2315,
+    "held_out_generated": 1592,
+    "eligible_total": 4907
+  },
+  "thresholds": {
+    "binoculars": {
+      "value": -0.87890625,
+      "comparison": ">",
+      "calibration_flags": 10,
+      "calibration_total": 1000,
+      "calibration_empirical_fpr": 0.01
+    },
+    "fast_detect_gpt": {
+      "value": 0.9973884381399437,
+      "comparison": ">",
+      "calibration_flags": 10,
+      "calibration_total": 1000,
+      "calibration_empirical_fpr": 0.01
+    },
+    "qwen_irm": {
+      "value": 13.32861328125,
+      "comparison": ">",
+      "calibration_flags": 10,
+      "calibration_total": 1000,
+      "calibration_empirical_fpr": 0.01
+    }
+  },
+  "per_detector": {
+    "binoculars": {
+      "false_positive_count": 27,
+      "held_out_human_count": 2315,
+      "fpr": 0.011663066954643628,
+      "true_positive_count": 1052,
+      "held_out_generated_count": 1592,
+      "tpr": 0.6608040201005025,
+      "held_out_auroc": 0.9778986726288027
+    },
+    "fast_detect_gpt": {
+      "false_positive_count": 24,
+      "held_out_human_count": 2315,
+      "fpr": 0.010367170626349892,
+      "true_positive_count": 1202,
+      "held_out_generated_count": 1592,
+      "tpr": 0.7550251256281407,
+      "held_out_auroc": 0.9689516697960645
+    },
+    "qwen_irm": {
+      "false_positive_count": 15,
+      "held_out_human_count": 2315,
+      "fpr": 0.0064794816414686825,
+      "true_positive_count": 1154,
+      "held_out_generated_count": 1592,
+      "tpr": 0.7248743718592965,
+      "held_out_auroc": 0.9748399123045031
+    }
+  },
+  "descriptive_held_out_roc_operating_points": {
+    "definition": "Post-hoc held-out ROC operating-point comparison: independently set each detector's strict upper-tail threshold from held-out-human scores at no more than 1% empirical FPR, then describe TPR on held-out generated rows from the same evaluation view.",
+    "warning": "Evaluation labels are used to describe these ROC points. They are not deployable thresholds and are never used for calibrated detector flags, detector-consensus votes, Venn regions, or primary operating-point metrics.",
+    "target_max_held_out_human_fpr": 0.01,
+    "threshold_rule": "For n held-out-human scores, allow floor(0.01*n) flags, set the threshold to the next descending order statistic, and flag only score > threshold; ties are conservative.",
+    "per_detector": {
+      "binoculars": {
+        "threshold": -0.87109375,
+        "comparison": ">",
+        "false_positive_count": 17,
+        "held_out_human_count": 2315,
+        "fpr": 0.00734341252699784,
+        "true_positive_count": 933,
+        "held_out_generated_count": 1592,
+        "tpr": 0.5860552763819096
+      },
+      "fast_detect_gpt": {
+        "threshold": 0.9976742464609103,
+        "comparison": ">",
+        "false_positive_count": 23,
+        "held_out_human_count": 2315,
+        "fpr": 0.009935205183585313,
+        "true_positive_count": 1198,
+        "held_out_generated_count": 1592,
+        "tpr": 0.7525125628140703
+      },
+      "qwen_irm": {
+        "threshold": 9.54736328125,
+        "comparison": ">",
+        "false_positive_count": 20,
+        "held_out_human_count": 2315,
+        "fpr": 0.008639308855291577,
+        "true_positive_count": 1231,
+        "held_out_generated_count": 1592,
+        "tpr": 0.7732412060301508
+      }
+    }
+  },
+  "detector_consensus": {
+    "definition": "detector-consensus flag: at least two of Binoculars, FastDetectGPT, and Qwen IRM independently exceed their calibration-human thresholds; this is not a ground-truth label",
+    "false_positive_count": 16,
+    "held_out_human_count": 2315,
+    "fpr": 0.006911447084233261,
+    "true_positive_count": 1186,
+    "held_out_generated_count": 1592,
+    "tpr": 0.7449748743718593,
+    "vote_count_distribution": {
+      "held_out_human": {
+        "flagged_by_0_detectors": 2267,
+        "flagged_by_1_detectors": 32,
+        "flagged_by_2_detectors": 14,
+        "flagged_by_3_detectors": 2
+      },
+      "held_out_generated": {
+        "flagged_by_0_detectors": 186,
+        "flagged_by_1_detectors": 220,
+        "flagged_by_2_detectors": 370,
+        "flagged_by_3_detectors": 816
+      }
+    },
+    "consensus_share_counts": {
+      "held_out_human": {
+        "detector_consensus_flag_count": 16,
+        "binoculars_participation_count": 14,
+        "binoculars_share_of_consensus": 0.875,
+        "fast_detect_gpt_participation_count": 15,
+        "fast_detect_gpt_share_of_consensus": 0.9375,
+        "qwen_irm_participation_count": 5,
+        "qwen_irm_share_of_consensus": 0.3125
+      },
+      "held_out_generated": {
+        "detector_consensus_flag_count": 1186,
+        "binoculars_participation_count": 972,
+        "binoculars_share_of_consensus": 0.8195615514333895,
+        "fast_detect_gpt_participation_count": 1175,
+        "fast_detect_gpt_share_of_consensus": 0.9907251264755481,
+        "qwen_irm_participation_count": 1041,
+        "qwen_irm_share_of_consensus": 0.8777403035413154
+      }
+    }
+  },
+  "exclusive_region_counts": {
+    "held_out_human": {
+      "binoculars_only": 13,
+      "fast_detect_gpt_only": 9,
+      "qwen_irm_only": 10,
+      "binoculars_fast_detect_gpt_only": 11,
+      "binoculars_qwen_irm_only": 1,
+      "fast_detect_gpt_qwen_irm_only": 2,
+      "all_three": 2
+    },
+    "held_out_generated": {
+      "binoculars_only": 80,
+      "fast_detect_gpt_only": 27,
+      "qwen_irm_only": 113,
+      "binoculars_fast_detect_gpt_only": 145,
+      "binoculars_qwen_irm_only": 11,
+      "fast_detect_gpt_qwen_irm_only": 214,
+      "all_three": 816
+    }
+  },
+  "irm_token_length_quartile_fpr": [
+    {
+      "quartile": 1,
+      "assignment_rule": "rank token_count ascending, break ties by row_index, then split into four count-balanced groups",
+      "min_token_count": 118,
+      "max_token_count": 362,
+      "held_out_human_count": 579,
+      "false_positive_count": 4,
+      "fpr": 0.0069084628670120895
+    },
+    {
+      "quartile": 2,
+      "assignment_rule": "rank token_count ascending, break ties by row_index, then split into four count-balanced groups",
+      "min_token_count": 362,
+      "max_token_count": 672,
+      "held_out_human_count": 579,
+      "false_positive_count": 4,
+      "fpr": 0.0069084628670120895
+    },
+    {
+      "quartile": 3,
+      "assignment_rule": "rank token_count ascending, break ties by row_index, then split into four count-balanced groups",
+      "min_token_count": 673,
+      "max_token_count": 1429,
+      "held_out_human_count": 579,
+      "false_positive_count": 6,
+      "fpr": 0.010362694300518135
+    },
+    {
+      "quartile": 4,
+      "assignment_rule": "rank token_count ascending, break ties by row_index, then split into four count-balanced groups",
+      "min_token_count": 1431,
+      "max_token_count": 2047,
+      "held_out_human_count": 578,
+      "false_positive_count": 1,
+      "fpr": 0.0017301038062283738
+    }
+  ],
+  "irm_mean_score_sensitivity": {
+    "used_in_detector_consensus": false,
+    "threshold": {
+      "value": 0.026043776523919752,
+      "comparison": ">",
+      "calibration_flags": 10,
+      "calibration_total": 1000,
+      "calibration_empirical_fpr": 0.01
+    },
+    "performance": {
+      "false_positive_count": 17,
+      "held_out_human_count": 2315,
+      "fpr": 0.00734341252699784,
+      "true_positive_count": 882,
+      "held_out_generated_count": 1592,
+      "tpr": 0.5540201005025126,
+      "held_out_auroc": 0.9527795565299501
+    }
+  },
+  "content_overlap_audit": {
+    "primary_row_level_split_is_content_disjoint": false,
+    "calibration_rows": 1000,
+    "calibration_unique_texts": 938,
+    "evaluation_rows": 3907,
+    "evaluation_unique_texts": 3624,
+    "evaluation_duplicate_rows": 283,
+    "cross_split_unique_texts": 16,
+    "calibration_rows_on_cross_split_texts": 77,
+    "evaluation_rows_on_cross_split_texts": 137
+  },
+  "content_unique_disjoint_sensitivity": {
+    "definition": "secondary sensitivity: retain the lowest row_index for each raw-text SHA-256, remove every evaluation hash present in calibration, recalibrate each detector at 1% empirical calibration-human FPR, then evaluate the remaining content-unique rows",
+    "sample_sizes": {
+      "calibration_human": 938,
+      "held_out_human": 2159,
+      "held_out_generated": 1449,
+      "evaluation_total": 3608
+    },
+    "thresholds": {
+      "binoculars": {
+        "value": -0.875,
+        "comparison": ">",
+        "calibration_flags": 9,
+        "calibration_total": 938,
+        "calibration_empirical_fpr": 0.009594882729211088
+      },
+      "fast_detect_gpt": {
+        "value": 0.9987133915901109,
+        "comparison": ">",
+        "calibration_flags": 9,
+        "calibration_total": 938,
+        "calibration_empirical_fpr": 0.009594882729211088
+      },
+      "qwen_irm": {
+        "value": 13.69140625,
+        "comparison": ">",
+        "calibration_flags": 9,
+        "calibration_total": 938,
+        "calibration_empirical_fpr": 0.009594882729211088
+      }
+    },
+    "per_detector": {
+      "binoculars": {
+        "false_positive_count": 21,
+        "held_out_human_count": 2159,
+        "fpr": 0.009726725335803613,
+        "true_positive_count": 939,
+        "held_out_generated_count": 1449,
+        "tpr": 0.6480331262939959,
+        "held_out_auroc": 0.9816538277983794
+      },
+      "fast_detect_gpt": {
+        "false_positive_count": 18,
+        "held_out_human_count": 2159,
+        "fpr": 0.008337193144974525,
+        "true_positive_count": 1101,
+        "held_out_generated_count": 1449,
+        "tpr": 0.7598343685300207,
+        "held_out_auroc": 0.9746158648327526
+      },
+      "qwen_irm": {
+        "false_positive_count": 15,
+        "held_out_human_count": 2159,
+        "fpr": 0.006947660954145438,
+        "true_positive_count": 1082,
+        "held_out_generated_count": 1449,
+        "tpr": 0.7467218771566597,
+        "held_out_auroc": 0.9839492569822633
+      }
+    },
+    "detector_consensus": {
+      "definition": "detector-consensus flag: at least two of Binoculars, FastDetectGPT, and Qwen IRM independently exceed their calibration-human thresholds; this is not a ground-truth label",
+      "false_positive_count": 14,
+      "held_out_human_count": 2159,
+      "fpr": 0.006484483557202408,
+      "true_positive_count": 1081,
+      "held_out_generated_count": 1449,
+      "tpr": 0.746031746031746,
+      "vote_count_distribution": {
+        "held_out_human": {
+          "flagged_by_0_detectors": 2121,
+          "flagged_by_1_detectors": 24,
+          "flagged_by_2_detectors": 12,
+          "flagged_by_3_detectors": 2
+        },
+        "held_out_generated": {
+          "flagged_by_0_detectors": 124,
+          "flagged_by_1_detectors": 244,
+          "flagged_by_2_detectors": 365,
+          "flagged_by_3_detectors": 716
+        }
+      },
+      "consensus_share_counts": {
+        "held_out_human": {
+          "detector_consensus_flag_count": 14,
+          "binoculars_participation_count": 13,
+          "binoculars_share_of_consensus": 0.9285714285714286,
+          "fast_detect_gpt_participation_count": 13,
+          "fast_detect_gpt_share_of_consensus": 0.9285714285714286,
+          "qwen_irm_participation_count": 4,
+          "qwen_irm_share_of_consensus": 0.2857142857142857
+        },
+        "held_out_generated": {
+          "detector_consensus_flag_count": 1081,
+          "binoculars_participation_count": 864,
+          "binoculars_share_of_consensus": 0.7992599444958371,
+          "fast_detect_gpt_participation_count": 1069,
+          "fast_detect_gpt_share_of_consensus": 0.9888991674375578,
+          "qwen_irm_participation_count": 945,
+          "qwen_irm_share_of_consensus": 0.8741905642923219
+        }
+      }
+    },
+    "descriptive_held_out_roc_operating_points": {
+      "definition": "Post-hoc held-out ROC operating-point comparison: independently set each detector's strict upper-tail threshold from held-out-human scores at no more than 1% empirical FPR, then describe TPR on held-out generated rows from the same evaluation view.",
+      "warning": "Evaluation labels are used to describe these ROC points. They are not deployable thresholds and are never used for calibrated detector flags, detector-consensus votes, Venn regions, or primary operating-point metrics.",
+      "target_max_held_out_human_fpr": 0.01,
+      "threshold_rule": "For n held-out-human scores, allow floor(0.01*n) flags, set the threshold to the next descending order statistic, and flag only score > threshold; ties are conservative.",
+      "per_detector": {
+        "binoculars": {
+          "threshold": -0.875,
+          "comparison": ">",
+          "false_positive_count": 21,
+          "held_out_human_count": 2159,
+          "fpr": 0.009726725335803613,
+          "true_positive_count": 939,
+          "held_out_generated_count": 1449,
+          "tpr": 0.6480331262939959
+        },
+        "fast_detect_gpt": {
+          "threshold": 0.9981600747748545,
+          "comparison": ">",
+          "false_positive_count": 21,
+          "held_out_human_count": 2159,
+          "fpr": 0.009726725335803613,
+          "true_positive_count": 1122,
+          "held_out_generated_count": 1449,
+          "tpr": 0.7743271221532091
+        },
+        "qwen_irm": {
+          "threshold": 9.4058837890625,
+          "comparison": ">",
+          "false_positive_count": 21,
+          "held_out_human_count": 2159,
+          "fpr": 0.009726725335803613,
+          "true_positive_count": 1172,
+          "held_out_generated_count": 1449,
+          "tpr": 0.8088336783988958
+        }
+      }
+    }
+  },
+  "plot_artifacts": {
+    "held_out_human": [
+      "qwen_irm_agreement_held_out_human.pdf",
+      "qwen_irm_agreement_held_out_human.png",
+      "qwen_irm_agreement_held_out_human.svg"
+    ],
+    "held_out_generated": [
+      "qwen_irm_agreement_held_out_generated.pdf",
+      "qwen_irm_agreement_held_out_generated.png",
+      "qwen_irm_agreement_held_out_generated.svg"
+    ]
+  }
+}

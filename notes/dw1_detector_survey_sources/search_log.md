@@ -166,8 +166,23 @@ it contributed no evidence.
   `c108289ea8595da780471ed1ce034773a571b364`.
 
 GitHub's public API exact-title searches on 8 August 2026 found no official
-repository or checkpoint for EchoPrompt or Steer-to-Detect. Exact-title searches
-for DWT-Fusion found only an unrelated 2020 repository. Repository absence is
+repository or checkpoint for EchoPrompt or Steer-to-Detect. That historical
+result is preserved as of that date. Exact-title searches for DWT-Fusion found
+only an unrelated 2020 repository.
+
+The 14 August current-status audit corrected EchoPrompt's disposition. Its
+original abstract calls it “a training-free detector”. The later author-overlap
+[EVIL-Detect paper](https://arxiv.org/abs/2608.10698) says, “Our code is
+available at” its linked [repository at the inspected
+commit](https://github.com/bbbbhrrrr/evildetect/tree/597bc4f0dd3fc1cc39a3dcd495013bd4f323ffdd).
+This post-review paper was inspected live for the status correction; it postdates
+and is not included in the closed 8 August PDF ledger in `paper_artifacts.md`.
+That commit contains `scripts/echoprompt/score_votes.py` and section 4 of
+`docs/reproduction.md`: a method-faithful Chinese/NLPCC implementation that fits
+thresholds on validation labels. It is not a trained EchoPrompt checkpoint or an
+exact reproduction of the original DetectRL, RealDet, and RAID results. The same
+bounded official-source, GitHub repository, and Hugging Face search still found
+no Steer-to-Detect implementation or learned state. Negative search results are
 reported as “not found in the bounded search,” never as proof that no artifact
 can exist.
 

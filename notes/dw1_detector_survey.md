@@ -435,7 +435,30 @@ were not accessed. [N2]
 The strongest anonymous paper-listed family, Qwen2-0.5B, measured 1.834 seconds
 per batch and 30,384 MiB per card at batch 8 and 2,048 tokens. Its fixed same-row
 AUROC was 0.9436, below stored Binoculars 0.9595 and FastDetectGPT 0.9536. IRM
-therefore remains a runnable control, not a demonstrated improvement. [M4]
+therefore remained a runnable control in that 500/500 continuity screen. [M4]
+
+The requested full-corpus agreement follow-up now scores all 4,907 available
+texts of at least 100 words with the same public pair. On the established
+row-level evaluation, IRM AUROC is 0.974840 versus 0.977899 Binoculars and
+0.968952 FastDetectGPT. At independently calibrated one-percent human FPR,
+IRM's evaluation FPR/TPR is 0.00648/0.72487 versus Binoculars at
+0.01166/0.66080. A two-of-three detector-consensus flag has
+0.00691/0.74497. At a separate post-hoc held-out ROC point capped at one-percent
+human FPR, IRM TPR is 0.77324 versus 0.58606 Binoculars and 0.75251
+FastDetectGPT; these evaluation-selected thresholds are descriptive and are not
+used for deployment or voting. [M9]
+
+The input audit found that the primary split is not content-disjoint: 16 exact
+text hashes cross calibration/evaluation, and evaluation has 283 duplicate rows
+by text hash. After retaining one row per content hash, excluding calibration
+content from evaluation, and recalibrating, IRM AUROC is 0.983949 versus
+0.981654 Binoculars; IRM FPR/TPR is 0.00695/0.74672 versus
+0.00973/0.64803. At the same post-hoc 0.00973 evaluation FPR, IRM TPR is
+0.80883 versus 0.64803 Binoculars and 0.77433 FastDetectGPT. This descriptive
+sensitivity reverses the small AUROC ordering but is not a significance result.
+It makes IRM a strong runnable comparator, not a production replacement: the
+corpus remains available rather than newly stratified, current-generator, and
+content-disjoint, while the stored comparators remain historical. [M9]
 
 ### Reconstruction only: SV-Detect
 
@@ -466,7 +489,7 @@ inference and is excluded as retrieval. Triospect generates summaries and
 simplifications and aggregates multiple views; it is excluded as rewriting,
 regeneration, and multi-view inference. Their evidence is preserved. [N8]
 
-### Calibration and unreleased lanes
+### Calibration and watchlist lanes
 
 The ICLR 2026 Markov-informed layer is public code and improves within-paper
 Binoculars average AUROC from 94.85 to 94.91 on Essay, 86.99 to 91.41 on Reuters,
@@ -476,11 +499,18 @@ A6000 comparison. It is retained as calibration research, not a detector
 replacement. [N10]
 
 EchoPrompt reports 95.56 average AUROC versus 90.07 Binoculars with a Llama-3-8B
-proxy; Steer-to-Detect reports 98.90 versus 87.70 and 0.30 versus 0.50 seconds on
-one short-text A100 test. Neither released implementation or trained state was
-found in the bounded public search. Their length, batch, and hardware evidence
-does not prove the fixed A6000 screen. Both remain unreproduced watchlist claims.
-[N4, N5]
+proxy. Its paper calls the detector training-free. The 8 August exact-title
+search found no repository then, but a later author-overlap EVIL-Detect paper
+links a repository whose inspected commit contains an EchoPrompt scorer and
+reproduction instructions. This is a method-faithful Chinese/NLPCC
+implementation with validation-fitted thresholds, not a trained EchoPrompt
+checkpoint or an exact DetectRL/RealDet/RAID reproduction. Steer-to-Detect
+reports 98.90 versus 87.70 and 0.30 versus 0.50 seconds on one short-text A100
+test; the 14 August bounded public search still found no released implementation
+or learned detector state. Neither method has complete length, batch, and
+hardware evidence for the fixed A6000 screen. EchoPrompt is now a runnable
+watchlist method; Steer-to-Detect remains an unreproduced watchlist claim. [N4,
+N5]
 
 ## Normalized decision table
 
@@ -494,12 +524,13 @@ does not prove the fixed A6000 screen. Both remain unreproduced watchlist claims
 | LM²otifs | In-domain 0.98 accuracy/1.00 AUC vs same-table Binoculars 0.97/0.99 | Cross-domain 0.79 vs 0.95; nearest-neighbor fallback; no state or comparable cost | Excluded/rejected |
 | NEULIF | In-domain CNN 97% accuracy and 0.9951 ROC-AUC; reported 25 MB | One under-specified corpus split; no matched comparator, state, low-FPR, or reproducible timing | Unreleased in-domain claim |
 | 987 full-text detector accounts | Up to 1.0 on reported F1, accuracy, precision, TPR, or AUROC slices; exact source/artifact disposition for 263 embedded results and 724 primary configurations | Narrow, validation-only, shifted, language-specific, closed, missing-state, excluded-method, or weaker mean/overall result except Desklib follow-up | Individually accounted across all 119 papers; no parent-only grouping or hidden promotion |
-| IRM | Best paper pair beats matched Binoculars on three DetectRL AUROCs | Best pair gated; anonymous public pair trails stored Binoculars locally | Runnable control |
+| IRM | Best paper pair beats matched Binoculars on three DetectRL AUROCs; public Qwen pair is 0.9839 vs 0.9817 Binoculars in the content-unique sensitivity and improves the selected low-FPR point | Established row-weighted view is 0.9748 vs 0.9779; convenience corpus is not a new stratified current-generator test; stored comparators are historical | Strong runnable comparison; not a production replacement |
 | SV-Detect | 99.83–100 matched-family reported AUROC | No trained detector state; supervised setting; local run is reconstruction only | Reconstruction evidence |
 | LAPD | 92.37 average vs same-pair Binoculars 89.72; measured near-identical cost | 10,000 auxiliary categorical samples | Excluded by method |
 | Exons-Detect | 92.14 average vs same-table Binoculars 86.08 | Essential generated ideal-sequence stage; incomplete cleaned release | Excluded by method |
 | Markov calibration | Improves Binoculars on three within-paper datasets | Per-dataset supervised state not shipped; no whole-path fixed screen | Calibration research |
-| EchoPrompt / Steer-to-Detect | Strong same-paper reported comparisons | No public implementation or state; incomplete deployment basis | Unreleased watchlist |
+| EchoPrompt | 95.56 average AUROC vs same-proxy Binoculars 90.07; later author-linked scorer is public | Chinese/NLPCC implementation fits validation thresholds; no exact original-benchmark reproduction or complete A6000 basis | Runnable method-faithful watchlist |
+| Steer-to-Detect | 98.90 AUROC vs same-test Binoculars 87.70; 0.30 vs 0.50 seconds on one short-text A100 test | No implementation or learned state found in the bounded current search; incomplete A6000 basis | Bounded unreleased watchlist |
 
 AUROC is threshold-free ranking quality, not classification accuracy. F1, raw
 accuracy, TPR at one-percent FPR, TPR at 0.01-percent FPR, and composite challenge

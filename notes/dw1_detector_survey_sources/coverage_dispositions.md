@@ -113,11 +113,11 @@ Exact-title and citation-following checks from the accepted earlier search are
 kept alongside the export-derived set. Three plausible high-accuracy papers were
 not members of the 119-row exact-phrase union:
 
-| Date | Result | One-line disposition |
+| Paper date | Result | Current disposition as of 14 August 2026 |
 | --- | --- | --- |
-| 2026-08-06 | [EchoPrompt, 2608.05741](https://arxiv.org/abs/2608.05741) | Retain unreleased watchlist: paper reports 95.56 average AUROC versus same-proxy Binoculars 90.07, but no public code/state and no complete batch/length/hardware timing basis were found. [N4] |
+| 2026-08-06 | [EchoPrompt, 2608.05741](https://arxiv.org/abs/2608.05741) | Retain runnable watchlist: paper reports 95.56 average AUROC versus same-proxy Binoculars 90.07; a later author-overlap paper links a method-faithful Chinese/NLPCC implementation with validation-fitted thresholds, but no exact original-benchmark reproduction or complete batch/length/hardware timing basis. [N4] |
 | 2026-05-22 | [Hidden Human-Like Nature, 2605.23190](https://arxiv.org/abs/2605.23190) | Retain/reject: targeted citation-following evidence lacks a released, frozen detector state and a complete same-run A6000/Binoculars basis. [N8] |
-| 2026-05-13 | [Steer-to-Detect, 2605.12890](https://arxiv.org/abs/2605.12890) | Retain unreleased watchlist: paper reports 98.90 AUROC versus Binoculars 87.70 on one short-text A100 test, but no public state and no 2,048-token batch-8 A6000 fit. [N5] |
+| 2026-05-13 | [Steer-to-Detect, 2605.12890](https://arxiv.org/abs/2605.12890) | Retain bounded unreleased watchlist: paper reports 98.90 AUROC versus Binoculars 87.70 on one short-text A100 test, but the 14 August bounded search found no public implementation or learned state and no 2,048-token batch-8 A6000 fit is established. [N5] |
 
 ## Composite-source result expansion
 

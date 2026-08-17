@@ -147,3 +147,12 @@
 
 # Specific
 data/
+
+# Bound DW1 Qwen IRM comparison evidence.
+!notes/dw1_detector_survey_sources/qwen_irm_agreement_scores.csv
+!notes/dw1_detector_survey_sources/qwen_irm_agreement_held_out_human.svg
+!notes/dw1_detector_survey_sources/qwen_irm_agreement_held_out_generated.svg
+!notes/dw1_detector_survey_sources/qwen_irm_agreement_run_stdout.txt
+!notes/dw1_detector_survey_sources/qwen_irm_agreement_run_stderr.txt
+!notes/dw1_detector_survey_sources/qwen_irm_agreement_run_time.txt
+!notes/dw1_detector_survey_sources/qwen_irm_agreement_gpu_dmon.txt

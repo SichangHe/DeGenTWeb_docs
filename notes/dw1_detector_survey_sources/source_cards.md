@@ -12,9 +12,11 @@ Bracketed `E1` through `E19` references are document identifiers for the embedde
 result cards in `coverage_composite_dispositions.md`; they are not evidence-label
 prefixes. Each such card distinguishes sourced claims from M8 measurements.
 
-The primary PDFs and official snapshots are retained at the discoverable path
-documented in `paper_artifacts.md`, with a complete SHA-256 ledger. Repository
-commits and search routes are in `search_log.md`.
+The closed 8 August primary-PDF and official-snapshot set is retained at the
+discoverable path documented in `paper_artifacts.md`, with a complete SHA-256
+ledger. Later live sources used only for a current-status correction are marked
+as such and are not implied to be part of that closed ledger. Repository commits
+and search routes are in `search_log.md`.
 
 ## 2026-08-08 accuracy-first follow-up
 
@@ -100,6 +102,12 @@ commits and search routes are in `search_log.md`.
 
 - Official source: [arXiv 2608.05741](https://arxiv.org/abs/2608.05741), submitted
   6 August 2026.
+- Later author-linked source: [EVIL-Detect, arXiv
+  2608.10698](https://arxiv.org/abs/2608.10698), whose abstract links the
+  [repository at inspected
+  commit](https://github.com/bbbbhrrrr/evildetect/tree/597bc4f0dd3fc1cc39a3dcd495013bd4f323ffdd).
+  This live 14 August status source postdates and is not part of the closed 8
+  August PDF ledger.
 - Preserved evidence: primary manuscript, Tables 1–2, Figure 7, implementation
   details, and limitations.
 - Sourced method: a fixed assistant-style prefix conditions base and aligned
@@ -112,10 +120,20 @@ commits and search routes are in `search_log.md`.
 - Sourced runtime boundary: Figure 7 plots 0.254 seconds per EchoPrompt text and
   0.157 for Binoculars. Experiments state a V100 32 GB and 1,024-token maximum,
   but the figure does not fully identify proxy, batch, or timing boundary.
-- Exact anchor quote: “depends on the choice of proxy family”.
-- Artifact boundary: no official repository or checkpoint was found in exact-title
-  GitHub search on 8 August 2026. Results are manuscript claims, not a runnable
-  reproduction.
+- Exact anchor quotes: “a training-free detector” and “depends on the choice of
+  proxy family”. The later paper says, “Our code is available at” the linked
+  repository.
+- Artifact status: the exact-title GitHub search on 8 August 2026 found no
+  official repository or checkpoint then. By 14 August, the later author-linked
+  repository's inspected commit contained `scripts/echoprompt/score_votes.py`
+  and section 4 of `docs/reproduction.md`. The scorer computes base/instruction
+  mean-log-likelihood contrasts and fits decision thresholds on validation
+  labels.
+- Scope boundary: this is a method-faithful Chinese/NLPCC implementation, not an
+  exact reproduction of the original DetectRL, RealDet, and RAID results. The
+  training-free method needs no trained EchoPrompt checkpoint, but the released
+  workflow does require validation-fitted thresholds and does not establish the
+  fixed A6000 deployment comparison.
 
 ### N5 — Steer-to-Detect
 
@@ -129,9 +147,12 @@ commits and search routes are in `search_log.md`.
   98.90 AUROC, 97.75 TPR at 1 percent false-positive rate, 0.30 seconds, and
   39 GB peak. Binoculars reports 87.70, 74.70, 0.50 seconds, and 58 GB.
 - Exact anchor quote: “All efficiency profiling is conducted on a single NVIDIA A100”.
-- Artifact boundary: no official code, checkpoint, or detector state was found by
-  exact-title GitHub search on 8 August 2026. A short-text batch-1 39 GB result
-  does not prove batch-8, 2,048-token A6000 fit.
+- Artifact boundary: the exact-title GitHub search on 8 August 2026 found no
+  official code, checkpoint, or detector state then. The 14 August bounded
+  official-source, GitHub repository, and Hugging Face search still found no
+  released implementation or learned state. This is a failure-to-find, not proof
+  of absence. A short-text batch-1 39 GB result does not prove batch-8,
+  2,048-token A6000 fit.
 
 ### N6 — RepreGuard
 
@@ -863,6 +884,52 @@ high claims and individually rejected, leaving the recommendation unchanged.
 - Boundary: public executable pair, but not the paper's best gated Llama pair;
   local corpus is unstratified and historical comparators may differ in software
   and truncation.
+
+### M9 — Bound Qwen IRM agreement follow-up
+
+- Durable design/result: [result note](qwen_irm_agreement_results.md),
+  [artifact hashes](qwen_irm_agreement_artifacts.sha256), schema-v2
+  [run manifest](qwen_irm_agreement_score_manifest.json), immutable
+  [completion seal](qwen_irm_agreement_completion_manifest.json), complete
+  [score sidecar](qwen_irm_agreement_scores.csv), machine-readable
+  [statistics](qwen_irm_agreement_stats.json), and held-out
+  [human](qwen_irm_agreement_held_out_human.svg)/[generated](qwen_irm_agreement_held_out_generated.svg)
+  agreement diagrams.
+- Reproducibility anchors: the source CSV is
+  `c635d2b98583f9f9bcf3917f7ecb18469185550ab66d46ff60021a977195e786`;
+  the ordered 4,907-text identity is
+  `4acd86ebcea12aceb129b88566318fcb32e62f8cd49350525b57d8edbf790612`;
+  and the sealed score CSV is
+  `2e3556fb41397ad61700da0325fcd9d905ab3073a86a6be590e40cdb196beb10`.
+- Measured full-run boundary: pinned public Qwen2-0.5B base/instruct revisions,
+  float32, batch 8, maximum 2,048 tokens, two RTX A6000 cards, and 4,907 texts.
+  End-to-end command wall time was 7 minutes 51.43 seconds. One-second device
+  monitoring observed peak framebuffer use of 35,309/35,307 MiB. This broad
+  boundary includes two full text-hash passes, model/tokenizer load,
+  tokenization, transfer, score checkpoints, and completion sealing; M4 remains
+  the controlled inference-only Binoculars timing comparator.
+- Established row-level result: AUROC is 0.974840 IRM, 0.977899 stored
+  Binoculars, and 0.968952 stored FastDetectGPT. At independently calibrated
+  one-percent human FPR, evaluation FPR/TPR is 0.00648/0.72487 IRM,
+  0.01166/0.66080 Binoculars, 0.01037/0.75503 FastDetectGPT, and
+  0.00691/0.74497 for the at-least-two-of-three detector-consensus flag. At a
+  separate post-hoc held-out ROC point capped at one-percent human FPR, TPR is
+  0.77324 IRM, 0.75251 FastDetectGPT, and 0.58606 Binoculars. Evaluation labels
+  select these descriptive thresholds; they are never used for deployment,
+  votes, or Venn regions.
+- Content audit: 16 raw-text hashes cross calibration/evaluation, covering 77
+  calibration and 137 evaluation rows; evaluation has 283 content-duplicate
+  rows. The deterministic content-unique/disjoint sensitivity recalibrates on
+  938 unique humans and evaluates 2,159 human/1,449 generated texts. AUROC is
+  0.983949 IRM versus 0.981654 Binoculars and 0.974616 FastDetectGPT; FPR/TPR is
+  0.00695/0.74672 IRM versus 0.00973/0.64803 Binoculars. At the same post-hoc
+  0.00973 evaluation FPR, TPR is 0.80883 IRM, 0.77433 FastDetectGPT, and
+  0.64803 Binoculars.
+- Boundary: the row-weighted and content-unique AUROC orderings differ, no
+  paired significance claim is made, the corpus is not a new stratified
+  current-generator pool, and stored comparators are historical. IRM is now a
+  reproducible strong comparison and agreement-analysis member, not a
+  demonstrated production replacement.
 
 ### M5 — Local SV-Detect feature-path screen
 

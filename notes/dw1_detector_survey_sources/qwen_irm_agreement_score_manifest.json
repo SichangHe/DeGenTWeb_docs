@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "source_sha256": "c635d2b98583f9f9bcf3917f7ecb18469185550ab66d46ff60021a977195e786",
+  "source_rows": 8022,
+  "eligible_rows": 4907,
+  "eligible_text_inputs_sha256": "4acd86ebcea12aceb129b88566318fcb32e62f8cd49350525b57d8edbf790612",
+  "scored_splits": [
+    "calibration_human",
+    "evaluation"
+  ],
+  "base_model": "Qwen/Qwen2-0.5B",
+  "base_revision": "91d2aff3f957f99e4c74c962f2f408dcc88a18d8",
+  "base_device": "cuda:1",
+  "instruction_model": "Qwen/Qwen2-0.5B-Instruct",
+  "instruction_revision": "c540970f9e29518b1d8f06ab8b24cba66ad77b6d",
+  "instruction_device": "cuda:0",
+  "dtype": "float32",
+  "max_tokens": 2048,
+  "batch_size": 8,
+  "primary_score": "sum_score = instruction sequence log likelihood - base sequence log likelihood (paper Eq. 5; higher means more AI-like)",
+  "sensitivity_score": "mean_score = sum_score / token_count; not used for voting",
+  "sidecar_columns": [
+    "row_index",
+    "token_count",
+    "sum_score",
+    "mean_score"
+  ]
+}

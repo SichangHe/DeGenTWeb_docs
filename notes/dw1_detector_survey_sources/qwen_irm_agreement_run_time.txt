@@ -1,0 +1,23 @@
+	Command being timed: "env HF_HOME=/tmp/dw1-qwen-irm-models PYTHONPATH=src:. .venv/bin/python imc2026stats/score_qwen_irm_agreement.py --instruction-device cuda:0 --base-device cuda:1 --local-files-only"
+	User time (seconds): 845.54
+	System time (seconds): 52.13
+	Percent of CPU this job got: 190%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:51.43
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2071316
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 11944
+	Minor (reclaiming a frame) page faults: 492729
+	Voluntary context switches: 652810
+	Involuntary context switches: 47197
+	Swaps: 0
+	File system inputs: 4780288
+	File system outputs: 5504
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
