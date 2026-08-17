@@ -73,10 +73,12 @@ the runner records that human confirmation, clears the in-flight marker, and
 retries it. If its outcome is uncertain or it completed, leave the checkpoint
 unchanged and obtain a new reviewed handoff rather than risking a duplicate.
 
-Each manifest line must contain `site_key`, `category`, `name`, `description`,
-and `posts`; every post has `title` and `description`. The same frozen manifest
-supplies both the split and audit site list. Audit input must have unique page
-identities and only manifest site keys.
+Each manifest line must contain `site_key`, `category`, `generator`, `name`,
+`description`, and `posts`; every post has `title` and `description`. For the
+Wix or B12 runner, `generator` must equal that provider; a fixed-HTML arm is
+not run by this browser command. The same frozen manifest supplies both the
+split and audit site list. Audit input must have unique page identities and
+only manifest site keys.
 
 The pre-runner reviewed JSON-array manifest is also accepted. Give its matching
 schema-v1 state file through `--legacy-state`; the runner accepts only a pending
@@ -95,17 +97,48 @@ uv run python -m degentweb.agent.gen_b12 \
   --output-dir data/generation-checkpoints
 ```
 
-The page loop stops only after 15 candidate pages. If the input runs out of
-posts, or the provider cannot complete the path, the checkpoint is
-`unclassifiable` or `needs_intervention` respectively. Crawl and extract main
-text before calling `audit_extracted_page`; the audit only rejects pages with
-fewer than 50 words or obvious prompt/AI meta-text. A site with fewer than 15
-remaining pages is unclassifiable.
+The page loop consumes every frozen post specification; provide at least 20
+posts so a site has replacement pages beyond the 15-page eligibility minimum.
+If the input runs out, the checkpoint is `needs_more_pages`; an unknown provider
+state is `needs_intervention`. Crawl and extract main text before calling
+`audit_extracted_page`; the audit only rejects pages with fewer than 50 words
+or obvious prompt/AI meta-text. A site with fewer than 15 remaining pages is
+`needs_more_pages`, so append post specifications to the frozen manifest and
+rerun the same draft before final scoring. The runner permits only an
+append-only post extension and records that continuation in its checkpoint.
 
-Use `split_by_category` to freeze the conventional random train/test split
-within every category. It rejects duplicate site keys to prevent train/test
-leakage and categories with fewer than two sites. Store that output with the
-extraction/audit artifacts.
+## Positive baseline size and split
+
+The site is the sampling unit. A generated positive is not paired with a
+historic negative: a source site's one-sentence summary may seed a generation,
+but no one-to-one matched-control design is used. Stop only after the site has
+15 scoreable extracted pages; replace failed sites in the same stratum.
+
+Start with 1,000 complete generated-positive sites: 800 train and 200 test.
+500 (400/100) is the minimum credible first result; 2,000 (1,600/400) is the
+stretch target if generation is inexpensive. Ten thousand positives are not
+required. At the conservative p=0.5 true-positive-rate or false-negative-rate
+point, a test set of 100, 200, or 400 sites has approximately 5, 3.5, or 2.5
+percentage-point binomial standard error, respectively. More sites are useful
+chiefly when they add generators or site categories, not merely repeated pages
+from the same generator.
+
+Use `split_by_category` to freeze one simple random site split within every
+`(category, generator)` stratum. The manifest must record `generator` (for
+example `wix`, `b12`, or `fixed-html:mixtral`) as well as `category`; the
+splitter keeps every stratum in both sets, rejects duplicate site keys, and
+rejects strata with fewer than two sites. Store the frozen manifest, seed,
+split, extraction, and audit artifacts together.
+
+Use a 1:4 test:train split (20% test) for the 1,000-site target and whenever
+each reported stratum still has at least 20 complete sites, giving about four
+test sites per stratum. With 5--19 sites in a stratum, preserve the same 20%
+target but round to at least one test site and report that stratum descriptively
+instead of as a precise per-generator estimate. With 2--4 sites, retain one
+test site only for coverage; do not make a per-stratum accuracy claim. A
+one-site stratum must be expanded or omitted from the supervised split.
+
+This policy does not implement or invoke Bedrock generation.
 
 ```sh
 uv run python -m degentweb.agent.generation_dataset split \
