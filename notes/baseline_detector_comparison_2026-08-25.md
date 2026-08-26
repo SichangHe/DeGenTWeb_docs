@@ -102,6 +102,7 @@ Defer pending explicit access or design decisions:
   low-cost intermediate control is current text proven unchanged from a
   pre-ChatGPT archive snapshot
 
-Wix-to-B12/B12-to-Wix transfer and body swapping address the immediate template
-concern, but the former remains builder/site-type-confounded and neither replaces
-a later third-builder external-validity test.
+Wix-to-B12/B12-to-Wix transfer remains builder/site-type-confounded. Body
+swapping is separate: it replaces the bodies of existing negative samples with
+LLM-generated text. The resulting synthetic pages are out-of-distribution (OOD)
+stress-test samples, not evidence about Wix/B12 or in-distribution accuracy.

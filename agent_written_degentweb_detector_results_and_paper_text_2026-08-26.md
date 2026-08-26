@@ -3,8 +3,8 @@
 > **Authorship:** This synthesis was written by an AI agent. The linked results
 > and protocols are the sources of record.
 
-This note integrates the reviewed learning-curve, body-swap, duplicate-threshold,
-and detector-comparison results. It separates measured results from planned or
+This note integrates the reviewed learning-curve, duplicate-threshold, and
+detector-comparison results. It separates measured results from planned or
 blocked work.
 
 ## Supported results
@@ -36,20 +36,6 @@ and [plot](https://github.com/SichangHe/DeGenTWeb/blob/15907e96946f4d12dece58189
 plus the page manifest, nested order, repeated-run table, and summary are bound
 to DeGenTWeb commit `15907e9`. The corresponding Methods change is bound to
 paper commit `0c3c91d`.
-
-### Body-swap control
-
-The reviewed control contains 24 current-original and reciprocal-swap page
-records: one trusted Wix-human pair and one trusted B12-human pair, with three
-pages per condition. Every record meets a 200-token minimum and was freshly
-scored through one recorded scorer boundary.
-
-All 24 page predictions match the text donor's label, no matched original/swap
-pair crosses the page threshold, and descriptive median score differences range
-from -0.023 to 0.000. This is a bounded page-level end-to-end
-extraction-plus-detector control. It does not establish template invariance,
-shell causality, site-level performance, or a population effect. See
-[the body-swap protocol and limits](template_control.md).
 
 ### Detector and duplicate-threshold comparison
 
@@ -110,12 +96,10 @@ replace the explicit limitations.
 
 ### Add to controls and limitations
 
-> In a bounded body-swap control spanning one Wix-human pair and one B12-human
-> pair, all 24 freshly scored page predictions followed the text donor's label,
-> and no matched original/swap crossed the page threshold. Because this control
-> covers only two site pairs and end-to-end extraction may include shell text,
-> it does not establish template invariance, shell causality, or site-level
-> generalization. Separate directional curves test a balanced 50-site personal
-> cohort and a balanced 54-site company cohort; those results confound builder
-> and site type. Pangram and rewrite-based alternatives remain unevaluated
-> locally; their cost, access, method, and cohort gates are reported separately.
+> Separate directional curves test a balanced 50-site personal cohort and a
+> balanced 54-site company cohort; those results confound builder and site type.
+> Body-swapped negatives, whose bodies are replaced with LLM-generated text,
+> are synthetic out-of-distribution samples. Any results on them are OOD stress
+> tests, not in-distribution accuracy or evidence about Wix or B12. Pangram and
+> rewrite-based alternatives remain unevaluated locally; their cost, access,
+> method, and cohort gates are reported separately.
