@@ -1,0 +1,26 @@
+# Ubiquitous Language
+
+- `negative sample`: one sample with class label `0`
+- `natural negative sample`: one eligible, untransformed human-class page
+    - counts toward the 10,000-sample target
+- `body-swapped negative`: one transformed negative sample
+    - OOD and additional to the 10,000 natural negatives
+- `negative swap`: a human body placed in its matched generated shell
+    - label `0`
+- `positive swap`: a generated body placed in its matched human shell
+    - label `1`
+- `site family`: one human source and matched generated site
+    - includes redirects, aliases, mirrors, and derivatives
+    - use as the indivisible unit for partitioning
+- `development cohort`: site families available before final evaluation
+    - contains disjoint fit and validation cohorts
+- `fit cohort`: development families used to estimate model parameters
+- `validation cohort`: development families used to choose features, hyperparameters, and thresholds
+    - never used to estimate final model parameters
+- `evaluation-reserved cohort`: site families excluded from fitting and model selection
+- `same-generator test`: reserved sites from the trained generator and matching human type
+- `natural OOD test`: reserved sites from the other generator and human type, without transformation
+- `body-swap OOD test`: transformed sites combining bodies and site shells
+    - always OOD, regardless of component provenance
+- `primary mixed-domain holdout`: the separate 10-AI-site and 10-human-site test
+    - excluded from expanded baseline targets and splits

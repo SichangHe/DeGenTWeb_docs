@@ -58,6 +58,10 @@
 
 ## Training/test dataset 144x
 
+The frozen protocol for the expanded 400-AI-site and 10,000-human-page
+evaluation is in [`expanded_baseline_cohort_protocol.md`](expanded_baseline_cohort_protocol.md).
+It is separate from the historical 144-site dataset below.
+
 - company website dataset 60x: 30x Wix vs. 30x Russell 2000
 - personal website dataset 60x: 30x B12 vs. 30x IndieWeb Wiki
 - other website dataset 24x: 4x Wix + 4x B12 + 2x self-claim generated vs.
