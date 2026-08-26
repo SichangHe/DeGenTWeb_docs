@@ -3,12 +3,11 @@
 - `negative sample`: one sample with class label `0`
 - `natural negative sample`: one eligible, untransformed human-class page
     - counts toward the 10,000-sample target
-- `body-swapped negative`: one transformed negative sample
+- `body-swapped negative`: one OOD derivative of a natural negative sample
+    - starts from a human negative page
+    - replaces its body with LLM-generated text and preserves its human shell
     - OOD and additional to the 10,000 natural negatives
-- `negative swap`: a human body placed in its matched generated shell
-    - label `0`
-- `positive swap`: a generated body placed in its matched human shell
-    - label `1`
+    - `negative` describes its source; the derivative reference label is `1`
 - `site family`: one human source and matched generated site
     - includes redirects, aliases, mirrors, and derivatives
     - use as the indivisible unit for partitioning
@@ -20,7 +19,7 @@
 - `evaluation-reserved cohort`: site families excluded from fitting and model selection
 - `same-generator test`: reserved sites from the trained generator and matching human type
 - `natural OOD test`: reserved sites from the other generator and human type, without transformation
-- `body-swap OOD test`: transformed sites combining bodies and site shells
-    - always OOD, regardless of component provenance
+- `body-swap OOD test`: body-swapped negative derivatives evaluated only as OOD
+    - excludes reciprocal swaps and human bodies in generated shells
 - `primary mixed-domain holdout`: the separate 10-AI-site and 10-human-site test
     - excluded from expanded baseline targets and splits

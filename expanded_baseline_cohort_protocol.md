@@ -1,6 +1,10 @@
 # Expanded Baseline Cohort Protocol
 
-Status: frozen before model training or evaluation (`expanded-baseline-v1`).
+Status: corrected protocol specification (`expanded-baseline-v2`). No cohort,
+body-swap output, fitted model, or result is claimed here.
+
+This version supersedes the withdrawn `expanded-baseline-v1` reciprocal-swap
+design, which did not implement the intended negative-sample transformation.
 
 This protocol covers the source-1067 baseline expansion. The separate primary
 mixed-domain holdout of 10 AI-generated and 10 human sites is outside this
@@ -22,8 +26,9 @@ executable; they were not independently observed facts:
 - each human or generated site: 25 eligible pages
 - each type: 40 development sites and 160 evaluation-reserved sites
 - each 40-site development cohort: 32 fit sites and 8 validation sites
-- each generator family: 160 negative and 160 positive body-swap sites
-    - 25 pages per site, or 4,000 pages per label
+- each human type: attempt 160 body-swapped negative sites
+    - 25 pages per site, or 4,000 attempted transformed OOD pages
+    - usable totals may be lower and must be reported as attrition
 
 Each 200-site target includes its 160 evaluation-reserved sites. The 5,000-page
 target likewise includes 1,000 development and 4,000 evaluation-reserved pages.
@@ -58,35 +63,37 @@ Freeze sites before selecting pages or running experiments.
    Record its content digest, retrieval time, source identity, canonical IDs,
    and generator-to-human-source mapping. This immutable snapshot is the only
    candidate universe for this protocol version.
-3. Build two lists of matched site families. Each Wix/company family contains
+3. Freeze the body-swap prompt and generation configuration specified below,
+   but do not generate text. This prevents cohort outcomes from influencing the
+   configuration and generation outcomes from influencing natural cohorts.
+4. Build two lists of matched site families. Each Wix/company family contains
    one Wix site and its company-human source; each B12/personal family contains
    one B12 site and its personal-human source. Redirects, aliases, mirrors, and
    derivatives retain the same canonical family ID.
-4. Apply one frozen page-eligibility pipeline to human and generated sites. For
-   every candidate site with at least 25 passing pages, order its pages by the
+5. Apply one frozen page-eligibility pipeline to natural human and generated
+   sites. For every candidate site with at least 25 passing pages, order its
+   pages by the
    128-bit BLAKE2b digest of the UTF-8 canonical JSON array
-   `["expanded-baseline-v1", <canonical-site-id>, <canonical-page-id>]` and
-   provisionally retain the first 25. Before family selection, rank-pair those
-   provisional pages and run the frozen validation for all 50 reciprocal swap
-   outputs defined below. A family is eligible only if both sites have 25
-   provisional pages and every swap passes. The cohort manifest must record the
-   Git commit and code path implementing every extraction and filter step, the
-   exact serialized configuration and its SHA-256 digest, the dependency-lock
-   digest, and all exclusion reasons. The prose overview is in
+   `["expanded-baseline-v2", <canonical-site-id>, <canonical-page-id>]` and
+   provisionally retain the first 25. Body-swap generation and validation are
+   not natural-cohort eligibility conditions. A family is eligible when both
+   natural sites have 25 provisional pages. The cohort manifest
+   must record the Git commit and code path implementing every extraction and
+   filter step, the exact serialized configuration and its SHA-256 digest, the
+   dependency-lock digest, and all exclusion reasons. The prose overview is in
    [`filter_non_article.md`](filter_non_article.md).
-5. Order every eligible family by the 128-bit BLAKE2b digest of the UTF-8
+6. Order every eligible family by the 128-bit BLAKE2b digest of the UTF-8
    canonical JSON array
-   `["expanded-baseline-v1", <direction>, <canonical-family-id>]`, where
+   `["expanded-baseline-v2", <direction>, <canonical-family-id>]`, where
    `<direction>` is exactly `wix-company` or `b12-personal`. Break a digest tie
    by canonical family ID. Select the first 200; do not inspect outcomes or
    hand-pick among eligible families. Assign both sites in the first 40
    selected families to development and both sites in the remaining 160 to
    evaluation-reserved. Within development, assign the first 32 to fitting and
    the next 8 to validation.
-6. Promote each selected site's 25 provisional pages into the frozen page
-   manifest. Every page, reciprocal swap, and derivative inherits its site
-   family's partition. Discard provisional artifacts for unselected families.
-7. Persist the candidate, cohort, and page manifests with canonical IDs,
+7. Promote each selected natural site's 25 provisional pages into the frozen
+   page manifest. Discard provisional artifacts for unselected families.
+8. Persist the candidate, cohort, and page manifests with canonical IDs,
    exclusion reasons, digests, labels, partitions, and content snapshot IDs.
    Serialize each manifest with RFC 8785 JSON canonicalization and record its
    SHA-256 digest. Do not redraw a cohort after seeing results.
@@ -131,7 +138,9 @@ The scoring unit is one site. Score each of its 25 frozen pages, then represent
 the site by the nine page-score percentiles from 10% through 90%. The site model
 emits one binary prediction from that vector. Report site-level confusion
 counts and metrics separately for same-generator, natural-OOD, and
-body-swap-OOD cohorts; do not pool them into one headline metric.
+body-swap-OOD cohorts; do not pool them into one headline metric. Body-swap-OOD
+metrics use reference label `1` because the evaluated main-body text is LLM-
+generated; they remain OOD metrics, not in-distribution accuracy.
 
 The feature vector and selection rule are frozen as follows:
 
@@ -154,32 +163,100 @@ The feature vector and selection rule are frozen as follows:
 No evaluation-reserved site may be used for fitting, threshold selection,
 feature selection, prompt revision, early stopping, or model selection.
 
-## Body swaps
+## Body-swapped negative OOD cohort
 
-Every body swap is OOD, regardless of which generator, human source, body, or
-site shell supplied its components. Body swaps are never training data, never
-part of a same-generator test, and never part of the 400 generated-site or
-10,000 human-negative targets.
+A body-swapped negative starts from an eligible human negative page. Replace
+that page's main body with LLM-generated text while preserving its human shell.
+The transformed derivative is OOD. It is never training data, never part of a
+same-generator test, and never part of the 400 generated-site or 10,000 natural-
+negative targets. Do not place a human body in a generated shell, construct a
+reciprocal orientation, or define this cohort by Wix or B12 provenance.
 
-The body-swap population and labels are protocol decisions, not source-1067
-facts. For each of the 160 evaluation-reserved families in each direction,
-pair the human and generated pages by their frozen page-selection rank from 1
-through 25. Build exactly two reciprocal swap sites:
+For each frozen page of every selected evaluation-reserved human site, submit
+its frozen title and main body to the text-generation configuration. The exact
+prompt template is:
 
-- negative swap, label `0`: human page bodies in the matched generated shell
-- positive swap, label `1`: generated page bodies in the matched human shell
+```text
+Rewrite the source text below into a standalone web-page main body. Preserve
+its factual claims and language. Return only the replacement body text, with no
+commentary.
 
-This yields, separately for Wix/company and B12/personal, 160 negative swap
-sites and 160 positive swap sites, with 4,000 pages per label. Do not construct
-cross-family swaps or use development components. A compatible swap must
-preserve the donor's frozen main-body bytes and replace the recipient's main
-body without retaining recipient-body text; reject the entire candidate family
-if any of its 50 reciprocal pages cannot satisfy those checks.
+Title: {{title}}
+Source text:
+{{main_body}}
+```
 
-Before cohort selection, freeze the swap implementation's Git commit, code
-path, serialized configuration, configuration SHA-256 digest, and dependency-
-lock digest. The body-swap manifest records every direction, family, page rank,
-donor page and body hash, shell page and shell hash, output page hash, label,
-and validation result. Canonicalize and hash it by the same rule as the cohort
-manifests. Apply the same 25-page site aggregation and report each generator
-family and swap orientation separately.
+Before natural-family selection, freeze the provider, immutable model
+identifier, model revision when the provider exposes one, all request
+parameters including any supported seed, a maximum of three attempts per page,
+prompt bytes, implementation Git commit and code path, serialized configuration
+and its SHA-256 digest, and dependency-lock digest. Record the complete request
+and response bytes, provider request ID, attempt number, and retrieval time. If
+the provider cannot identify the served model sufficiently for audit, report
+that limitation; do not silently substitute a model. A remote provider may not
+reproduce identical bytes, so accepted response bytes are frozen inputs to all
+later steps.
+
+Do not generate until natural cohorts, both directional models, and both
+thresholds are frozen. Then generate only the 25 frozen pages of each selected
+evaluation-reserved human site, in ascending site-selection and page-selection
+rank. No development page is a generation input.
+
+Construct each attempt canonically:
+
+1. Decode the frozen source response with the frozen extractor's recorded
+   charset decision. Parse and serialize it with the frozen HTML implementation
+   as UTF-8. Record the implementation version, decoded-text hash, serialized-
+   HTML hash, selected main-body element's selector, and its unique serialized
+   inner-byte range. A missing, non-unique, or non-contiguous range fails the
+   attempt.
+2. Normalize the LLM response's line endings to LF and Unicode to NFC. Split on
+   one or more blank lines, discard empty parts, HTML-escape `&`, `<`, and `>`
+   in each part, wrap each part in `<p>` and `</p>`, and join paragraphs with a
+   single LF. The resulting UTF-8 bytes are the replacement fragment.
+3. Replace exactly the selected element's serialized inner-byte range. Every
+   other serialized HTML byte remains unchanged. Preserve the effective URL and
+   response headers, except remove `Content-Encoding` and `Transfer-Encoding`,
+   set `Content-Type` to `text/html; charset=utf-8`, and recompute
+   `Content-Length` from the constructed bytes. Record original and derivative
+   URL/header/HTML bytes and their SHA-256 digests.
+4. Run the complete frozen page-eligibility pipeline on the constructed full
+   derivative with that URL and those headers. For duplicate comparison, treat
+   the 25 derivatives as one synthetic site ordered by frozen page-selection
+   rank; rank `r` is compared only with accepted derivatives at ranks below
+   `r`, in ascending rank. Record the ordered comparison IDs, extracted-text
+   hash, predicate results, and rejection reason for every attempt.
+
+Accept the first passing attempt among at most three attempts for a page. If a
+page has no passing attempt, record it as OOD attrition and continue attempting
+later ranks. Do not redraw a family, substitute a page or site, change any
+natural cohort, or revise the prompt, model, threshold, or generation settings.
+These are protocol instructions, not a claim that generation or validation has
+occurred.
+
+Create one derivative page per accepted attempt. Its reference label is `1`
+because its evaluated body is the recorded LLM response; `negative` describes
+the natural source, not the derivative label. The derivative ID is the 128-bit
+BLAKE2b digest of the UTF-8 canonical JSON array
+`["expanded-baseline-v2", "body-swapped-negative",
+<canonical-human-page-id>, <generation-response-sha256>]`. It inherits the
+source site's partition but cannot replace or modify the source identity.
+
+Attempt derivatives for the 160 evaluation-reserved human sites of each type:
+4,000 pages per human type and 8,000 total. A site enters site-level scoring
+only if all 25 derivatives pass; otherwise report its accepted-page count and
+exclude it from nine-percentile aggregation. The body-swap manifest records the
+source site and page IDs, page rank, partition, reference label, every original
+and constructed artifact named above, generation request and response hashes,
+provider receipt, attempt number, output hash, derivative ID, duplicate-
+comparison order, every predicate result, and page/site attrition reason.
+Canonicalize and hash it by the same rule as the cohort manifests. Report both
+attempted and accepted page and complete-site counts; 4,000 pages and 160 sites
+per human type are attempted maxima, not claimed completed totals.
+
+Apply each frozen directional model and its already selected threshold to both
+human-shell OOD cohorts. Report every model/cohort combination separately as an
+OOD stress test. Because the transformation changes a natural negative's body
+to generated text, `negative` describes the source sample, not a class label of
+`0`; the derivative's reference label is `1`. Do not report these derivatives
+as natural negatives or use them to estimate in-distribution accuracy.
