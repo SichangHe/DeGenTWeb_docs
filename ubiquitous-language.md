@@ -17,9 +17,10 @@
 - `validation cohort`: development families used to choose features, hyperparameters, and thresholds
     - never used to estimate final model parameters
 - `evaluation-reserved cohort`: site families excluded from fitting and model selection
-- `same-generator test`: reserved sites from the trained generator and matching human type
-- `natural OOD test`: reserved sites from the other generator and human type, without transformation
+- `same-generator test`: reserved sites from the trained generator and its matched human-source cohort
+- `natural OOD test`: reserved sites from the other generator and its matched human-source cohort, without transformation
 - `body-swap OOD test`: body-swapped negative derivatives evaluated only as OOD
     - excludes reciprocal swaps and human bodies in generated shells
+    - its required sample count remains under debate
 - `primary mixed-domain holdout`: the separate 10-AI-site and 10-human-site test
     - excluded from expanded baseline targets and splits

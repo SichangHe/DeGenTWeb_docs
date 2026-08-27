@@ -1,10 +1,14 @@
 # Expanded Baseline Cohort Protocol
 
-Status: corrected protocol specification (`expanded-baseline-v2`). No cohort,
-body-swap output, fitted model, or result is claimed here.
+Status: corrected draft protocol (`expanded-baseline-v3`). No cohort, body-swap
+output, fitted model, or result is claimed here. The body-swap OOD sample count
+remains under debate. This version therefore does not authorize body-swap
+generation; a later protocol version must freeze that count and its source-
+selection rule before generation.
 
 This version supersedes the withdrawn `expanded-baseline-v1` reciprocal-swap
-design, which did not implement the intended negative-sample transformation.
+design and the `expanded-baseline-v2` category split and fixed OOD counts. It
+retains the intended negative-sample transformation.
 
 This protocol covers the source-1067 baseline expansion. The separate primary
 mixed-domain holdout of 10 AI-generated and 10 human sites is outside this
@@ -16,43 +20,47 @@ any target below.
 Source-1067 requires 200 Wix and 200 B12 sites, approximately 10,000 human
 negative samples, training on only one generator at a time, tests on unseen
 samples from that generator, OOD tests, and OOD treatment of body swaps. It
-also requires most sites of each type to be held out.
+also requires most sites of each cohort to be held out.
 
-The following numbers are protocol decisions needed to make those requirements
-executable; they were not independently observed facts:
+The following natural-cohort numbers are protocol decisions needed to make
+those requirements executable; they were not independently observed facts:
 
-- company-human target: 200 sites and 5,000 eligible pages
-- personal-human target: 200 sites and 5,000 eligible pages
+- Wix-generated target: 200 sites and 5,000 eligible pages
+- Wix-matched human target: 200 sites and 5,000 eligible pages
+- B12-generated target: 200 sites and 5,000 eligible pages
+- B12-matched human target: 200 sites and 5,000 eligible pages
 - each human or generated site: 25 eligible pages
-- each type: 40 development sites and 160 evaluation-reserved sites
+- each cohort: 40 development sites and 160 evaluation-reserved sites
 - each 40-site development cohort: 32 fit sites and 8 validation sites
-- each human type: attempt 160 body-swapped negative sites
-    - 25 pages per site, or 4,000 attempted transformed OOD pages
-    - usable totals may be lower and must be reported as attrition
+
+No required body-swap OOD page or site count is settled. Do not infer one from
+the natural-cohort sizes or partitions.
 
 Each 200-site target includes its 160 evaluation-reserved sites. The 5,000-page
-target likewise includes 1,000 development and 4,000 evaluation-reserved pages.
-Neither target includes any site or page from the primary mixed-domain holdout.
+target likewise includes 1,000 development and 4,000 natural evaluation-
+reserved pages. Neither target includes any site or page from the primary
+mixed-domain holdout.
 
 The resulting frozen inventory is:
 
-- Wix/company: 200 sites and 5,000 generated pages
+- Wix-generated: 200 sites and 5,000 generated pages
     - 40 development sites = 32 fit + 8 validation
     - 160 evaluation-reserved sites
-- company-human: 200 sites and 5,000 natural negative pages
+- Wix-matched human: 200 sites and 5,000 natural negative pages
     - 40 development sites = 32 fit + 8 validation
     - 160 evaluation-reserved sites
-- B12/personal: 200 sites and 5,000 generated pages
+- B12-generated: 200 sites and 5,000 generated pages
     - 40 development sites = 32 fit + 8 validation
     - 160 evaluation-reserved sites
-- personal-human: 200 sites and 5,000 natural negative pages
+- B12-matched human: 200 sites and 5,000 natural negative pages
     - 40 development sites = 32 fit + 8 validation
     - 160 evaluation-reserved sites
 
 For this protocol, the 10,000-negative-sample target means natural human class-0
-pages: 5,000 company-human plus 5,000 personal-human. This interpretation is a
-protocol decision because source-1067 does not define the negative-sample unit.
-Body-swapped negatives are additional OOD samples and do not count toward it.
+pages: 5,000 matched to Wix sites plus 5,000 matched to B12 sites. This
+interpretation is a protocol decision because source-1067 does not define the
+negative-sample unit. Body-swapped negatives are additional OOD samples and do
+not count toward it.
 
 ## Freeze procedure
 
@@ -61,20 +69,20 @@ Freeze sites before selecting pages or running experiments.
 1. Remove every primary mixed-domain holdout site and all of its derivatives.
 2. Snapshot the complete candidate inventory before applying eligibility rules.
    Record its content digest, retrieval time, source identity, canonical IDs,
-   and generator-to-human-source mapping. This immutable snapshot is the only
+   and generated-to-human-source mapping. This immutable snapshot is the only
    candidate universe for this protocol version.
 3. Freeze the body-swap prompt and generation configuration specified below,
    but do not generate text. This prevents cohort outcomes from influencing the
    configuration and generation outcomes from influencing natural cohorts.
-4. Build two lists of matched site families. Each Wix/company family contains
-   one Wix site and its company-human source; each B12/personal family contains
-   one B12 site and its personal-human source. Redirects, aliases, mirrors, and
-   derivatives retain the same canonical family ID.
+4. Build two lists of matched site families. Each Wix family contains one Wix
+   site and its matched human source; each B12 family contains one B12 site and
+   its matched human source. Redirects, aliases, mirrors, and derivatives
+   retain the same canonical family ID.
 5. Apply one frozen page-eligibility pipeline to natural human and generated
    sites. For every candidate site with at least 25 passing pages, order its
    pages by the
    128-bit BLAKE2b digest of the UTF-8 canonical JSON array
-   `["expanded-baseline-v2", <canonical-site-id>, <canonical-page-id>]` and
+   `["expanded-baseline-v3", <canonical-site-id>, <canonical-page-id>]` and
    provisionally retain the first 25. Body-swap generation and validation are
    not natural-cohort eligibility conditions. A family is eligible when both
    natural sites have 25 provisional pages. The cohort manifest
@@ -84,8 +92,8 @@ Freeze sites before selecting pages or running experiments.
    [`filter_non_article.md`](filter_non_article.md).
 6. Order every eligible family by the 128-bit BLAKE2b digest of the UTF-8
    canonical JSON array
-   `["expanded-baseline-v2", <direction>, <canonical-family-id>]`, where
-   `<direction>` is exactly `wix-company` or `b12-personal`. Break a digest tie
+   `["expanded-baseline-v3", <direction>, <canonical-family-id>]`, where
+   `<direction>` is exactly `wix` or `b12`. Break a digest tie
    by canonical family ID. Select the first 200; do not inspect outcomes or
    hand-pick among eligible families. Assign both sites in the first 40
    selected families to development and both sites in the remaining 160 to
@@ -99,7 +107,7 @@ Freeze sites before selecting pages or running experiments.
    SHA-256 digest. Do not redraw a cohort after seeing results.
 
 If an inventory cannot meet a frozen target, report the shortfall. Do not move
-primary-holdout sites, substitute across types, or silently change the split.
+primary-holdout sites, substitute across cohorts, or silently change the split.
 Any amendment needs a new protocol version and a rationale recorded before
 affected results are computed.
 
@@ -108,31 +116,33 @@ affected results are computed.
 The split is global, but `same-generator` and `OOD` are relative to the model
 being evaluated.
 
-The natural OOD tests intentionally change generator and site type together.
-They measure the requested Wix/company-to-B12/personal shift and its reverse;
-they do not isolate generator shift from domain shift.
+The natural OOD tests change both the generated-site cohort and its matched
+human-source cohort. They measure the Wix-to-B12 shift and its reverse; they do
+not isolate which cohort property caused a difference.
 
-### Wix/company direction
+### Wix direction
 
-- development: 40 Wix/company and 40 company-human sites
+- development: 40 Wix-generated and 40 Wix-matched human sites
     - fitting: the first 32 matched families
     - validation: the next 8 matched families
-- same-generator test: the 160 evaluation-reserved Wix/company sites against
-  the 160 evaluation-reserved company-human sites
-- natural OOD test: the 160 evaluation-reserved B12/personal sites against the
-  160 evaluation-reserved personal-human sites
-- transformed OOD test: every body-swap cohort, reported separately
+- same-generator test: the 160 evaluation-reserved Wix-generated sites against
+  the 160 evaluation-reserved Wix-matched human sites
+- natural OOD test: the 160 evaluation-reserved B12-generated sites against the
+  160 evaluation-reserved B12-matched human sites
+- transformed OOD test: each body-swap cohort frozen by the later protocol
+  version, reported separately
 
-### B12/personal direction
+### B12 direction
 
-- development: 40 B12/personal and 40 personal-human sites
+- development: 40 B12-generated and 40 B12-matched human sites
     - fitting: the first 32 matched families
     - validation: the next 8 matched families
-- same-generator test: the 160 evaluation-reserved B12/personal sites against
-  the 160 evaluation-reserved personal-human sites
-- natural OOD test: the 160 evaluation-reserved Wix/company sites against the
-  160 evaluation-reserved company-human sites
-- transformed OOD test: every body-swap cohort, reported separately
+- same-generator test: the 160 evaluation-reserved B12-generated sites against
+  the 160 evaluation-reserved B12-matched human sites
+- natural OOD test: the 160 evaluation-reserved Wix-generated sites against the
+  160 evaluation-reserved Wix-matched human sites
+- transformed OOD test: each body-swap cohort frozen by the later protocol
+  version, reported separately
 
 The scoring unit is one site. Score each of its 25 frozen pages, then represent
 the site by the nine page-score percentiles from 10% through 90%. The site model
@@ -170,11 +180,12 @@ that page's main body with LLM-generated text while preserving its human shell.
 The transformed derivative is OOD. It is never training data, never part of a
 same-generator test, and never part of the 400 generated-site or 10,000 natural-
 negative targets. Do not place a human body in a generated shell, construct a
-reciprocal orientation, or define this cohort by Wix or B12 provenance.
+reciprocal orientation, or divide this cohort by human-site category.
 
-For each frozen page of every selected evaluation-reserved human site, submit
-its frozen title and main body to the text-generation configuration. The exact
-prompt template is:
+After a later protocol version freezes the OOD count and deterministic source-
+selection rule, submit only the selected evaluation-reserved human pages. For
+each selected page, submit its frozen title and main body to the frozen text-
+generation configuration. The exact prompt template is:
 
 ```text
 Rewrite the source text below into a standalone web-page main body. Preserve
@@ -186,8 +197,9 @@ Source text:
 {{main_body}}
 ```
 
-Before natural-family selection, freeze the provider, immutable model
-identifier, model revision when the provider exposes one, all request
+Before natural-family selection, the later protocol version must freeze the OOD
+page and site counts, deterministic source-selection rule, provider, immutable
+model identifier, model revision when the provider exposes one, all request
 parameters including any supported seed, a maximum of three attempts per page,
 prompt bytes, implementation Git commit and code path, serialized configuration
 and its SHA-256 digest, and dependency-lock digest. Record the complete request
@@ -198,9 +210,9 @@ reproduce identical bytes, so accepted response bytes are frozen inputs to all
 later steps.
 
 Do not generate until natural cohorts, both directional models, and both
-thresholds are frozen. Then generate only the 25 frozen pages of each selected
-evaluation-reserved human site, in ascending site-selection and page-selection
-rank. No development page is a generation input.
+thresholds are frozen. Then generate only the pages in the frozen OOD source
+manifest, in ascending site-selection and page-selection rank. No development
+page is a generation input.
 
 Construct each attempt canonically:
 
@@ -222,10 +234,11 @@ Construct each attempt canonically:
    URL/header/HTML bytes and their SHA-256 digests.
 4. Run the complete frozen page-eligibility pipeline on the constructed full
    derivative with that URL and those headers. For duplicate comparison, treat
-   the 25 derivatives as one synthetic site ordered by frozen page-selection
-   rank; rank `r` is compared only with accepted derivatives at ranks below
-   `r`, in ascending rank. Record the ordered comparison IDs, extracted-text
-   hash, predicate results, and rejection reason for every attempt.
+   derivatives selected for one synthetic site as a group ordered by frozen
+   page-selection rank; rank `r` is compared only with accepted derivatives at
+   lower selected ranks, in ascending rank. Record the ordered comparison IDs,
+   extracted-text hash, predicate results, and rejection reason for every
+   attempt.
 
 Accept the first passing attempt among at most three attempts for a page. If a
 page has no passing attempt, record it as OOD attrition and continue attempting
@@ -238,25 +251,25 @@ Create one derivative page per accepted attempt. Its reference label is `1`
 because its evaluated body is the recorded LLM response; `negative` describes
 the natural source, not the derivative label. The derivative ID is the 128-bit
 BLAKE2b digest of the UTF-8 canonical JSON array
-`["expanded-baseline-v2", "body-swapped-negative",
+`["expanded-baseline-v3", "body-swapped-negative",
 <canonical-human-page-id>, <generation-response-sha256>]`. It inherits the
 source site's partition but cannot replace or modify the source identity.
 
-Attempt derivatives for the 160 evaluation-reserved human sites of each type:
-4,000 pages per human type and 8,000 total. A site enters site-level scoring
-only if all 25 derivatives pass; otherwise report its accepted-page count and
-exclude it from nine-percentile aggregation. The body-swap manifest records the
+Attempt derivatives only for the OOD source manifest frozen by the later
+protocol version. That version must also freeze any complete-site requirement
+and site aggregation rule before generation. The body-swap manifest records the
 source site and page IDs, page rank, partition, reference label, every original
 and constructed artifact named above, generation request and response hashes,
 provider receipt, attempt number, output hash, derivative ID, duplicate-
 comparison order, every predicate result, and page/site attrition reason.
 Canonicalize and hash it by the same rule as the cohort manifests. Report both
-attempted and accepted page and complete-site counts; 4,000 pages and 160 sites
-per human type are attempted maxima, not claimed completed totals.
+attempted and accepted page and site counts. Generation or validation failures
+are attrition; do not redraw or replace a source to reach a target count.
 
-Apply each frozen directional model and its already selected threshold to both
-human-shell OOD cohorts. Report every model/cohort combination separately as an
-OOD stress test. Because the transformation changes a natural negative's body
-to generated text, `negative` describes the source sample, not a class label of
-`0`; the derivative's reference label is `1`. Do not report these derivatives
-as natural negatives or use them to estimate in-distribution accuracy.
+Apply each frozen directional model and its already selected threshold to every
+human-shell OOD cohort specified by the later protocol version. Report every
+model/cohort combination separately as an OOD stress test. Because the
+transformation changes a natural negative's body to generated text, `negative`
+describes the source sample, not a class label of `0`; the derivative's
+reference label is `1`. Do not report these derivatives as natural negatives or
+use them to estimate in-distribution accuracy.
