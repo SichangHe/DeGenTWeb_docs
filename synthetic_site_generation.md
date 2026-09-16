@@ -76,9 +76,9 @@ unchanged and obtain a new reviewed handoff rather than risking a duplicate.
 Each manifest line must contain `site_key`, `category`, `generator`, `name`,
 `description`, and `posts`; every post has `title` and `description`. For the
 Wix or B12 runner, `generator` must equal that provider; a fixed-HTML arm is
-not run by this browser command. The same frozen manifest supplies both the
-split and audit site list. Audit input must have unique page identities and
-only manifest site keys.
+not run by this browser command. A legacy JSON-array import receives the
+selected provider's label and is checked by the same rule. Audit input must
+have unique page identities and only candidate-manifest site keys.
 
 The pre-runner reviewed JSON-array manifest is also accepted. Give its matching
 schema-v1 state file through `--legacy-state`; the runner accepts only a pending
@@ -103,9 +103,16 @@ If the input runs out, the checkpoint is `needs_more_pages`; an unknown provider
 state is `needs_intervention`. Crawl and extract main text before calling
 `audit_extracted_page`; the audit only rejects pages with fewer than 50 words
 or obvious prompt/AI meta-text. A site with fewer than 15 remaining pages is
-`needs_more_pages`, so append post specifications to the frozen manifest and
+`needs_more_pages`, so append post specifications to the candidate manifest and
 rerun the same draft before final scoring. The runner permits only an
 append-only post extension and records that continuation in its checkpoint.
+After every generation, top-up, or replacement round, extract and audit again.
+Repeat that loop until every candidate site is complete. Then write the final
+eligible manifest, audit that exact file, and pass its `site-output` to
+`--site-audit` with `--publish`. Publication rejects an audit that is missing,
+incomplete, or for a different manifest. A published checkpoint deliberately
+does not accept a manifest extension; publication is the final, irreversible
+generation step for that site.
 
 ## Positive baseline size and split
 
@@ -123,12 +130,14 @@ percentage-point binomial standard error, respectively. More sites are useful
 chiefly when they add generators or site categories, not merely repeated pages
 from the same generator.
 
-Use `split_by_category` to freeze one simple random site split within every
-`(category, generator)` stratum. The manifest must record `generator` (for
-example `wix`, `b12`, or `fixed-html:mixtral`) as well as `category`; the
-splitter keeps every stratum in both sets, rejects duplicate site keys, and
-rejects strata with fewer than two sites. Store the frozen manifest, seed,
-split, extraction, and audit artifacts together.
+After all candidate sites have passed audit or been replaced in the same
+stratum, write the final eligible manifest. Then use `split_by_category` once
+to freeze one simple random site split within every `(category, generator)`
+stratum. The manifest must record `generator` (for example `wix`, `b12`, or
+`fixed-html:mixtral`) as well as `category`; the splitter keeps every stratum
+in both sets, rejects duplicate site keys, and rejects strata with fewer than
+two sites. Store the candidate manifest, final eligible manifest, seed, split,
+extraction, and audit artifacts together.
 
 Use a 1:4 test:train split (20% test) for the 1,000-site target and whenever
 each reported stratum still has at least 20 complete sites, giving about four
@@ -138,32 +147,55 @@ instead of as a precise per-generator estimate. With 2--4 sites, retain one
 test site only for coverage; do not make a per-stratum accuracy claim. A
 one-site stratum must be expanded or omitted from the supervised split.
 
-This policy does not implement or invoke Bedrock generation.
+The hosted-site policy does not invoke Bedrock itself. Its model-comparison
+arm uses the existing resumable fixed-HTML generator, with local artifacts only.
 
 ```sh
-uv run python -m degentweb.agent.generation_dataset split \
-  --input data/site-manifest.jsonl --output data/site-split.jsonl --seed 20260817
 uv run python -m degentweb.agent.generation_dataset audit \
   --input data/extracted-pages.jsonl --page-output data/page-audits.jsonl \
-  --site-output data/site-audits.jsonl --sites-input data/site-manifest.jsonl
+  --site-output data/site-audits.jsonl --sites-input data/candidate-site-manifest.jsonl
+# top up `needs_more_pages` drafts and replace failed sites; extract and audit
+# again until every candidate is complete, then write the final eligible manifest
+uv run python -m degentweb.agent.generation_dataset audit \
+  --input data/final-extracted-pages.jsonl --page-output data/final-page-audits.jsonl \
+  --site-output data/final-site-audits.jsonl --sites-input data/final-eligible-site-manifest.jsonl
+uv run python -m degentweb.agent.generation_dataset split \
+  --input data/final-eligible-site-manifest.jsonl \
+  --output data/site-split.jsonl --seed 20260817
 ```
 
-## HTML and historic-model choice
+## Model arms and access
 
-Keep the existing fixed HTML shell wherever possible: it is deterministic and
-does not require a text model. This implementation does not make Bedrock
-generation requests. If that separate future arm is approved, the live `aws
-bedrock list-foundation-models --region us-east-1` probe on 2026-08-17 found
-`mistral.mixtral-8x7b-instruct-v0:1` `ACTIVE`; it is the practical
-period-appropriate templating fallback with frozen request settings.
+Keep the fixed HTML shell: it gives every model the same page structure. The
+first practical arms are `gpt-oss-20b` and `gpt-oss-120b` through the existing
+Bedrock generator. The 2026-08-17 read-only model-catalog probes in both
+`us-east-1` and the generator's `us-west-2` found
+`openai.gpt-oss-20b-1:0` and `openai.gpt-oss-120b-1:0` `ACTIVE`. Use
+the existing Bedrock authentication with `bedrock:Converse` permission, then
+run this resumable one-site smoke in a fresh local output directory:
 
-The same live probe found no GPT-4, Claude 2.x, Claude 3 Sonnet, Claude 3.5
-Sonnet, or Claude 3.7 Sonnet IDs. It did find legacy Claude 3 Haiku and active
-Mixtral. Anthropic's own API documentation says Claude Sonnet 3.5 was retired
-on 2026-01-05 and Claude 2/2.1 plus Claude Sonnet 3 were retired on 2024-11-06,
-so changing providers does not restore those exact Claude models. For a
-non-Bedrock paid comparison, OpenAI currently documents the frozen
-`gpt-4.1-2025-04-14` snapshot; this is a practical GPT-family substitute but
-not historical GPT-4 and must be funded outside Bedrock.
+```sh
+uv run python -m degentweb.classifying.bedrock_synth_site_generate \
+  --output-dir data/classify/gptoss20b-smoke-20260817 \
+  --model-family gpt-oss-20b --site-key coastal-plumber \
+  --condition-key baseline --max-tokens 512
+```
 
-Sources: [AWS Bedrock model lifecycle](https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html), [Anthropic model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations), [OpenAI GPT-4.1 model documentation](https://developers.openai.com/api/docs/models/gpt-4.1).
+Record the model id, region, token limits, and expected cost before a larger
+request; catalog visibility does not prove an invocation quota or remaining
+Bedrock credit.
+
+Claude Sonnet 3.5 is not a practical exact arm: Anthropic says the Sonnet 3.5
+models were retired on 2025-10-28 and requests to retired models fail. The same
+local Bedrock probes found no Sonnet model, only legacy Claude 3 Haiku. The
+closest current Claude comparison is the Anthropic API's recommended
+`claude-sonnet-4-6`, which needs separately provisioned Anthropic API access.
+
+GPT-4 is also not present in the local Bedrock catalogs. OpenAI documents the
+frozen `gpt-4.1-2025-04-14` snapshot as a practical GPT-family comparison; it
+needs separately provisioned OpenAI API access. No `OPENAI_API_KEY` or
+`ANTHROPIC_API_KEY` was configured in this environment on 2026-08-17, so these
+two non-Bedrock arms remain blocked rather than silently falling back to a
+different model.
+
+Sources: [Anthropic model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations), [OpenAI GPT-4.1 model documentation](https://developers.openai.com/api/docs/models/gpt-4.1), [OpenAI GPT-OSS-20B model documentation](https://developers.openai.com/api/docs/models/gpt-oss-20b), [OpenAI GPT-OSS-120B model documentation](https://developers.openai.com/api/docs/models/gpt-oss-120b), [AWS Bedrock model lifecycle](https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html).
