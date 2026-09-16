@@ -36,6 +36,8 @@
 
 ## Coordination
 
+- human-authenticated personal-browser work:
+    `personal_browser_auth.md` (draft; inactive until human approval)
 - to pause scoring tasks, run:
     ```sh
     sh pause_bino_server.sh
