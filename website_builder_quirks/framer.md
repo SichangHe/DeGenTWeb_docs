@@ -52,15 +52,6 @@
   A custom robots file requires Pro or Enterprise, according to the
   [robots guide](https://www.framer.com/help/articles/how-can-i-access-the-robots-txt-file/).
 
-## Automation and bulk restrictions
-
-- **restriction:** Framer's [acceptable-use policy](https://www.framer.com/legal/acceptable-use-policy)
-  prohibits robots, page scraping, and manual processes that acquire or monitor
-  platform or hosted content by means Framer did not purposely provide.
-- **restriction:** external Agents are a product feature, but the one-time 500
-  variable-cost Free credits bound Framer AI features that consume credits in
-  an eligible Free workspace; editor helpers continue at zero credits.
-
 ## Verified unknowns
 
 - **verified unknown:** no cited provider source states how many separate Free
