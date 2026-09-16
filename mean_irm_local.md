@@ -1,0 +1,26 @@
+# Mean-normalized Implicit Reward evaluation
+
+- purpose
+  - evaluate the paper-supported per-token mean after the raw sum failed
+  - distinguish threshold-free separation from a label-trained SVM result
+- population
+  - 10,000 old-Common-Crawl sites with 15 pages each
+  - 45 generated provider sites with 15 pages each
+  - input identities are pinned in `scripts/source1328_mean_irm_eval.py`
+- score
+  - divide each stored raw reward by `min(cleaned_n_tokens, 2048)-1`
+  - this is the exact scored-token count for the documented shared-Falcon-tokenizer runtime: the common mask is truncated to 2,048 tokens and shifted once
+  - take the median of the 15 page means for each site
+- evaluation
+  - native result: site-level ROC AUC across all 10,045 sites
+  - trained result: 20 repetitions of five stratified site folds
+  - each fold uses one scalar per site, `StandardScaler`, and linear `SVC(C=1, class_weight=balanced)`
+  - calculate ROC AUC within each held-out fold, then average the five fold values
+  - report accuracy, balanced accuracy, F1, precision, recall, ROC AUC, and confusion counts
+- limits
+  - normalization was chosen after seeing the raw failure on these cohorts
+  - generated sites come from only two providers
+  - site folds prevent train/test site overlap but do not undo the post-hoc normalization choice
+  - this is an exploratory same-cohort diagnostic, not independent validation or transfer to an unseen provider
+  - plain accuracy is dominated by the 10,000 human sites; use balanced metrics and error counts to interpret practical performance
+  - historical score rows do not bind the exact model/tokenizer revisions or runtime source, so the stored rows alone cannot prove revision identity

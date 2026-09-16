@@ -68,6 +68,9 @@ fusionbikes.com.ar,producto/luz-knog-blinder-mini-niner/,20250512054001,78501,24
 
 `common_crawl/classify10k.py`
 
+Offline dispatch evidence and conservative replay planning are documented in
+[`common_crawl_attempt_ledger.md`](common_crawl_attempt_ledger.md).
+
 - sample 10,000 subdomain from all index files
 - 2.16%~4.30%~9.30% subdomains classified as AI-dominant,
     much lower compared to search results

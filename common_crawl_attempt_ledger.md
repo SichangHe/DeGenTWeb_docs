@@ -1,0 +1,24 @@
+# Common Crawl attempt ledger
+
+- scope
+  - offline primitive only; no production caller imports it
+  - one immutable attempt must exist before each future WARC request
+  - exactly one immutable terminal receipt follows success, failure, interruption, or give-up
+- durability
+  - filenames derive from canonical attempt identity
+  - private staging is file-fsynced, hard-linked create-only to its final name, then directory-fsynced
+  - restart removes only `.stage-*` files; final names never expose partial bytes
+  - restart reconciliation exposes attempts without receipts instead of treating them as completed
+  - retries form one exact record-identity chain; a pending, successful, or given-up record blocks another dispatch
+- identity
+  - attempt binds run, crawl source, site, expected page, record hash, WARC byte range, selector cursor, and dispatch sequence
+  - success additionally binds decoded page URL, page and crawl IDs, WARC timestamp, and content hash
+- replay planning
+  - accepts a frozen ordered candidate inventory and explicit inclusive reviewed endpoints
+  - reports the conservative superset, completed overlap, remaining requests, and duration at one request per second
+  - never claims to reconstruct a historical affected set
+- database blocker
+  - `crawls` upserts exact `(page_id, crawled_at)` identities and can overwrite status fields
+  - `SAVE_RESPONSE_INFO` then inserts another `htmls` row, which has no uniqueness constraint
+  - replay execution is blocked until a separately reviewed idempotent persistence path exists
+  - `given_up_sites` overwrites on `(subdomain_id, crawl_src_id)`; replay must preserve the old row separately and obtain a later execution review

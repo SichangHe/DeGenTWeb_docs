@@ -1,0 +1,32 @@
+# Local L2D comparison
+
+- purpose
+  - run a four-rewrite L2D adaptation on the frozen 141-site population
+  - keep the native detector result separate from the apples-to-apples SVM result
+  - use the first rewrite as the primary L2D rule after parity-checking it against pinned upstream source; report the four-rewrite mean only as a separate ablation
+- immutable inputs
+  - Gemma rewrite/base model: `google/gemma-2-9b-it` at `11c9b309abf73637e4b6f9a3fa1e92e615547819`
+  - L2D adapter: `mamba413/L2D` at `d0b4a6b02696c3f3580b78d3da35417901d70394`
+  - upstream source: `Mamba413/L2D` at `462d5761012ca97755b0876efeaf0c644aac1cd0`
+  - frozen population: `.runtime/raidar-old-baseline/manifest.jsonl` and its reconciliation
+- stages
+  - `python scripts/source1328_l2d.py prepare RUN/preflight.json` validates the 141 sites, local pinned Gemma snapshot, Torch/Transformers/PEFT/CUDA runtime, literal leading 3,200-token cap, and 8,192-token rewrite bound
+  - `python scripts/source1328_l2d_fence.py probe-rewrite RUN/preflight.json RUN/probe-rewrite.json` runs the longest bounded prompt through the supported Bino pause/resume lease
+  - after that process exits, `python scripts/source1328_l2d_fence.py probe-score RUN/preflight.json RUN/probe-rewrite.json RUN/probe.json` loads the adapter and scores the longest original and rewrite serially
+  - only after both probes pass, `python scripts/source1328_l2d_fence.py rewrite RUN/preflight.json RUN/probe.json RUN/rewrite-checkpoint RUN/rewrites.json` creates four stochastic rewrites per text and supports an exact-prefix checkpoint
+  - exit the rewrite process before `score`; this releases its model
+  - `python scripts/source1328_l2d_fence.py score RUN/preflight.json RUN/rewrites.json RUN/probe.json RUN/score-checkpoint RUN/scores.json` loads one Gemma base in float16, attaches the L2D adapter to that instance, and reduces each serial forward pass immediately to one upstream-compatible mean log probability; the log-softmax reduction uses float32 to prevent float16 overflow without changing the model inputs, outputs, or formula
+  - `python scripts/source1328_l2d_campaign.py rewrite RUN/preflight.json RUN/probe.json RUN/rewrite-checkpoint RUN/rewrites.json` and the corresponding `score` command continue across bounded fence expiries only when the checkpoint grew; any other exit stops
+  - `python scripts/source1328_l2d.py evaluate RUN/scores.json RUN/evaluation.json` reports the first-rewrite native AUROC with `-mean_abs_distance`, plus a separately labelled four-rewrite ablation; it reports no native accuracy because this population has no fixed native threshold
+  - `python scripts/verify_source1328_l2d_parity.py UPSTREAM_GIT RUN/scores.json RUN/evaluation.json RUN/parity.json` reads the exact upstream commit's Git object bytes, binds the evaluator files, and checks the prompt, first-rewrite choice, mean-log-probability reduction, and absolute-distance formula; this supports an L2D first-rewrite result with a local float32 stable-reduction adaptation, not a byte-for-byte upstream runtime reproduction
+  - the separate SVM uses only that scalar score with 20 repetitions of five site-grouped folds, `StandardScaler`, and linear `SVC(C=1)`
+- safety
+  - every Hugging Face load is local-only; the runner never logs in or downloads
+  - every GPU stage must reproduce the preflight's exact installed package and CUDA topology
+  - final artifacts and individual checkpoint records are create-only; checkpoint directories must contain a gap-free numeric prefix
+  - a second process collides on the next record and fails instead of appending duplicate work
+  - an incomplete temporary file is ignored; an invalid numbered record fails closed and must be preserved for diagnosis
+  - never import upstream `scripts/model.py`; that file logs into Hugging Face during import
+  - every GPU stage refuses direct execution and must use `source1328_l2d_fence.py`
+  - the fence creates a bounded pause lease, invokes the supported pause script, verifies GPU release, runs one exact child, and restores Bino in a `finally` path after success, failure, or timeout
+  - each window also binds the live sampler and ordinary scorer identities; the scorer must be the same process after restoration

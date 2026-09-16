@@ -42,7 +42,7 @@
     ```
 - after done using the GPU, please allow the tasks to resume:
     ```sh
-    sh /ssd1/sichanghe/DeGenTWeb/resume_bino_server.sh
+    sh resume_bino_server.sh
     ```
 
 ## Live process debugging

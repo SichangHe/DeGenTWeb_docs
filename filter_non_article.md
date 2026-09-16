@@ -29,8 +29,9 @@ Current method to filter out non-articles (`visit_subdomains.py`):
     - large block need ≥200 characters
 - discard pages w/ \> 20% text in list/table
     - do not count long list item/ table cell: need ≤ 100 characters long
-- discard pages w/ \> 50% text duplicated relative to previous pages of
-    the same subdomain
+- discard a page when a majority of its text duplicates text already seen on
+    earlier pages from the same subdomain
+    - the duplicate-threshold study processes pages in stable URL-hash order
     - calculate %duplication based on byte chunks from
         Rabin fingerprint content-defined chunking (CDC)
         - 32 byte window, 96 byte target block size (1/64 probability for

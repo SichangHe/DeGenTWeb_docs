@@ -1,0 +1,22 @@
+# RAIDAR Bino lifecycle fence
+
+- scope
+  - resumes only the accepted `92/141` RAIDAR checkpoint
+  - changes no sampler, scorer, database, provider, or AWS state by itself
+- required Bino integration
+  - the sampler-spawned recovery Bino must read the exclusive bounded lease
+  - while `lease_blocks_auto_resume` is true, it must not start its normal GPU-idle monitor
+  - lease removal or expiry must enqueue `ResumeSignal` immediately
+  - invalid lease content blocks only through its file-mtime plus the 20-minute maximum
+- controlled sequence
+  - bind sampler PID/start time/command, sole Bino identity, socket inode, GPU users, and checkpoint hash
+  - publish the lease before the supported pause
+  - verify the old Bino retired and the sampler respawned exactly one paused lease-aware Bino
+  - verify both GPUs have no compute process, then launch the exact checkpoint-resume command
+  - while it runs, reject sampler, paused-Bino, socket, lease, or GPU-process drift
+  - on every ordinary exit, terminate the child if needed, remove the exact lease, call supported resume, and verify sole Bino GPU ownership plus unchanged sampler identity
+  - after coordinator death, the Bino-side maximum lease expiry provides bounded automatic restoration
+- deployment implications
+  - requires a reviewed recovery-runtime Bino change before this coordinator can be used
+  - requires one concrete operations adapter for `/proc`, socket inode, `nvidia-smi`, supported pause/resume scripts, and the exact RAIDAR command
+  - neither component may be deployed from design review alone
