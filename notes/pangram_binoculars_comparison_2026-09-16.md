@@ -16,7 +16,7 @@ replacement.
 
 ## Selected figure and matched comparison
 
-Use [`pangram-vs-binoculars-all-available.pdf`](../../data/classify/pangram_all_samples/pangram-vs-binoculars-all-available.pdf).
+Use [`pangram-vs-binoculars-all-available.pdf`](../data/pangram_binoculars_comparison_2026-09-16/pangram-vs-binoculars-all-available.pdf).
 It is a completed direct same-page Pangram/Binoculars comparison. Do not use it as
 an accuracy plot.
 
@@ -42,15 +42,15 @@ Coverage is 605/780 pages. It differs by model: 289/435 Sonnet 4 pages and
 316/345 Sonnet 4.6 pages. All 52 sites have observations, but individual sites
 have only 4--15 observed pages. The completed subset is not a random sample;
 the submission process reused prior labels and prioritized texts under a credit
-budget. The exact inputs and counts are in
-[`all-available-analysis-summary.json`](../../data/classify/pangram_all_samples/all-available-analysis-summary.json),
-[`manifest.json`](../../data/classify/pangram_all_samples/manifest.json), and
-[`site-percentage-summary.csv`](../../data/classify/pangram_all_samples/site-percentage-summary.csv).
+budget. The exact aggregate counts and site rows used here are in
+[`all-available-analysis-summary.json`](../data/pangram_binoculars_comparison_2026-09-16/all-available-analysis-summary.json)
+and
+[`site-percentage-summary.csv`](../data/pangram_binoculars_comparison_2026-09-16/site-percentage-summary.csv).
 
 The analysis contract states, verbatim, that it "reports generated-site
 sensitivity evidence only" and "does not estimate SVM accuracy without
 human-site Pangram percentages"
-([`scripts/pangram_all_available_analysis.md`](../../scripts/pangram_all_available_analysis.md)).
+([source excerpt and original repository path](pangram_binoculars_source_excerpts_2026-09-16.md#pangram-analysis-contract)).
 
 ## What the model results support
 
@@ -65,14 +65,15 @@ The same test also detected 99.3% of Sonnet 4 and 97.2% of Sonnet 4.6 sites.
 That difference does not establish a general recency effect inside the body-swap
 task. The source explicitly says: "Older whole-site results and the preliminary
 eight-Wix-site page-body run are not directly comparable"
-([`final_result_packet.md`](../../data/classify/full_corpus_svm_final_packet_20260915/final_result_packet.md)).
+([source excerpt and original repository path](pangram_binoculars_source_excerpts_2026-09-16.md#full-corpus-result-packet)).
 
 ### Newer whole-site generators
 
 The separate Bedrock whole-site stress test is evidence of uneven performance
-on current generators. Because every test site was generated, its reported site
-accuracy is generated-site detection: 90% for Sonnet 4, 15% for Sonnet 4.6,
-75% for Haiku 4.5, 0% for DeepSeek R1, and 100% for GPT-OSS-120B. Across seven
+on current generators. Because every test site was generated, the reported
+`site_accuracy` field is a generated-site detection rate: 90% for Sonnet 4,
+15% for Sonnet 4.6, 75% for Haiku 4.5, 0% for DeepSeek R1, and 100% for
+GPT-OSS-120B. Across seven
 model/configuration points, this rate had Spearman correlation -0.870 with the
 AA Intelligence Index. Seven points and heterogeneous model results are not
 enough to establish a general chronological trend.
@@ -87,8 +88,8 @@ Safe wording:
 > setup, not universal degradation with model age.
 
 The exact whole-site values are in
-[`model_summary.csv`](../../data/classify/bedrock_synth_site_analysis_ctl/model_summary.csv)
-and [`bedrock_synth_paper_stats.txt`](../../data/classify/bedrock_synth_paper_imc2026/bedrock_synth_paper_stats.txt).
+[`bedrock-model-summary.csv`](../data/pangram_binoculars_comparison_2026-09-16/bedrock-model-summary.csv)
+and [`bedrock-paper-stats.txt`](../data/pangram_binoculars_comparison_2026-09-16/bedrock-paper-stats.txt).
 
 ## Why Sonnet body swaps score better
 
@@ -104,11 +105,11 @@ The experiment does not isolate why those score distributions differ. Body
 swaps replace text inside selected existing sites. The whole-site protocol says
 it generated "20-page synthetic sites from minimal prompts" with `plain` and
 `quality` prompt styles plus thinking controls
-([experiment protocol](../../codebase_index/bedrock_synth_site_eval.md)).
+([experiment-protocol excerpt and original repository path](pangram_binoculars_source_excerpts_2026-09-16.md#bedrock-experiment-protocol)).
 The cohorts, prompts, reasoning settings, retained pages, and sample sizes
 differ. The reviewed source warns: "Prompts, reasoning settings,
 retained pages, and other generation conditions were not isolated"
-([`final_result_packet.md`](../../data/classify/full_corpus_svm_final_packet_20260915/final_result_packet.md)).
+([source excerpt and original repository path](pangram_binoculars_source_excerpts_2026-09-16.md#full-corpus-result-packet)).
 
 Therefore describe the lower body-swap scores as an observed explanation of the
 classifier outputs, not a causal explanation of model behavior.

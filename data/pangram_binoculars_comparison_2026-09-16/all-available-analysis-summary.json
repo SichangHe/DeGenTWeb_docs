@@ -1,0 +1,90 @@
+{
+  "history_inputs": [
+    {
+      "path": "data/classify/pangram_trial_cohort/history-results.jsonl",
+      "sha256": "2cbfa5f2957f24b228086e0caa9ffa9b78dd54322321de3659df9db1e26d7cc5",
+      "rows_n": 195
+    },
+    {
+      "path": "data/classify/pangram_all_samples/history-results.jsonl",
+      "sha256": "4420b7ee9fc6d52134bdf9c17b831f81ed11a8778cecd62a9014e44784aca644",
+      "rows_n": 412
+    }
+  ],
+  "population_texts_n": 780,
+  "observed_texts_n": 605,
+  "missing_percentage_texts_n": 175,
+  "pangram_results_n": 605,
+  "labels": {
+    "Human": 8,
+    "AI": 594,
+    "Mixed": 3
+  },
+  "score_range": [
+    0.74609375,
+    1.015625
+  ],
+  "binoculars_thresholds": {
+    "0.01_percent_fpr": 0.8536432310785527,
+    "max_f1": 0.9015310749276843
+  },
+  "pearson_bino_score_vs_pangram_ai_percentage": {
+    "correlation": -0.3540102416337784,
+    "p_value": 2.6592416644014365e-19
+  },
+  "generated_site_descriptives": {
+    "anthropic/claude-sonnet-4": {
+      "sites_n": 29,
+      "observed_pages_n": 289,
+      "observed_pages_per_site_min_median_max": [
+        4,
+        10,
+        14
+      ],
+      "page_labels": {
+        "Human": 3,
+        "AI": 284,
+        "Mixed": 2
+      },
+      "site_mean_ai_percentage_min_median_max": [
+        89.09428715705872,
+        96.3003402406519,
+        99.83927488327026
+      ],
+      "site_median_ai_percentage_min_median_max": [
+        89.57060277462006,
+        98.25561046600342,
+        99.91034865379333
+      ],
+      "sites_with_majority_pages_at_least_50_percent_n": 29
+    },
+    "us.anthropic.claude-sonnet-4-6": {
+      "sites_n": 23,
+      "observed_pages_n": 316,
+      "observed_pages_per_site_min_median_max": [
+        10,
+        14,
+        15
+      ],
+      "page_labels": {
+        "Human": 5,
+        "AI": 310,
+        "Mixed": 1
+      },
+      "site_mean_ai_percentage_min_median_max": [
+        85.14198427550443,
+        98.15367781198941,
+        99.69172009399959
+      ],
+      "site_median_ai_percentage_min_median_max": [
+        94.21372413635254,
+        99.57612156867981,
+        99.98403489589691
+      ],
+      "sites_with_majority_pages_at_least_50_percent_n": 23
+    }
+  },
+  "site_svm_accuracy_estimate": null,
+  "site_svm_accuracy_unavailable_reason": "The Pangram-percentage cohort contains generated sites only; no human-site negative class is available for training or held-out evaluation.",
+  "plot_note": "Each x mark is one text; only the first result is retained when a text was checked repeatedly."
+}
