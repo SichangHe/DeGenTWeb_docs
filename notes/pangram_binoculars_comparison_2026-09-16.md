@@ -5,10 +5,12 @@
 ## Bottom line
 
 The local data strongly support saying that Pangram has higher generated-page
-sensitivity on the observed Claude body-swap pages. They do not support saying
-that Pangram has better accuracy: the comparison has no human pages, Pangram's
-false-positive rate is unknown, and the two detectors do not use matched
-false-positive-rate thresholds.
+sensitivity on the observed Claude body-swap pages. On a separate matched 2014
+Common Crawl negative sample, Pangram labeled 0/678 pages AI or Mixed;
+Binoculars marked 7/678 AI at its pre-existing max-F1 threshold and 0/678 at
+its pre-existing low-FPR threshold. Capture date does not establish human
+authorship, and these are not matched false-positive-rate operating points.
+The comparison therefore does not establish better overall accuracy.
 
 Keep Binoculars as the reproducible baseline. Say that current detectors show
 promising replacement paths, not that the local data establish a drop-in
@@ -51,6 +53,52 @@ The analysis contract states, verbatim, that it "reports generated-site
 sensitivity evidence only" and "does not estimate SVM accuracy without
 human-site Pangram percentages"
 ([source excerpt and original repository path](pangram_binoculars_source_excerpts_2026-09-16.md#pangram-analysis-contract)).
+
+## Matched old-page negative check
+
+We separately froze 605 2014 Common Crawl negative pages to match the number
+of generated pages observed above, then used remaining Pangram trial credits
+on 73 further old pages. Both detectors scored the *same 678 source texts*;
+their decisions on these negative-labeled pages were:
+
+| AI call rule | original 605 | all 678 |
+|---|---:|---:|
+| Pangram label `AI` or `Mixed` | 0/605 | 0/678 |
+| Binoculars score < 0.9015310749276843 (pre-existing max-F1) | 5/605 | 7/678 (1.03%) |
+| Binoculars score < 0.8536432310785527 (pre-existing low-FPR) | 0/605 | 0/678 (0%) |
+
+The Binoculars decisions come from 678 finite, independently recorded scores,
+not the zero placeholders in the frozen Pangram manifests. Each scored text's
+SHA-256 matches its frozen manifest and completed Pangram result; all Pangram
+labels were `Human`, and all 678 Binoculars requests have corresponding score
+receipts. The local source artifacts are
+`.runtime/pangram-fpr/frozen-{negatives-605,even-2102,leftover-12,leftover-3}/`
+and `.runtime/pangram-fpr/frozen-678-binoculars-{attempts,real-scores}.jsonl`
+in the DW2 worktree; the score ledger SHA-256 is
+`6df3ae0299d40ffa75ece8b64094f8425909275351e1ec0c8999e343901d2f8d`.
+
+With AI as the positive class, an AI call on these negative pages is an
+*observed false-positive call*, not a false negative. Conversely, on the
+different 605 generated pages in the figure above, Pangram missed 11/605
+(1.8%), Binoculars missed 135/605 (22.3%) at max-F1 and 489/605 (80.8%) at
+the low-FPR threshold; those are generated-page *false negatives*. The negative
+sample is a convenience sample: 2014 capture does not prove individual human
+authorship or exclude older automated/template text. Both detectors received
+the same original text, but Binoculars truncated 59 texts longer than its
+2,048-token context window; Pangram saw the full text. These observed rates
+do not compare either detector at a shared false-positive-rate threshold.
+
+Paper-ready wording:
+
+> On 678 frozen 2014 Common Crawl negative pages, Pangram labeled none AI or
+> Mixed, while Binoculars labeled 7 (1.03%) AI at its pre-existing max-F1
+> cutoff and none at its lower false-positive-rate cutoff. Both detectors saw
+> the same original pages, but Binoculars truncated 59 long texts to 2,048
+> tokens. The capture date does not establish human authorship, and the
+> thresholds were not matched to a common false-positive rate. On a separate
+> nonrandom subset of 605 generated replacement pages, the respective
+> generated-page false-negative counts were 11 for Pangram, 135 for Binoculars
+> at max-F1, and 489 at its lower false-positive-rate cutoff.
 
 ## What the model results support
 
@@ -127,9 +175,11 @@ Three local results make replacement plausible:
   calibrated 1% false-positive operating point, but its AUROC was slightly
   lower, 0.9751 versus 0.9779
 
-None establishes replacement. Pangram lacks a human negative cohort. The Qwen
-and Desklib comparisons use convenience data and historical Binoculars scores,
-not fresh same-process scoring on a frozen current-generator test. The Qwen
+None establishes replacement. Pangram has a matched 2014 negative-page check,
+but capture date does not establish authorship or a shared operating point.
+The Qwen and Desklib comparisons use convenience data and historical
+Binoculars scores, not fresh same-process scoring on a frozen current-generator
+test. The Qwen
 report says, verbatim, "It does not establish a production replacement"
 ([`qwen_irm_agreement_results.md`](dw1_detector_survey_sources/qwen_irm_agreement_results.md)).
 The detector inventory concludes, "None of the three replaces Binoculars"
@@ -146,6 +196,8 @@ Safe wording:
 ## Claim strength
 
 - strong: Pangram has higher sensitivity on the 605 observed generated pages
+- strong: on the 678 matched old-page negative texts, Pangram made 0 AI-or-Mixed
+  calls; Binoculars made 7 AI calls at max-F1 and 0 at its low-FPR cutoff
 - moderate: the whole-site stress test exposes serious failures on some current
   generators
 - weak: model age or strength alone causes the degradation
