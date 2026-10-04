@@ -72,8 +72,8 @@ not the zero placeholders in the frozen Pangram manifests. Each scored text's
 SHA-256 matches its frozen manifest and completed Pangram result; all Pangram
 labels were `Human`, and all 678 Binoculars requests have corresponding score
 receipts. The local source artifacts are
-`.runtime/pangram-fpr/frozen-{negatives-605,even-2102,leftover-12,leftover-3}/`
-and `.runtime/pangram-fpr/frozen-678-binoculars-{attempts,real-scores}.jsonl`
+`data/classify/pangram-fpr/frozen-{negatives-605,even-2102,leftover-12,leftover-3}/`
+and `data/classify/pangram-fpr/frozen-678-binoculars-{attempts,real-scores}.jsonl`
 in the DW2 worktree; the score ledger SHA-256 is
 `6df3ae0299d40ffa75ece8b64094f8425909275351e1ec0c8999e343901d2f8d`.
 
