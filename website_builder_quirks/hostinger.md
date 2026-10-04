@@ -18,6 +18,15 @@
   provides a seven-day draft. Trial sites cannot publish, stores cannot
   connect payment methods, Agentic mode gets five credits, and publishing,
   exporting, more credits, or more sites requires payment.
+- **observed restriction (2026-10-02):** the Manual mode free trial does not
+  allow deleting its website to free the single trial site slot. The account
+  offered only `Get plan` and `Edit website`; direct deletion attempts failed
+  with HTTP 401 or 404. Hostinger's automated assistant stated: "No such
+  deletion tool or self-service provider route is available for this trial
+  state." Deleting and recreating trial sites is therefore not a usable
+  baseline collection workflow. This observation applies to the tested free
+  trial, not paid plans. The experiment was abandoned per human instruction
+  `manager_mail/85c5dff58359-2370.txt`; the 35 saved HTML pages were retained.
 - **restriction:** Premium allows three sites. The higher Unlimited and Cloud
   plans advertise unlimited sites on the [AI Builder page](https://www.hostinger.com/ai-website-builder),
   subject to its linked [Fair Usage Policy](https://www.hostinger.com/legal/hosting-agreement).

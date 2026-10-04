@@ -1,3 +1,19 @@
+## 2026-10-03
+
+- 🧑 thought on releasing artifacts, a job for after paper acceptance, not to
+    do yet: "For this submission after we make it we need to package up all
+    the artifacts and store them and prepare for uploading them the minimum
+    portion to some hosting platforms so that people can get their hands on
+    these artifacts. I am thinking we use compressed par crate files and only
+    include the relevant fields and exclude most of the HTML except for the
+    websites we refer to in the paper as examples"
+    - 🤖 "par crate" reads as dictated "Parquet"
+- 🧑 on the old project copy `/hdd1/sichanghe/DeGenTWeb_imc2025`: "Let's keep
+    the old SQLite databases in the old copy of this whole project. There
+    were some issues when we moved all the data from SQLite to Postgres and
+    so some data might be a little bit corrupted or lost and if there is ever
+    a chance, it is good that we can get those old data."
+
 ## 2026-03-31
 
 - site-level comments not yet recorded elsewhere:
