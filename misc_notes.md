@@ -7,7 +7,7 @@
     these artifacts. I am thinking we use compressed par crate files and only
     include the relevant fields and exclude most of the HTML except for the
     websites we refer to in the paper as examples"
-    - 🤖 "par crate" reads as dictated "Parquet"
+    - 🧑 "par crate" means Parquet: "Yes, Parquet."
 - 🧑 on the old project copy `/hdd1/sichanghe/DeGenTWeb_imc2025`: "Let's keep
     the old SQLite databases in the old copy of this whole project. There
     were some issues when we moved all the data from SQLite to Postgres and
