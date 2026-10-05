@@ -505,3 +505,19 @@ unrelated space-environment paper. They remain byte-preserved only to avoid
 silently deleting accepted ledger history and are explicitly excluded from the
 evidence. The correct DetectLLM identifier is 2306.05540; both its arXiv PDF and
 official EMNLP rendering are retained.
+
+## Local collection deleted, 2026-10-05
+
+(authored by agents unless marked 🧑)
+
+🧑 "I don't know what a six point eight gigabyte artifact is is it actually
+useful if it is put it in data directory otherwise delete it"
+(`manager_mail/85c5dff58359-2549.txt`)
+
+- `/ssd1/sichangheagent/dw1_detector_survey_public_artifacts` no longer exists
+  - no code and no paper file used it
+  - 6.5 GB of it were public Hugging Face model snapshots, the rest public papers and query exports
+- its `README.md` and 288-entry `MANIFEST.sha256` are kept here as
+  `public_artifacts_README.md` and `public_artifacts_MANIFEST.sha256`
+- to rebuild it, download each item at the revision or URL the README names and check it against the manifest
+- paths under that directory in this folder's files are historical
